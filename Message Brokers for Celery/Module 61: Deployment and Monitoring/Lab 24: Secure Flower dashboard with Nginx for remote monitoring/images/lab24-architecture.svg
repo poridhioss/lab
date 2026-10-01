@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560 490" width="1560" height="490">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 520" width="1640" height="520">
 
   <defs>
     <style>
@@ -7,46 +7,46 @@
         fill: #000000;
       }
       .title-text {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
         fill: #000000;
       }
       .subtitle-text {
-        font-size: 13.5px;
+        font-size: 15px;
         font-style: italic;
         fill: #000000;
       }
       .section-heading {
-        font-size: 15px;
+        font-size: 17px;
         font-weight: bold;
         fill: #000000;
       }
       .code-font {
         font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 13.5px;
+        font-size: 15.5px;
         fill: #000000;
       }
       .body-text {
-        font-size: 13.5px;
+        font-size: 15.5px;
         fill: #000000;
       }
       .arrow-label {
-        font-size: 13.5px;
+        font-size: 16px;
         font-weight: bold;
         fill: #000000;
       }
       .arrow-sub {
-        font-size: 12.5px;
+        font-size: 14.5px;
         font-style: italic;
         fill: #000000;
       }
       .flow-step-title {
-        font-size: 14.5px;
+        font-size: 16.5px;
         font-weight: bold;
         fill: #000000;
       }
       .flow-step-sub {
-        font-size: 13px;
+        font-size: 14.5px;
         font-style: italic;
         fill: #000000;
       }
@@ -59,157 +59,157 @@
   <rect width="100%" height="100%" fill="#ffffff" />
 
   <!-- Box 1: Remote User / Browser -->
-  <g transform="translate(20, 20)">
-    <rect width="260" height="450" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+  <g transform="translate(30, 20)">
+    <rect width="290" height="480" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
 
-    <rect width="260" height="54" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
-    <rect y="44" width="260" height="10" fill="#dbeafe" />
-    <rect x="12" y="10" width="34" height="34" rx="7" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
-    <g transform="translate(17, 15) scale(1)">
+    <rect width="290" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="48" width="290" height="10" fill="#dbeafe" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
       <path d="M.803 14.8169c0-.5342.433-.9665.9665-.9665.5335 0 .9665.4323.9665.9665 0 .5335-.433.9657-.9665.9657-.5335 0-.9666-.4322-.9666-.9657m2.736 0c0-.1963-.0532-.376-.1119-.5525-.2344-.7024-.876-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0708C.6149 13.2865 0 13.9646 0 14.817c0 .9764.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.793 1.7694-1.7694m-1.7694-7.149c.5335 0 .9665.433.9665.9665 0 .5335-.433.9665-.9665.9665-.5343 0-.9666-.433-.9666-.9665 0-.5335.4323-.9665.9666-.9665m0 2.7359c.9772 0 1.7694-.7923 1.7694-1.7694 0-.1956-.0532-.376-.1119-.5525-.2344-.7024-.8767-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0716C.6149 7.104 0 7.782 0 8.6344c0 .9771.7923 1.7694 1.7695 1.7694m13.221-5.694c-.5342 0-.9665-.433-.9665-.9664a.966.966 0 01.9666-.9665c.5335 0 .9658.4322.9658.9665 0 .5334-.4323.9664-.9658.9664m-9.6 16.5133c-.5335 0-.9666-.433-.9666-.9665 0-.5342.433-.9665.9666-.9665a.966.966 0 01.9665.9665c0 .5335-.4323.9665-.9665.9665m9.6-19.2491c-.978 0-1.7695.7922-1.7695 1.7694 0 .2085.0525.4025.1187.5882L5.039 18.5581c-.803.1681-1.4179.8462-1.4179 1.6985 0 .9772.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.7922 1.7694-1.7694 0-.1963-.0525-.3759-.111-.5525l8.3427-14.2728c.7778-.1865 1.3683-.8531 1.3683-1.688 0-.977-.793-1.7693-1.7694-1.7693m7.24 2.7359c-.5343 0-.9666-.433-.9666-.9665a.966.966 0 01.9665-.9665c.5335 0 .9666.4322.9666.9665 0 .5334-.433.9665-.9666.9665M12.6313 21.223c-.5343 0-.9665-.433-.9665-.9665a.966.966 0 01.9665-.9665c.5335 0 .9658.4323.9658.9665 0 .5335-.4323.9665-.9658.9665M22.2305 1.974c-.9772 0-1.7694.7922-1.7694 1.7694 0 .2085.0525.4025.1187.5882l-8.3009 14.2265c-.8021.1681-1.417.8462-1.417 1.6985 0 .9772.7922 1.7694 1.7694 1.7694.9764 0 1.7687-.7922 1.7687-1.7694 0-.1963-.0525-.3759-.1111-.5525l8.3427-14.2728C23.4094 5.2448 24 4.5782 24 3.7433c0-.977-.7923-1.7693-1.7695-1.7693" fill="#111827" />
     </g>
-    <text x="54" y="27" text-anchor="start" class="title-text">Remote User / Browser</text>
-    <text x="54" y="45" text-anchor="start" class="subtitle-text">External HTTP Client</text>
+    <text x="60" y="28" text-anchor="start" class="title-text">Remote User / Browser</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">External HTTP Client</text>
 
-    <g transform="translate(15, 70)">
-      <rect width="230" height="155" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="230" height="30" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">Unauthenticated Access</text>
-      <text x="12" y="55" class="code-font">curl -I http://localhost</text>
-      <text x="12" y="82" class="body-text">• No credentials provided</text>
-      <text x="12" y="112" class="code-font" font-weight="bold">HTTP/1.1 401 Unauthorized</text>
-      <text x="12" y="138" class="subtitle-text">Request blocked at proxy edge</text>
+    <g transform="translate(15, 75)">
+      <rect width="260" height="170" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Unauthenticated Access</text>
+      <text x="12" y="60" class="code-font">curl -I http://localhost</text>
+      <text x="12" y="88" class="body-text">• No credentials provided</text>
+      <text x="12" y="120" class="code-font" font-weight="bold">HTTP/1.1 401 Unauthorized</text>
+      <text x="12" y="148" class="subtitle-text">Request blocked at proxy edge</text>
     </g>
 
-    <g transform="translate(15, 245)">
-      <rect width="230" height="185" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="230" height="30" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">Authenticated Access</text>
-      <text x="12" y="55" class="code-font">curl -u floweradmin http://...</text>
-      <text x="12" y="82" class="body-text">• Provides valid credentials</text>
-      <text x="12" y="112" class="code-font" font-weight="bold">HTTP/1.1 200 OK</text>
-      <text x="12" y="140" class="body-text">• Renders Flower web interface</text>
-      <text x="12" y="168" class="subtitle-text">Secure administrative ingress</text>
+    <g transform="translate(15, 260)">
+      <rect width="260" height="200" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Authenticated Access</text>
+      <text x="12" y="60" class="code-font">curl -u floweradmin http://...</text>
+      <text x="12" y="88" class="body-text">• Provides valid credentials</text>
+      <text x="12" y="120" class="code-font" font-weight="bold">HTTP/1.1 200 OK</text>
+      <text x="12" y="150" class="body-text">• Renders Flower web interface</text>
+      <text x="12" y="182" class="subtitle-text">Secure administrative ingress</text>
     </g>
   </g>
 
   <!-- Arrow 1: User -> Nginx -->
-  <rect x="295" y="202" width="110" height="26" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
-  <text x="350" y="219" text-anchor="middle" class="arrow-label">1. Request (:80)</text>
-  <line x1="280" y1="240" x2="418" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <rect x="335" y="220" width="105" height="30" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="387" y="240" text-anchor="middle" class="arrow-label">1. Request (:80)</text>
+  <line x1="320" y1="262" x2="453" y2="262" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
 
   <!-- Box 2: Nginx Reverse Proxy -->
-  <g transform="translate(420, 20)">
-    <rect width="270" height="450" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
+  <g transform="translate(455, 20)">
+    <rect width="290" height="480" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
 
-    <rect width="270" height="54" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" />
-    <rect y="44" width="270" height="10" fill="#ccfbf1" />
-    <rect x="12" y="10" width="34" height="34" rx="7" fill="#ffffff" stroke="#0d9488" stroke-width="1.2" />
-    <g transform="translate(17, 15) scale(1)">
+    <rect width="290" height="58" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" />
+    <rect y="48" width="290" height="10" fill="#ccfbf1" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
       <path d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0zm6 16.59c0 .705-.646 1.29-1.529 1.29-.631 0-1.351-.255-1.801-.81l-6-7.141v6.66c0 .721-.57 1.29-1.274 1.29H7.32c-.721 0-1.29-.6-1.29-1.29V7.41c0-.705.63-1.29 1.5-1.29.646 0 1.38.255 1.83.81l5.97 7.141V7.41c0-.721.6-1.29 1.29-1.29h.075c.72 0 1.29.6 1.29 1.29v9.18H18z" fill="#009639" />
     </g>
-    <text x="54" y="27" text-anchor="start" class="title-text">Nginx Reverse Proxy</text>
-    <text x="54" y="45" text-anchor="start" class="subtitle-text">Port 80 (Public Listener)</text>
+    <text x="60" y="28" text-anchor="start" class="title-text">Nginx Reverse Proxy</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 80 (Public Listener)</text>
 
-    <g transform="translate(15, 70)">
-      <rect width="240" height="155" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
-      <rect width="240" height="30" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">HTTP Basic Authentication</text>
-      <text x="12" y="55" class="code-font">auth_basic "Flower Auth";</text>
-      <text x="12" y="82" class="code-font">/etc/nginx/.flower_htpasswd</text>
-      <text x="12" y="112" class="body-text">• Cryptographic hash validation</text>
-      <text x="12" y="138" class="subtitle-text">Rejects unauthenticated traffic</text>
+    <g transform="translate(15, 75)">
+      <rect width="260" height="170" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">HTTP Basic Authentication</text>
+      <text x="12" y="60" class="code-font">auth_basic "Flower Auth";</text>
+      <text x="12" y="88" class="code-font">/etc/nginx/.flower_htpasswd</text>
+      <text x="12" y="120" class="body-text">• Cryptographic hash validation</text>
+      <text x="12" y="148" class="subtitle-text">Rejects unauthenticated traffic</text>
     </g>
 
-    <g transform="translate(15, 245)">
-      <rect width="240" height="185" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
-      <rect width="240" height="30" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">Reverse Proxying</text>
-      <text x="12" y="55" class="code-font">proxy_pass http://localhost:5555;</text>
-      <text x="12" y="82" class="body-text">• Forwards authenticated requests</text>
-      <text x="12" y="112" class="body-text">• Preserves client headers (Host, IP)</text>
-      <text x="12" y="140" class="body-text">• Isolates Flower from external exposure</text>
-      <text x="12" y="168" class="subtitle-text">Edge protection layer</text>
+    <g transform="translate(15, 260)">
+      <rect width="260" height="200" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Reverse Proxying</text>
+      <text x="12" y="60" class="code-font">proxy_pass http://localhost:5555;</text>
+      <text x="12" y="90" class="body-text">• Forwards authenticated requests</text>
+      <text x="12" y="120" class="body-text">• Preserves client headers (Host, IP)</text>
+      <text x="12" y="150" class="body-text">• Isolates Flower from direct exposure</text>
+      <text x="12" y="182" class="subtitle-text">Edge protection layer</text>
     </g>
   </g>
 
   <!-- Arrow 2: Nginx -> Flower -->
-  <rect x="705" y="202" width="110" height="26" rx="4" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2" />
-  <text x="760" y="219" text-anchor="middle" class="arrow-label">2. Proxy (:5555)</text>
-  <line x1="690" y1="240" x2="828" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <rect x="760" y="220" width="105" height="30" rx="5" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2" />
+  <text x="812" y="240" text-anchor="middle" class="arrow-label">2. Proxy (:5555)</text>
+  <line x1="745" y1="262" x2="878" y2="262" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
 
   <!-- Box 3: Flower Dashboard -->
-  <g transform="translate(830, 20)">
-    <rect width="270" height="450" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2" />
+  <g transform="translate(880, 20)">
+    <rect width="290" height="480" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2" />
 
-    <rect width="270" height="54" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5" />
-    <rect y="44" width="270" height="10" fill="#ffedd5" />
-    <rect x="12" y="10" width="34" height="34" rx="7" fill="#ffffff" stroke="#ea580c" stroke-width="1.2" />
-    <g transform="translate(17, 15) scale(1)">
+    <rect width="290" height="58" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5" />
+    <rect y="48" width="290" height="10" fill="#ffedd5" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
       <path d="m18.938 5.31-.647-2.263-1.094-.28-.062-1.11L15.318.514l-1.036.274-.69-.788h-2.175l-.619.788L9.751.372l-1.754.764L7.61 2.22l-1.347.067-1.066 2.325.68 1.125-.63.96.29 2.03 1.251.415.012 1.302 1.937 1.119.908-.284.66.816v4.973H9.24v-.578H7.037v1.162H9.23v.579h1.075v3.517H5.062v1.162H7.42V24h6.929v-1.09h2.262v-1.162h-5.147v-4.626h1.624v-.927h-1.624v-4.097h1.286l.76-.74.84.336 2.098-.76.202-1.238 1.266-.13.83-2.043-.535-1.166Zm-1.453 2.243-.377.928-1.455.15-.237 1.442-1.045.377-1.128-.452-.963.937h-1.42l-.808-1-1.176.367-.921-.532L7.94 8.3l-1.356-.448-.126-.88.792-1.208-.742-1.227.515-1.124 1.42-.071.477-1.34.852-.372 1.403.558.806-1.027h1.082l.818.934 1.244-.329.881.554.077 1.36 1.274.326.31 1.09-.789 1.143zm-1.615 7.476h-2.783v1.163h2.783zM11.04 3.715l-1.036 1.038v1.87l1.049 1.037 2.975-.035 1.02-1.01.046-1.834-1.037-1.066Zm2.86 2.403-.354.349-2.023.024-.36-.356v-.903l.357-.357h2.047l.354.364z" fill="#ea580c" />
     </g>
-    <text x="54" y="27" text-anchor="start" class="title-text">Flower Dashboard</text>
-    <text x="54" y="45" text-anchor="start" class="subtitle-text">Local Port: 5555 (Internal)</text>
+    <text x="60" y="28" text-anchor="start" class="title-text">Flower Dashboard</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Local Port: 5555 (Internal)</text>
 
-    <g transform="translate(15, 70)">
-      <rect width="240" height="155" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1.2" />
-      <rect width="240" height="30" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">Localhost Binding</text>
-      <text x="12" y="55" class="body-text">• Bound to: 127.0.0.1:5555</text>
-      <text x="12" y="82" class="body-text">• No direct external port exposure</text>
-      <text x="12" y="112" class="body-text">• Renders real-time cluster state</text>
-      <text x="12" y="138" class="subtitle-text">Accessible strictly via Nginx</text>
+    <g transform="translate(15, 75)">
+      <rect width="260" height="170" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Localhost Binding</text>
+      <text x="12" y="60" class="body-text">• Bound to: 127.0.0.1:5555</text>
+      <text x="12" y="90" class="body-text">• No direct external port exposure</text>
+      <text x="12" y="120" class="body-text">• Renders real-time cluster state</text>
+      <text x="12" y="148" class="subtitle-text">Accessible strictly via Nginx</text>
     </g>
 
-    <g transform="translate(15, 245)">
-      <rect width="240" height="185" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1.2" />
-      <rect width="240" height="30" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">Broker Telemetry</text>
-      <text x="12" y="55" class="code-font">--broker=amqp://guest:guest@...</text>
-      <text x="12" y="82" class="body-text">• Queries RabbitMQ queue state</text>
-      <text x="12" y="112" class="body-text">• Tracks worker status &amp; job latency</text>
-      <text x="12" y="140" class="body-text">• Zero performance overhead</text>
-      <text x="12" y="168" class="subtitle-text">Real-time administration UI</text>
+    <g transform="translate(15, 260)">
+      <rect width="260" height="200" rx="6" fill="#ffffff" stroke="#fed7aa" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Broker Telemetry</text>
+      <text x="12" y="60" class="code-font">--broker=amqp://guest:guest@...</text>
+      <text x="12" y="90" class="body-text">• Queries RabbitMQ queue state</text>
+      <text x="12" y="120" class="body-text">• Tracks worker status &amp; job latency</text>
+      <text x="12" y="150" class="body-text">• Zero performance overhead</text>
+      <text x="12" y="182" class="subtitle-text">Real-time administration UI</text>
     </g>
   </g>
 
   <!-- Arrow 3: Flower -> RabbitMQ -->
-  <rect x="1115" y="202" width="120" height="26" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1.2" />
-  <text x="1175" y="219" text-anchor="middle" class="arrow-label">3. AMQP (:5672)</text>
-  <line x1="1100" y1="240" x2="1248" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <rect x="1185" y="220" width="105" height="30" rx="5" fill="#fff7ed" stroke="#ea580c" stroke-width="1.2" />
+  <text x="1237" y="240" text-anchor="middle" class="arrow-label">3. AMQP (:5672)</text>
+  <line x1="1170" y1="262" x2="1303" y2="262" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
 
   <!-- Box 4: RabbitMQ Broker -->
-  <g transform="translate(1250, 20)">
-    <rect width="260" height="450" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
+  <g transform="translate(1305, 20)">
+    <rect width="290" height="480" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
 
-    <rect width="260" height="54" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
-    <rect y="44" width="260" height="10" fill="#fef3c7" />
-    <rect x="12" y="10" width="34" height="34" rx="7" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
-    <g transform="translate(17, 15) scale(1)">
+    <rect width="290" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+    <rect y="48" width="290" height="10" fill="#fef3c7" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
       <path d="M23.035 9.601h-7.677a.956.956 0 01-.962-.962V.962a.956.956 0 00-.962-.956H10.56a.956.956 0 00-.962.956V8.64a.956.956 0 01-.962.962H5.762a.956.956 0 01-.961-.962V.962A.956.956 0 003.839 0H.959a.956.956 0 00-.956.962v22.076A.956.956 0 00.965 24h22.07a.956.956 0 00.962-.962V10.58a.956.956 0 00-.962-.98zm-3.86 8.152a1.437 1.437 0 01-1.437 1.443h-1.924a1.437 1.437 0 01-1.436-1.443v-1.917a1.437 1.437 0 011.436-1.443h1.924a1.437 1.437 0 011.437 1.443z" fill="#d97706" />
     </g>
-    <text x="54" y="27" text-anchor="start" class="title-text">RabbitMQ Broker</text>
-    <text x="54" y="45" text-anchor="start" class="subtitle-text">Native Service (:5672)</text>
+    <text x="60" y="28" text-anchor="start" class="title-text">RabbitMQ Broker</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Native Service (:5672)</text>
 
-    <g transform="translate(15, 70)">
-      <rect width="230" height="155" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.2" />
-      <rect width="230" height="30" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">Systemd Daemon Service</text>
-      <text x="12" y="55" class="body-text">• Package: rabbitmq-server</text>
-      <text x="12" y="82" class="body-text">• Port 5672: AMQP message bus</text>
-      <text x="12" y="112" class="body-text">• Managed via systemctl enable/start</text>
-      <text x="12" y="138" class="subtitle-text">Default credentials: guest / guest</text>
+    <g transform="translate(15, 75)">
+      <rect width="260" height="170" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Systemd Daemon Service</text>
+      <text x="12" y="60" class="body-text">• Package: rabbitmq-server</text>
+      <text x="12" y="88" class="body-text">• Port 5672: AMQP message bus</text>
+      <text x="12" y="120" class="body-text">• Managed via systemctl enable/start</text>
+      <text x="12" y="148" class="subtitle-text">Default credentials: guest / guest</text>
     </g>
 
-    <g transform="translate(15, 245)">
-      <rect width="230" height="185" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.2" />
-      <rect width="230" height="30" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.2" />
-      <text x="12" y="20" class="section-heading">Queue Telemetry Bus</text>
-      <text x="12" y="55" class="body-text">• Coordinates distributed task queues</text>
-      <text x="12" y="82" class="body-text">• Emits worker heartbeats</text>
-      <text x="12" y="112" class="body-text">• Exposes queue metrics to Flower</text>
-      <text x="12" y="140" class="body-text">• Production asynchronous backbone</text>
-      <text x="12" y="168" class="subtitle-text">High throughput AMQP engine</text>
+    <g transform="translate(15, 260)">
+      <rect width="260" height="200" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.2" />
+      <rect width="260" height="32" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Queue Telemetry Bus</text>
+      <text x="12" y="60" class="body-text">• Coordinates distributed task queues</text>
+      <text x="12" y="90" class="body-text">• Emits worker heartbeats</text>
+      <text x="12" y="120" class="body-text">• Exposes queue metrics to Flower</text>
+      <text x="12" y="150" class="body-text">• Production asynchronous backbone</text>
+      <text x="12" y="182" class="subtitle-text">High throughput AMQP engine</text>
     </g>
   </g>
 
