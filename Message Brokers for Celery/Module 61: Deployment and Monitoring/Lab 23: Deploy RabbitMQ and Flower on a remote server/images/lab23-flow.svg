@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="100%" height="100%">
+  <defs>
+    <style>
+      .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-size: 13px; font-weight: 500; fill: #64748b; }
+      .actor-title { font-size: 13px; font-weight: 700; fill: #ffffff; }
+      .actor-sub { font-size: 10.5px; font-weight: 500; fill: #e2e8f0; }
+      .step-num { font-size: 11px; font-weight: 700; fill: #ffffff; }
+      .step-title { font-size: 12.5px; font-weight: 700; fill: #0f172a; }
+      .step-desc { font-size: 11px; font-weight: 400; fill: #334155; }
+      .lifeline { stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 6 4; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
+    </marker>
+  </defs>
+
+  <rect width="1000" height="660" fill="#f8fafc" rx="12" />
+  <rect x="1" y="1" width="998" height="658" fill="none" stroke="#e2e8f0" stroke-width="2" rx="11" />
+
+  <!-- Header -->
+  <rect x="25" y="20" width="950" height="54" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)" />
+  <text x="45" y="44" class="font-sans title">Lab 23: Task Dispatch &amp; Cloudflare Tunnel Monitoring Flow</text>
+  <text x="45" y="62" class="font-sans subtitle">Detailed lifecycle of container orchestration, task submission, worker execution, and remote tunnel visualization</text>
+
+  <!-- Actors (4) -->
+  <g transform="translate(40, 95)">
+    <rect width="180" height="48" rx="8" fill="#2563eb" filter="url(#shadow)" />
+    <text x="90" y="23" text-anchor="middle" class="font-sans actor-title">Client / Browser</text>
+    <text x="90" y="38" text-anchor="middle" class="font-sans actor-sub">Python Client &amp; Web</text>
+    <line x1="90" y1="48" x2="90" y2="530" class="lifeline" />
+  </g>
+
+  <g transform="translate(280, 95)">
+    <rect width="190" height="48" rx="8" fill="#dc2626" filter="url(#shadow)" />
+    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">RabbitMQ (Broker)</text>
+    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Port 5672 (AMQP)</text>
+    <line x1="95" y1="48" x2="95" y2="530" class="lifeline" />
+  </g>
+
+  <g transform="translate(530, 95)">
+    <rect width="190" height="48" rx="8" fill="#7c3aed" filter="url(#shadow)" />
+    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Celery Worker</text>
+    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">tasks.add(10, 20)</text>
+    <line x1="95" y1="48" x2="95" y2="530" class="lifeline" />
+  </g>
+
+  <g transform="translate(770, 95)">
+    <rect width="190" height="48" rx="8" fill="#d97706" filter="url(#shadow)" />
+    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Flower + Cloudflare</text>
+    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Port 5555 -&gt; HTTPS Tunnel</text>
+    <line x1="95" y1="48" x2="95" y2="530" class="lifeline" />
+  </g>
+
+  <!-- Step 1: Submit add.delay(10, 20) -->
+  <g transform="translate(0, 160)">
+    <line x1="130" y1="20" x2="375" y2="20" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
+    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="196" cy="19" r="10" fill="#2563eb" />
+    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">1</text>
+    <text x="214" y="16" class="font-sans step-title" fill="#1e40af">add.delay(10, 20)</text>
+    <text x="214" y="29" class="font-sans step-desc">Publishes AMQP message</text>
+  </g>
+
+  <!-- Step 2: Worker consumes -->
+  <g transform="translate(0, 220)">
+    <line x1="375" y1="20" x2="625" y2="20" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr-purple)" />
+    <rect x="440" y="2" width="150" height="34" rx="6" fill="#ffffff" stroke="#c084fc" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="456" cy="19" r="10" fill="#7c3aed" />
+    <text x="456" y="23" text-anchor="middle" class="font-sans step-num">2</text>
+    <text x="474" y="16" class="font-sans step-title" fill="#581c87">Worker Dequeues</text>
+    <text x="474" y="29" class="font-sans step-desc">Consumes from RabbitMQ</text>
+  </g>
+
+  <!-- Step 3: Worker executes task -->
+  <g transform="translate(0, 280)">
+    <path d="M 625 15 C 675 15, 675 45, 625 45" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr-purple)" />
+    <rect x="680" y="10" width="165" height="42" rx="6" fill="#ffffff" stroke="#c084fc" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="696" cy="31" r="10" fill="#7c3aed" />
+    <text x="696" y="35" text-anchor="middle" class="font-sans step-num">3</text>
+    <text x="714" y="25" class="font-sans step-title" fill="#581c87">Execute add()</text>
+    <text x="714" y="40" class="font-sans step-desc">sleep(2) then returns 30</text>
+  </g>
+
+  <!-- Step 4: RPC result back through RabbitMQ -->
+  <g transform="translate(0, 350)">
+    <line x1="625" y1="20" x2="375" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
+    <rect x="430" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="446" cy="19" r="10" fill="#059669" />
+    <text x="446" y="23" text-anchor="middle" class="font-sans step-num">4</text>
+    <text x="464" y="16" class="font-sans step-title" fill="#065f46">RPC Result Reply</text>
+    <text x="464" y="29" class="font-sans step-desc">Sends return value: 30</text>
+  </g>
+
+  <!-- Step 5: Flower captures event -->
+  <g transform="translate(0, 410)">
+    <line x1="375" y1="20" x2="865" y2="20" stroke="#d97706" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arr-amber)" />
+    <rect x="540" y="2" width="170" height="34" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="556" cy="19" r="10" fill="#d97706" />
+    <text x="556" y="23" text-anchor="middle" class="font-sans step-num">5</text>
+    <text x="574" y="16" class="font-sans step-title" fill="#92400e">Ingest Event in Flower</text>
+    <text x="574" y="29" class="font-sans step-desc">Records task state: SUCCESS</text>
+  </g>
+
+  <!-- Step 6: Browser views via Cloudflare -->
+  <g transform="translate(0, 475)">
+    <line x1="130" y1="20" x2="865" y2="20" stroke="#d97706" stroke-width="2" marker-end="url(#arr-amber)" />
+    <rect x="410" y="2" width="200" height="34" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="426" cy="19" r="10" fill="#d97706" />
+    <text x="426" y="23" text-anchor="middle" class="font-sans step-num">6</text>
+    <text x="444" y="16" class="font-sans step-title" fill="#92400e">Cloudflare HTTPS Ingress</text>
+    <text x="444" y="29" class="font-sans step-desc">Renders tasks.add in browser UI</text>
+  </g>
+
+  <!-- Footer note -->
+  <g transform="translate(40, 550)">
+    <rect width="920" height="80" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)" />
+    <rect width="6" height="80" rx="3" fill="#2563eb" />
+    <text x="24" y="28" class="font-sans step-title">Deployment Insight:</text>
+    <text x="24" y="48" class="font-sans step-desc">• Cloudflare Quick Tunnel establishes an outbound encrypted TLS connection to Cloudflare's edge network.</text>
+    <text x="24" y="66" class="font-sans step-desc">• The remote server requires no public IP or firewall port forwarding to securely present the monitoring dashboard.</text>
+  </g>
+</svg>

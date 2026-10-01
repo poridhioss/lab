@@ -1,10 +1,10 @@
-# Production Task Management
+# Module 58 and 59 - Lab 16: Production Task Management
 
 You will build a production-style asynchronous task management system using a Flask API, Celery workers, and Redis. The API will handle long-running background jobs, manage task IDs, configure automatic retries, implement delayed jobs, and scale worker concurrency.
 
-![Lab 16 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab16/Untitled%20Diagram.drawio%20%286%29.svg)
+![Lab 16 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab16/lab16-architecture.svg)
 
-## Concept section
+## Concepts
 
 | Term | Definition |
 | --- | --- |
@@ -14,6 +14,8 @@ You will build a production-style asynchronous task management system using a Fl
 | **Task Retries** | The mechanism to automatically retry a failed task, often with backoff delays. |
 
 The Flask API receives client requests to process long-running tasks. Instead of blocking the request, the API delegates the task to the Celery worker via the Redis broker and immediately returns a task ID to the client. The Celery worker picks up the task from Redis, processes it in the background, and updates its status in the Redis result backend. The client can poll the API using the task ID to check the current status and final result.
+
+![Lab 16 Task Lifecycle and Retry Flow](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab16/lab16-flow.svg)
 
 ## Objectives
 

@@ -1,10 +1,39 @@
-# Lab 14 — Flask Integration with Celery + Redis
-
-![Lab 14 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab14/lab_14.drawio.svg)
-
-## Overview
+# Lab 14: Flask Integration with Celery and Redis
 
 You will build a Flask web application integrated with Celery and Redis. This setup allows the Flask API to offload long-running background tasks to a Celery worker asynchronously, using Redis as both the message broker and result backend.
+
+![Lab 14 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab14/lab14-architecture.svg)
+
+## Concepts
+
+| Term | Definition |
+| --- | --- |
+| Celery | A distributed task queue system for executing asynchronous background jobs. |
+| Flask | A lightweight Python web framework used to expose REST API endpoints. |
+| Message Broker | An intermediary service (Redis) that accepts and queues task messages. |
+| Result Backend | A storage layer (Redis) where task states, metadata, and results are retained. |
+| Asynchronous Execution | A non-blocking execution model where jobs run in separate worker processes outside the request-response cycle. |
+
+The Flask API accepts HTTP POST requests to trigger email tasks. Rather than blocking the client for 10 seconds, the API enqueues the job into Redis and immediately returns HTTP 202 Accepted with a unique task ID. The Celery worker picks up the task from Redis, executes the background delay, and saves the result to the Redis backend. Clients poll the status endpoint using the task ID to monitor progression from PENDING to SUCCESS.
+
+![Lab 14 Email Task Processing Flow](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab14/lab14-flow.svg)
+
+## Objectives
+
+- Build a Flask API integrated with Celery.
+- Configure Redis as both the task broker and result backend.
+- Implement an asynchronous email processing task with simulated latency.
+- Verify non-blocking task submission and status polling via curl.
+
+## What You Will Build
+
+```text
+celery-lab/
+├── app.py
+└── venv/
+```
+
+You will configure `app.py` containing both Flask API routes and Celery background tasks, connected to a local Redis server for task queuing and result storage.
 
 ## 1. Update system
 
@@ -458,6 +487,16 @@ Expected:
 
 ---
 
+### Verification Summary
+
+| # | Call | Status | Body snippet |
+|---|---|---|---|
+| 1 | `POST /send-email` (`{"to":"user@example.com"}`) | 202 Accepted | `{"message":"Email is being sent...","task_id":"..."}` |
+| 2 | `GET /task-status/<task_id>` (immediate) | 200 OK | `{"status":"PENDING","task_id":"..."}` |
+| 3 | `GET /task-status/<task_id>` (after 10s) | 200 OK | `{"result":"Email sent to user@example.com","status":"SUCCESS",...}` |
+| 4 | `POST /send-email` (`{}`) | 400 Bad Request | `{"error":"to field is required"}` |
+| 5 | `POST /send-email` (empty body) | 400 Bad Request | `{"error":"JSON body is required"}` |
+
 ## Conclusion
 
-In this lab, you successfully integrated Flask with Celery and Redis to handle asynchronous background tasks. You configured Redis as the message broker and result backend, and verified the task execution flow through the Flask API.
+You built an asynchronous background task processing pipeline integrating Flask, Celery, and Redis. You configured Redis as both the message broker and result backend, verified non-blocking task offloading, and monitored job state transitions from pending to successful completion.

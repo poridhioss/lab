@@ -2,7 +2,7 @@
 
 You will build an asynchronous task processing pipeline using Celery as the task queue and Redis as the message broker and result backend. The architecture includes a Celery client to submit background jobs, a Redis server to queue tasks, and a Celery worker to execute them.
 
-![Lab 15 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab15/Untitled%20Diagram.drawio.svg)
+![Lab 15 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab15/lab15-architecture.svg)
 
 ## Concepts
 
@@ -16,7 +16,7 @@ You will build an asynchronous task processing pipeline using Celery as the task
 
 The Celery client submits tasks to the Redis broker, which queues them in memory. The Celery worker continuously monitors the broker, retrieves pending tasks, and executes them asynchronously. Once execution finishes, the worker saves the task status and return value to the Redis result backend, allowing the client to retrieve the results later.
 
-![Celery Workflow and Dead Letter Queue](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab15/Untitled%20Diagram.drawio%20%286%29.svg)
+![Celery Task Lifecycle Flow](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab15/lab15-flow.svg)
 
 ## Objectives
 - Build a Celery task queue using Redis as the broker.

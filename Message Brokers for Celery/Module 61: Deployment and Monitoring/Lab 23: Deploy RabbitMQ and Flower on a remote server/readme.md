@@ -2,7 +2,7 @@
 
 You will deploy a remote task processing environment using Docker Compose. The setup includes a RabbitMQ message broker, a Celery worker to execute background jobs, and a Flower dashboard to monitor the task queue in real-time. Finally, you will expose the local Flower interface to the public internet securely using a Cloudflare Quick Tunnel.
 
-![Lab 23 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab23/23.drawio.svg)
+![Lab 23 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab23/lab23-architecture.svg)
 
 ## Concepts
 
@@ -11,6 +11,10 @@ You will deploy a remote task processing environment using Docker Compose. The s
 | RabbitMQ | A robust message broker that receives, stores, and routes tasks to workers. |
 | Flower | A web-based tool for monitoring and administrating Celery clusters. |
 | Cloudflare Tunnel | A secure connection that exposes local services to the internet without opening inbound firewall ports. |
+
+RabbitMQ receives task requests and coordinates delivery to the Celery worker process. The worker executes background tasks asynchronously and reports status events back to RabbitMQ. Flower consumes these events to compile live cluster metrics. Cloudflare Quick Tunnel establishes an outbound encrypted tunnel from the server to Cloudflare's edge network, granting secure external browser access to the Flower UI without public IP exposure or port forwarding.
+
+![Lab 23 Task Dispatch and Tunnel Monitoring Flow](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab23/lab23-flow.svg)
 
 ## Objectives
 
@@ -246,7 +250,15 @@ To access the Flower dashboard and verify task completion, open the generated `h
 
 - Navigate to the **Workers** tab (or visit `https://<tunnel-id>.trycloudflare.com/workers`) to see the active worker node.
 
-![Flower Workers](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab23/Pasted%20image%20(16).png)
+### Verification Summary
+
+| # | Call | Status | Body snippet |
+|---|---|---|---|
+| 1 | `docker compose ps` | Up (running) | `lab23-rabbitmq`, `lab23-worker`, `lab23-flower` |
+| 2 | `python3 -c "from tasks import add; res = add.delay(10, 20); print(res.get())"` | SUCCESS | `30` |
+| 3 | `cloudflared tunnel --url http://localhost:5555` | 200 OK | `https://*.trycloudflare.com` |
+| 4 | Web Browser: `/tasks` | 200 OK | `tasks.add args=(10, 20) SUCCESS` |
+| 5 | Web Browser: `/workers` | 200 OK | `1 Worker Online (celery@...)` |
 
 ## Conclusion
 

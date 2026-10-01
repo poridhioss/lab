@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="100%" height="100%">
+  <defs>
+    <style>
+      .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-size: 13px; font-weight: 500; fill: #64748b; }
+      .actor-title { font-size: 13px; font-weight: 700; fill: #ffffff; }
+      .actor-sub { font-size: 10.5px; font-weight: 500; fill: #e2e8f0; }
+      .step-num { font-size: 11px; font-weight: 700; fill: #ffffff; }
+      .step-title { font-size: 12.5px; font-weight: 700; fill: #0f172a; }
+      .step-desc { font-size: 11px; font-weight: 400; fill: #334155; }
+      .lifeline { stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 6 4; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
+    </marker>
+  </defs>
+
+  <rect width="1000" height="680" fill="#f8fafc" rx="12" />
+  <rect x="1" y="1" width="998" height="678" fill="none" stroke="#e2e8f0" stroke-width="2" rx="11" />
+
+  <!-- Header -->
+  <rect x="25" y="20" width="950" height="54" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)" />
+  <text x="45" y="44" class="font-sans title">Lab 16: Production Task Lifecycle, Retry &amp; Concurrency Flow</text>
+  <text x="45" y="62" class="font-sans subtitle">Detailed sequence of asynchronous submission, concurrent pool allocation, status transitions, and retries</text>
+
+  <!-- Actors -->
+  <g transform="translate(40, 95)">
+    <rect width="180" height="48" rx="8" fill="#2563eb" filter="url(#shadow)" />
+    <text x="90" y="23" text-anchor="middle" class="font-sans actor-title">Client (Curl)</text>
+    <text x="90" y="38" text-anchor="middle" class="font-sans actor-sub">HTTP Requester</text>
+    <line x1="90" y1="48" x2="90" y2="550" class="lifeline" />
+  </g>
+
+  <g transform="translate(280, 95)">
+    <rect width="190" height="48" rx="8" fill="#0284c7" filter="url(#shadow)" />
+    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Flask API (:5000)</text>
+    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Producer Service</text>
+    <line x1="95" y1="48" x2="95" y2="550" class="lifeline" />
+  </g>
+
+  <g transform="translate(530, 95)">
+    <rect width="190" height="48" rx="8" fill="#dc2626" filter="url(#shadow)" />
+    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Redis (DB 0 &amp; DB 1)</text>
+    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Broker &amp; Result Store</text>
+    <line x1="95" y1="48" x2="95" y2="550" class="lifeline" />
+  </g>
+
+  <g transform="translate(770, 95)">
+    <rect width="190" height="48" rx="8" fill="#7c3aed" filter="url(#shadow)" />
+    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Celery Pool (x4)</text>
+    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Concurrent Workers</text>
+    <line x1="95" y1="48" x2="95" y2="550" class="lifeline" />
+  </g>
+
+  <!-- Step 1: POST /tasks -->
+  <g transform="translate(0, 160)">
+    <line x1="130" y1="20" x2="375" y2="20" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
+    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="196" cy="19" r="10" fill="#2563eb" />
+    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">1</text>
+    <text x="214" y="16" class="font-sans step-title" fill="#1e40af">POST /tasks</text>
+    <text x="214" y="29" class="font-sans step-desc">Payload: {"duration": 10}</text>
+  </g>
+
+  <!-- Step 2: Push to Redis DB 0 -->
+  <g transform="translate(0, 215)">
+    <line x1="375" y1="20" x2="625" y2="20" stroke="#0284c7" stroke-width="2" marker-end="url(#arr-blue)" />
+    <rect x="430" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#7dd3fc" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="446" cy="19" r="10" fill="#0284c7" />
+    <text x="446" y="23" text-anchor="middle" class="font-sans step-num">2</text>
+    <text x="464" y="16" class="font-sans step-title" fill="#0369a1">delay(duration)</text>
+    <text x="464" y="29" class="font-sans step-desc">Enqueues in Redis DB 0</text>
+  </g>
+
+  <!-- Step 3: Return 202 Accepted -->
+  <g transform="translate(0, 270)">
+    <line x1="375" y1="20" x2="130" y2="20" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arr-blue)" />
+    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="196" cy="19" r="10" fill="#2563eb" />
+    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">3</text>
+    <text x="214" y="16" class="font-sans step-title" fill="#1e40af">202 Accepted</text>
+    <text x="214" y="29" class="font-sans step-desc">task_id + status: PENDING</text>
+  </g>
+
+  <!-- Step 4: Available Worker Slot consumes -->
+  <g transform="translate(0, 330)">
+    <line x1="625" y1="20" x2="865" y2="20" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr-purple)" />
+    <rect x="680" y="2" width="150" height="34" rx="6" fill="#ffffff" stroke="#c084fc" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="696" cy="19" r="10" fill="#7c3aed" />
+    <text x="696" y="23" text-anchor="middle" class="font-sans step-num">4</text>
+    <text x="714" y="16" class="font-sans step-title" fill="#581c87">Worker Allocation</text>
+    <text x="714" y="29" class="font-sans step-desc">Assigned to Worker Slot 1–4</text>
+  </g>
+
+  <!-- Step 5: Retry branch (if exception occurs) -->
+  <g transform="translate(0, 390)">
+    <path d="M 865 15 C 915 15, 915 45, 865 45" fill="none" stroke="#d97706" stroke-width="2" marker-end="url(#arr-amber)" />
+    <rect x="715" y="10" width="180" height="42" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="731" cy="31" r="10" fill="#d97706" />
+    <text x="731" y="35" text-anchor="middle" class="font-sans step-num">5</text>
+    <text x="749" y="25" class="font-sans step-title" fill="#92400e">On Error: Retry</text>
+    <text x="749" y="40" class="font-sans step-desc">retry_backoff=True (max 3)</text>
+  </g>
+
+  <!-- Step 6: Worker saves SUCCESS in DB 1 -->
+  <g transform="translate(0, 455)">
+    <line x1="865" y1="20" x2="625" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
+    <rect x="680" y="2" width="150" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="696" cy="19" r="10" fill="#059669" />
+    <text x="696" y="23" text-anchor="middle" class="font-sans step-num">6</text>
+    <text x="714" y="16" class="font-sans step-title" fill="#065f46">Save Result</text>
+    <text x="714" y="29" class="font-sans step-desc">Writes to Redis DB 1</text>
+  </g>
+
+  <!-- Step 7: Client GET /tasks/{id} -->
+  <g transform="translate(0, 510)">
+    <line x1="130" y1="20" x2="375" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
+    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
+    <circle cx="196" cy="19" r="10" fill="#059669" />
+    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">7</text>
+    <text x="214" y="16" class="font-sans step-title" fill="#065f46">GET /tasks/{id}</text>
+    <text x="214" y="29" class="font-sans step-desc">Returns SUCCESS + duration</text>
+  </g>
+
+  <!-- Footer note -->
+  <g transform="translate(40, 575)">
+    <rect width="920" height="80" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)" />
+    <rect width="6" height="80" rx="3" fill="#2563eb" />
+    <text x="24" y="28" class="font-sans step-title">Production Resilience Features:</text>
+    <text x="24" y="48" class="font-sans step-desc">• <tspan font-weight="600">Concurrency:</tspan> 4 worker processes concurrently process tasks without blocking one another.</text>
+    <text x="24" y="66" class="font-sans step-desc">• <tspan font-weight="600">Backoff:</tspan> Tasks encountering transient errors automatically retry with exponential delays up to 3 times.</text>
+  </g>
+</svg>

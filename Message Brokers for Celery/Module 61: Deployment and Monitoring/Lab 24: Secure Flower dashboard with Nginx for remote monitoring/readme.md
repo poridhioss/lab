@@ -1,10 +1,10 @@
-# Secure Flower Dashboard with Nginx for Remote Monitoring
+# Module 61 - Lab 24: Secure Flower Dashboard with Nginx for Remote Monitoring
 
 You will build a secure remote monitoring setup for Celery tasks using Flower and Nginx. This architecture places the Flower dashboard behind an Nginx reverse proxy to restrict access using HTTP Basic Authentication.
 
 ![Lab 24 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab24/lab24-architecture.svg)
 
-## Concept
+## Concepts
 
 | Term | Description |
 | ---- | ----------- |
@@ -14,6 +14,8 @@ You will build a secure remote monitoring setup for Celery tasks using Flower an
 | HTTP Basic Authentication | A method for an HTTP user agent to provide a username and password when making a request. |
 
 A reverse proxy acts as an intermediary for requests from clients seeking resources from servers. Instead of exposing Flower directly to the internet, Nginx intercepts incoming HTTP traffic on port 80, enforces authentication, and routes authorized requests to the internally hosted Flower service on port 5555.
+
+![Lab 24 Reverse Proxy Authentication Flow](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab24/lab24-flow.svg)
 
 ## Objectives
 

@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 580" width="100%" height="100%">
+  <defs>
+    <style>
+      .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-size: 13px; font-weight: 500; fill: #64748b; }
+      .box-title { font-size: 15px; font-weight: 700; fill: #0f172a; }
+      .box-desc { font-size: 12px; font-weight: 400; fill: #475569; }
+      .badge-text { font-size: 11px; font-weight: 600; }
+      .code-text { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; fill: #0f172a; }
+    </style>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+    </marker>
+    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+    </marker>
+  </defs>
+
+  <rect width="1120" height="580" fill="#f8fafc" rx="12" />
+  <rect x="1" y="1" width="1118" height="578" fill="none" stroke="#e2e8f0" stroke-width="2" rx="11" />
+
+  <!-- Header -->
+  <rect x="30" y="24" width="1060" height="60" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)" />
+  <circle cx="58" cy="54" r="16" fill="#eff6ff" />
+  <path d="M51 54 L56 59 L66 49" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="86" y="48" class="font-sans title">Lab 16: Production Task Management Architecture</text>
+  <text x="86" y="68" class="font-sans subtitle">Flask API with Worker Concurrency (--concurrency=4) and Automatic Exponential Backoff Retries</text>
+
+  <!-- Box 1: Client -->
+  <g transform="translate(35, 115)">
+    <rect width="210" height="400" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)" />
+    <rect width="210" height="46" rx="10" fill="#eff6ff" />
+    <rect y="36" width="210" height="10" fill="#eff6ff" />
+    <text x="105" y="28" text-anchor="middle" class="font-sans box-title" fill="#1e40af">Client (Curl)</text>
+    <text x="16" y="75" class="font-sans box-desc">• Submits task durations:</text>
+    <rect x="12" y="90" width="186" height="55" rx="6" fill="#f8fafc" stroke="#e2e8f0" />
+    <text x="20" y="110" class="code-text" fill="#2563eb">POST /tasks</text>
+    <text x="20" y="130" class="code-text" fill="#64748b">{"duration": 10}</text>
+
+    <text x="16" y="165" class="font-sans box-desc">• Receives 202 Accepted:</text>
+    <rect x="12" y="175" width="186" height="50" rx="6" fill="#f8fafc" stroke="#e2e8f0" />
+    <text x="20" y="195" class="code-text" fill="#059669">{"status": "PENDING",</text>
+    <text x="20" y="212" class="code-text" fill="#059669"> "task_id": "uuid"}</text>
+
+    <text x="16" y="245" class="font-sans box-desc">• Polls task state:</text>
+    <rect x="12" y="255" width="186" height="50" rx="6" fill="#f8fafc" stroke="#e2e8f0" />
+    <text x="20" y="275" class="code-text" fill="#2563eb">GET /tasks/{id}</text>
+    <text x="20" y="292" class="code-text" fill="#64748b">State: PENDING / SUCCESS</text>
+
+    <rect x="12" y="320" width="186" height="80" rx="6" fill="#f1f5f9" />
+    <text x="20" y="342" class="font-sans badge-text" fill="#475569">ERROR VALIDATION</text>
+    <text x="20" y="362" class="font-sans box-desc">duration &lt; 1 --&gt; HTTP 400</text>
+    <text x="20" y="380" class="font-sans box-desc">non-int --&gt; HTTP 400</text>
+  </g>
+
+  <!-- Box 2: Flask API -->
+  <g transform="translate(285, 115)">
+    <rect width="250" height="400" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)" />
+    <rect width="250" height="46" rx="10" fill="#eff6ff" />
+    <rect y="36" width="250" height="10" fill="#eff6ff" />
+    <text x="125" y="28" text-anchor="middle" class="font-sans box-title" fill="#1e40af">Flask API (:5000)</text>
+    <text x="16" y="75" class="font-sans box-desc">• File: <tspan font-family="monospace">app.py</tspan></text>
+    <text x="16" y="98" class="font-sans box-desc font-weight-600">Task Acceptance Endpoint:</text>
+    <rect x="14" y="110" width="222" height="60" rx="6" fill="#f8fafc" stroke="#e2e8f0" />
+    <text x="22" y="132" class="code-text" fill="#2563eb">@app.route("/tasks", POST)</text>
+    <text x="22" y="152" class="code-text" fill="#0f172a">task = long_running_task.delay()</text>
+
+    <text x="16" y="192" class="font-sans box-desc font-weight-600">Status Query Endpoint:</text>
+    <rect x="14" y="205" width="222" height="65" rx="6" fill="#f8fafc" stroke="#e2e8f0" />
+    <text x="22" y="227" class="code-text" fill="#059669">@app.route("/tasks/&lt;id&gt;", GET)</text>
+    <text x="22" y="247" class="code-text" fill="#0f172a">task = AsyncResult(id, app=celery)</text>
+    <text x="22" y="263" class="code-text" fill="#64748b">Inspects state &amp; returns JSON</text>
+
+    <rect x="14" y="285" width="222" height="115" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
+    <text x="22" y="307" class="font-sans badge-text" fill="#1e40af">BROKER &amp; BACKEND CONFIG</text>
+    <text x="22" y="327" class="font-sans box-desc">BROKER_URL: redis://localhost:6379/0</text>
+    <text x="22" y="347" class="font-sans box-desc">RESULT_BACKEND: redis://localhost:6379/1</text>
+    <text x="22" y="367" class="font-sans box-desc">• DB 0: Message Broker Queue</text>
+    <text x="22" y="387" class="font-sans box-desc">• DB 1: Task State Store</text>
+  </g>
+
+  <!-- Box 3: Redis Broker -->
+  <g transform="translate(575, 115)">
+    <rect width="230" height="400" rx="10" fill="#ffffff" stroke="#f87171" stroke-width="1.5" filter="url(#shadow)" />
+    <rect width="230" height="46" rx="10" fill="#fef2f2" />
+    <rect y="36" width="230" height="10" fill="#fef2f2" />
+    <text x="115" y="28" text-anchor="middle" class="font-sans box-title" fill="#991b1b">Redis Broker (:6379)</text>
+    <text x="16" y="75" class="font-sans box-desc">• Container: <tspan font-family="monospace">lab16-redis</tspan></text>
+    <text x="16" y="98" class="font-sans box-desc">• Port: 6379:6379</text>
+
+    <rect x="14" y="115" width="202" height="120" rx="6" fill="#fff1f2" stroke="#fecaca" />
+    <text x="24" y="138" class="font-sans badge-text" fill="#991b1b">DATABASE 0: QUEUE</text>
+    <text x="24" y="160" class="font-sans box-desc">• Stores pending task jobs</text>
+    <text x="24" y="180" class="font-sans box-desc">• Key: <tspan font-family="monospace">celery</tspan></text>
+    <text x="24" y="200" class="font-sans box-desc">• Atomic BRPOP dequeue</text>
+    <text x="24" y="220" class="font-sans box-desc">• Handles worker retries</text>
+
+    <rect x="14" y="250" width="202" height="135" rx="6" fill="#f0fdf4" stroke="#bbf7d0" />
+    <text x="24" y="273" class="font-sans badge-text" fill="#166534">DATABASE 1: RESULTS</text>
+    <text x="24" y="295" class="font-sans box-desc">• Key: <tspan font-family="monospace">celery-task-meta-...</tspan></text>
+    <text x="24" y="315" class="font-sans box-desc">• States:</text>
+    <text x="32" y="333" class="font-sans box-desc">- PENDING, STARTED</text>
+    <text x="32" y="351" class="font-sans box-desc">- SUCCESS, FAILURE, RETRY</text>
+    <text x="24" y="371" class="font-sans box-desc">• Output payload metadata</text>
+  </g>
+
+  <!-- Box 4: Celery Workers (Concurrency 4) -->
+  <g transform="translate(845, 115)">
+    <rect width="240" height="400" rx="10" fill="#ffffff" stroke="#c084fc" stroke-width="1.5" filter="url(#shadow)" />
+    <rect width="240" height="46" rx="10" fill="#faf5ff" />
+    <rect y="36" width="240" height="10" fill="#faf5ff" />
+    <text x="120" y="28" text-anchor="middle" class="font-sans box-title" fill="#581c87">Celery Workers (--concurrency=4)</text>
+    <text x="16" y="75" class="font-sans box-desc">• Command: <tspan font-family="monospace">celery -A tasks.celery worker</tspan></text>
+
+    <!-- Concurrency Pool Badges -->
+    <rect x="14" y="90" width="212" height="85" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
+    <text x="24" y="112" class="font-sans badge-text" fill="#581c87">4 CONCURRENT WORKER PROCESSES</text>
+    <rect x="24" y="122" width="45" height="20" rx="3" fill="#e9d5ff" />
+    <text x="46" y="136" text-anchor="middle" class="code-text" fill="#581c87">P 1</text>
+    <rect x="74" y="122" width="45" height="20" rx="3" fill="#e9d5ff" />
+    <text x="96" y="136" text-anchor="middle" class="code-text" fill="#581c87">P 2</text>
+    <rect x="124" y="122" width="45" height="20" rx="3" fill="#e9d5ff" />
+    <text x="146" y="136" text-anchor="middle" class="code-text" fill="#581c87">P 3</text>
+    <rect x="174" y="122" width="45" height="20" rx="3" fill="#e9d5ff" />
+    <text x="196" y="136" text-anchor="middle" class="code-text" fill="#581c87">P 4</text>
+    <text x="24" y="162" class="font-sans box-desc">Processes 4 tasks concurrently</text>
+
+    <!-- Retry Card -->
+    <rect x="14" y="185" width="212" height="120" rx="6" fill="#fffbeb" stroke="#fde68a" />
+    <text x="24" y="208" class="font-sans badge-text" fill="#92400e">AUTOMATIC RETRY ENGINE</text>
+    <text x="24" y="228" class="font-sans box-desc">• <tspan font-family="monospace">autoretry_for=(Exception,)</tspan></text>
+    <text x="24" y="248" class="font-sans box-desc">• <tspan font-family="monospace">retry_backoff=True</tspan> (exp. delay)</text>
+    <text x="24" y="268" class="font-sans box-desc">• <tspan font-family="monospace">max_retries=3</tspan></text>
+    <text x="24" y="288" class="font-sans box-desc">• Context access via <tspan font-family="monospace">bind=True</tspan></text>
+
+    <!-- Task Spec -->
+    <rect x="14" y="315" width="212" height="85" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
+    <text x="24" y="337" class="font-sans badge-text" fill="#475569">TASK EXECUTION</text>
+    <text x="24" y="357" class="code-text" fill="#0f172a">long_running_task(duration)</text>
+    <text x="24" y="377" class="font-sans box-desc">Logs task ID &amp; sleeps for duration</text>
+  </g>
+
+  <!-- Connectors -->
+  <line x1="245" y1="200" x2="285" y2="200" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
+  <line x1="285" y1="230" x2="245" y2="230" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
+
+  <line x1="535" y1="200" x2="575" y2="200" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
+  <line x1="575" y1="230" x2="535" y2="230" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
+
+  <line x1="805" y1="200" x2="845" y2="200" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr-purple)" />
+  <line x1="845" y1="310" x2="805" y2="310" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
+
+  <!-- Footer -->
+  <rect x="35" y="530" width="1050" height="26" rx="4" fill="#f1f5f9" />
+  <text x="45" y="547" class="font-sans box-desc">Port 5000: Flask API | Port 6379: Redis (DB 0: Tasks, DB 1: Results) | Workers: 4 Concurrent Celery Instances</text>
+  <text x="1070" y="547" text-anchor="end" class="font-sans badge-text" fill="#64748b">Poridhi Labs • Lab 16</text>
+</svg>

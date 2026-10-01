@@ -2,7 +2,7 @@
 
 You will build a Flask API that dispatches background tasks to a Celery worker using a Redis broker. You will implement Flower to observe task execution metrics and worker states in real-time. You will configure Nginx as a reverse proxy secured with HTTP Basic Authentication to protect the Flower dashboard.
 
-![Lab 17 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab17/Untitled%20Diagram.drawio.svg)
+![Lab 17 Architecture Overview](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab17/lab17-architecture.svg)
 
 ## Concepts
 
@@ -13,6 +13,8 @@ You will build a Flask API that dispatches background tasks to a Celery worker u
 | Basic Authentication | A method for HTTP user agents to provide a username and password when making a request. |
 
 Flower connects to the Celery broker to ingest real-time data about workers and tasks. Nginx intercepts HTTP requests directed at the dashboard, enforces basic authentication, and proxies legitimate requests to the internal Flower process running on a separate port.
+
+![Lab 17 Observability and Execution Flow](https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/lab17/lab17-flow.svg)
 
 ## Objectives
 
