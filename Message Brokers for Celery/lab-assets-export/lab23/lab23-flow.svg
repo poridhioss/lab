@@ -7,46 +7,46 @@
         fill: #000000;
       }
       .title-text {
-        font-size: 15px;
+        font-size: 17px;
         font-weight: bold;
         fill: #000000;
       }
       .subtitle-text {
-        font-size: 11px;
+        font-size: 13px;
         font-style: italic;
         fill: #000000;
       }
       .section-heading {
-        font-size: 12px;
+        font-size: 14.5px;
         font-weight: bold;
         fill: #000000;
       }
       .code-font {
         font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .body-text {
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .arrow-label {
-        font-size: 11px;
+        font-size: 13px;
         font-weight: bold;
         fill: #000000;
       }
       .arrow-sub {
-        font-size: 10px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
       .flow-step-title {
-        font-size: 12px;
+        font-size: 13.5px;
         font-weight: bold;
         fill: #000000;
       }
       .flow-step-sub {
-        font-size: 11px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
@@ -59,66 +59,66 @@
 <rect width="100%" height="100%" fill="#ffffff" />
 
   <!-- Lifeline Header: Client / Operator -->
-  <rect x="35" y="20" width="190" height="48" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+  <rect x="30" y="20" width="200" height="50" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
   <text x="130" y="42" text-anchor="middle" class="section-heading">Client / Operator</text>
-  <text x="130" y="57" text-anchor="middle" class="subtitle-text">Python Client &amp; Browser</text>
-  <line x1="130" y1="68" x2="130" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="130" y="59" text-anchor="middle" class="subtitle-text">Python Client &amp; Browser</text>
+  <line x1="130" y1="70" x2="130" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Lifeline Header: RabbitMQ (Broker) -->
-  <rect x="305" y="20" width="190" height="48" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.8" />
+  <rect x="300" y="20" width="200" height="50" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.8" />
   <text x="400" y="42" text-anchor="middle" class="section-heading">RabbitMQ (Broker)</text>
-  <text x="400" y="57" text-anchor="middle" class="subtitle-text">Port 5672 (AMQP)</text>
-  <line x1="400" y1="68" x2="400" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="400" y="59" text-anchor="middle" class="subtitle-text">Port 5672 (AMQP)</text>
+  <line x1="400" y1="70" x2="400" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Lifeline Header: Celery Worker -->
-  <rect x="575" y="20" width="190" height="48" rx="6" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.8" />
+  <rect x="570" y="20" width="200" height="50" rx="6" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.8" />
   <text x="670" y="42" text-anchor="middle" class="section-heading">Celery Worker</text>
-  <text x="670" y="57" text-anchor="middle" class="subtitle-text">tasks.add(10, 20)</text>
-  <line x1="670" y1="68" x2="670" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="670" y="59" text-anchor="middle" class="subtitle-text">tasks.add(10, 20)</text>
+  <line x1="670" y1="70" x2="670" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Lifeline Header: Flower + Cloudflare -->
-  <rect x="845" y="20" width="190" height="48" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8" />
+  <rect x="840" y="20" width="200" height="50" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8" />
   <text x="940" y="42" text-anchor="middle" class="section-heading">Flower + Cloudflare</text>
-  <text x="940" y="57" text-anchor="middle" class="subtitle-text">Port 5555 -&gt; HTTPS Tunnel</text>
-  <line x1="940" y1="68" x2="940" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="940" y="59" text-anchor="middle" class="subtitle-text">Port 5555 -&gt; HTTPS Tunnel</text>
+  <line x1="940" y1="70" x2="940" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Message Step -->
-  <line x1="130" y1="125" x2="398" y2="125" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
-  <text x="265" y="97" text-anchor="middle" class="flow-step-title">1. add.delay(10, 20)</text>
+  <line x1="130" y1="130" x2="398" y2="130" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="265" y="102" text-anchor="middle" class="flow-step-title">1. add.delay(10, 20)</text>
 
-  <text x="265" y="113" text-anchor="middle" class="flow-step-sub">(Python script dispatches task via AMQP broker)</text>
+  <text x="265" y="118" text-anchor="middle" class="flow-step-sub">(Python script dispatches task via AMQP broker)</text>
 
   <!-- Message Step -->
-  <line x1="400" y1="205" x2="668" y2="205" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
-  <text x="535" y="177" text-anchor="middle" class="flow-step-title">2. Worker Dequeues from RabbitMQ</text>
+  <line x1="400" y1="210" x2="668" y2="210" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="535" y="182" text-anchor="middle" class="flow-step-title">2. Worker Dequeues from RabbitMQ</text>
 
-  <text x="535" y="193" text-anchor="middle" class="flow-step-sub">(Worker pulls pending add task from queue)</text>
+  <text x="535" y="198" text-anchor="middle" class="flow-step-sub">(Worker pulls pending add task from queue)</text>
 
   <!-- Self Loop -->
-  <path d="M 670 273 C 705 273, 705 297, 675 297" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
-  <text x="715" y="283" text-anchor="start" class="flow-step-title">3. Execute add(10, 20)</text>
+  <path d="M 670 278 C 705 278, 705 302, 675 302" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <text x="715" y="288" text-anchor="start" class="flow-step-title">3. Execute add(10, 20)</text>
 
-  <text x="715" y="299" text-anchor="start" class="flow-step-sub">sleep(2) then returns 30</text>
-
-  <!-- Message Step -->
-  <line x1="670" y1="365" x2="402" y2="365" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
-  <text x="535" y="337" text-anchor="middle" class="flow-step-title">4. RPC Result Reply (30)</text>
-
-  <text x="535" y="353" text-anchor="middle" class="flow-step-sub">(Worker sends outcome back over AMQP backend)</text>
+  <text x="715" y="304" text-anchor="start" class="flow-step-sub">sleep(2) then returns 30</text>
 
   <!-- Message Step -->
-  <line x1="400" y1="445" x2="938" y2="445" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
-  <text x="670" y="417" text-anchor="middle" class="flow-step-title">5. Ingest Event into Flower</text>
+  <line x1="670" y1="370" x2="402" y2="370" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="535" y="342" text-anchor="middle" class="flow-step-title">4. RPC Result Reply (30)</text>
 
-  <text x="670" y="433" text-anchor="middle" class="flow-step-sub">(Flower captures SUCCESS status transition)</text>
+  <text x="535" y="358" text-anchor="middle" class="flow-step-sub">(Worker sends outcome back over AMQP backend)</text>
 
   <!-- Message Step -->
-  <line x1="130" y1="525" x2="938" y2="525" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
-  <text x="535" y="497" text-anchor="middle" class="flow-step-title">6. HTTPS Ingress via Cloudflare Tunnel</text>
+  <line x1="400" y1="450" x2="938" y2="450" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <text x="670" y="422" text-anchor="middle" class="flow-step-title">5. Ingest Event into Flower</text>
 
-  <text x="535" y="513" text-anchor="middle" class="flow-step-sub">(Remote operator views tasks.add SUCCESS in browser UI)</text>
+  <text x="670" y="438" text-anchor="middle" class="flow-step-sub">(Flower captures SUCCESS status transition)</text>
+
+  <!-- Message Step -->
+  <line x1="130" y1="530" x2="938" y2="530" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="535" y="502" text-anchor="middle" class="flow-step-title">6. HTTPS Ingress via Cloudflare Tunnel</text>
+
+  <text x="535" y="518" text-anchor="middle" class="flow-step-sub">(Remote operator views tasks.add SUCCESS in browser UI)</text>
 </svg>

@@ -7,46 +7,46 @@
         fill: #000000;
       }
       .title-text {
-        font-size: 15px;
+        font-size: 17px;
         font-weight: bold;
         fill: #000000;
       }
       .subtitle-text {
-        font-size: 11px;
+        font-size: 13px;
         font-style: italic;
         fill: #000000;
       }
       .section-heading {
-        font-size: 12px;
+        font-size: 14.5px;
         font-weight: bold;
         fill: #000000;
       }
       .code-font {
         font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .body-text {
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .arrow-label {
-        font-size: 11px;
+        font-size: 13px;
         font-weight: bold;
         fill: #000000;
       }
       .arrow-sub {
-        font-size: 10px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
       .flow-step-title {
-        font-size: 12px;
+        font-size: 13.5px;
         font-weight: bold;
         fill: #000000;
       }
       .flow-step-sub {
-        font-size: 11px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
@@ -60,179 +60,153 @@
 
   <!-- Box 1: HTTP Client (Blue) -->
   <g transform="translate(20, 20)">
-    <rect width="250" height="440" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
-    <rect width="250" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
-    <rect y="34" width="250" height="10" fill="#dbeafe" />
-    <text x="125" y="24" text-anchor="middle" class="title-text">HTTP Client (Curl)</text>
-    <text x="125" y="40" text-anchor="middle" class="subtitle-text">Postman / Terminal</text>
+    <rect width="260" height="440" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect width="260" height="46" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="36" width="260" height="10" fill="#dbeafe" />
+    <text x="130" y="26" text-anchor="middle" class="title-text">HTTP Client (Curl)</text>
+    <text x="130" y="42" text-anchor="middle" class="subtitle-text">Postman / Terminal Caller</text>
 
-    <g transform="translate(15, 60)">
-      <rect width="220" height="110" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
-      <rect width="220" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Task Submission</text>
-      <text x="10" y="44" class="code-font" font-weight="bold">POST /send-email</text>
-      <text x="10" y="64" class="code-font">{"to": "user@example.com"}</text>
-      <text x="10" y="86" class="body-text">&#x2190; 202 Accepted (Instant)</text>
-      <text x="10" y="104" class="code-font">{"task_id": "uuid"}</text>
+    <g transform="translate(15, 65)">
+      <rect width="230" height="150" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="230" height="28" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">1. Task Submission</text>
+      <text x="12" y="52" class="code-font" font-weight="bold">POST /send-email</text>
+      <text x="12" y="76" class="code-font">{"to": "user@example.com"}</text>
+      <text x="12" y="106" class="body-text">&#x2190; 202 Accepted (Instant)</text>
+      <text x="12" y="130" class="code-font">{"task_id": "uuid"}</text>
     </g>
 
-    <g transform="translate(15, 185)">
-      <rect width="220" height="115" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
-      <rect width="220" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Status Polling</text>
-      <text x="10" y="44" class="code-font" font-weight="bold">GET /task-status/{id}</text>
-      <text x="10" y="66" class="body-text">Immediate: {"status": "PENDING"}</text>
-      <text x="10" y="88" class="body-text">After 10s: {"status": "SUCCESS"}</text>
-      <text x="10" y="108" class="body-text">Result: "Email sent to..."</text>
-    </g>
-
-    <g transform="translate(15, 315)">
-      <rect width="220" height="110" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
-      <rect width="220" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Client Benefits</text>
-      <text x="10" y="44" class="body-text">• No 10-second request block</text>
-      <text x="10" y="66" class="body-text">• Fast response time (&lt;10ms)</text>
-      <text x="10" y="88" class="body-text">• Resilient to timeout errors</text>
-      <text x="10" y="106" class="body-text">• Decoupled architecture</text>
+    <g transform="translate(15, 235)">
+      <rect width="230" height="175" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="230" height="28" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">2. Status Polling</text>
+      <text x="12" y="52" class="code-font" font-weight="bold">GET /task-status/{id}</text>
+      <text x="12" y="80" class="body-text">• Initial: {"status": "PENDING"}</text>
+      <text x="12" y="108" class="body-text">• After 10s: {"status": "SUCCESS"}</text>
+      <text x="12" y="136" class="code-font">"Email sent to user..."</text>
+      <text x="12" y="160" class="subtitle-text">Non-blocking client execution</text>
     </g>
   </g>
 
   <!-- Box 2: Flask Web App (Green) -->
-  <g transform="translate(410, 20)">
+  <g transform="translate(420, 20)">
     <rect width="270" height="440" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="2" />
-    <rect width="270" height="44" rx="8" fill="#dcfce7" stroke="#059669" stroke-width="1.5" />
-    <rect y="34" width="270" height="10" fill="#dcfce7" />
-    <text x="135" y="24" text-anchor="middle" class="title-text">Flask Web App (:5000)</text>
-    <text x="135" y="40" text-anchor="middle" class="subtitle-text">app.py (REST API)</text>
+    <rect width="270" height="46" rx="8" fill="#dcfce7" stroke="#059669" stroke-width="1.5" />
+    <rect y="36" width="270" height="10" fill="#dcfce7" />
+    <text x="135" y="26" text-anchor="middle" class="title-text">Flask Web App (:5000)</text>
+    <text x="135" y="42" text-anchor="middle" class="subtitle-text">Producer REST API (app.py)</text>
 
-    <g transform="translate(15, 60)">
-      <rect width="240" height="110" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Route: POST /send-email</text>
-      <text x="10" y="44" class="body-text">• Validates JSON body and "to"</text>
-      <text x="10" y="66" class="body-text">• Calls Celery task:</text>
-      <text x="18" y="86" class="code-font">task = send_email_task.delay(to)</text>
-      <text x="10" y="106" class="body-text">• Returns HTTP 202 + task.id</text>
+    <g transform="translate(15, 65)">
+      <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
+      <rect width="240" height="28" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">Task Dispatch Route</text>
+      <text x="12" y="52" class="body-text">• Validates JSON request body</text>
+      <text x="12" y="78" class="code-font">task = send_email_task.delay(to)</text>
+      <text x="12" y="106" class="body-text">• Enqueues task into broker</text>
+      <text x="12" y="130" class="body-text">• Returns HTTP 202 + task ID</text>
     </g>
 
-    <g transform="translate(15, 185)">
-      <rect width="240" height="115" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Route: GET /task-status/{id}</text>
-      <text x="10" y="44" class="body-text">• Queries result backend:</text>
-      <text x="18" y="64" class="code-font">task = send_email_task.AsyncResult(id)</text>
-      <text x="10" y="88" class="body-text">• Returns status: PENDING / SUCCESS</text>
-      <text x="10" y="108" class="body-text">• Attaches result payload on success</text>
-    </g>
-
-    <g transform="translate(15, 315)">
-      <rect width="240" height="110" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Celery Configuration</text>
-      <text x="10" y="44" class="code-font">broker: redis://localhost:6379/0</text>
-      <text x="10" y="66" class="code-font">backend: redis://localhost:6379/0</text>
-      <text x="10" y="88" class="body-text">• Redis DB 0 holds broker queue</text>
-      <text x="10" y="106" class="body-text">• Redis DB 0 stores results</text>
+    <g transform="translate(15, 235)">
+      <rect width="240" height="175" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
+      <rect width="240" height="28" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">Status Query &amp; Config</text>
+      <text x="12" y="52" class="code-font">task = AsyncResult(task_id)</text>
+      <text x="12" y="78" class="body-text">• Returns status and result payload</text>
+      <text x="12" y="108" class="code-font">broker: redis://localhost:6379/0</text>
+      <text x="12" y="132" class="code-font">backend: redis://localhost:6379/0</text>
+      <text x="12" y="160" class="subtitle-text">Integrated Celery &amp; Flask application</text>
     </g>
   </g>
 
-  <!-- Box 3: Redis Server (Red / Rose) -->
-  <g transform="translate(820, 20)">
+  <!-- Box 3: Redis Server (Red) -->
+  <g transform="translate(830, 20)">
     <rect width="270" height="440" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="2" />
-    <rect width="270" height="44" rx="8" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.5" />
-    <rect y="34" width="270" height="10" fill="#ffe4e6" />
-    <text x="135" y="24" text-anchor="middle" class="title-text">Redis Server (:6379)</text>
-    <text x="135" y="40" text-anchor="middle" class="subtitle-text">In-Memory Data Store</text>
+    <rect width="270" height="46" rx="8" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.5" />
+    <rect y="36" width="270" height="10" fill="#ffe4e6" />
+    <text x="135" y="26" text-anchor="middle" class="title-text">Redis Server (:6379)</text>
+    <text x="135" y="42" text-anchor="middle" class="subtitle-text">In-Memory Message Bus &amp; Store</text>
 
-    <g transform="translate(15, 60)">
-      <rect width="240" height="170" rx="6" fill="#ffffff" stroke="#fda4af" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#fff1f2" stroke="#fda4af" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">1. Message Broker (DB 0)</text>
-      <text x="10" y="44" class="body-text">• Key: "celery" (Task List)</text>
-      <text x="10" y="66" class="body-text">• Ingests task message JSON</text>
-      <text x="10" y="88" class="body-text">• Holds job until picked up</text>
-      <text x="10" y="110" class="body-text">• Atomic BRPOP dequeue</text>
-      <text x="10" y="132" class="body-text">• High throughput delivery</text>
-      <text x="10" y="152" class="body-text">• Persistent queue state</text>
+    <g transform="translate(15, 65)">
+      <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#fda4af" stroke-width="1.2" />
+      <rect width="240" height="28" rx="6" fill="#fff1f2" stroke="#fda4af" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">Message Broker (DB 0)</text>
+      <text x="12" y="52" class="code-font">• Key: "celery" (Task List)</text>
+      <text x="12" y="78" class="body-text">• Ingests JSON task messages</text>
+      <text x="12" y="106" class="body-text">• Atomic BRPOP delivery</text>
+      <text x="12" y="130" class="body-text">• High throughput in-memory bus</text>
     </g>
 
-    <g transform="translate(15, 245)">
-      <rect width="240" height="180" rx="6" fill="#ffffff" stroke="#fda4af" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#fff1f2" stroke="#fda4af" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">2. Result Backend (DB 0)</text>
-      <text x="10" y="44" class="body-text">• Key: celery-task-meta-{task_id}</text>
-      <text x="10" y="66" class="body-text">• Stores task execution state:</text>
-      <text x="18" y="88" class="body-text">- PENDING (in progress)</text>
-      <text x="18" y="108" class="body-text">- SUCCESS (completed)</text>
-      <text x="10" y="130" class="body-text">• Stores return string payload</text>
-      <text x="10" y="150" class="body-text">• Serves API polling queries</text>
-      <text x="10" y="170" class="body-text">• TTL managed key lifecycle</text>
+    <g transform="translate(15, 235)">
+      <rect width="240" height="175" rx="6" fill="#ffffff" stroke="#fda4af" stroke-width="1.2" />
+      <rect width="240" height="28" rx="6" fill="#fff1f2" stroke="#fda4af" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">Result Backend (DB 0)</text>
+      <text x="12" y="52" class="code-font">• Key: celery-task-meta-{id}</text>
+      <text x="12" y="80" class="body-text">• Stores task state: PENDING / SUCCESS</text>
+      <text x="12" y="108" class="body-text">• Stores return string &amp; metadata</text>
+      <text x="12" y="136" class="body-text">• Serves polling queries from API</text>
+      <text x="12" y="160" class="subtitle-text">Persistent state until TTL expiry</text>
     </g>
   </g>
 
   <!-- Box 4: Celery Worker (Purple) -->
-  <g transform="translate(1230, 20)">
+  <g transform="translate(1240, 20)">
     <rect width="270" height="440" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="2" />
-    <rect width="270" height="44" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
-    <rect y="34" width="270" height="10" fill="#ede9fe" />
-    <text x="135" y="24" text-anchor="middle" class="title-text">Celery Worker</text>
-    <text x="135" y="40" text-anchor="middle" class="subtitle-text">Background Daemon</text>
+    <rect width="270" height="46" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
+    <rect y="36" width="270" height="10" fill="#ede9fe" />
+    <text x="135" y="26" text-anchor="middle" class="title-text">Celery Worker</text>
+    <text x="135" y="42" text-anchor="middle" class="subtitle-text">Asynchronous Background Consumer</text>
 
-    <g transform="translate(15, 60)">
-      <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Task Definition</text>
-      <text x="10" y="44" class="code-font">@celery.task(name=...)</text>
-      <text x="10" y="64" class="code-font">def send_email_task(to):</text>
-      <text x="18" y="86" class="body-text">• Simulates workload:</text>
-      <text x="26" y="106" class="code-font">time.sleep(10)</text>
-      <text x="18" y="128" class="body-text">• Returns result:</text>
-      <text x="26" y="146" class="code-font">return f"Email sent..."</text>
+    <g transform="translate(15, 65)">
+      <rect width="240" height="150" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
+      <rect width="240" height="28" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">Task Definition</text>
+      <text x="12" y="52" class="code-font">@celery.task(name=...)</text>
+      <text x="12" y="76" class="code-font">def send_email_task(to):</text>
+      <text x="20" y="104" class="code-font">time.sleep(10) # 10s sleep</text>
+      <text x="20" y="128" class="code-font">return f"Email sent to {to}"</text>
     </g>
 
-    <g transform="translate(15, 230)">
-      <rect width="240" height="195" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1" />
-      <text x="10" y="17" class="section-heading">Worker Execution</text>
-      <text x="10" y="44" class="code-font">celery -A app.celery</text>
-      <text x="10" y="62" class="code-font">worker --loglevel=info</text>
-      <text x="10" y="88" class="body-text">• Pulls task from Redis</text>
-      <text x="10" y="110" class="body-text">• Executes 10s sleep</text>
-      <text x="10" y="132" class="body-text">• Writes SUCCESS status</text>
-      <text x="10" y="154" class="body-text">• Acknowledges message</text>
-      <text x="10" y="176" class="body-text">• Ready for next job</text>
+    <g transform="translate(15, 235)">
+      <rect width="240" height="175" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
+      <rect width="240" height="28" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
+      <text x="12" y="19" class="section-heading">Worker Execution</text>
+      <text x="12" y="52" class="code-font">celery -A app.celery worker</text>
+      <text x="12" y="80" class="body-text">• Dequeues pending jobs via BRPOP</text>
+      <text x="12" y="108" class="body-text">• Executes simulated email workload</text>
+      <text x="12" y="136" class="body-text">• Writes SUCCESS result to backend</text>
+      <text x="12" y="160" class="subtitle-text">Acks message and awaits next task</text>
     </g>
   </g>
 
-  <!-- Connectors -->
+  <!-- Connectors (Badges sit ABOVE the lines) -->
   <!-- 1. POST -->
-  <line x1="270" y1="120" x2="408" y2="120" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="305" y="98" width="70" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
-  <text x="340" y="113" text-anchor="middle" class="arrow-label">1. POST</text>
+  <rect x="300" y="112" width="100" height="26" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="350" y="130" text-anchor="middle" class="arrow-label">1. POST</text>
+  <line x1="280" y1="150" x2="418" y2="150" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
   <!-- 2. delay() -->
-  <line x1="680" y1="120" x2="818" y2="120" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="715" y="98" width="70" height="22" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1" />
-  <text x="750" y="113" text-anchor="middle" class="arrow-label">2. delay()</text>
+  <rect x="710" y="112" width="100" height="26" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
+  <text x="760" y="130" text-anchor="middle" class="arrow-label">2. delay()</text>
+  <line x1="690" y1="150" x2="828" y2="150" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
   <!-- 3. Pop -->
-  <line x1="1090" y1="120" x2="1228" y2="120" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="1125" y="98" width="70" height="22" rx="3" fill="#ffffff" stroke="#e11d48" stroke-width="1" />
-  <text x="1160" y="113" text-anchor="middle" class="arrow-label">3. Pop</text>
-
-  <!-- 4. Save -->
-  <line x1="1230" y1="330" x2="1092" y2="330" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="1125" y="308" width="70" height="22" rx="3" fill="#ffffff" stroke="#7c3aed" stroke-width="1" />
-  <text x="1160" y="323" text-anchor="middle" class="arrow-label">4. Save</text>
+  <rect x="1120" y="112" width="100" height="26" rx="4" fill="#ffffff" stroke="#e11d48" stroke-width="1.2" />
+  <text x="1170" y="130" text-anchor="middle" class="arrow-label">3. Pop Task</text>
+  <line x1="1100" y1="150" x2="1238" y2="150" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
   <!-- 5. Poll -->
-  <line x1="270" y1="240" x2="408" y2="240" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
-  <rect x="305" y="218" width="70" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
-  <text x="340" y="233" text-anchor="middle" class="arrow-label">5. Poll</text>
+  <rect x="300" y="202" width="100" height="26" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="350" y="220" text-anchor="middle" class="arrow-label">5. Poll Status</text>
+  <line x1="280" y1="240" x2="418" y2="240" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
 
   <!-- 6. Query -->
-  <line x1="680" y1="240" x2="818" y2="240" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
-  <rect x="715" y="218" width="70" height="22" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1" />
-  <text x="750" y="233" text-anchor="middle" class="arrow-label">6. Query</text>
+  <rect x="710" y="202" width="100" height="26" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
+  <text x="760" y="220" text-anchor="middle" class="arrow-label">6. Query State</text>
+  <line x1="690" y1="240" x2="828" y2="240" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
+
+  <!-- 4. Save -->
+  <rect x="1120" y="292" width="100" height="26" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" />
+  <text x="1170" y="310" text-anchor="middle" class="arrow-label">4. Save Result</text>
+  <line x1="1240" y1="330" x2="1102" y2="330" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
 </svg>

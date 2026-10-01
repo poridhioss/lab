@@ -7,46 +7,46 @@
         fill: #000000;
       }
       .title-text {
-        font-size: 15px;
+        font-size: 17px;
         font-weight: bold;
         fill: #000000;
       }
       .subtitle-text {
-        font-size: 11px;
+        font-size: 13px;
         font-style: italic;
         fill: #000000;
       }
       .section-heading {
-        font-size: 12px;
+        font-size: 14.5px;
         font-weight: bold;
         fill: #000000;
       }
       .code-font {
         font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .body-text {
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .arrow-label {
-        font-size: 11px;
+        font-size: 13px;
         font-weight: bold;
         fill: #000000;
       }
       .arrow-sub {
-        font-size: 10px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
       .flow-step-title {
-        font-size: 12px;
+        font-size: 13.5px;
         font-weight: bold;
         fill: #000000;
       }
       .flow-step-sub {
-        font-size: 11px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
@@ -59,66 +59,66 @@
 <rect width="100%" height="100%" fill="#ffffff" />
 
   <!-- Lifeline Header: Python Client -->
-  <rect x="35" y="20" width="190" height="48" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
+  <rect x="30" y="20" width="200" height="50" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" />
   <text x="130" y="42" text-anchor="middle" class="section-heading">Python Client</text>
-  <text x="130" y="57" text-anchor="middle" class="subtitle-text">Interactive REPL</text>
-  <line x1="130" y1="68" x2="130" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="130" y="59" text-anchor="middle" class="subtitle-text">Interactive REPL</text>
+  <line x1="130" y1="70" x2="130" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Lifeline Header: Redis Broker (DB 0) -->
-  <rect x="305" y="20" width="190" height="48" rx="6" fill="#fff1f2" stroke="#e11d48" stroke-width="1.8" />
+  <rect x="300" y="20" width="200" height="50" rx="6" fill="#fff1f2" stroke="#e11d48" stroke-width="1.8" />
   <text x="400" y="42" text-anchor="middle" class="section-heading">Redis Broker (DB 0)</text>
-  <text x="400" y="57" text-anchor="middle" class="subtitle-text">Task Queue: redis://...:6379/0</text>
-  <line x1="400" y1="68" x2="400" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="400" y="59" text-anchor="middle" class="subtitle-text">Task Queue: redis://...:6379/0</text>
+  <line x1="400" y1="70" x2="400" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Lifeline Header: Celery Worker -->
-  <rect x="575" y="20" width="190" height="48" rx="6" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.8" />
+  <rect x="570" y="20" width="200" height="50" rx="6" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.8" />
   <text x="670" y="42" text-anchor="middle" class="section-heading">Celery Worker</text>
-  <text x="670" y="57" text-anchor="middle" class="subtitle-text">celery -A tasks.app worker</text>
-  <line x1="670" y1="68" x2="670" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="670" y="59" text-anchor="middle" class="subtitle-text">celery -A tasks.app worker</text>
+  <line x1="670" y1="70" x2="670" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Lifeline Header: Redis Backend (DB 1) -->
-  <rect x="845" y="20" width="190" height="48" rx="6" fill="#fff1f2" stroke="#e11d48" stroke-width="1.8" />
+  <rect x="840" y="20" width="200" height="50" rx="6" fill="#fff1f2" stroke="#e11d48" stroke-width="1.8" />
   <text x="940" y="42" text-anchor="middle" class="section-heading">Redis Backend (DB 1)</text>
-  <text x="940" y="57" text-anchor="middle" class="subtitle-text">Results: redis://...:6379/1</text>
-  <line x1="940" y1="68" x2="940" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+  <text x="940" y="59" text-anchor="middle" class="subtitle-text">Results: redis://...:6379/1</text>
+  <line x1="940" y1="70" x2="940" y2="580" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
 
 
   <!-- Message Step -->
-  <line x1="130" y1="125" x2="398" y2="125" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
-  <text x="265" y="97" text-anchor="middle" class="flow-step-title">1. process_task.delay("Bayajid")</text>
+  <line x1="130" y1="130" x2="398" y2="130" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="265" y="102" text-anchor="middle" class="flow-step-title">1. process_task.delay("Bayajid")</text>
 
-  <text x="265" y="113" text-anchor="middle" class="flow-step-sub">(Enqueues task payload into Redis DB 0 queue)</text>
-
-  <!-- Message Step -->
-  <line x1="400" y1="205" x2="132" y2="205" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
-  <text x="265" y="177" text-anchor="middle" class="flow-step-title">2. Return AsyncResult(UUID)</text>
-
-  <text x="265" y="193" text-anchor="middle" class="flow-step-sub">(Immediate non-blocking return to client)</text>
+  <text x="265" y="118" text-anchor="middle" class="flow-step-sub">(Enqueues task payload into Redis DB 0 queue)</text>
 
   <!-- Message Step -->
-  <line x1="400" y1="285" x2="668" y2="285" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
-  <text x="535" y="257" text-anchor="middle" class="flow-step-title">3. BRPOP / Dequeue Task</text>
+  <line x1="400" y1="210" x2="132" y2="210" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <text x="265" y="182" text-anchor="middle" class="flow-step-title">2. Return AsyncResult(UUID)</text>
 
-  <text x="535" y="273" text-anchor="middle" class="flow-step-sub">(Worker pulls next pending job from queue)</text>
+  <text x="265" y="198" text-anchor="middle" class="flow-step-sub">(Immediate non-blocking return to client)</text>
+
+  <!-- Message Step -->
+  <line x1="400" y1="290" x2="668" y2="290" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="535" y="262" text-anchor="middle" class="flow-step-title">3. BRPOP / Dequeue Task</text>
+
+  <text x="535" y="278" text-anchor="middle" class="flow-step-sub">(Worker pulls next pending job from queue)</text>
 
   <!-- Self Loop -->
-  <path d="M 670 353 C 705 353, 705 377, 675 377" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
-  <text x="715" y="363" text-anchor="start" class="flow-step-title">4. Execute process_task</text>
+  <path d="M 670 358 C 705 358, 705 382, 675 382" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <text x="715" y="368" text-anchor="start" class="flow-step-title">4. Execute process_task</text>
 
-  <text x="715" y="379" text-anchor="start" class="flow-step-sub">Simulates 5s workload (sleep)</text>
-
-  <!-- Message Step -->
-  <line x1="670" y1="445" x2="938" y2="445" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
-  <text x="805" y="417" text-anchor="middle" class="flow-step-title">5. Save Status &amp; Value</text>
-
-  <text x="805" y="433" text-anchor="middle" class="flow-step-sub">(Stores status: SUCCESS in DB 1)</text>
+  <text x="715" y="384" text-anchor="start" class="flow-step-sub">Simulates 5s workload (sleep)</text>
 
   <!-- Message Step -->
-  <line x1="130" y1="525" x2="938" y2="525" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
-  <text x="535" y="497" text-anchor="middle" class="flow-step-title">6. result.get() / Status Check</text>
+  <line x1="670" y1="450" x2="938" y2="450" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="805" y="422" text-anchor="middle" class="flow-step-title">5. Save Status &amp; Value</text>
 
-  <text x="535" y="513" text-anchor="middle" class="flow-step-sub">(Client queries DB 1 and retrieves final return value)</text>
+  <text x="805" y="438" text-anchor="middle" class="flow-step-sub">(Stores status: SUCCESS in DB 1)</text>
+
+  <!-- Message Step -->
+  <line x1="130" y1="530" x2="938" y2="530" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <text x="535" y="502" text-anchor="middle" class="flow-step-title">6. result.get() / Status Check</text>
+
+  <text x="535" y="518" text-anchor="middle" class="flow-step-sub">(Client queries DB 1 and retrieves final return value)</text>
 </svg>

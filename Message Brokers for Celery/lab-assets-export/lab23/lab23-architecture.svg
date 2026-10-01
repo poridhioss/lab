@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 500" width="1300" height="500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 500" width="1320" height="500">
 
   <defs>
     <style>
@@ -7,46 +7,46 @@
         fill: #000000;
       }
       .title-text {
-        font-size: 15px;
+        font-size: 17px;
         font-weight: bold;
         fill: #000000;
       }
       .subtitle-text {
-        font-size: 11px;
+        font-size: 13px;
         font-style: italic;
         fill: #000000;
       }
       .section-heading {
-        font-size: 12px;
+        font-size: 14.5px;
         font-weight: bold;
         fill: #000000;
       }
       .code-font {
         font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .body-text {
-        font-size: 11px;
+        font-size: 13px;
         fill: #000000;
       }
       .arrow-label {
-        font-size: 11px;
+        font-size: 13px;
         font-weight: bold;
         fill: #000000;
       }
       .arrow-sub {
-        font-size: 10px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
       .flow-step-title {
-        font-size: 12px;
+        font-size: 13.5px;
         font-weight: bold;
         fill: #000000;
       }
       .flow-step-sub {
-        font-size: 11px;
+        font-size: 12px;
         font-style: italic;
         fill: #000000;
       }
@@ -64,59 +64,53 @@
   <!-- Box 1: Task Dispatcher / CLI (Blue) -->
   <g transform="translate(20, 50)">
     <rect width="340" height="195" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
-    <rect width="340" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
-    <rect y="26" width="340" height="10" fill="#dbeafe" />
-    <text x="170" y="22" text-anchor="middle" class="section-heading">Task Dispatcher / CLI</text>
+    <rect width="340" height="38" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="28" width="340" height="10" fill="#dbeafe" />
+    <text x="170" y="24" text-anchor="middle" class="section-heading">Task Dispatcher / CLI</text>
 
-    <text x="12" y="55" class="body-text">• Dispatches asynchronous task:</text>
-    <text x="18" y="73" class="code-font">docker compose exec worker python -c</text>
-    <text x="18" y="91" class="code-font">"from tasks import add; r=add.delay(10,20)"</text>
-    <text x="12" y="115" class="body-text">• Immediate non-blocking return:</text>
-    <text x="18" y="133" class="code-font" font-weight="bold">Task ID: [UUID string]</text>
-    <text x="12" y="155" class="body-text">• Validates queue insertion via CLI</text>
-    <text x="12" y="178" class="subtitle-text">Local Task Producer</text>
+    <text x="12" y="60" class="code-font">docker compose exec worker</text>
+    <text x="12" y="86" class="code-font">python -c "from tasks import add; r=add.delay(10,20)"</text>
+    <text x="12" y="114" class="body-text">• Non-blocking asynchronous dispatch</text>
+    <text x="12" y="142" class="code-font" font-weight="bold">Task ID: [UUID string]</text>
+    <text x="12" y="174" class="subtitle-text">Local container task producer</text>
   </g>
 
-  <!-- Box 2: RabbitMQ Message Broker (Orange / Amber) -->
-  <g transform="translate(480, 50)">
+  <!-- Box 2: RabbitMQ Message Broker (Amber) -->
+  <g transform="translate(490, 50)">
     <rect width="340" height="195" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
-    <rect width="340" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
-    <rect y="26" width="340" height="10" fill="#fef3c7" />
-    <text x="170" y="22" text-anchor="middle" class="section-heading">RabbitMQ Message Broker</text>
+    <rect width="340" height="38" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+    <rect y="28" width="340" height="10" fill="#fef3c7" />
+    <text x="170" y="24" text-anchor="middle" class="section-heading">RabbitMQ Message Broker</text>
 
-    <text x="12" y="55" class="body-text">• Container: lab23-rabbitmq</text>
-    <text x="12" y="75" class="body-text">• AMQP Broker: amqp://celery:celery123@...:5672</text>
-    <text x="12" y="95" class="body-text">• Management Web UI: Port 15672</text>
-    <text x="12" y="115" class="body-text">• Persistent Volume: rabbitmq_data</text>
-    <text x="18" y="133" class="code-font">/var/lib/rabbitmq</text>
-    <text x="12" y="155" class="body-text">• Holds message queues across restarts</text>
-    <text x="12" y="178" class="subtitle-text">Central AMQP Backbone</text>
+    <text x="12" y="60" class="code-font">lab23-rabbitmq (:5672 AMQP / :15672 Web)</text>
+    <text x="12" y="86" class="code-font">URL: amqp://celery:celery123@...:5672</text>
+    <text x="12" y="114" class="body-text">• Volume: rabbitmq_data (/var/lib/rabbitmq)</text>
+    <text x="12" y="142" class="body-text">• Preserves task queues across restarts</text>
+    <text x="12" y="174" class="subtitle-text">Central AMQP message bus</text>
   </g>
 
   <!-- Box 3: Celery Worker Daemon (Purple) -->
-  <g transform="translate(940, 50)">
+  <g transform="translate(960, 50)">
     <rect width="340" height="195" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="2" />
-    <rect width="340" height="36" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
-    <rect y="26" width="340" height="10" fill="#ede9fe" />
-    <text x="170" y="22" text-anchor="middle" class="section-heading">Celery Worker Daemon</text>
+    <rect width="340" height="38" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
+    <rect y="28" width="340" height="10" fill="#ede9fe" />
+    <text x="170" y="24" text-anchor="middle" class="section-heading">Celery Worker Daemon</text>
 
-    <text x="12" y="55" class="body-text">• Container: lab23-worker (python:3.11)</text>
-    <text x="12" y="75" class="body-text">• Task: add(x, y) in worker/tasks.py</text>
-    <text x="18" y="93" class="code-font">time.sleep(2); return x + y</text>
-    <text x="12" y="115" class="body-text">• Backend: rpc:// (Result reply bus)</text>
-    <text x="12" y="135" class="body-text">• Executes: celery -A tasks worker</text>
-    <text x="12" y="155" class="body-text">• Returns result: 10 + 20 &#x2192; 30</text>
-    <text x="12" y="178" class="subtitle-text">Asynchronous Worker Node</text>
+    <text x="12" y="60" class="code-font">Container: lab23-worker (python:3.11)</text>
+    <text x="12" y="86" class="code-font">Task: add(10, 20) -> 30 (sleep 2s)</text>
+    <text x="12" y="114" class="body-text">• Celery command: celery -A tasks worker</text>
+    <text x="12" y="142" class="body-text">• Result reply backend: rpc://</text>
+    <text x="12" y="174" class="subtitle-text">Asynchronous background worker</text>
   </g>
 
-  <!-- Connectors Row 1 -->
-  <line x1="360" y1="140" x2="478" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="390" y="118" width="60" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
-  <text x="420" y="133" text-anchor="middle" class="arrow-label">1. Submit</text>
+  <!-- Connectors Row 1 (Badges sit ABOVE line at y=145) -->
+  <rect x="380" y="107" width="85" height="26" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="422" y="125" text-anchor="middle" class="arrow-label">1. Submit</text>
+  <line x1="360" y1="145" x2="488" y2="145" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
-  <line x1="820" y1="140" x2="938" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="850" y="118" width="60" height="22" rx="3" fill="#ffffff" stroke="#d97706" stroke-width="1" />
-  <text x="880" y="133" text-anchor="middle" class="arrow-label">2. AMQP</text>
+  <rect x="850" y="107" width="85" height="26" rx="4" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
+  <text x="892" y="125" text-anchor="middle" class="arrow-label">2. AMQP</text>
+  <line x1="830" y1="145" x2="958" y2="145" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
   <!-- Section 2 Label -->
   <text x="20" y="278" class="title-text">2. Remote Observability &amp; Ingress Pipeline (Cloudflare Quick Tunnel):</text>
@@ -124,63 +118,57 @@
   <!-- Box 4: Remote Operator / Browser (Blue) -->
   <g transform="translate(20, 295)">
     <rect width="340" height="190" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
-    <rect width="340" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
-    <rect y="26" width="340" height="10" fill="#dbeafe" />
-    <text x="170" y="22" text-anchor="middle" class="section-heading">Remote Operator / Browser</text>
+    <rect width="340" height="38" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="28" width="340" height="10" fill="#dbeafe" />
+    <text x="170" y="24" text-anchor="middle" class="section-heading">Remote Operator / Browser</text>
 
-    <text x="12" y="55" class="body-text">• Accesses public monitoring URL:</text>
-    <text x="18" y="73" class="code-font" font-weight="bold">https://*.trycloudflare.com</text>
-    <text x="12" y="95" class="body-text">• /tasks: Inspects executed add task</text>
-    <text x="18" y="113" class="code-font">Status: SUCCESS | Result: 30</text>
-    <text x="12" y="135" class="body-text">• /workers: 1 Worker Online status</text>
-    <text x="12" y="155" class="body-text">• Zero inbound firewall open ports</text>
-    <text x="12" y="174" class="subtitle-text">External Web Observer</text>
+    <text x="12" y="60" class="code-font" font-weight="bold">https://*.trycloudflare.com</text>
+    <text x="12" y="86" class="body-text">• /tasks: Inspects executed add task (SUCCESS)</text>
+    <text x="12" y="114" class="body-text">• /workers: 1 Worker Online status</text>
+    <text x="12" y="142" class="body-text">• Zero inbound firewall open ports</text>
+    <text x="12" y="172" class="subtitle-text">External secure web access</text>
   </g>
 
   <!-- Box 5: Cloudflare Quick Tunnel (Amber) -->
-  <g transform="translate(480, 295)">
+  <g transform="translate(490, 295)">
     <rect width="340" height="190" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
-    <rect width="340" height="36" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" />
-    <rect y="26" width="340" height="10" fill="#fef3c7" />
-    <text x="170" y="22" text-anchor="middle" class="section-heading">Cloudflare Quick Tunnel</text>
+    <rect width="340" height="38" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" />
+    <rect y="28" width="340" height="10" fill="#fef3c7" />
+    <text x="170" y="24" text-anchor="middle" class="section-heading">Cloudflare Quick Tunnel</text>
 
-    <text x="12" y="55" class="body-text">• Host process: ./cloudflared tunnel</text>
-    <text x="18" y="73" class="code-font">--url http://localhost:5555</text>
-    <text x="12" y="95" class="body-text">• Establishes outbound TLS tunnel</text>
-    <text x="12" y="115" class="body-text">• Cloudflare edge handles HTTPS ingress</text>
-    <text x="12" y="135" class="body-text">• Forwards traffic to localhost:5555</text>
-    <text x="12" y="155" class="body-text">• Secure external access to Flower</text>
-    <text x="12" y="174" class="subtitle-text">Encrypted Edge Ingress</text>
+    <text x="12" y="60" class="code-font">./cloudflared tunnel --url :5555</text>
+    <text x="12" y="86" class="body-text">• Establishes outbound encrypted TLS tunnel</text>
+    <text x="12" y="114" class="body-text">• Generates public HTTPS trycloudflare URL</text>
+    <text x="12" y="142" class="body-text">• Proxies external requests to port 5555</text>
+    <text x="12" y="172" class="subtitle-text">Encrypted edge ingress gateway</text>
   </g>
 
   <!-- Box 6: Flower Dashboard (Orange) -->
-  <g transform="translate(940, 295)">
+  <g transform="translate(960, 295)">
     <rect width="340" height="190" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2" />
-    <rect width="340" height="36" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5" />
-    <rect y="26" width="340" height="10" fill="#ffedd5" />
-    <text x="170" y="22" text-anchor="middle" class="section-heading">Flower Dashboard</text>
+    <rect width="340" height="38" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5" />
+    <rect y="28" width="340" height="10" fill="#ffedd5" />
+    <text x="170" y="24" text-anchor="middle" class="section-heading">Flower Dashboard</text>
 
-    <text x="12" y="55" class="body-text">• Container: lab23-flower (mher/flower:2.0)</text>
-    <text x="12" y="75" class="body-text">• Internal listening port: 5555</text>
-    <text x="12" y="95" class="body-text">• Subscribes to RabbitMQ task events</text>
-    <text x="12" y="115" class="body-text">• Tracks active tasks and completion stats</text>
-    <text x="12" y="135" class="body-text">• Serves interactive web dashboard</text>
-    <text x="12" y="155" class="body-text">• Zero performance penalty on workers</text>
-    <text x="12" y="174" class="subtitle-text">Real-Time Cluster Dashboard</text>
+    <text x="12" y="60" class="code-font">Container: lab23-flower (:5555)</text>
+    <text x="12" y="86" class="body-text">• Subscribes to RabbitMQ AMQP broker</text>
+    <text x="12" y="114" class="body-text">• Real-time cluster dashboard &amp; graphs</text>
+    <text x="12" y="142" class="body-text">• Tracks task execution runtime and states</text>
+    <text x="12" y="172" class="subtitle-text">Cluster monitoring daemon</text>
   </g>
 
-  <!-- Connectors Row 2 -->
-  <line x1="360" y1="385" x2="478" y2="385" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="390" y="363" width="60" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
-  <text x="420" y="378" text-anchor="middle" class="arrow-label">4. HTTPS</text>
+  <!-- Connectors Row 2 (Badges sit ABOVE line at y=385) -->
+  <rect x="380" y="347" width="85" height="26" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="422" y="365" text-anchor="middle" class="arrow-label">4. HTTPS</text>
+  <line x1="360" y1="385" x2="488" y2="385" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
-  <line x1="820" y1="385" x2="938" y2="385" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="840" y="363" width="80" height="22" rx="3" fill="#ffffff" stroke="#ea580c" stroke-width="1" />
-  <text x="880" y="378" text-anchor="middle" class="arrow-label">5. Local (:5555)</text>
+  <rect x="840" y="347" width="105" height="26" rx="4" fill="#ffffff" stroke="#ea580c" stroke-width="1.2" />
+  <text x="892" y="365" text-anchor="middle" class="arrow-label">5. Local (:5555)</text>
+  <line x1="830" y1="385" x2="958" y2="385" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
 
   <!-- Cross-tier connection in corridor: RabbitMQ -> Flower -->
-  <line x1="820" y1="210" x2="938" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
-  <rect x="805" y="258" width="150" height="22" rx="3" fill="#ffffff" stroke="#ea580c" stroke-width="1" />
-  <text x="880" y="273" text-anchor="middle" class="arrow-sub">3. Event Stream (AMQP)</text>
+  <line x1="830" y1="210" x2="958" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
+  <rect x="820" y="254" width="150" height="24" rx="4" fill="#ffffff" stroke="#ea580c" stroke-width="1.2" />
+  <text x="895" y="271" text-anchor="middle" class="arrow-sub">3. Event Stream (AMQP)</text>
 
 </svg>
