@@ -1,146 +1,130 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 650" width="1180" height="650">
+
   <defs>
     <style>
-      .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-      .title { font-size: 20px; font-weight: 700; fill: #0f172a; }
-      .subtitle { font-size: 13px; font-weight: 500; fill: #64748b; }
-      .actor-title { font-size: 13px; font-weight: 700; fill: #ffffff; }
-      .actor-sub { font-size: 10.5px; font-weight: 500; fill: #e2e8f0; }
-      .step-num { font-size: 11px; font-weight: 700; fill: #ffffff; }
-      .step-title { font-size: 12.5px; font-weight: 700; fill: #0f172a; }
-      .step-desc { font-size: 11px; font-weight: 400; fill: #334155; }
-      .lifeline { stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 6 4; }
+      text {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        fill: #000000;
+      }
+      .title-text {
+        font-size: 15px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .subtitle-text {
+        font-size: 11px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .section-heading {
+        font-size: 12px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .code-font {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        font-size: 11px;
+        fill: #000000;
+      }
+      .body-text {
+        font-size: 11px;
+        fill: #000000;
+      }
+      .arrow-label {
+        font-size: 11px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .arrow-sub {
+        font-size: 10px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .flow-step-title {
+        font-size: 12px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .flow-step-sub {
+        font-size: 11px;
+        font-style: italic;
+        fill: #000000;
+      }
     </style>
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08" />
-    </filter>
-    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
-    </marker>
-    <marker id="arr-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
-    </marker>
-    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
-    </marker>
-    <marker id="arr-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
+    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
     </marker>
   </defs>
 
-  <rect width="1000" height="680" fill="#f8fafc" rx="12" />
-  <rect x="1" y="1" width="998" height="678" fill="none" stroke="#e2e8f0" stroke-width="2" rx="11" />
+<rect width="100%" height="100%" fill="#ffffff" />
 
-  <!-- Header -->
-  <rect x="25" y="20" width="950" height="54" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)" />
-  <text x="45" y="44" class="font-sans title">Lab 16: Production Task Lifecycle, Retry &amp; Concurrency Flow</text>
-  <text x="45" y="62" class="font-sans subtitle">Detailed sequence of asynchronous submission, concurrent pool allocation, status transitions, and retries</text>
+  <!-- Lifeline Header: Client (Curl) -->
+  <rect x="35" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="130" y="42" text-anchor="middle" class="section-heading">Client (Curl)</text>
+  <text x="130" y="57" text-anchor="middle" class="subtitle-text">HTTP Caller</text>
+  <line x1="130" y1="68" x2="130" y2="630" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <!-- Actors -->
-  <g transform="translate(40, 95)">
-    <rect width="180" height="48" rx="8" fill="#2563eb" filter="url(#shadow)" />
-    <text x="90" y="23" text-anchor="middle" class="font-sans actor-title">Client (Curl)</text>
-    <text x="90" y="38" text-anchor="middle" class="font-sans actor-sub">HTTP Requester</text>
-    <line x1="90" y1="48" x2="90" y2="550" class="lifeline" />
-  </g>
 
-  <g transform="translate(280, 95)">
-    <rect width="190" height="48" rx="8" fill="#0284c7" filter="url(#shadow)" />
-    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Flask API (:5000)</text>
-    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Producer Service</text>
-    <line x1="95" y1="48" x2="95" y2="550" class="lifeline" />
-  </g>
+  <!-- Lifeline Header: Flask API (:5000) -->
+  <rect x="295" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="390" y="42" text-anchor="middle" class="section-heading">Flask API (:5000)</text>
+  <text x="390" y="57" text-anchor="middle" class="subtitle-text">Producer Service</text>
+  <line x1="390" y1="68" x2="390" y2="630" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <g transform="translate(530, 95)">
-    <rect width="190" height="48" rx="8" fill="#dc2626" filter="url(#shadow)" />
-    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Redis (DB 0 &amp; DB 1)</text>
-    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Broker &amp; Result Store</text>
-    <line x1="95" y1="48" x2="95" y2="550" class="lifeline" />
-  </g>
 
-  <g transform="translate(770, 95)">
-    <rect width="190" height="48" rx="8" fill="#7c3aed" filter="url(#shadow)" />
-    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Celery Pool (x4)</text>
-    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">Concurrent Workers</text>
-    <line x1="95" y1="48" x2="95" y2="550" class="lifeline" />
-  </g>
+  <!-- Lifeline Header: Redis (DB 0 & DB 1) -->
+  <rect x="555" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="650" y="42" text-anchor="middle" class="section-heading">Redis (DB 0 &amp; DB 1)</text>
+  <text x="650" y="57" text-anchor="middle" class="subtitle-text">Broker &amp; Result Store</text>
+  <line x1="650" y1="68" x2="650" y2="630" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <!-- Step 1: POST /tasks -->
-  <g transform="translate(0, 160)">
-    <line x1="130" y1="20" x2="375" y2="20" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)" />
-    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="196" cy="19" r="10" fill="#2563eb" />
-    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">1</text>
-    <text x="214" y="16" class="font-sans step-title" fill="#1e40af">POST /tasks</text>
-    <text x="214" y="29" class="font-sans step-desc">Payload: {"duration": 10}</text>
-  </g>
 
-  <!-- Step 2: Push to Redis DB 0 -->
-  <g transform="translate(0, 215)">
-    <line x1="375" y1="20" x2="625" y2="20" stroke="#0284c7" stroke-width="2" marker-end="url(#arr-blue)" />
-    <rect x="430" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#7dd3fc" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="446" cy="19" r="10" fill="#0284c7" />
-    <text x="446" y="23" text-anchor="middle" class="font-sans step-num">2</text>
-    <text x="464" y="16" class="font-sans step-title" fill="#0369a1">delay(duration)</text>
-    <text x="464" y="29" class="font-sans step-desc">Enqueues in Redis DB 0</text>
-  </g>
+  <!-- Lifeline Header: Celery Pool (x4) -->
+  <rect x="805" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="900" y="42" text-anchor="middle" class="section-heading">Celery Pool (x4)</text>
+  <text x="900" y="57" text-anchor="middle" class="subtitle-text">Concurrent Workers</text>
+  <line x1="900" y1="68" x2="900" y2="630" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <!-- Step 3: Return 202 Accepted -->
-  <g transform="translate(0, 270)">
-    <line x1="375" y1="20" x2="130" y2="20" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arr-blue)" />
-    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="196" cy="19" r="10" fill="#2563eb" />
-    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">3</text>
-    <text x="214" y="16" class="font-sans step-title" fill="#1e40af">202 Accepted</text>
-    <text x="214" y="29" class="font-sans step-desc">task_id + status: PENDING</text>
-  </g>
 
-  <!-- Step 4: Available Worker Slot consumes -->
-  <g transform="translate(0, 330)">
-    <line x1="625" y1="20" x2="865" y2="20" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr-purple)" />
-    <rect x="680" y="2" width="150" height="34" rx="6" fill="#ffffff" stroke="#c084fc" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="696" cy="19" r="10" fill="#7c3aed" />
-    <text x="696" y="23" text-anchor="middle" class="font-sans step-num">4</text>
-    <text x="714" y="16" class="font-sans step-title" fill="#581c87">Worker Allocation</text>
-    <text x="714" y="29" class="font-sans step-desc">Assigned to Worker Slot 1–4</text>
-  </g>
+  <!-- Message Step -->
+  <line x1="130" y1="120" x2="388" y2="120" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="260" y="92" text-anchor="middle" class="flow-step-title">1. POST /tasks {"duration": 10}</text>
 
-  <!-- Step 5: Retry branch (if exception occurs) -->
-  <g transform="translate(0, 390)">
-    <path d="M 865 15 C 915 15, 915 45, 865 45" fill="none" stroke="#d97706" stroke-width="2" marker-end="url(#arr-amber)" />
-    <rect x="715" y="10" width="180" height="42" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="731" cy="31" r="10" fill="#d97706" />
-    <text x="731" y="35" text-anchor="middle" class="font-sans step-num">5</text>
-    <text x="749" y="25" class="font-sans step-title" fill="#92400e">On Error: Retry</text>
-    <text x="749" y="40" class="font-sans step-desc">retry_backoff=True (max 3)</text>
-  </g>
+  <text x="260" y="108" text-anchor="middle" class="flow-step-sub">(Client submits long-running task request)</text>
 
-  <!-- Step 6: Worker saves SUCCESS in DB 1 -->
-  <g transform="translate(0, 455)">
-    <line x1="865" y1="20" x2="625" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
-    <rect x="680" y="2" width="150" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="696" cy="19" r="10" fill="#059669" />
-    <text x="696" y="23" text-anchor="middle" class="font-sans step-num">6</text>
-    <text x="714" y="16" class="font-sans step-title" fill="#065f46">Save Result</text>
-    <text x="714" y="29" class="font-sans step-desc">Writes to Redis DB 1</text>
-  </g>
+  <!-- Message Step -->
+  <line x1="390" y1="200" x2="648" y2="200" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="520" y="172" text-anchor="middle" class="flow-step-title">2. long_running_task.delay(10)</text>
 
-  <!-- Step 7: Client GET /tasks/{id} -->
-  <g transform="translate(0, 510)">
-    <line x1="130" y1="20" x2="375" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
-    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="196" cy="19" r="10" fill="#059669" />
-    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">7</text>
-    <text x="214" y="16" class="font-sans step-title" fill="#065f46">GET /tasks/{id}</text>
-    <text x="214" y="29" class="font-sans step-desc">Returns SUCCESS + duration</text>
-  </g>
+  <text x="520" y="188" text-anchor="middle" class="flow-step-sub">(Flask dispatches job to Redis DB 0)</text>
 
-  <!-- Footer note -->
-  <g transform="translate(40, 575)">
-    <rect width="920" height="80" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)" />
-    <rect width="6" height="80" rx="3" fill="#2563eb" />
-    <text x="24" y="28" class="font-sans step-title">Production Resilience Features:</text>
-    <text x="24" y="48" class="font-sans step-desc">• <tspan font-weight="600">Concurrency:</tspan> 4 worker processes concurrently process tasks without blocking one another.</text>
-    <text x="24" y="66" class="font-sans step-desc">• <tspan font-weight="600">Backoff:</tspan> Tasks encountering transient errors automatically retry with exponential delays up to 3 times.</text>
-  </g>
+  <!-- Message Step -->
+  <line x1="390" y1="280" x2="132" y2="280" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <text x="260" y="252" text-anchor="middle" class="flow-step-title">3. 202 Accepted {"task_id":"uuid"}</text>
+
+  <text x="260" y="268" text-anchor="middle" class="flow-step-sub">(Instant return with status: PENDING)</text>
+
+  <!-- Message Step -->
+  <line x1="650" y1="360" x2="898" y2="360" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="775" y="332" text-anchor="middle" class="flow-step-title">4. Worker Slot Dequeue (1 of 4)</text>
+
+  <text x="775" y="348" text-anchor="middle" class="flow-step-sub">(Allocated to available process in concurrency pool)</text>
+
+  <!-- Self Loop -->
+  <path d="M 900 428 C 935 428, 935 452, 905 452" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <text x="945" y="438" text-anchor="start" class="flow-step-title">5. On Exception: Retry Backoff</text>
+
+  <text x="945" y="454" text-anchor="start" class="flow-step-sub">retry_backoff=True (max 3 retries)</text>
+
+  <!-- Message Step -->
+  <line x1="900" y1="520" x2="652" y2="520" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="775" y="492" text-anchor="middle" class="flow-step-title">6. Save Result (SUCCESS)</text>
+
+  <text x="775" y="508" text-anchor="middle" class="flow-step-sub">(Stores duration &amp; completion payload in DB 1)</text>
+
+  <!-- Message Step -->
+  <line x1="130" y1="600" x2="388" y2="600" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="260" y="572" text-anchor="middle" class="flow-step-title">7. GET /tasks/{id} -&gt; SUCCESS</text>
+
+  <text x="260" y="588" text-anchor="middle" class="flow-step-sub">(Client retrieves: "Long-running task completed successfully")</text>
 </svg>

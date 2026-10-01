@@ -1,136 +1,136 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 720" width="1080" height="720">
+
   <defs>
     <style>
-      .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-      .title { font-size: 20px; font-weight: 700; fill: #0f172a; }
-      .subtitle { font-size: 13px; font-weight: 500; fill: #64748b; }
-      .actor-title { font-size: 13px; font-weight: 700; fill: #ffffff; }
-      .actor-sub { font-size: 10.5px; font-weight: 500; fill: #e2e8f0; }
-      .step-num { font-size: 11px; font-weight: 700; fill: #ffffff; }
-      .step-title { font-size: 12.5px; font-weight: 700; fill: #0f172a; }
-      .step-desc { font-size: 11px; font-weight: 400; fill: #334155; }
-      .lifeline { stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 6 4; }
+      text {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        fill: #000000;
+      }
+      .title-text {
+        font-size: 15px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .subtitle-text {
+        font-size: 11px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .section-heading {
+        font-size: 12px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .code-font {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        font-size: 11px;
+        fill: #000000;
+      }
+      .body-text {
+        font-size: 11px;
+        fill: #000000;
+      }
+      .arrow-label {
+        font-size: 11px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .arrow-sub {
+        font-size: 10px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .flow-step-title {
+        font-size: 12px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .flow-step-sub {
+        font-size: 11px;
+        font-style: italic;
+        fill: #000000;
+      }
     </style>
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08" />
-    </filter>
-    <marker id="arr-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
-    </marker>
-    <marker id="arr-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
-    </marker>
-    <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
-    </marker>
-    <marker id="arr-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
+    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
     </marker>
   </defs>
 
-  <rect width="1000" height="660" fill="#f8fafc" rx="12" />
-  <rect x="1" y="1" width="998" height="658" fill="none" stroke="#e2e8f0" stroke-width="2" rx="11" />
+<rect width="100%" height="100%" fill="#ffffff" />
 
-  <!-- Header -->
-  <rect x="25" y="20" width="950" height="54" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)" />
-  <text x="45" y="44" class="font-sans title">Lab 24: Nginx Reverse Proxy Authentication Lifecycle</text>
-  <text x="45" y="62" class="font-sans subtitle">Step-by-step verification of unauthorized denial (401) and authorized proxying (200) to Flower</text>
+  <!-- Lifeline Header: Client / Admin -->
+  <rect x="35" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="130" y="42" text-anchor="middle" class="section-heading">Client / Admin</text>
+  <text x="130" y="57" text-anchor="middle" class="subtitle-text">Browser / Curl</text>
+  <line x1="130" y1="68" x2="130" y2="700" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <!-- Actors (4) -->
-  <g transform="translate(40, 95)">
-    <rect width="180" height="48" rx="8" fill="#2563eb" filter="url(#shadow)" />
-    <text x="90" y="23" text-anchor="middle" class="font-sans actor-title">Client / Admin</text>
-    <text x="90" y="38" text-anchor="middle" class="font-sans actor-sub">Browser / Curl</text>
-    <line x1="90" y1="48" x2="90" y2="530" class="lifeline" />
-  </g>
 
-  <g transform="translate(280, 95)">
-    <rect width="190" height="48" rx="8" fill="#059669" filter="url(#shadow)" />
-    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Nginx Proxy (Port 80)</text>
-    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">auth_basic Module</text>
-    <line x1="95" y1="48" x2="95" y2="530" class="lifeline" />
-  </g>
+  <!-- Lifeline Header: Nginx Proxy (Port 80) -->
+  <rect x="305" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="400" y="42" text-anchor="middle" class="section-heading">Nginx Proxy (Port 80)</text>
+  <text x="400" y="57" text-anchor="middle" class="subtitle-text">auth_basic Module</text>
+  <line x1="400" y1="68" x2="400" y2="700" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <g transform="translate(530, 95)">
-    <rect width="190" height="48" rx="8" fill="#d97706" filter="url(#shadow)" />
-    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">Flower (Port 5555)</text>
-    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">127.0.0.1:5555 (Internal)</text>
-    <line x1="95" y1="48" x2="95" y2="530" class="lifeline" />
-  </g>
 
-  <g transform="translate(770, 95)">
-    <rect width="190" height="48" rx="8" fill="#dc2626" filter="url(#shadow)" />
-    <text x="95" y="23" text-anchor="middle" class="font-sans actor-title">RabbitMQ (Broker)</text>
-    <text x="95" y="38" text-anchor="middle" class="font-sans actor-sub">127.0.0.1:5672</text>
-    <line x1="95" y1="48" x2="95" y2="530" class="lifeline" />
-  </g>
+  <!-- Lifeline Header: Flower (Port 5555) -->
+  <rect x="575" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="670" y="42" text-anchor="middle" class="section-heading">Flower (Port 5555)</text>
+  <text x="670" y="57" text-anchor="middle" class="subtitle-text">127.0.0.1:5555 (Internal)</text>
+  <line x1="670" y1="68" x2="670" y2="700" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <!-- Step 1: Unauthenticated Request -->
-  <g transform="translate(0, 160)">
-    <line x1="130" y1="20" x2="375" y2="20" stroke="#dc2626" stroke-width="2" marker-end="url(#arr-red)" />
-    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="196" cy="19" r="10" fill="#dc2626" />
-    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">1</text>
-    <text x="214" y="16" class="font-sans step-title" fill="#991b1b">GET / (No Auth)</text>
-    <text x="214" y="29" class="font-sans step-desc">curl -I http://localhost</text>
-  </g>
 
-  <!-- Step 2: 401 Unauthorized -->
-  <g transform="translate(0, 220)">
-    <line x1="375" y1="20" x2="130" y2="20" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arr-red)" />
-    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="196" cy="19" r="10" fill="#dc2626" />
-    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">2</text>
-    <text x="214" y="16" class="font-sans step-title" fill="#991b1b">401 Unauthorized</text>
-    <text x="214" y="29" class="font-sans step-desc">WWW-Authenticate Challenge</text>
-  </g>
+  <!-- Lifeline Header: RabbitMQ (Broker) -->
+  <rect x="845" y="20" width="190" height="48" rx="6" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+  <text x="940" y="42" text-anchor="middle" class="section-heading">RabbitMQ (Broker)</text>
+  <text x="940" y="57" text-anchor="middle" class="subtitle-text">Port 5672 (AMQP)</text>
+  <line x1="940" y1="68" x2="940" y2="700" stroke="#888888" stroke-width="1.5" stroke-dasharray="4,4" />
 
-  <!-- Step 3: Authenticated Request -->
-  <g transform="translate(0, 290)">
-    <line x1="130" y1="20" x2="375" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
-    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="196" cy="19" r="10" fill="#059669" />
-    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">3</text>
-    <text x="214" y="16" class="font-sans step-title" fill="#065f46">GET / (With Auth)</text>
-    <text x="214" y="29" class="font-sans step-desc">Basic: admin:admin123</text>
-  </g>
 
-  <!-- Step 4: Nginx validates against .flower_htpasswd -->
-  <g transform="translate(0, 350)">
-    <path d="M 375 15 C 420 15, 420 45, 375 45" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
-    <rect x="425" y="10" width="160" height="42" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="441" cy="31" r="10" fill="#059669" />
-    <text x="441" y="35" text-anchor="middle" class="font-sans step-num">4</text>
-    <text x="459" y="25" class="font-sans step-title" fill="#065f46">Verify Hash</text>
-    <text x="459" y="40" class="font-sans step-desc">Matches .flower_htpasswd</text>
-  </g>
+  <!-- Message Step -->
+  <line x1="130" y1="120" x2="398" y2="120" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="265" y="92" text-anchor="middle" class="flow-step-title">1. GET / (No Credentials)</text>
 
-  <!-- Step 5: Nginx proxies to Flower -->
-  <g transform="translate(0, 415)">
-    <line x1="375" y1="20" x2="625" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
-    <rect x="440" y="2" width="150" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="456" cy="19" r="10" fill="#059669" />
-    <text x="456" y="23" text-anchor="middle" class="font-sans step-num">5</text>
-    <text x="474" y="16" class="font-sans step-title" fill="#065f46">Proxy to Flower</text>
-    <text x="474" y="29" class="font-sans step-desc">proxy_pass :5555</text>
-  </g>
+  <text x="265" y="108" text-anchor="middle" class="flow-step-sub">(curl -I http://localhost)</text>
 
-  <!-- Step 6: 200 OK Returned -->
-  <g transform="translate(0, 475)">
-    <line x1="375" y1="20" x2="130" y2="20" stroke="#059669" stroke-width="2" marker-end="url(#arr-green)" />
-    <rect x="180" y="2" width="160" height="34" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)" />
-    <circle cx="196" cy="19" r="10" fill="#059669" />
-    <text x="196" y="23" text-anchor="middle" class="font-sans step-num">6</text>
-    <text x="214" y="16" class="font-sans step-title" fill="#065f46">200 OK Response</text>
-    <text x="214" y="29" class="font-sans step-desc">Dashboard HTML delivered</text>
-  </g>
+  <!-- Message Step -->
+  <line x1="400" y1="200" x2="132" y2="200" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <text x="265" y="172" text-anchor="middle" class="flow-step-title">2. HTTP/1.1 401 Unauthorized</text>
 
-  <!-- Footer note -->
-  <g transform="translate(40, 545)">
-    <rect width="920" height="85" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)" />
-    <rect width="6" height="85" rx="3" fill="#059669" />
-    <text x="24" y="28" class="font-sans step-title">Security Architecture Rule:</text>
-    <text x="24" y="48" class="font-sans step-desc">• Flower is bound to localhost (127.0.0.1:5555) without direct exposure to the public network.</text>
-    <text x="24" y="66" class="font-sans step-desc">• All public requests must traverse Nginx port 80 and satisfy cryptographic htpasswd verification.</text>
-  </g>
+  <text x="265" y="188" text-anchor="middle" class="flow-step-sub">(WWW-Authenticate: Basic realm="Flower Auth")</text>
+
+  <!-- Message Step -->
+  <line x1="130" y1="280" x2="398" y2="280" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="265" y="252" text-anchor="middle" class="flow-step-title">3. GET / (With Basic Auth)</text>
+
+  <text x="265" y="268" text-anchor="middle" class="flow-step-sub">(curl -u floweradmin http://localhost)</text>
+
+  <!-- Self Loop -->
+  <path d="M 400 348 C 435 348, 435 372, 405 372" fill="none" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <text x="445" y="358" text-anchor="start" class="flow-step-title">4. Verify Hash against .flower_htpasswd</text>
+
+  <text x="445" y="374" text-anchor="start" class="flow-step-sub">Matches encrypted password</text>
+
+  <!-- Message Step -->
+  <line x1="400" y1="440" x2="668" y2="440" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="535" y="412" text-anchor="middle" class="flow-step-title">5. proxy_pass http://localhost:5555</text>
+
+  <text x="535" y="428" text-anchor="middle" class="flow-step-sub">(Nginx forwards authenticated request to Flower)</text>
+
+  <!-- Message Step -->
+  <line x1="670" y1="520" x2="938" y2="520" stroke="#000000" stroke-width="1.8"  marker-end="url(#arr-black)" />
+  <text x="805" y="492" text-anchor="middle" class="flow-step-title">6. AMQP: Query Broker &amp; Queue Depth</text>
+
+  <text x="805" y="508" text-anchor="middle" class="flow-step-sub">(Flower queries rabbitmq-server status)</text>
+
+  <!-- Message Step -->
+  <line x1="940" y1="600" x2="672" y2="600" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <text x="805" y="572" text-anchor="middle" class="flow-step-title">7. Return Active Queues &amp; Stats</text>
+
+  <text x="805" y="588" text-anchor="middle" class="flow-step-sub">(RabbitMQ delivers broker telemetry to Flower)</text>
+
+  <!-- Message Step -->
+  <line x1="670" y1="680" x2="132" y2="680" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <text x="400" y="652" text-anchor="middle" class="flow-step-title">8. HTTP/1.1 200 OK (Dashboard HTML)</text>
+
+  <text x="400" y="668" text-anchor="middle" class="flow-step-sub">(Browser displays real-time Flower dashboard)</text>
 </svg>
