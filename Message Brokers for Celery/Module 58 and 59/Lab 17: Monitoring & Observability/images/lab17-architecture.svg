@@ -61,11 +61,11 @@
   <!-- Section 1 Label -->
   <text x="20" y="32" class="title-text">1. Task Execution Pipeline (Async Jobs):</text>
 
-  <!-- Box 1: Client (Curl / Script) -->
+  <!-- Box 1: Client (Curl / Script) (Blue) -->
   <g transform="translate(20, 50)">
-    <rect width="250" height="195" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="250" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="250" height="10" fill="#f0f0f0" />
+    <rect width="250" height="195" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect width="250" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="26" width="250" height="10" fill="#dbeafe" />
     <text x="125" y="22" text-anchor="middle" class="section-heading">Client (Curl / Script)</text>
 
     <text x="10" y="55" class="body-text">• Submits batch task trigger:</text>
@@ -77,11 +77,11 @@
     <text x="10" y="178" class="subtitle-text">Asynchronous execution</text>
   </g>
 
-  <!-- Box 2: Flask API (Port 5000) -->
+  <!-- Box 2: Flask API (Green) -->
   <g transform="translate(410, 50)">
-    <rect width="260" height="195" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="260" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="260" height="10" fill="#f0f0f0" />
+    <rect width="260" height="195" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="2" />
+    <rect width="260" height="36" rx="8" fill="#dcfce7" stroke="#059669" stroke-width="1.5" />
+    <rect y="26" width="260" height="10" fill="#dcfce7" />
     <text x="130" y="22" text-anchor="middle" class="section-heading">Flask API (Port 5000)</text>
 
     <text x="10" y="55" class="body-text">• Application: app.py</text>
@@ -93,11 +93,11 @@
     <text x="10" y="178" class="subtitle-text">Producer Interface</text>
   </g>
 
-  <!-- Box 3: Redis 7 (Port 6379) -->
+  <!-- Box 3: Redis 7 (Red / Rose) -->
   <g transform="translate(810, 50)">
-    <rect width="260" height="195" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="260" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="260" height="10" fill="#f0f0f0" />
+    <rect width="260" height="195" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="2" />
+    <rect width="260" height="36" rx="8" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.5" />
+    <rect y="26" width="260" height="10" fill="#ffe4e6" />
     <text x="130" y="22" text-anchor="middle" class="section-heading">Redis 7 (Port 6379)</text>
 
     <text x="10" y="55" class="body-text">• Container: lab17-redis</text>
@@ -109,11 +109,11 @@
     <text x="10" y="178" class="subtitle-text">Central In-Memory Bus</text>
   </g>
 
-  <!-- Box 4: Celery Worker Daemon -->
+  <!-- Box 4: Celery Worker (Purple) -->
   <g transform="translate(1210, 50)">
-    <rect width="250" height="195" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="250" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="250" height="10" fill="#f0f0f0" />
+    <rect width="250" height="195" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="2" />
+    <rect width="250" height="36" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
+    <rect y="26" width="250" height="10" fill="#ede9fe" />
     <text x="125" y="22" text-anchor="middle" class="section-heading">Celery Worker Daemon</text>
 
     <text x="10" y="55" class="body-text">• Module: tasks.py</text>
@@ -127,25 +127,25 @@
 
   <!-- Connectors Row 1 -->
   <line x1="270" y1="140" x2="408" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="305" y="118" width="70" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="305" y="118" width="70" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
   <text x="340" y="133" text-anchor="middle" class="arrow-label">POST</text>
 
   <line x1="670" y1="140" x2="808" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="705" y="118" width="70" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="705" y="118" width="70" height="22" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1" />
   <text x="740" y="133" text-anchor="middle" class="arrow-label">Enqueue</text>
 
   <line x1="1070" y1="140" x2="1208" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="1105" y="118" width="70" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="1105" y="118" width="70" height="22" rx="3" fill="#ffffff" stroke="#7c3aed" stroke-width="1" />
   <text x="1140" y="133" text-anchor="middle" class="arrow-label">Execute</text>
 
   <!-- Section 2 Label -->
   <text x="20" y="278" class="title-text">2. Secure Observability &amp; Dashboard Pipeline:</text>
 
-  <!-- Box 5: Operator / Browser -->
+  <!-- Box 5: Operator / Browser (Blue) -->
   <g transform="translate(20, 295)">
-    <rect width="250" height="190" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="250" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="250" height="10" fill="#f0f0f0" />
+    <rect width="250" height="190" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect width="250" height="36" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="26" width="250" height="10" fill="#dbeafe" />
     <text x="125" y="22" text-anchor="middle" class="section-heading">Operator / Browser</text>
 
     <text x="10" y="55" class="body-text">• Accesses Flower dashboard:</text>
@@ -157,11 +157,11 @@
     <text x="10" y="174" class="subtitle-text">Authenticated Client</text>
   </g>
 
-  <!-- Box 6: Nginx Proxy (Port 8080) -->
+  <!-- Box 6: Nginx Proxy (Teal) -->
   <g transform="translate(410, 295)">
-    <rect width="260" height="190" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="260" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="260" height="10" fill="#f0f0f0" />
+    <rect width="260" height="190" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
+    <rect width="260" height="36" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" />
+    <rect y="26" width="260" height="10" fill="#ccfbf1" />
     <text x="130" y="22" text-anchor="middle" class="section-heading">Nginx Proxy (Port 8080)</text>
 
     <text x="10" y="55" class="body-text">• Reverse Proxy on port 8080</text>
@@ -173,11 +173,11 @@
     <text x="10" y="174" class="subtitle-text">Security Gatekeeper</text>
   </g>
 
-  <!-- Box 7: Flower Dashboard (:5555) -->
+  <!-- Box 7: Flower Dashboard (Orange) -->
   <g transform="translate(810, 295)">
-    <rect width="260" height="190" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="260" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="260" height="10" fill="#f0f0f0" />
+    <rect width="260" height="190" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2" />
+    <rect width="260" height="36" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5" />
+    <rect y="26" width="260" height="10" fill="#ffedd5" />
     <text x="130" y="22" text-anchor="middle" class="section-heading">Flower Dashboard (:5555)</text>
 
     <text x="10" y="55" class="body-text">• Internal Web Daemon</text>
@@ -189,11 +189,11 @@
     <text x="10" y="174" class="subtitle-text">Monitoring Interface</text>
   </g>
 
-  <!-- Box 8: Event Bus / Telemetry -->
+  <!-- Box 8: Event Bus / Telemetry (Purple) -->
   <g transform="translate(1210, 295)">
-    <rect width="250" height="190" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="250" height="36" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="26" width="250" height="10" fill="#f0f0f0" />
+    <rect width="250" height="190" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="2" />
+    <rect width="250" height="36" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
+    <rect y="26" width="250" height="10" fill="#ede9fe" />
     <text x="125" y="22" text-anchor="middle" class="section-heading">Event Bus / Telemetry</text>
 
     <text x="10" y="55" class="body-text">• Flower subscribes to broker</text>
@@ -207,20 +207,20 @@
 
   <!-- Connectors Row 2 -->
   <line x1="270" y1="385" x2="408" y2="385" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="295" y="363" width="90" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="295" y="363" width="90" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
   <text x="340" y="378" text-anchor="middle" class="arrow-label">Basic Auth</text>
 
   <line x1="670" y1="385" x2="808" y2="385" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="705" y="363" width="70" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="705" y="363" width="70" height="22" rx="3" fill="#ffffff" stroke="#0d9488" stroke-width="1" />
   <text x="740" y="378" text-anchor="middle" class="arrow-label">Proxy</text>
 
   <line x1="1070" y1="385" x2="1208" y2="385" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="1100" y="363" width="80" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="1100" y="363" width="80" height="22" rx="3" fill="#ffffff" stroke="#7c3aed" stroke-width="1" />
   <text x="1140" y="378" text-anchor="middle" class="arrow-label">Subscribe</text>
 
   <!-- Cross-tier vertical connection: Redis -> Flower -->
   <line x1="940" y1="245" x2="940" y2="293" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
-  <rect x="875" y="259" width="130" height="20" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="875" y="259" width="130" height="20" rx="3" fill="#ffffff" stroke="#ea580c" stroke-width="1" />
   <text x="940" y="273" text-anchor="middle" class="arrow-sub">Celery Event Stream</text>
 
 </svg>

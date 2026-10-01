@@ -58,17 +58,17 @@
 
   <rect width="100%" height="100%" fill="#ffffff" />
 
-  <!-- Box 1: Python Client (REPL) -->
+  <!-- Box 1: Python Client (REPL) (Blue) -->
   <g transform="translate(20, 20)">
-    <rect width="300" height="440" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="300" height="44" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="34" width="300" height="10" fill="#f0f0f0" />
+    <rect width="300" height="440" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect width="300" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="34" width="300" height="10" fill="#dbeafe" />
     <text x="150" y="24" text-anchor="middle" class="title-text">Python Client (REPL)</text>
     <text x="150" y="40" text-anchor="middle" class="subtitle-text">Task Producer / Caller</text>
 
     <g transform="translate(15, 60)">
-      <rect width="270" height="145" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="270" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="270" height="145" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
+      <rect width="270" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Task Submission</text>
       <text x="10" y="44" class="code-font">&gt;&gt;&gt; from tasks import process_task</text>
       <text x="10" y="66" class="code-font">&gt;&gt;&gt; res = process_task.delay("Bayajid")</text>
@@ -78,8 +78,8 @@
     </g>
 
     <g transform="translate(15, 225)">
-      <rect width="270" height="170" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="270" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="270" height="170" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
+      <rect width="270" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Result &amp; Status Query</text>
       <text x="10" y="44" class="code-font">&gt;&gt;&gt; print(res.status)</text>
       <text x="18" y="64" class="code-font" font-weight="bold">SUCCESS</text>
@@ -91,17 +91,17 @@
     <text x="150" y="425" text-anchor="middle" class="subtitle-text">Client Module: tasks.py</text>
   </g>
 
-  <!-- Box 2: Redis 7 Container -->
+  <!-- Box 2: Redis 7 Container (Red / Rose) -->
   <g transform="translate(460, 20)">
-    <rect width="360" height="440" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="360" height="44" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="34" width="360" height="10" fill="#f0f0f0" />
+    <rect width="360" height="440" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="2" />
+    <rect width="360" height="44" rx="8" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.5" />
+    <rect y="34" width="360" height="10" fill="#ffe4e6" />
     <text x="180" y="24" text-anchor="middle" class="title-text">Redis 7 Container</text>
     <text x="180" y="40" text-anchor="middle" class="subtitle-text">Docker Port: 6379:6379</text>
 
     <g transform="translate(15, 60)">
-      <rect width="330" height="155" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="330" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="330" height="155" rx="6" fill="#ffffff" stroke="#fda4af" stroke-width="1" />
+      <rect width="330" height="24" rx="6" fill="#fff1f2" stroke="#fda4af" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Database 0: Message Broker (Queue)</text>
       <text x="10" y="44" class="code-font">URL: redis://localhost:6379/0</text>
       <text x="10" y="68" class="body-text">• Ingests task message payloads</text>
@@ -111,8 +111,8 @@
     </g>
 
     <g transform="translate(15, 230)">
-      <rect width="330" height="175" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="330" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="330" height="175" rx="6" fill="#ffffff" stroke="#fda4af" stroke-width="1" />
+      <rect width="330" height="24" rx="6" fill="#fff1f2" stroke="#fda4af" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Database 1: Result Backend (States)</text>
       <text x="10" y="44" class="code-font">URL: redis://localhost:6379/1</text>
       <text x="10" y="68" class="body-text">• Stores task outcomes and return values</text>
@@ -123,17 +123,17 @@
     </g>
   </g>
 
-  <!-- Box 3: Celery Worker -->
+  <!-- Box 3: Celery Worker (Purple) -->
   <g transform="translate(960, 20)">
-    <rect width="320" height="440" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="320" height="44" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="34" width="320" height="10" fill="#f0f0f0" />
+    <rect width="320" height="440" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="2" />
+    <rect width="320" height="44" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
+    <rect y="34" width="320" height="10" fill="#ede9fe" />
     <text x="160" y="24" text-anchor="middle" class="title-text">Celery Worker</text>
     <text x="160" y="40" text-anchor="middle" class="subtitle-text">Consumer / Execution Engine</text>
 
     <g transform="translate(15, 60)">
-      <rect width="290" height="175" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="290" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="290" height="175" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1" />
+      <rect width="290" height="24" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Task Definition</text>
       <text x="10" y="44" class="code-font">@app.task</text>
       <text x="10" y="64" class="code-font">def process_task(name):</text>
@@ -144,8 +144,8 @@
     </g>
 
     <g transform="translate(15, 250)">
-      <rect width="290" height="145" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="290" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="290" height="145" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1" />
+      <rect width="290" height="24" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Worker Daemon Process</text>
       <text x="10" y="44" class="code-font">celery -A tasks.app worker</text>
       <text x="10" y="62" class="code-font">--loglevel=info</text>
@@ -160,22 +160,22 @@
   <!-- Connectors -->
   <!-- 1. delay() -->
   <line x1="320" y1="120" x2="458" y2="120" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="355" y="98" width="70" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="355" y="98" width="70" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
   <text x="390" y="113" text-anchor="middle" class="arrow-label">1. delay()</text>
 
   <!-- 2. BRPOP -->
   <line x1="820" y1="120" x2="958" y2="120" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="855" y="98" width="70" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="855" y="98" width="70" height="22" rx="3" fill="#ffffff" stroke="#e11d48" stroke-width="1" />
   <text x="890" y="113" text-anchor="middle" class="arrow-label">2. BRPOP</text>
 
   <!-- 3. Store Result -->
   <line x1="960" y1="330" x2="822" y2="330" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="845" y="308" width="90" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="845" y="308" width="90" height="22" rx="3" fill="#ffffff" stroke="#7c3aed" stroke-width="1" />
   <text x="890" y="323" text-anchor="middle" class="arrow-label">3. Store Result</text>
 
   <!-- 4. get() -->
   <line x1="320" y1="330" x2="458" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arr-black)" />
-  <rect x="355" y="308" width="70" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="355" y="308" width="70" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
   <text x="390" y="323" text-anchor="middle" class="arrow-label">4. get()</text>
 
 </svg>

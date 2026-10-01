@@ -58,17 +58,17 @@
 
   <rect width="100%" height="100%" fill="#ffffff" />
 
-  <!-- Box 1: Remote User / Browser -->
+  <!-- Box 1: Remote User / Browser (Blue) -->
   <g transform="translate(20, 20)">
-    <rect width="260" height="440" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="260" height="44" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="34" width="260" height="10" fill="#f0f0f0" />
+    <rect width="260" height="440" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect width="260" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="34" width="260" height="10" fill="#dbeafe" />
     <text x="130" y="24" text-anchor="middle" class="title-text">Remote User / Browser</text>
     <text x="130" y="40" text-anchor="middle" class="subtitle-text">External HTTP Client</text>
 
     <g transform="translate(15, 60)">
-      <rect width="230" height="170" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="230" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="230" height="170" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
+      <rect width="230" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Unauthenticated Access</text>
       <text x="10" y="44" class="code-font">curl -I http://localhost</text>
       <text x="10" y="70" class="body-text">• No credentials provided</text>
@@ -79,8 +79,8 @@
     </g>
 
     <g transform="translate(15, 245)">
-      <rect width="230" height="180" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="230" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="230" height="180" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1" />
+      <rect width="230" height="24" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Authenticated Access</text>
       <text x="10" y="44" class="code-font">curl -u floweradmin http://...</text>
       <text x="10" y="70" class="body-text">• Enter host password</text>
@@ -91,17 +91,17 @@
     </g>
   </g>
 
-  <!-- Box 2: Nginx Reverse Proxy -->
+  <!-- Box 2: Nginx Reverse Proxy (Teal) -->
   <g transform="translate(420, 20)">
-    <rect width="270" height="440" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="270" height="44" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="34" width="270" height="10" fill="#f0f0f0" />
+    <rect width="270" height="440" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
+    <rect width="270" height="44" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" />
+    <rect y="34" width="270" height="10" fill="#ccfbf1" />
     <text x="135" y="24" text-anchor="middle" class="title-text">Nginx Reverse Proxy</text>
     <text x="135" y="40" text-anchor="middle" class="subtitle-text">Port 80 (Public Listener)</text>
 
     <g transform="translate(15, 60)">
-      <rect width="240" height="170" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="240" height="170" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1" />
+      <rect width="240" height="24" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1" />
       <text x="10" y="17" class="section-heading">HTTP Basic Authentication</text>
       <text x="10" y="44" class="body-text">auth_basic "Flower Auth";</text>
       <text x="10" y="66" class="body-text">auth_basic_user_file</text>
@@ -112,8 +112,8 @@
     </g>
 
     <g transform="translate(15, 245)">
-      <rect width="240" height="180" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="240" height="180" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1" />
+      <rect width="240" height="24" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Reverse Proxying</text>
       <text x="10" y="44" class="body-text">proxy_pass http://localhost:5555;</text>
       <text x="10" y="66" class="body-text">• Forwards authenticated traffic</text>
@@ -124,17 +124,17 @@
     </g>
   </g>
 
-  <!-- Box 3: Flower Monitoring Dashboard -->
+  <!-- Box 3: Flower Monitoring Dashboard (Orange) -->
   <g transform="translate(830, 20)">
-    <rect width="270" height="440" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="270" height="44" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="34" width="270" height="10" fill="#f0f0f0" />
+    <rect width="270" height="440" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2" />
+    <rect width="270" height="44" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="1.5" />
+    <rect y="34" width="270" height="10" fill="#ffedd5" />
     <text x="135" y="24" text-anchor="middle" class="title-text">Flower Dashboard</text>
     <text x="135" y="40" text-anchor="middle" class="subtitle-text">Local Port: 5555 (Internal)</text>
 
     <g transform="translate(15, 60)">
-      <rect width="240" height="170" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="240" height="170" rx="6" fill="#ffffff" stroke="#fdba74" stroke-width="1" />
+      <rect width="240" height="24" rx="6" fill="#fff7ed" stroke="#fdba74" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Localhost Binding</text>
       <text x="10" y="44" class="body-text">• Bound to: 127.0.0.1:5555</text>
       <text x="10" y="66" class="body-text">• No direct public exposure</text>
@@ -145,8 +145,8 @@
     </g>
 
     <g transform="translate(15, 245)">
-      <rect width="240" height="180" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="240" height="180" rx="6" fill="#ffffff" stroke="#fdba74" stroke-width="1" />
+      <rect width="240" height="24" rx="6" fill="#fff7ed" stroke="#fdba74" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Broker Telemetry</text>
       <text x="10" y="44" class="body-text">• Started with broker argument:</text>
       <text x="18" y="64" class="code-font">--broker=amqp://guest:guest@...</text>
@@ -157,17 +157,17 @@
     </g>
   </g>
 
-  <!-- Box 4: RabbitMQ Message Broker -->
+  <!-- Box 4: RabbitMQ Message Broker (Amber) -->
   <g transform="translate(1240, 20)">
-    <rect width="270" height="440" rx="8" fill="#fafafa" stroke="#000000" stroke-width="2" />
-    <rect width="270" height="44" rx="8" fill="#f0f0f0" stroke="#000000" stroke-width="1.5" />
-    <rect y="34" width="270" height="10" fill="#f0f0f0" />
+    <rect width="270" height="440" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
+    <rect width="270" height="44" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+    <rect y="34" width="270" height="10" fill="#fef3c7" />
     <text x="135" y="24" text-anchor="middle" class="title-text">RabbitMQ Broker</text>
     <text x="135" y="40" text-anchor="middle" class="subtitle-text">Native Service (:5672)</text>
 
     <g transform="translate(15, 60)">
-      <rect width="240" height="170" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="240" height="170" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1" />
+      <rect width="240" height="24" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Systemd Daemon Service</text>
       <text x="10" y="44" class="body-text">• Package: rabbitmq-server</text>
       <text x="10" y="66" class="body-text">• Managed via systemctl</text>
@@ -178,8 +178,8 @@
     </g>
 
     <g transform="translate(15, 245)">
-      <rect width="240" height="180" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1" />
-      <rect width="240" height="24" rx="6" fill="#f5f5f5" stroke="#333333" stroke-width="1" />
+      <rect width="240" height="180" rx="6" fill="#ffffff" stroke="#fcd34d" stroke-width="1" />
+      <rect width="240" height="24" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1" />
       <text x="10" y="17" class="section-heading">Queue Inspection API</text>
       <text x="10" y="44" class="body-text">• Ingests task dispatch messages</text>
       <text x="10" y="66" class="body-text">• Emits worker heartbeats</text>
@@ -193,17 +193,17 @@
   <!-- Connectors -->
   <!-- 1. Request (:80) -->
   <line x1="280" y1="140" x2="418" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="300" y="118" width="95" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="300" y="118" width="95" height="22" rx="3" fill="#ffffff" stroke="#2563eb" stroke-width="1" />
   <text x="347" y="133" text-anchor="middle" class="arrow-label">1. Request (:80)</text>
 
   <!-- 2. proxy_pass (:5555) -->
   <line x1="690" y1="140" x2="828" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="710" y="118" width="100" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="710" y="118" width="100" height="22" rx="3" fill="#ffffff" stroke="#0d9488" stroke-width="1" />
   <text x="760" y="133" text-anchor="middle" class="arrow-label">2. Proxy (:5555)</text>
 
   <!-- 3. AMQP (:5672) -->
   <line x1="1100" y1="140" x2="1238" y2="140" stroke="#000000" stroke-width="2" marker-end="url(#arr-black)" />
-  <rect x="1120" y="118" width="100" height="22" rx="3" fill="#ffffff" stroke="#cccccc" stroke-width="0.75" />
+  <rect x="1120" y="118" width="100" height="22" rx="3" fill="#ffffff" stroke="#d97706" stroke-width="1" />
   <text x="1170" y="133" text-anchor="middle" class="arrow-label">3. AMQP (:5672)</text>
 
 </svg>
