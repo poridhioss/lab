@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 520" width="1680" height="520">
+
+  <defs>
+    <style>
+      text {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        fill: #000000;
+      }
+      .title-text {
+        font-size: 20px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .subtitle-text {
+        font-size: 15px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .section-heading {
+        font-size: 17px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .code-font {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        font-size: 15.5px;
+        fill: #000000;
+      }
+      .body-text {
+        font-size: 15.5px;
+        fill: #000000;
+      }
+      .arrow-label {
+        font-size: 16px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .arrow-sub {
+        font-size: 14.5px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .flow-step-title {
+        font-size: 16.5px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .flow-step-sub {
+        font-size: 14.5px;
+        font-style: italic;
+        fill: #000000;
+      }
+    </style>
+    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+
+  <!-- Component: External Client -->
+  <g transform="translate(40, 20)">
+    <rect width="280" height="480" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect width="280" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="48" width="280" height="10" fill="#dbeafe" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M.803 14.8169c0-.5342.433-.9665.9665-.9665.5335 0 .9665.4323.9665.9665 0 .5335-.433.9657-.9665.9657-.5335 0-.9666-.4322-.9666-.9657m2.736 0c0-.1963-.0532-.376-.1119-.5525-.2344-.7024-.876-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0708C.6149 13.2865 0 13.9646 0 14.817c0 .9764.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.793 1.7694-1.7694m-1.7694-7.149c.5335 0 .9665.433.9665.9665 0 .5335-.433.9665-.9665.9665-.5343 0-.9666-.433-.9666-.9665 0-.5335.4323-.9665.9666-.9665m0 2.7359c.9772 0 1.7694-.7923 1.7694-1.7694 0-.1956-.0532-.376-.1119-.5525-.2344-.7024-.8767-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0716C.6149 7.104 0 7.782 0 8.6344c0 .9771.7923 1.7694 1.7695 1.7694m13.221-5.694c-.5342 0-.9665-.433-.9665-.9664a.966.966 0 01.9666-.9665c.5335 0 .9658.4322.9658.9665 0 .5334-.4323.9664-.9658.9664m-9.6 16.5133c-.5335 0-.9666-.433-.9666-.9665 0-.5342.433-.9665.9666-.9665a.966.966 0 01.9665.9665c0 .5335-.4323.9665-.9665.9665m9.6-19.2491c-.978 0-1.7695.7922-1.7695 1.7694 0 .2085.0525.4025.1187.5882L5.039 18.5581c-.803.1681-1.4179.8462-1.4179 1.6985 0 .9772.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.7922 1.7694-1.7694 0-.1963-.0525-.3759-.111-.5525l8.3427-14.2728c.7778-.1865 1.3683-.8531 1.3683-1.688 0-.977-.793-1.7693-1.7694-1.7693m7.24 2.7359c-.5343 0-.9666-.433-.9666-.9665a.966.966 0 01.9665-.9665c.5335 0 .9666.4322.9666.9665 0 .5334-.433.9665-.9666.9665M12.6313 21.223c-.5343 0-.9665-.433-.9665-.9665a.966.966 0 01.9665-.9665c.5335 0 .9658.4323.9658.9665 0 .5335-.4323.9665-.9658.9665M22.2305 1.974c-.9772 0-1.7694.7922-1.7694 1.7694 0 .2085.0525.4025.1187.5882l-8.3009 14.2265c-.8021.1681-1.417.8462-1.417 1.6985 0 .9772.7922 1.7694 1.7694 1.7694.9764 0 1.7687-.7922 1.7687-1.7694 0-.1963-.0525-.3759-.1111-.5525l8.3427-14.2728C23.4094 5.2448 24 4.5782 24 3.7433c0-.977-.7923-1.7693-1.7695-1.7693" fill="#111827" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">External Client</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">cURL / Frontend Web App</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Authenticated Queries</text>
+      <text x="12" y="56" class="code-font" font-weight="bold">X-API-Key: valid-secret-key</text>
+      <text x="12" y="84" class="body-text">• GET /api/v1/orders</text>
+      <text x="12" y="112" class="body-text">• GET /api/v1/users</text>
+      <text x="12" y="140" class="body-text">← 200 OK (Proxied Service)</text>
+    </g>
+
+    <g transform="translate(15, 257)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Edge Guard Rejections</text>
+      <text x="12" y="56" class="body-text">• Missing key: 401 Unauthorized</text>
+      <text x="12" y="84" class="body-text">• Burst &gt; 10 req/s: 429 Too Many</text>
+      <text x="12" y="112" class="body-text">• Zero backend service load</text>
+      <text x="12" y="140" class="subtitle-text">Edge gatekeeper protection</text>
+    </g>
+  </g>
+
+  <!-- Arrow: 1. Request (:80) -->
+  <rect x="344" y="198" width="110" height="30" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="399" y="218" text-anchor="middle" class="arrow-label">1. Request (:80)</text>
+  <line x1="320" y1="240" x2="478" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Component: Nginx API Gateway -->
+  <g transform="translate(480, 20)">
+    <rect width="280" height="480" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
+    <rect width="280" height="58" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" />
+    <rect y="48" width="280" height="10" fill="#ccfbf1" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0zm6 16.59c0 .705-.646 1.29-1.529 1.29-.631 0-1.351-.255-1.801-.81l-6-7.141v6.66c0 .721-.57 1.29-1.274 1.29H7.32c-.721 0-1.29-.6-1.29-1.29V7.41c0-.705.63-1.29 1.5-1.29.646 0 1.38.255 1.83.81l5.97 7.141V7.41c0-.721.6-1.29 1.29-1.29h.075c.72 0 1.29.6 1.29 1.29v9.18H18z" fill="#009639" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">Nginx API Gateway</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 80 Ingress Gatekeeper</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Rate Limit and Security</text>
+      <text x="12" y="56" class="code-font" font-weight="bold">Zone: limit_req_zone</text>
+      <text x="12" y="84" class="body-text">• Rate: 10r/s burst=5 nodelay</text>
+      <text x="12" y="112" class="body-text">• API Key Auth validation map</text>
+      <text x="12" y="140" class="body-text">• Immediate 401 and 429 rejection</text>
+    </g>
+
+    <g transform="translate(15, 257)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Dynamic Route Splitting</text>
+      <text x="12" y="56" class="body-text">• /api/v1/orders -&gt; Port 3001</text>
+      <text x="12" y="84" class="body-text">• /api/v1/users -&gt; Port 3002</text>
+      <text x="12" y="112" class="body-text">• Preserves X-Forwarded-For</text>
+      <text x="12" y="140" class="subtitle-text">High-throughput reverse proxy</text>
+    </g>
+  </g>
+
+  <!-- Arrow: 2. Proxy (:3001) -->
+  <rect x="784" y="98" width="110" height="30" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2" />
+  <text x="839" y="118" text-anchor="middle" class="arrow-label">2. Proxy (:3001)</text>
+  <line x1="760" y1="140" x2="918" y2="140" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Arrow: 3. Proxy (:3002) -->
+  <rect x="784" y="308" width="110" height="30" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2" />
+  <text x="839" y="328" text-anchor="middle" class="arrow-label">3. Proxy (:3002)</text>
+  <line x1="760" y1="350" x2="918" y2="350" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Component: Orders Service -->
+  <g transform="translate(920, 20)">
+    <rect width="340" height="230" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" />
+    <rect width="340" height="58" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
+    <rect y="48" width="340" height="10" fill="#ede9fe" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">Orders Service</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 3001 (Internal Network)</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="310" height="138" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
+      <rect width="310" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Orders Microservice Domain</text>
+      <text x="12" y="56" class="body-text">• GET /orders and POST /orders</text>
+      <text x="12" y="84" class="body-text">• Dedicated order fulfillment logic</text>
+      <text x="12" y="112" class="subtitle-text">Protected from direct external exposure</text>
+    </g>
+  </g>
+
+  <!-- Component: Users Service -->
+  <g transform="translate(920, 270)">
+    <rect width="340" height="230" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="2" />
+    <rect width="340" height="58" rx="8" fill="#dcfce7" stroke="#059669" stroke-width="1.5" />
+    <rect y="48" width="340" height="10" fill="#dcfce7" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">Users Service</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 3002 (Internal Network)</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="310" height="138" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
+      <rect width="310" height="32" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Users Microservice Domain</text>
+      <text x="12" y="56" class="body-text">• GET /users and GET /users/:id</text>
+      <text x="12" y="84" class="body-text">• User identity and profile management</text>
+      <text x="12" y="112" class="subtitle-text">Isolated service domain compute</text>
+    </g>
+  </g>
+
+  <!-- Component: Docker Network -->
+  <g transform="translate(1340, 20)">
+    <rect width="300" height="480" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
+    <rect width="300" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+    <rect y="48" width="300" height="10" fill="#fef3c7" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z" fill="#0284c7" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">Docker Network</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Private Bridge Network (lab-net)</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="270" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
+      <rect width="270" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Service Isolation</text>
+      <text x="12" y="56" class="body-text">• Internal DNS: orders_service:3001</text>
+      <text x="12" y="84" class="body-text">• Internal DNS: users_service:3002</text>
+      <text x="12" y="112" class="body-text">• Ports 3001 and 3002 internal only</text>
+      <text x="12" y="140" class="body-text">• Accessible strictly via Gateway</text>
+    </g>
+
+    <g transform="translate(15, 257)">
+      <rect width="270" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
+      <rect width="270" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Edge Defense Benefits</text>
+      <text x="12" y="56" class="body-text">• Centralized authentication policy</text>
+      <text x="12" y="84" class="body-text">• Uniform rate quota enforcement</text>
+      <text x="12" y="112" class="body-text">• Single ingress IP and SSL endpoint</text>
+      <text x="12" y="140" class="subtitle-text">Production standard topology</text>
+    </g>
+  </g>
+</svg>

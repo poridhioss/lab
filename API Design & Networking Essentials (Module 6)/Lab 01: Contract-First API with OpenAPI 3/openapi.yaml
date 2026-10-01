@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: Orders Service API
+  version: 1.0.0
+  description: Contract-first API specification supporting cursor pagination, idempotency keys, and RFC 7807 error formats.
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local Development Server
+
+paths:
+  /orders:
+    post:
+      summary: Create an order (Idempotent write)
+      description: Submits a new order mutation. The client MUST include an Idempotency-Key header to prevent duplicate orders upon retries.
+      operationId: createOrder
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Unique client-generated token (UUID v4) guaranteeing idempotent execution.
+          schema:
+            type: string
+            format: uuid
+            example: "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '201':
+          description: Order successfully placed and committed.
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/api/v1/orders/ord_101"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          $ref: '#/components/responses/ProblemDetails400'
+        '409':
+          $ref: '#/components/responses/ProblemDetails409'
+
+    get:
+      summary: List orders with cursor-based pagination
+      description: Retrieves a chronological stream of orders using high-performance cursor pagination.
+      operationId: listOrders
+      parameters:
+        - name: cursor
+          in: query
+          required: false
+          description: Opaque cursor identifier representing the last seen order ID.
+          schema:
+            type: integer
+            example: 100
+        - name: limit
+          in: query
+          required: false
+          description: Number of records to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+            example: 10
+      responses:
+        '200':
+          description: Paginated collection of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrdersResponse'
+        '400':
+          $ref: '#/components/responses/ProblemDetails400'
+
+components:
+  schemas:
+    CreateOrderRequest:
+      type: object
+      required:
+        - item_id
+        - quantity
+        - amount
+      properties:
+        item_id:
+          type: integer
+          example: 402
+        quantity:
+          type: integer
+          minimum: 1
+          example: 2
+        amount:
+          type: number
+          format: float
+          minimum: 0.01
+          example: 150.50
+
+    OrderResponse:
+      type: object
+      required:
+        - id
+        - item_id
+        - quantity
+        - amount
+        - status
+        - created_at
+      properties:
+        id:
+          type: integer
+          example: 101
+        item_id:
+          type: integer
+          example: 402
+        quantity:
+          type: integer
+          example: 2
+        amount:
+          type: number
+          example: 150.50
+        status:
+          type: string
+          enum: [PENDING, CONFIRMED, COMPLETED]
+          example: CONFIRMED
+        created_at:
+          type: string
+          format: date-time
+          example: "2026-10-02T10:00:00Z"
+
+    PaginationMetadata:
+      type: object
+      required:
+        - next_cursor
+        - has_more
+        - count
+      properties:
+        next_cursor:
+          type: integer
+          nullable: true
+          example: 110
+        has_more:
+          type: boolean
+          example: true
+        count:
+          type: integer
+          example: 10
+
+    PaginatedOrdersResponse:
+      type: object
+      required:
+        - data
+        - pagination
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+        pagination:
+          $ref: '#/components/schemas/PaginationMetadata'
+
+    ProblemDetails:
+      type: object
+      description: RFC 7807 standard error structure.
+      required:
+        - type
+        - title
+        - status
+        - detail
+      properties:
+        type:
+          type: string
+          format: uri
+          example: "https://api.example.com/errors/invalid-parameter"
+        title:
+          type: string
+          example: "Invalid Request Parameter"
+        status:
+          type: integer
+          example: 400
+        detail:
+          type: string
+          example: "The limit parameter exceeds maximum allowed of 50."
+        instance:
+          type: string
+          example: "/api/v1/orders"
+
+  responses:
+    ProblemDetails400:
+      description: Bad Request (RFC 7807 Problem Details).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ProblemDetails409:
+      description: Conflict (Concurrent Mutation in Progress).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'

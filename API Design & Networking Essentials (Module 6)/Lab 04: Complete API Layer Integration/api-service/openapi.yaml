@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Production Integrated API Layer
+  version: 1.0.0
+  description: End-to-end integrated API contract supporting edge gateway authentication, schema validation, and Redis idempotency.
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Nginx API Gateway Ingress
+
+paths:
+  /orders:
+    post:
+      summary: Place order with idempotency guarantee
+      operationId: createOrder
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Unique client mutation token (UUID v4) forwarded intact across the gateway.
+          schema:
+            type: string
+            format: uuid
+            example: "tx_live_891e4a3b-28f1-4db5-9e3d-71b8e4f16921"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - item_id
+                - quantity
+                - amount
+              properties:
+                item_id:
+                  type: integer
+                  example: 501
+                quantity:
+                  type: integer
+                  minimum: 1
+                  example: 2
+                amount:
+                  type: number
+                  minimum: 0.01
+                  example: 299.99
+      responses:
+        '201':
+          description: Order placed successfully (or replayed from idempotency cache).
+          headers:
+            X-Cache:
+              schema:
+                type: string
+                example: "HIT-IDEMPOTENT"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  item_id:
+                    type: integer
+                  quantity:
+                    type: integer
+                  amount:
+                    type: number
+                  status:
+                    type: string
+                  created_at:
+                    type: string
+        '400':
+          description: Schema validation failure (RFC 7807).
+        '401':
+          description: Unauthorized request dropped at gateway edge.
+        '409':
+          description: Concurrent mutation with identical key currently in flight.
+
+    get:
+      summary: List orders
+      operationId: listOrders
+      responses:
+        '200':
+          description: Orders list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  orders:
+                    type: array
+                    items:
+                      type: object

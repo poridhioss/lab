@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 520" width="1680" height="520">
+
+  <defs>
+    <style>
+      text {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        fill: #000000;
+      }
+      .title-text {
+        font-size: 20px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .subtitle-text {
+        font-size: 15px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .section-heading {
+        font-size: 17px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .code-font {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        font-size: 15.5px;
+        fill: #000000;
+      }
+      .body-text {
+        font-size: 15.5px;
+        fill: #000000;
+      }
+      .arrow-label {
+        font-size: 16px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .arrow-sub {
+        font-size: 14.5px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .flow-step-title {
+        font-size: 16.5px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .flow-step-sub {
+        font-size: 14.5px;
+        font-style: italic;
+        fill: #000000;
+      }
+    </style>
+    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+
+  <!-- Component: HTTP Client -->
+  <g transform="translate(40, 20)">
+    <rect width="280" height="480" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect width="280" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
+    <rect y="48" width="280" height="10" fill="#dbeafe" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M.803 14.8169c0-.5342.433-.9665.9665-.9665.5335 0 .9665.4323.9665.9665 0 .5335-.433.9657-.9665.9657-.5335 0-.9666-.4322-.9666-.9657m2.736 0c0-.1963-.0532-.376-.1119-.5525-.2344-.7024-.876-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0708C.6149 13.2865 0 13.9646 0 14.817c0 .9764.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.793 1.7694-1.7694m-1.7694-7.149c.5335 0 .9665.433.9665.9665 0 .5335-.433.9665-.9665.9665-.5343 0-.9666-.433-.9666-.9665 0-.5335.4323-.9665.9666-.9665m0 2.7359c.9772 0 1.7694-.7923 1.7694-1.7694 0-.1956-.0532-.376-.1119-.5525-.2344-.7024-.8767-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0716C.6149 7.104 0 7.782 0 8.6344c0 .9771.7923 1.7694 1.7695 1.7694m13.221-5.694c-.5342 0-.9665-.433-.9665-.9664a.966.966 0 01.9666-.9665c.5335 0 .9658.4322.9658.9665 0 .5334-.4323.9664-.9658.9664m-9.6 16.5133c-.5335 0-.9666-.433-.9666-.9665 0-.5342.433-.9665.9666-.9665a.966.966 0 01.9665.9665c0 .5335-.4323.9665-.9665.9665m9.6-19.2491c-.978 0-1.7695.7922-1.7695 1.7694 0 .2085.0525.4025.1187.5882L5.039 18.5581c-.803.1681-1.4179.8462-1.4179 1.6985 0 .9772.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.7922 1.7694-1.7694 0-.1963-.0525-.3759-.111-.5525l8.3427-14.2728c.7778-.1865 1.3683-.8531 1.3683-1.688 0-.977-.793-1.7693-1.7694-1.7693m7.24 2.7359c-.5343 0-.9666-.433-.9666-.9665a.966.966 0 01.9665-.9665c.5335 0 .9666.4322.9666.9665 0 .5334-.433.9665-.9666.9665M12.6313 21.223c-.5343 0-.9665-.433-.9665-.9665a.966.966 0 01.9665-.9665c.5335 0 .9658.4323.9658.9665 0 .5335-.4323.9665-.9658.9665M22.2305 1.974c-.9772 0-1.7694.7922-1.7694 1.7694 0 .2085.0525.4025.1187.5882l-8.3009 14.2265c-.8021.1681-1.417.8462-1.417 1.6985 0 .9772.7922 1.7694 1.7694 1.7694.9764 0 1.7687-.7922 1.7687-1.7694 0-.1963-.0525-.3759-.1111-.5525l8.3427-14.2728C23.4094 5.2448 24 4.5782 24 3.7433c0-.977-.7923-1.7693-1.7695-1.7693" fill="#111827" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">HTTP Client</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Swagger UI / cURL Caller</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">1. Contract Mutation</text>
+      <text x="12" y="56" class="code-font" font-weight="bold">POST /api/v1/orders</text>
+      <text x="12" y="84" class="body-text">Idempotency-Key: ord_7f8a9</text>
+      <text x="12" y="112" class="body-text">Content-Type: application/json</text>
+      <text x="12" y="140" class="subtitle-text">Deterministic write request</text>
+    </g>
+
+    <g transform="translate(15, 257)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">2. Paginated Query</text>
+      <text x="12" y="56" class="code-font" font-weight="bold">GET /api/v1/orders?limit=10</text>
+      <text x="12" y="84" class="body-text">Cursor: eyJpZCI6MTB9</text>
+      <text x="12" y="112" class="body-text">• Accept: application/json</text>
+      <text x="12" y="140" class="subtitle-text">Safe non-blocking cursor query</text>
+    </g>
+  </g>
+
+  <!-- Arrow: 1. POST (Key) -->
+  <rect x="344" y="108" width="110" height="30" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="399" y="128" text-anchor="middle" class="arrow-label">1. POST (Key)</text>
+  <line x1="320" y1="150" x2="478" y2="150" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Arrow: 4. Return List -->
+  <rect x="346" y="288" width="110" height="30" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
+  <text x="401" y="308" text-anchor="middle" class="arrow-label">4. Return List</text>
+  <line x1="480" y1="330" x2="322" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Component: OpenAPI 3 Contract -->
+  <g transform="translate(480, 20)">
+    <rect width="280" height="480" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="2" />
+    <rect width="280" height="58" rx="8" fill="#dcfce7" stroke="#059669" stroke-width="1.5" />
+    <rect y="48" width="280" height="10" fill="#dcfce7" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M21.039 0a2.959 2.959 0 00-2.65 4.274l-6.447 6.447a2.96 2.96 0 101.335 1.336l6.447-6.447A2.959 2.959 0 1021.04 0zM10.628 2.745c-.072 0-.143.003-.214.004-.072.002-.143.002-.215.005-.447.018-.893.064-1.335.138l-.03.005-.185.033-.105.02a7.718 7.718 0 00-.289.062l-.032.008a10.69 10.69 0 00-2.55.95l-.155.089c-.063.034-.125.07-.187.105-.046.027-.093.051-.14.079H5.19l-.01.005-.036.02v.002l.111.184 3.15 5.23a4.168 4.168 0 01.38-.202 4.294 4.294 0 011.628-.413c.071-.004.143-.008.214-.008zm.428.01v6.333c.325.034.647.103.96.209l4.66-4.66c-.173-.12-.348-.237-.528-.347l-.026-.015c-.056-.035-.112-.067-.168-.1l-.098-.056-.099-.055a12.735 12.735 0 00-.171-.092l-.027-.014a10.628 10.628 0 00-1.425-.617c-.69-.241-1.403-.41-2.128-.505l-.089-.012-.09-.01a6.56 6.56 0 00-.17-.019l-.049-.004-.204-.017a6.44 6.44 0 00-.255-.015c-.031-.003-.062-.003-.093-.004zM4.782 4.498a9.92 9.92 0 00-1.36 1.062l4.461 4.461.018.018c.049-.04.098-.078.149-.116l-.011-.018zm-1.67 1.36c-.05.05-.098.103-.147.154l-.149.155c-.33.357-.63.73-.902 1.118l-.039.056a10.588 10.588 0 00-.216.326 10.6 10.6 0 00-1.65 5.276l-.006.215-.003.214h6.317c0-.072.007-.143.01-.214.005-.072.006-.144.013-.215.081-.822.399-1.625.952-2.3.045-.055.096-.106.144-.16.048-.052.093-.107.144-.158zm16.255 1.464l-4.663 4.663c.106.312.175.634.21.959h6.332l-.004-.094a11.579 11.579 0 00-.032-.456l-.005-.052a13.044 13.044 0 00-.026-.241v-.009l-.033-.24v-.009a10.618 10.618 0 00-.327-1.493l-.003-.01a15.839 15.839 0 00-.07-.228l-.01-.03a14.111 14.111 0 00-.069-.204l-.02-.055a5.65 5.65 0 00-.153-.405 7.84 7.84 0 00-.093-.227 16.67 16.67 0 00-.063-.144l-.037-.081a13.776 13.776 0 00-.08-.171l-.024-.052-.096-.194-.014-.027a11.2 11.2 0 00-.112-.212l-.004-.008a10.615 10.615 0 00-.604-.98zm-4.43 6.05c0 .071-.006.142-.01.214-.003.072-.005.143-.012.214a4.29 4.29 0 01-.952 2.301c-.045.055-.096.107-.144.16-.048.053-.093.108-.144.159l4.467 4.467c.051-.051.099-.104.148-.155.05-.052.1-.103.148-.155.331-.358.633-.733.905-1.122l.032-.046.098-.144.085-.13.04-.063a10.597 10.597 0 001.647-5.272c.003-.071.004-.143.006-.214.001-.071.004-.143.004-.214zM.01 13.8l.004.093.01.179.005.076.017.206.005.046c.007.076.015.153.024.228l.003.022a9.605 9.605 0 00.033.248c.072.505.182 1.005.327 1.497l.002.006c.022.077.047.154.071.23l.004.014.005.014a15.737 15.737 0 00.153.439l.03.08.059.148a7.702 7.702 0 00.093.228l.062.14.038.084.078.169.027.054a10.677 10.677 0 00.225.441l.025.043 5.408-3.258.02-.012a4.314 4.314 0 01-.395-1.414h-.025zm.505 2.846l-.206.058.002.005zm6.425-1.052l-5.415 3.262c.083.139.17.273.259.406l.008.014.004.005.008.014h.001c.007.012.014.022.022.032l.001.002v.001a10.634 10.634 0 00.298.417l.006.008a9.963 9.963 0 00.29.368l.033.04c.043.052.086.103.13.153l.057.065.112.127.064.069.029.031.083.09.035.035c.049.051.098.103.149.153L7.58 16.42a3.86 3.86 0 01-.285-.321 4.422 4.422 0 01-.356-.505zm6.416 1.111c-.05.04-.1.079-.15.116l.011.018 3.257 5.407c.151-.099.3-.2.446-.307.315-.232.62-.484.914-.756l-4.46-4.46zm-5.457.003l-.015.015-4.46 4.46a8.966 8.966 0 00.195.176c.022.02.043.04.065.058l.152.13a10.622 10.622 0 00.215.174l.023.017.191.148.008.005c.268.2.547.389.834.564l.03.018.164.097.101.057a5.458 5.458 0 00.27.148c.008.004.016.01.025.013.162.085.327.164.493.24l.158-.385 2.243-5.448.009-.02a4.328 4.328 0 01-.701-.467zm4.951.353c-.061.037-.124.07-.187.104a4.318 4.318 0 01-3.271.336c-.069-.02-.135-.047-.203-.071-.067-.024-.136-.044-.202-.072l-2.242 5.444-.088.213-.075.183v.001l.017.007a.137.137 0 00.019.007l.005.003c.052.021.106.04.159.06.067.027.133.053.2.077l.102.04c.702.247 1.43.42 2.168.518l.087.012.09.01.172.019a7.173 7.173 0 00.252.022c.023.001.048.001.071.003l.184.011.112.005a7.06 7.06 0 00.358.007h.05a10.667 10.667 0 001.793-.15l.185-.034.105-.02.109-.023.18-.04.032-.008a10.684 10.684 0 002.55-.95c.052-.028.104-.06.156-.089.063-.034.125-.07.187-.105.043-.024.087-.047.13-.073h.001l.002-.002.002-.001.002-.001.007-.004.042-.025-.11-.183-.11-.184zm3.262 5.414l-.042.025.042-.024zm-.05.029zm-.005.004h-.002z" fill="#6ba539" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">OpenAPI 3 Contract</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Specification (openapi.yaml)</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Schema Validation</text>
+      <text x="12" y="56" class="code-font" font-weight="bold">openapi: 3.0.3</text>
+      <text x="12" y="84" class="body-text">• Validates: Idempotency-Key</text>
+      <text x="12" y="112" class="body-text">• Validates limit: [1..50]</text>
+      <text x="12" y="140" class="body-text">• RFC 7807 problem details format</text>
+    </g>
+
+    <g transform="translate(15, 257)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Resource Versioning</text>
+      <text x="12" y="56" class="body-text">• URI Path: /api/v1/orders</text>
+      <text x="12" y="84" class="body-text">• Backward compatible models</text>
+      <text x="12" y="112" class="body-text">• Cursor pagination schema</text>
+      <text x="12" y="140" class="subtitle-text">Strict type validation contract</text>
+    </g>
+  </g>
+
+  <!-- Arrow: 2. Validated -->
+  <rect x="784" y="108" width="110" height="30" rx="6" fill="#f0fdf4" stroke="#059669" stroke-width="1.2" />
+  <text x="839" y="128" text-anchor="middle" class="arrow-label">2. Validated</text>
+  <line x1="760" y1="150" x2="918" y2="150" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Arrow: 3. Filter -->
+  <rect x="794" y="288" width="95" height="30" rx="6" fill="#f0fdf4" stroke="#059669" stroke-width="1.2" />
+  <text x="841" y="308" text-anchor="middle" class="arrow-label">3. Filter</text>
+  <line x1="920" y1="330" x2="762" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Component: Express Server Stub -->
+  <g transform="translate(920, 20)">
+    <rect width="280" height="480" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" />
+    <rect width="280" height="58" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
+    <rect y="48" width="280" height="10" fill="#ede9fe" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">Express Server Stub</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Node.js Controller Runtime</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Route Handlers</text>
+      <text x="12" y="56" class="code-font" font-weight="bold">app.post(&apos;/api/v1/orders&apos;)</text>
+      <text x="12" y="84" class="code-font" font-weight="bold">app.get(&apos;/api/v1/orders&apos;)</text>
+      <text x="12" y="112" class="body-text">• Extracts cursor and limit query</text>
+      <text x="12" y="140" class="body-text">• Generates 201 and 200 OK</text>
+    </g>
+
+    <g transform="translate(15, 257)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Stub Implementation</text>
+      <text x="12" y="56" class="body-text">• Generated from OpenAPI 3 spec</text>
+      <text x="12" y="84" class="body-text">• Non-blocking asynchronous I/O</text>
+      <text x="12" y="112" class="body-text">• Contract runtime bindings</text>
+      <text x="12" y="140" class="subtitle-text">Robust server controller stub</text>
+    </g>
+  </g>
+
+  <!-- Arrow: 3. Save Entity -->
+  <rect x="1224" y="108" width="110" height="30" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2" />
+  <text x="1279" y="128" text-anchor="middle" class="arrow-label">3. Save Entity</text>
+  <line x1="1200" y1="150" x2="1358" y2="150" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Arrow: 2. Cursor Slice -->
+  <rect x="1226" y="288" width="110" height="30" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2" />
+  <text x="1281" y="308" text-anchor="middle" class="arrow-label">2. Cursor Slice</text>
+  <line x1="1360" y1="330" x2="1202" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Component: In-Memory Store -->
+  <g transform="translate(1360, 20)">
+    <rect width="280" height="480" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
+    <rect width="280" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+    <rect y="48" width="280" height="10" fill="#fef3c7" />
+    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M12 2C6.48 2 2 4.01 2 6.5v11C2 19.99 6.48 22 12 22s10-2.01 10-4.5v-11C22 4.01 17.52 2 12 2zm0 2c4.42 0 8 1.34 8 2.5S16.42 9 12 9 4 7.66 4 6.5 7.58 4 12 4zm8 13.5c0 1.16-3.58 2.5-8 2.5s-8-1.34-8-2.5v-2.32c1.88 1.18 4.79 1.82 8 1.82s6.12-.64 8-1.82v2.32zm0-5c0 1.16-3.58 2.5-8 2.5s-8-1.34-8-2.5v-2.32c1.88 1.18 4.79 1.82 8 1.82s6.12-.64 8-1.82v2.32z" fill="#4b5563" />
+    </g>
+    <text x="60" y="28" text-anchor="start" class="title-text">In-Memory Store</text>
+    <text x="60" y="48" text-anchor="start" class="subtitle-text">Mock Orders Collection</text>
+
+    <g transform="translate(15, 75)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Orders Collection</text>
+      <text x="12" y="56" class="body-text">• In-memory records collection</text>
+      <text x="12" y="84" class="body-text">• Auto-incrementing cursor ID</text>
+      <text x="12" y="112" class="body-text">• WHERE id &gt; cursor LIMIT limit</text>
+      <text x="12" y="140" class="body-text">• Strict schema adherence</text>
+    </g>
+
+    <g transform="translate(15, 257)">
+      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
+      <rect width="250" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
+      <text x="12" y="22" class="section-heading">Pagination Metadata</text>
+      <text x="12" y="56" class="body-text">• Emits next_cursor token</text>
+      <text x="12" y="84" class="body-text">• Emits has_more boolean flag</text>
+      <text x="12" y="112" class="body-text">• Deterministic order indexing</text>
+      <text x="12" y="140" class="subtitle-text">Zero duplicate record creation</text>
+    </g>
+  </g>
+</svg>

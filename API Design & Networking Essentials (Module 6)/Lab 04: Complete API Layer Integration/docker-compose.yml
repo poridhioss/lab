@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  gateway:
+    image: nginx:alpine
+    container_name: lab04-gateway
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api_service
+    networks:
+      - lab04-net
+
+  api_service:
+    image: node:18-alpine
+    container_name: lab04-api
+    working_dir: /app
+    volumes:
+      - ./api-service:/app
+    environment:
+      - PORT=3000
+      - REDIS_URL=redis://redis:6379
+    command: sh -c "npm install && node server.js"
+    depends_on:
+      - redis
+    networks:
+      - lab04-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: lab04-redis
+    ports:
+      - "6380:6379"
+    restart: unless-stopped
+    networks:
+      - lab04-net
+
+networks:
+  lab04-net:
+    driver: bridge

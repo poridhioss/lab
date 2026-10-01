@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 700" width="1640" height="700">
+
+  <defs>
+    <style>
+      text {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        fill: #000000;
+      }
+      .title-text {
+        font-size: 20px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .subtitle-text {
+        font-size: 15px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .section-heading {
+        font-size: 17px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .code-font {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        font-size: 15.5px;
+        fill: #000000;
+      }
+      .body-text {
+        font-size: 15.5px;
+        fill: #000000;
+      }
+      .arrow-label {
+        font-size: 16px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .arrow-sub {
+        font-size: 14.5px;
+        font-style: italic;
+        fill: #000000;
+      }
+      .flow-step-title {
+        font-size: 16.5px;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .flow-step-sub {
+        font-size: 14.5px;
+        font-style: italic;
+        fill: #000000;
+      }
+    </style>
+    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+
+  <g transform="translate(30, 15)">
+    <rect width="200" height="60" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
+    <rect x="12" y="11" width="38" height="38" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M.803 14.8169c0-.5342.433-.9665.9665-.9665.5335 0 .9665.4323.9665.9665 0 .5335-.433.9657-.9665.9657-.5335 0-.9666-.4322-.9666-.9657m2.736 0c0-.1963-.0532-.376-.1119-.5525-.2344-.7024-.876-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0708C.6149 13.2865 0 13.9646 0 14.817c0 .9764.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.793 1.7694-1.7694m-1.7694-7.149c.5335 0 .9665.433.9665.9665 0 .5335-.433.9665-.9665.9665-.5343 0-.9666-.433-.9666-.9665 0-.5335.4323-.9665.9666-.9665m0 2.7359c.9772 0 1.7694-.7923 1.7694-1.7694 0-.1956-.0532-.376-.1119-.5525-.2344-.7024-.8767-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0716C.6149 7.104 0 7.782 0 8.6344c0 .9771.7923 1.7694 1.7695 1.7694m13.221-5.694c-.5342 0-.9665-.433-.9665-.9664a.966.966 0 01.9666-.9665c.5335 0 .9658.4322.9658.9665 0 .5334-.4323.9664-.9658.9664m-9.6 16.5133c-.5335 0-.9666-.433-.9666-.9665 0-.5342.433-.9665.9666-.9665a.966.966 0 01.9665.9665c0 .5335-.4323.9665-.9665.9665m9.6-19.2491c-.978 0-1.7695.7922-1.7695 1.7694 0 .2085.0525.4025.1187.5882L5.039 18.5581c-.803.1681-1.4179.8462-1.4179 1.6985 0 .9772.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.7922 1.7694-1.7694 0-.1963-.0525-.3759-.111-.5525l8.3427-14.2728c.7778-.1865 1.3683-.8531 1.3683-1.688 0-.977-.793-1.7693-1.7694-1.7693m7.24 2.7359c-.5343 0-.9666-.433-.9666-.9665a.966.966 0 01.9665-.9665c.5335 0 .9666.4322.9666.9665 0 .5334-.433.9665-.9666.9665M12.6313 21.223c-.5343 0-.9665-.433-.9665-.9665a.966.966 0 01.9665-.9665c.5335 0 .9658.4323.9658.9665 0 .5335-.4323.9665-.9658.9665M22.2305 1.974c-.9772 0-1.7694.7922-1.7694 1.7694 0 .2085.0525.4025.1187.5882l-8.3009 14.2265c-.8021.1681-1.417.8462-1.417 1.6985 0 .9772.7922 1.7694 1.7694 1.7694.9764 0 1.7687-.7922 1.7687-1.7694 0-.1963-.0525-.3759-.1111-.5525l8.3427-14.2728C23.4094 5.2448 24 4.5782 24 3.7433c0-.977-.7923-1.7693-1.7695-1.7693" fill="#111827" />
+    </g>
+    <text x="58" y="28" text-anchor="start" class="title-text">HTTP Client</text>
+    <text x="58" y="47" text-anchor="start" class="subtitle-text">Automated Test</text>
+  </g>
+  <line x1="130" y1="75" x2="130" y2="680" stroke="#9ca3af" stroke-width="1.8" stroke-dasharray="6,6" />
+
+  <g transform="translate(390, 15)">
+    <rect width="200" height="60" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
+    <rect x="12" y="11" width="38" height="38" rx="6" fill="#ffffff" stroke="#0d9488" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0zm6 16.59c0 .705-.646 1.29-1.529 1.29-.631 0-1.351-.255-1.801-.81l-6-7.141v6.66c0 .721-.57 1.29-1.274 1.29H7.32c-.721 0-1.29-.6-1.29-1.29V7.41c0-.705.63-1.29 1.5-1.29.646 0 1.38.255 1.83.81l5.97 7.141V7.41c0-.721.6-1.29 1.29-1.29h.075c.72 0 1.29.6 1.29 1.29v9.18H18z" fill="#009639" />
+    </g>
+    <text x="58" y="28" text-anchor="start" class="title-text">Nginx Gateway</text>
+    <text x="58" y="47" text-anchor="start" class="subtitle-text">Port 80 Gatekeeper</text>
+  </g>
+  <line x1="490" y1="75" x2="490" y2="680" stroke="#9ca3af" stroke-width="1.8" stroke-dasharray="6,6" />
+
+  <g transform="translate(770, 15)">
+    <rect width="200" height="60" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" />
+    <rect x="12" y="11" width="38" height="38" rx="6" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
+    </g>
+    <text x="58" y="28" text-anchor="start" class="title-text">API Service</text>
+    <text x="58" y="47" text-anchor="start" class="subtitle-text">OpenAPI and Middleware</text>
+  </g>
+  <line x1="870" y1="75" x2="870" y2="680" stroke="#9ca3af" stroke-width="1.8" stroke-dasharray="6,6" />
+
+  <g transform="translate(1140, 15)">
+    <rect width="200" height="60" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2" />
+    <rect x="12" y="11" width="38" height="38" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M22.71 13.145c-1.66 2.092-3.452 4.483-7.038 4.483-3.203 0-4.397-2.825-4.48-5.12.701 1.484 2.073 2.685 4.214 2.63 4.117-.133 6.94-3.852 6.94-7.239 0-4.05-3.022-6.972-8.268-6.972-3.752 0-8.4 1.428-11.455 3.685C2.59 6.937 3.885 9.958 4.35 9.626c2.648-1.904 4.748-3.13 6.784-3.744C8.12 9.244.886 17.05 0 18.425c.1 1.261 1.66 4.648 2.424 4.648.232 0 .431-.133.664-.365a100.49 100.49 0 0 0 5.54-6.765c.222 3.104 1.748 6.898 6.014 6.898 3.819 0 7.604-2.756 9.33-8.965.2-.764-.73-1.361-1.261-.73zm-4.349-5.013c0 1.959-1.926 2.922-3.685 2.922-.941 0-1.664-.247-2.235-.568 1.051-1.592 2.092-3.225 3.21-4.973 1.972.334 2.71 1.43 2.71 2.619z" fill="#dc2626" />
+    </g>
+    <text x="58" y="28" text-anchor="start" class="title-text">Redis Store</text>
+    <text x="58" y="47" text-anchor="start" class="subtitle-text">Distributed Lock &amp; Cache</text>
+  </g>
+  <line x1="1240" y1="75" x2="1240" y2="680" stroke="#9ca3af" stroke-width="1.8" stroke-dasharray="6,6" />
+
+  <g transform="translate(1430, 15)">
+    <rect width="200" height="60" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
+    <rect x="12" y="11" width="38" height="38" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
+    <g transform="translate(19, 15) scale(1.16)">
+      <path d="M12 2C6.48 2 2 4.01 2 6.5v11C2 19.99 6.48 22 12 22s10-2.01 10-4.5v-11C22 4.01 17.52 2 12 2zm0 2c4.42 0 8 1.34 8 2.5S16.42 9 12 9 4 7.66 4 6.5 7.58 4 12 4zm8 13.5c0 1.16-3.58 2.5-8 2.5s-8-1.34-8-2.5v-2.32c1.88 1.18 4.79 1.82 8 1.82s6.12-.64 8-1.82v2.32zm0-5c0 1.16-3.58 2.5-8 2.5s-8-1.34-8-2.5v-2.32c1.88 1.18 4.79 1.82 8 1.82s6.12-.64 8-1.82v2.32z" fill="#4b5563" />
+    </g>
+    <text x="58" y="28" text-anchor="start" class="title-text">Order DB</text>
+    <text x="58" y="47" text-anchor="start" class="subtitle-text">Persistence</text>
+  </g>
+  <line x1="1530" y1="75" x2="1530" y2="680" stroke="#9ca3af" stroke-width="1.8" stroke-dasharray="6,6" />
+
+  <!-- Step 1: POST /api/v1/orders -->
+  <text x="310" y="110" text-anchor="middle" class="flow-step-title">1. POST /api/v1/orders</text>
+  <text x="310" y="125" text-anchor="middle" class="flow-step-sub">X-API-Key + Idempotency-Key: tx_891</text>
+  <line x1="130" y1="130" x2="485" y2="130" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 2: Pass Auth and Forward Headers -->
+  <text x="680" y="155" text-anchor="middle" class="flow-step-title">2. Pass Auth and Forward Headers</text>
+  <text x="680" y="170" text-anchor="middle" class="flow-step-sub">Gateway proxies request with Idempotency-Key intact</text>
+  <line x1="490" y1="175" x2="865" y2="175" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 3: SET idemp:tx_891 &apos;LOCK&apos; NX EX 60 -->
+  <text x="1055" y="200" text-anchor="middle" class="flow-step-title">3. SET idemp:tx_891 &apos;LOCK&apos; NX EX 60</text>
+  <text x="1055" y="215" text-anchor="middle" class="flow-step-sub">Service acquires Redis lock</text>
+  <line x1="870" y1="220" x2="1235" y2="220" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 4: Lock Granted (OK) -->
+  <text x="1055" y="245" text-anchor="middle" class="flow-step-title">4. Lock Granted (OK)</text>
+  <text x="1055" y="260" text-anchor="middle" class="flow-step-sub">Lock acquired; proceed to controller</text>
+  <line x1="1240" y1="265" x2="875" y2="265" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Step 5: Create Order Record -->
+  <text x="1200" y="290" text-anchor="middle" class="flow-step-title">5. Create Order Record</text>
+  <text x="1200" y="305" text-anchor="middle" class="flow-step-sub">Appends new order to transactional DB</text>
+  <line x1="870" y1="310" x2="1525" y2="310" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 6: Order Confirmed (ID: 891) -->
+  <text x="1200" y="335" text-anchor="middle" class="flow-step-title">6. Order Confirmed (ID: 891)</text>
+  <text x="1200" y="350" text-anchor="middle" class="flow-step-sub">Order committed to store</text>
+  <line x1="1530" y1="355" x2="875" y2="355" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Step 7: Cache Status 201 and Body in Redis -->
+  <text x="1055" y="380" text-anchor="middle" class="flow-step-title">7. Cache Status 201 and Body in Redis</text>
+  <text x="1055" y="395" text-anchor="middle" class="flow-step-sub">Stores HTTP status and payload (TTL: 24h)</text>
+  <line x1="870" y1="400" x2="1235" y2="400" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 8: 201 Created (X-Cache: MISS) -->
+  <text x="680" y="425" text-anchor="middle" class="flow-step-title">8. 201 Created (X-Cache: MISS)</text>
+  <text x="680" y="440" text-anchor="middle" class="flow-step-sub">Returns confirmed response to Gateway</text>
+  <line x1="870" y1="445" x2="495" y2="445" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Step 9: 201 Created (Proxied Response) -->
+  <text x="310" y="470" text-anchor="middle" class="flow-step-title">9. 201 Created (Proxied Response)</text>
+  <text x="310" y="485" text-anchor="middle" class="flow-step-sub">Gateway returns response to client</text>
+  <line x1="490" y1="490" x2="135" y2="490" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Step 10: Retry POST /orders (Same Key: tx_891) -->
+  <text x="310" y="520" text-anchor="middle" class="flow-step-title">10. Retry POST /orders (Same Key: tx_891)</text>
+  <text x="310" y="535" text-anchor="middle" class="flow-step-sub">Client re-sends request through gateway</text>
+  <line x1="130" y1="540" x2="485" y2="540" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 11: Forward Retry Request -->
+  <text x="680" y="560" text-anchor="middle" class="flow-step-title">11. Forward Retry Request</text>
+  <text x="680" y="575" text-anchor="middle" class="flow-step-sub">Gateway forwards retry with key intact</text>
+  <line x1="490" y1="580" x2="865" y2="580" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 12: GET idemp:tx_891 -->
+  <text x="1055" y="595" text-anchor="middle" class="flow-step-title">12. GET idemp:tx_891</text>
+  <text x="1055" y="610" text-anchor="middle" class="flow-step-sub">Finds cached response in Redis</text>
+  <line x1="870" y1="615" x2="1235" y2="615" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+
+  <!-- Step 13: 201 Created (X-Cache: HIT) -->
+  <text x="680" y="625" text-anchor="middle" class="flow-step-title">13. 201 Created (X-Cache: HIT)</text>
+  <text x="680" y="640" text-anchor="middle" class="flow-step-sub">Replays cached response; DB not called</text>
+  <line x1="870" y1="645" x2="495" y2="645" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+
+  <!-- Step 14: 201 Created (X-Cache: HIT-IDEMPOTENT) -->
+  <text x="310" y="655" text-anchor="middle" class="flow-step-title">14. 201 Created (X-Cache: HIT-IDEMPOTENT)</text>
+  <text x="310" y="670" text-anchor="middle" class="flow-step-sub">Replayed to client; exactly-once execution proven</text>
+  <line x1="490" y1="675" x2="135" y2="675" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+</svg>

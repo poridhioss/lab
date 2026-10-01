@@ -1,0 +1,14 @@
+{
+  "name": "lab02-idempotent-write-endpoint",
+  "version": "1.0.0",
+  "description": "Lab 02: Idempotent Write Endpoint with Node.js and Redis",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test-idempotency.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ioredis": "^5.4.1"
+  }
+}
