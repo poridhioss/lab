@@ -550,6 +550,8 @@ chmod +x verify-gateway.sh
 ./verify-gateway.sh
 ```
 
+![Verify Gateway Output](images/step5-verify-script-run.png)
+
 Expected output:
 
 ```text
