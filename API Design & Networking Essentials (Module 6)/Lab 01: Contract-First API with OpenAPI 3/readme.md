@@ -71,6 +71,8 @@ mkdir -p ~/lab01-contract-first-api
 cd ~/lab01-contract-first-api
 ```
 
+![Create Project Directory](images/step1-create-dir.png)
+
 Create `package.json` with the required dependencies:
 
 ```bash
@@ -92,11 +94,15 @@ cat << 'EOF' > package.json
 EOF
 ```
 
+![Create package.json](images/step1-package-json.png)
+
 Install the dependencies:
 
 ```bash
 npm install
 ```
+
+![Install Dependencies](images/step1-npm-install.png)
 
 Expected output:
 
@@ -310,6 +316,8 @@ components:
 EOF
 ```
 
+![Create openapi.yaml](images/step2-openapi-yaml.png)
+
 ---
 
 ## Step 3: Implement the Server Stub (`server.js`)
@@ -469,6 +477,8 @@ if (require.main === module) {
 module.exports = app;
 EOF
 ```
+
+![Create server.js](images/step3-server-js.png)
 
 ---
 
