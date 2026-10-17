@@ -396,6 +396,8 @@ Notice that only port `8080` (the gateway) is exposed to the host machine. Ports
 curl -i http://localhost:8080/health
 ```
 
+![Test Gateway Health](images/step5-test1-health.png)
+
 Expected output:
 
 ```text
@@ -412,6 +414,8 @@ Make a request without providing the `X-API-Key` header:
 ```bash
 curl -i http://localhost:8080/api/v1/orders
 ```
+
+![Verify Authentication Enforcement](images/step5-test2-auth-unauthorized.png)
 
 Expected output:
 
@@ -431,6 +435,8 @@ Supply the valid API key:
 ```bash
 curl -s -H "X-API-Key: valid-secret-key-123" http://localhost:8080/api/v1/orders | jq .
 ```
+
+![Verify Orders Service Routing](images/step5-test3-orders-service.png)
 
 Expected output:
 
@@ -452,6 +458,8 @@ Query the Users endpoint through the same gateway:
 ```bash
 curl -s -H "X-API-Key: valid-secret-key-123" http://localhost:8080/api/v1/users | jq .
 ```
+
+![Verify Users Service Routing](images/step5-test4-users-service.png)
 
 Expected output:
 
@@ -532,6 +540,8 @@ echo "  ALL GATEWAY TESTS COMPLETED                             "
 echo "=========================================================="
 EOF
 ```
+
+![Create Verification Script](images/step5-test5-verify-script.png)
 
 Execute the verification script to simulate a burst of requests:
 
