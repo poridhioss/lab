@@ -301,6 +301,8 @@ http {
 EOF
 ```
 
+![Configure Nginx API Gateway](images/step2-nginx-conf.png)
+
 ---
 
 ## Step 3: Configure Docker Compose (`docker-compose.yml`)
@@ -351,6 +353,8 @@ networks:
 EOF
 ```
 
+![Create docker-compose.yml](images/step3-docker-compose.png)
+
 ---
 
 ## Step 4: Launch the Multi-Service Gateway Stack
@@ -361,11 +365,15 @@ Start all containers in detached mode:
 docker compose up -d
 ```
 
+![Launch Multi-Service Gateway Stack](images/step4-docker-compose-up.png)
+
 Verify that all three containers are healthy and running:
 
 ```bash
 docker compose ps
 ```
+
+![Verify Containers Status](images/step4-docker-compose-ps.png)
 
 Expected output:
 
