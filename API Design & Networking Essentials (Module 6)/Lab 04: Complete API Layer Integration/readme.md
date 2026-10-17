@@ -79,6 +79,8 @@ mkdir -p ~/lab04-api-layer-integration/api-service/middleware
 cd ~/lab04-api-layer-integration
 ```
 
+![Create project directories](images/step1-create-dirs.png)
+
 Create `api-service/package.json`:
 
 ```bash
@@ -99,6 +101,8 @@ cat << 'EOF' > api-service/package.json
 }
 EOF
 ```
+
+![Create api-service/package.json](images/step1-package-json.png)
 
 ---
 
@@ -205,6 +209,8 @@ paths:
 EOF
 ```
 
+![Define OpenAPI specification](images/step2-openapi-yaml.png)
+
 ---
 
 ## Step 3: Implement Redis Idempotency Middleware (`api-service/middleware/idempotency.js`)
@@ -293,6 +299,8 @@ function createIdempotencyMiddleware(redis, ttlSeconds = 86400) {
 module.exports = { createIdempotencyMiddleware };
 EOF
 ```
+
+![Implement idempotency middleware](images/step3-idempotency-middleware.png)
 
 ---
 
@@ -395,6 +403,8 @@ module.exports = { app, redis };
 EOF
 ```
 
+![Implement API service server.js](images/step4-server-js.png)
+
 ---
 
 ## Step 5: Configure the Gateway with Header Forwarding (`nginx.conf`)
@@ -473,6 +483,8 @@ http {
 EOF
 ```
 
+![Configure Nginx Gateway nginx.conf](images/step5-nginx-conf.png)
+
 ---
 
 ## Step 6: Create the Multi-Container Stack (`docker-compose.yml`)
@@ -526,6 +538,8 @@ networks:
 EOF
 ```
 
+![Define multi-container docker-compose.yml](images/step6-docker-compose-yml.png)
+
 ---
 
 ## Step 7: Launch Stack and Run End-to-End Test
@@ -536,11 +550,15 @@ Launch the complete stack in detached mode:
 docker compose up -d
 ```
 
+![Launch stack with docker compose up -d](images/step7-docker-compose-up.png)
+
 Verify that all three containers are healthy:
 
 ```bash
 docker compose ps
 ```
+
+![Verify containers status with docker compose ps](images/step7-docker-compose-ps.png)
 
 Expected output:
 
@@ -670,11 +688,15 @@ if (require.main === module) {
 EOF
 ```
 
+![Create test-integration.js script](images/step7-test-integration-js.png)
+
 Execute `node test-integration.js`:
 
 ```bash
 node test-integration.js
 ```
+
+![Execute end-to-end integration test suite](images/step7-node-test-integration.png)
 
 Expected output:
 
