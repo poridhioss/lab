@@ -492,6 +492,8 @@ Start the server in the background:
 node server.js &
 ```
 
+![Start Server](images/step4-start-server.png)
+
 > [!NOTE]
 > If the terminal prompt does not reappear immediately, press `Enter` on your keyboard.
 
@@ -505,12 +507,22 @@ In Poridhi cloud lab environment, expose your running Node.js service using the 
 hostname -I | awk '{print $1}'
 ```
 
+![Get Private IP](images/step4-hostname-ip.png)
+
 2. Open the **Load Balancer** modal in the Poridhi lab interface (the Cloud/Load Balancer icon in the top header).
 3. Enter the configuration:
-   - **Enter IP**: Paste the IP address obtained above (e.g., `10.x.x.x` or `127.0.0.1`).
+   - **Enter IP**: Paste the IP address obtained above (e.g., `10.x.x.x`).
    - **Enter Port**: `5000`
-   - Click **Expose**.
-4. Poridhi will generate an active public Load Balancer URL (e.g., `http://<lab-id>-5000.lb.poridhi.io`).
+
+![Configure Load Balancer](images/step4-loadbalancer-modal.png)
+
+4. Click **Expose**. Poridhi will generate an active public Load Balancer URL:
+
+![Load Balancer Exposed](images/step4-loadbalancer-exposed.png)
+
+5. Open the generated Load Balancer URL in your web browser:
+
+![Browser Status](images/step4-browser-status.png)
 
 ---
 
