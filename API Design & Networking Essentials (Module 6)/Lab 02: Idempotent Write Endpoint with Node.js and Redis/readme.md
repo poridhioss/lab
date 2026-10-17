@@ -124,11 +124,15 @@ services:
 EOF
 ```
 
+![Create docker-compose.yml](images/step2-docker-compose.png)
+
 Launch the Redis container in the background:
 
 ```bash
 docker compose up -d redis
 ```
+
+![Launch Redis Container](images/step2-docker-compose-up.png)
 
 Verify Redis connectivity:
 
