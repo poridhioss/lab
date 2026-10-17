@@ -125,7 +125,7 @@ info:
   version: 1.0.0
   description: Contract-first API specification supporting cursor pagination, idempotency keys, and RFC 7807 error formats.
 servers:
-  - url: http://localhost:3000/api/v1
+  - url: http://localhost:5000/api/v1
     description: Local Development Server
 
 paths:
@@ -332,7 +332,7 @@ const path = require('path');
 const yaml = require('yaml');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
@@ -482,18 +482,47 @@ EOF
 
 ---
 
-## Step 4: Verify Contract Enforcement via cURL
+## Step 4: Expose and Verify via Poridhi Load Balancer
 
-Start the server in the background or in a separate terminal:
+### 1. Start the Server on Port 5000
+
+Start the server in the background:
 
 ```bash
 node server.js &
 ```
 
-### 1. Test Missing Idempotency Key (Expect RFC 7807 400 Bad Request)
+> [!NOTE]
+> If the terminal prompt does not reappear immediately, press `Enter` on your keyboard.
+
+### 2. Configure Poridhi Load Balancer
+
+In Poridhi cloud lab environment, expose your running Node.js service using the **Poridhi Load Balancer**:
+
+1. Find the primary private IP of your Poridhi VM:
 
 ```bash
-curl -i -X POST http://localhost:3000/api/v1/orders \
+hostname -I | awk '{print $1}'
+```
+
+2. Open the **Load Balancer** modal in the Poridhi lab interface (the Cloud/Load Balancer icon in the top header).
+3. Enter the configuration:
+   - **Enter IP**: Paste the IP address obtained above (e.g., `10.x.x.x` or `127.0.0.1`).
+   - **Enter Port**: `5000`
+   - Click **Expose**.
+4. Poridhi will generate an active public Load Balancer URL (e.g., `http://<lab-id>-5000.lb.poridhi.io`).
+
+---
+
+### 3. Verify Contract Enforcement via cURL
+
+> [!TIP]
+> You can run the test commands below using `http://localhost:5000` directly in the terminal, or replace `http://localhost:5000` with your **Poridhi Load Balancer URL** to test over the web!
+
+#### Test 1: Missing Idempotency Key (Expect RFC 7807 400 Bad Request)
+
+```bash
+curl -i -X POST http://localhost:5000/api/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"item_id": 402, "quantity": 1, "amount": 99.50}'
 ```
@@ -513,10 +542,10 @@ Content-Type: application/problem+json; charset=utf-8
 }
 ```
 
-### 2. Test Successful Order Placement (Expect 201 Created)
+#### Test 2: Successful Order Placement (Expect 201 Created)
 
 ```bash
-curl -i -X POST http://localhost:3000/api/v1/orders \
+curl -i -X POST http://localhost:5000/api/v1/orders \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d" \
   -d '{"item_id": 402, "quantity": 2, "amount": 199.00}'
@@ -539,10 +568,10 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-### 3. Test Query Limit Violation (Expect RFC 7807 400 Bad Request)
+#### Test 3: Query Limit Violation (Expect RFC 7807 400 Bad Request)
 
 ```bash
-curl -i "http://localhost:3000/api/v1/orders?limit=100"
+curl -i "http://localhost:5000/api/v1/orders?limit=100"
 ```
 
 Expected output:
@@ -560,12 +589,12 @@ Content-Type: application/problem+json; charset=utf-8
 }
 ```
 
-### 4. Test Cursor Pagination (Page 1 & Page 2)
+#### Test 4: Cursor Pagination (Page 1 & Page 2)
 
 Query Page 1 (limit 3):
 
 ```bash
-curl -s "http://localhost:3000/api/v1/orders?limit=3" | jq .
+curl -s "http://localhost:5000/api/v1/orders?limit=3" | jq .
 ```
 
 Expected output:
@@ -588,7 +617,7 @@ Expected output:
 Query Page 2 using `cursor=103`:
 
 ```bash
-curl -s "http://localhost:3000/api/v1/orders?limit=3&cursor=103" | jq .
+curl -s "http://localhost:5000/api/v1/orders?limit=3&cursor=103" | jq .
 ```
 
 Expected output:
