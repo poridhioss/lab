@@ -140,6 +140,8 @@ Verify Redis connectivity:
 docker compose exec redis redis-cli ping
 ```
 
+![Verify Redis Connectivity](images/step2-redis-ping.png)
+
 Expected output:
 
 ```text
@@ -311,6 +313,8 @@ module.exports = { app, redis };
 EOF
 ```
 
+![Create server.js](images/step3-server-js.png)
+
 ---
 
 ## Step 4: Expose Service via Poridhi Load Balancer & Verify via cURL
@@ -322,6 +326,8 @@ Start the server in the background:
 ```bash
 node server.js &
 ```
+
+![Start Server](images/step4-start-server.png)
 
 > [!NOTE]
 > If the terminal prompt does not reappear immediately, press `Enter` on your keyboard.
@@ -336,11 +342,19 @@ In Poridhi cloud lab environment, expose your running Node.js service using the 
 hostname -I | awk '{print $1}'
 ```
 
+![Get Private IP](images/step4-hostname-ip.png)
+
 2. Open the **Load Balancer** modal in the Poridhi lab interface (the Cloud/Load Balancer icon in the top header).
 3. Enter the configuration:
    - **Enter IP**: Paste the IP address obtained above (e.g., `10.x.x.x`).
    - **Enter Port**: `5000`
-4. Click **Expose**. Poridhi will generate an active public Load Balancer URL.
+4. Click **Expose**. Poridhi will generate an active public Load Balancer URL:
+
+![Load Balancer Exposed](images/step4-loadbalancer-exposed.png)
+
+5. Open the generated Load Balancer URL in your web browser:
+
+![Browser Status](images/step4-browser-status.png)
 
 ---
 
@@ -357,6 +371,8 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -H "Idempotency-Key: ord_tx_1001" \
   -d '{"amount": 250.00, "description": "Mechanical Keyboard"}'
 ```
+
+![Test 1 Cache Miss](images/step4-test1-first-request.png)
 
 Expected output:
 
@@ -385,6 +401,8 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -d '{"amount": 250.00, "description": "Mechanical Keyboard"}'
 ```
 
+![Test 2 Cache Hit](images/step4-test2-retry-request.png)
+
 Expected output:
 
 ```text
@@ -411,6 +429,8 @@ Query the orders collection:
 ```bash
 curl -s http://localhost:5000/api/v1/orders | jq .
 ```
+
+![Test 3 Verify Database State](images/step4-test3-verify-db.png)
 
 Expected output:
 
@@ -548,11 +568,15 @@ const server = app.listen(0, async () => {
 EOF
 ```
 
+![Create test-idempotency.js](images/step5-test-idempotency.png)
+
 Run the automated test suite in `test-idempotency.js`:
 
 ```bash
 npm test
 ```
+
+![Automated Idempotency Test Output](images/step5-npm-test.png)
 
 Expected output:
 
