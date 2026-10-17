@@ -565,6 +565,8 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -d '{"item_id": 402, "quantity": 2, "amount": 199.00}'
 ```
 
+![Test 2 Valid Order](images/step4-test2-valid-order.png)
+
 Expected output:
 
 ```text
@@ -587,6 +589,8 @@ Content-Type: application/json; charset=utf-8
 ```bash
 curl -i "http://localhost:5000/api/v1/orders?limit=100"
 ```
+
+![Test 3 Query Limit Violation](images/step4-test3-query-limit.png)
 
 Expected output:
 
@@ -611,6 +615,8 @@ Query Page 1 (limit 3):
 curl -s "http://localhost:5000/api/v1/orders?limit=3" | jq .
 ```
 
+![Test 4 Pagination Page 1](images/step4-test4-pagination-p1.png)
+
 Expected output:
 
 ```json
@@ -633,6 +639,8 @@ Query Page 2 using `cursor=103`:
 ```bash
 curl -s "http://localhost:5000/api/v1/orders?limit=3&cursor=103" | jq .
 ```
+
+![Test 4 Pagination Page 2](images/step4-test4-pagination-p2.png)
 
 Expected output:
 
@@ -752,11 +760,15 @@ const server = app.listen(0, async () => {
 EOF
 ```
 
+![Create Test Script](images/step5-test-js.png)
+
 Execute `npm test` to run the automated contract validation suite:
 
 ```bash
 npm test
 ```
+
+![Automated Test Suite Output](images/step5-npm-test.png)
 
 Expected output:
 
