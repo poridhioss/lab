@@ -81,7 +81,8 @@ cd ~/lab03-gateway-routing
 
 Create `services/orders-service/package.json`:
 
-```json
+```bash
+cat << 'EOF' > services/orders-service/package.json
 {
   "name": "orders-service",
   "version": "1.0.0",
@@ -93,11 +94,13 @@ Create `services/orders-service/package.json`:
     "express": "^4.19.2"
   }
 }
+EOF
 ```
 
 Create `services/orders-service/server.js`:
 
-```javascript
+```bash
+cat << 'EOF' > services/orders-service/server.js
 const express = require('express');
 
 const app = express();
@@ -134,13 +137,15 @@ app.post('/api/v1/orders', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Orders Microservice listening on internal port ${PORT}`);
 });
+EOF
 ```
 
 ### Configure Users Microservice
 
 Create `services/users-service/package.json`:
 
-```json
+```bash
+cat << 'EOF' > services/users-service/package.json
 {
   "name": "users-service",
   "version": "1.0.0",
@@ -152,11 +157,13 @@ Create `services/users-service/package.json`:
     "express": "^4.19.2"
   }
 }
+EOF
 ```
 
 Create `services/users-service/server.js`:
 
-```javascript
+```bash
+cat << 'EOF' > services/users-service/server.js
 const express = require('express');
 
 const app = express();
@@ -189,6 +196,7 @@ app.get('/api/v1/users/:id', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Users Microservice listening on internal port ${PORT}`);
 });
+EOF
 ```
 
 ---
@@ -197,7 +205,8 @@ app.listen(PORT, () => {
 
 Create `nginx.conf`. This configuration establishes the rate-limiting zone, maps authorized API keys, and routes traffic:
 
-```nginx
+```bash
+cat << 'EOF' > nginx.conf
 events {
     worker_connections 1024;
 }
@@ -279,6 +288,7 @@ http {
         }
     }
 }
+EOF
 ```
 
 ---
@@ -287,7 +297,8 @@ http {
 
 Create `docker-compose.yml` to orchestrate the gateway and services inside a private bridge network:
 
-```yaml
+```bash
+cat << 'EOF' > docker-compose.yml
 version: '3.8'
 
 services:
@@ -327,6 +338,7 @@ services:
 networks:
   lab-net:
     driver: bridge
+EOF
 ```
 
 ---
@@ -437,6 +449,71 @@ Expected output:
 ```
 
 ### 5. Verify Rate Limit Quota Enforcement (Expect 429 Too Many Requests)
+
+Create the verification script `verify-gateway.sh`:
+
+```bash
+cat << 'EOF' > verify-gateway.sh
+#!/usr/bin/env bash
+set -e
+
+GATEWAY_URL="http://localhost:8080"
+VALID_KEY="valid-secret-key-123"
+
+echo "=========================================================="
+echo "  Lab 03: API Gateway & Rate-Aware Routing Verification   "
+echo "=========================================================="
+echo ""
+
+echo "1. Checking Gateway Health (Unauthenticated)..."
+curl -s -i "$GATEWAY_URL/health" | head -n 8
+echo ""
+
+echo "2. Calling /api/v1/orders WITHOUT API Key (Expect 401 Unauthorized)..."
+HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$GATEWAY_URL/api/v1/orders")
+echo "HTTP Status Code: $HTTP_CODE"
+if [ "$HTTP_CODE" -eq 401 ]; then
+  echo " PASS: 401 Unauthorized enforced at Gateway edge."
+else
+  echo " FAIL: Expected 401, got $HTTP_CODE"
+fi
+echo ""
+
+echo "3. Calling /api/v1/orders WITH Valid API Key (Expect 200 OK -> Orders Service)..."
+curl -s -H "X-API-Key: $VALID_KEY" "$GATEWAY_URL/api/v1/orders" | jq .
+echo ""
+
+echo "4. Calling /api/v1/users WITH Valid API Key (Expect 200 OK -> Users Service)..."
+curl -s -H "X-API-Key: $VALID_KEY" "$GATEWAY_URL/api/v1/users" | jq .
+echo ""
+
+echo "5. Testing Rate Limiting Quota (Sending 12 rapid concurrent requests)..."
+echo "Rate limit is 5r/s with burst=5. Excess requests must receive 429 Too Many Requests."
+COUNT_200=0
+COUNT_429=0
+
+for i in {1..12}; do
+  CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "X-API-Key: $VALID_KEY" "$GATEWAY_URL/api/v1/orders")
+  if [ "$CODE" -eq 200 ]; then
+    COUNT_200=$((COUNT_200 + 1))
+  elif [ "$CODE" -eq 429 ]; then
+    COUNT_429=$((COUNT_429 + 1))
+  fi
+done
+
+echo "Results from 12 rapid requests: 200 OK = $COUNT_200, 429 Rate-Limited = $COUNT_429"
+if [ "$COUNT_429" -gt 0 ]; then
+  echo " PASS: Rate limit quota enforced by Nginx Gateway!"
+else
+  echo " WARNING: No 429 received, requests may have been spaced out."
+fi
+
+echo ""
+echo "=========================================================="
+echo "  ALL GATEWAY TESTS COMPLETED                             "
+echo "=========================================================="
+EOF
+```
 
 Execute the verification script to simulate a burst of requests:
 
