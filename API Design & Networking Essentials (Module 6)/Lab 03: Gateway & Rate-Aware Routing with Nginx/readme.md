@@ -69,28 +69,6 @@ lab03-gateway-routing/
 
 ## Step 1: Initialize Project and Microservices
 
-### Option A: Quick Setup (Download all files directly)
-
-If you are using the Poridhi web terminal and want to download all required files directly without manual copy-pasting, run:
-
-```bash
-mkdir -p ~/lab03-gateway-routing/services/orders-service ~/lab03-gateway-routing/services/users-service
-cd ~/lab03-gateway-routing
-BASE_URL="https://raw.githubusercontent.com/poridhioss/lab/main/API%20Design%20%26%20Networking%20Essentials%20(Module%206)/Lab%2003:%20Gateway%20&%20Rate-Aware%20Routing%20with%20Nginx"
-curl -sO "$BASE_URL/nginx.conf"
-curl -sO "$BASE_URL/docker-compose.yml"
-curl -sO "$BASE_URL/verify-gateway.sh"
-curl -s -o services/orders-service/package.json "$BASE_URL/services/orders-service/package.json"
-curl -s -o services/orders-service/server.js "$BASE_URL/services/orders-service/server.js"
-curl -s -o services/users-service/package.json "$BASE_URL/services/users-service/package.json"
-curl -s -o services/users-service/server.js "$BASE_URL/services/users-service/server.js"
-chmod +x verify-gateway.sh
-```
-
----
-
-### Option B: Step-by-Step Manual Setup
-
 Create the project directories:
 
 ```bash
