@@ -70,6 +70,8 @@ mkdir -p ~/lab02-idempotent-write-endpoint
 cd ~/lab02-idempotent-write-endpoint
 ```
 
+![Create Lab Directory](images/step1-create-dir.png)
+
 Create `package.json`:
 
 ```bash
@@ -91,30 +93,21 @@ cat << 'EOF' > package.json
 EOF
 ```
 
+![Create package.json](images/step1-package-json.png)
+
 Install dependencies:
 
 ```bash
 npm install
 ```
 
+![Install Dependencies](images/step1-npm-install.png)
+
 ---
 
-## Step 2: Ensure Redis is Running
+## Step 2: Start Redis Key Store with Docker Compose
 
-You can use the local system Redis or Docker:
-
-```bash
-# Verify system Redis status
-redis-cli ping
-```
-
-Expected output:
-
-```text
-PONG
-```
-
-Alternatively, you can launch Redis using Docker Compose with `docker-compose.yml`:
+Create `docker-compose.yml` to define the Redis 7 service:
 
 ```bash
 cat << 'EOF' > docker-compose.yml
@@ -131,10 +124,22 @@ services:
 EOF
 ```
 
-Launch Redis:
+Launch the Redis container in the background:
 
 ```bash
 docker compose up -d redis
+```
+
+Verify Redis connectivity:
+
+```bash
+docker compose exec redis redis-cli ping
+```
+
+Expected output:
+
+```text
+PONG
 ```
 
 ---
@@ -149,7 +154,7 @@ const express = require('express');
 const Redis = require('ioredis');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
 
 app.use(express.json());
@@ -304,18 +309,46 @@ EOF
 
 ---
 
-## Step 4: Verify Idempotency via cURL
+## Step 4: Expose Service via Poridhi Load Balancer & Verify via cURL
 
-Start the server:
+### 1. Start the Server
+
+Start the server in the background:
 
 ```bash
 node server.js &
 ```
 
-### 1. Send First POST Request (Cache Miss)
+> [!NOTE]
+> If the terminal prompt does not reappear immediately, press `Enter` on your keyboard.
+
+### 2. Expose Service via Poridhi Load Balancer
+
+In Poridhi cloud lab environment, expose your running Node.js service using the Poridhi Load Balancer:
+
+1. Find your container's private IP address:
 
 ```bash
-curl -i -X POST http://localhost:3000/api/v1/orders \
+hostname -I | awk '{print $1}'
+```
+
+2. Open the **Load Balancer** modal in the Poridhi lab interface (the Cloud/Load Balancer icon in the top header).
+3. Enter the configuration:
+   - **Enter IP**: Paste the IP address obtained above (e.g., `10.x.x.x`).
+   - **Enter Port**: `5000`
+4. Click **Expose**. Poridhi will generate an active public Load Balancer URL.
+
+---
+
+### 3. Verify Idempotency via cURL
+
+> [!TIP]
+> You can test directly against `http://localhost:5000` or use your public Poridhi Load Balancer URL!
+
+#### Test 1: Send First POST Request (Cache Miss)
+
+```bash
+curl -i -X POST http://localhost:5000/api/v1/orders \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: ord_tx_1001" \
   -d '{"amount": 250.00, "description": "Mechanical Keyboard"}'
@@ -337,12 +370,12 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-### 2. Send Identical Retry (Cache Hit)
+#### Test 2: Send Identical Retry (Cache Hit)
 
-Execute the exact same command again:
+Execute the exact same command again with the same `Idempotency-Key`:
 
 ```bash
-curl -i -X POST http://localhost:3000/api/v1/orders \
+curl -i -X POST http://localhost:5000/api/v1/orders \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: ord_tx_1001" \
   -d '{"amount": 250.00, "description": "Mechanical Keyboard"}'
@@ -367,12 +400,12 @@ Content-Type: application/json; charset=utf-8
 
 Notice that `X-Cache: HIT` was returned and the returned order ID remained `1`.
 
-### 3. Verify Database State
+#### Test 3: Verify Database State
 
 Query the orders collection:
 
 ```bash
-curl -s http://localhost:3000/api/v1/orders | jq .
+curl -s http://localhost:5000/api/v1/orders | jq .
 ```
 
 Expected output:
