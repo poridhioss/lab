@@ -539,6 +539,8 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -d '{"item_id": 402, "quantity": 1, "amount": 99.50}'
 ```
 
+![Test 1 Missing Idempotency Key](images/step4-test1-missing-key.png)
+
 Expected output:
 
 ```text
