@@ -77,6 +77,8 @@ mkdir -p ~/lab03-gateway-routing/services/users-service
 cd ~/lab03-gateway-routing
 ```
 
+![Create Directories](images/step1-create-dirs.png)
+
 ### Configure Orders Microservice
 
 Create `services/orders-service/package.json`:
@@ -96,6 +98,8 @@ cat << 'EOF' > services/orders-service/package.json
 }
 EOF
 ```
+
+![Orders Service package.json](images/step1-orders-package-json.png)
 
 Create `services/orders-service/server.js`:
 
@@ -140,6 +144,8 @@ app.listen(PORT, () => {
 EOF
 ```
 
+![Orders Service server.js](images/step1-orders-server-js.png)
+
 ### Configure Users Microservice
 
 Create `services/users-service/package.json`:
@@ -159,6 +165,8 @@ cat << 'EOF' > services/users-service/package.json
 }
 EOF
 ```
+
+![Users Service package.json](images/step1-users-package-json.png)
 
 Create `services/users-service/server.js`:
 
@@ -198,6 +206,8 @@ app.listen(PORT, () => {
 });
 EOF
 ```
+
+![Users Service server.js](images/step1-users-server-js.png)
 
 ---
 
