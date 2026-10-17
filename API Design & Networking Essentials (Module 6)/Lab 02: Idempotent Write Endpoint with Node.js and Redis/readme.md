@@ -63,6 +63,24 @@ lab02-idempotent-write-endpoint/
 
 ## Step 1: Initialize the Project
 
+### Option A: Quick Setup (Download all files directly)
+
+If you are using the Poridhi web terminal and want to download all required files directly without manual copy-pasting, run:
+
+```bash
+mkdir -p ~/lab02-idempotent-write-endpoint && cd ~/lab02-idempotent-write-endpoint
+BASE_URL="https://raw.githubusercontent.com/poridhioss/lab/main/API%20Design%20%26%20Networking%20Essentials%20(Module%206)/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis"
+curl -sO "$BASE_URL/package.json"
+curl -sO "$BASE_URL/docker-compose.yml"
+curl -sO "$BASE_URL/server.js"
+curl -sO "$BASE_URL/test-idempotency.js"
+npm install
+```
+
+---
+
+### Option B: Step-by-Step Manual Setup
+
 Create the lab directory:
 
 ```bash

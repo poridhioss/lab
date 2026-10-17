@@ -72,6 +72,29 @@ lab04-api-layer-integration/
 
 ## Step 1: Project Setup and Dependencies
 
+### Option A: Quick Setup (Download all files directly)
+
+If you are using the Poridhi web terminal and want to download all required files directly without manual copy-pasting, run:
+
+```bash
+mkdir -p ~/lab04-api-layer-integration/api-service/middleware
+cd ~/lab04-api-layer-integration
+BASE_URL="https://raw.githubusercontent.com/poridhioss/lab/main/API%20Design%20%26%20Networking%20Essentials%20(Module%206)/Lab%2004:%20Complete%20API%20Layer%20Integration"
+curl -sO "$BASE_URL/nginx.conf"
+curl -sO "$BASE_URL/docker-compose.yml"
+curl -sO "$BASE_URL/test-integration.js"
+curl -sO "$BASE_URL/verify-e2e.sh"
+curl -s -o api-service/package.json "$BASE_URL/api-service/package.json"
+curl -s -o api-service/openapi.yaml "$BASE_URL/api-service/openapi.yaml"
+curl -s -o api-service/server.js "$BASE_URL/api-service/server.js"
+curl -s -o api-service/middleware/idempotency.js "$BASE_URL/api-service/middleware/idempotency.js"
+chmod +x verify-e2e.sh
+```
+
+---
+
+### Option B: Step-by-Step Manual Setup
+
 Create the project directories:
 
 ```bash

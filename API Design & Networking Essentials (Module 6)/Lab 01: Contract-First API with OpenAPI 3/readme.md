@@ -64,7 +64,25 @@ lab01-contract-first-api/
 
 ## Step 1: Initialize the Project
 
-Create the project directory and initialize the Node.js project:
+### Option A: Quick Setup (Download all files directly)
+
+If you are using the Poridhi web terminal and want to download all required files directly without manual copy-pasting, run:
+
+```bash
+mkdir -p ~/lab01-contract-first-api && cd ~/lab01-contract-first-api
+BASE_URL="https://raw.githubusercontent.com/poridhioss/lab/main/API%20Design%20%26%20Networking%20Essentials%20(Module%206)/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203"
+curl -sO "$BASE_URL/package.json"
+curl -sO "$BASE_URL/openapi.yaml"
+curl -sO "$BASE_URL/server.js"
+curl -sO "$BASE_URL/test.js"
+npm install
+```
+
+---
+
+### Option B: Step-by-Step Manual Setup
+
+Create the project directory:
 
 ```bash
 mkdir -p ~/lab01-contract-first-api
