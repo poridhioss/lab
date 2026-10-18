@@ -25,8 +25,8 @@ flowchart TD
         C3["Automated Test Suites (cURL / Node.js)"]
     end
 
-    subgraph GatewayLayer ["Ingress & Security Edge (Port 80 / 8080)"]
-        GW["Nginx API Gateway<br/>- API Key Authentication (`X-API-Key`)<br/>- Token Bucket Rate Limiting (`limit_req 10r/s`)<br/>- Custom RFC 7807 Error Responses (`401`, `429`)<br/>- Header Forwarding (`Idempotency-Key`)"]
+    subgraph GatewayLayer ["Ingress & Security Edge (Host Port 8080 / Container Port 80)"]
+        GW["Nginx API Gateway<br/>- API Key Authentication (`X-API-Key`)<br/>- Token Bucket Rate Limiting (`5r/s - 10r/s`)<br/>- Custom RFC 7807 Error Responses (`401`, `429`)<br/>- Header Forwarding (`Idempotency-Key`)"]
     end
 
     subgraph ServiceMesh ["Internal Private Network (lab-net)"]
@@ -47,14 +47,14 @@ flowchart TD
         end
     end
 
-    Clients -->|"HTTP Requests"| GW
-    GW -->|"Route: /api/v1/orders"| Val
-    GW -->|"Route: /api/v1/users"| US
+    Clients -->|"HTTP Requests (:8080)"| GW
+    GW -->|"Lab 04 Route: /api/v1/orders"| Val
+    GW -->|"Lab 03 Route: /api/v1/orders"| OS
+    GW -->|"Lab 03 Route: /api/v1/users"| US
     Val --> IdempMid
     IdempMid <-->|"Atomic Mutex & Cache"| Redis
     IdempMid --> Controller
     Controller --> DB
-    GW -.->|"Proxy (:3001)"| OS
 ```
 
 ---

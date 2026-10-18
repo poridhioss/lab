@@ -37,7 +37,7 @@ The sequence diagram below illustrates how incoming HTTP requests are processed,
 
 ## Objectives
 
-- Configure Nginx as an API Gateway listening on public port 80.
+- Configure Nginx as an API Gateway with host port 8080 (internal container port 80).
 - Implement API Key verification using Nginx declarative `map` blocks.
 - Configure token-bucket rate limiting (`limit_req_zone`) to defend against traffic spikes.
 - Route `/api/v1/orders` and `/api/v1/users` to isolated upstream microservices.
