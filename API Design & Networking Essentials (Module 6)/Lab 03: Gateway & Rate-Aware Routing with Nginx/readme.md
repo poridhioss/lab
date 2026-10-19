@@ -3,7 +3,7 @@
 You will build an API gateway using Nginx and Docker Compose fronting two isolated Node.js microservices (`orders-service` and `users-service`). The gateway handles edge authentication using declarative `map` blocks, enforces token-bucket rate limiting (`5 req/s` with burst buffers), and dynamically routes client traffic to private upstream containers. You will deploy the multi-container stack and expose the gateway via the Poridhi Load Balancer on port 8080.
 
 <p align="center">
-  <img src="images/lab03-architecture.svg" alt="API Gateway Architecture Overview" width="750">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/lab03-architecture.svg" alt="API Gateway Architecture Overview" width="750">
 </p>
 
 ---
@@ -64,7 +64,7 @@ cd ~/lab03-gateway-routing
 ```
 
 <p align="center">
-  <img src="images/step1-create-dirs.png" alt="Create Directories" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step1-create-dirs.png" alt="Create Directories" width="700">
 </p>
 
 Create a file named `services/orders-service/package.json` with the following contents:
@@ -84,7 +84,7 @@ Create a file named `services/orders-service/package.json` with the following co
 ```
 
 <p align="center">
-  <img src="images/step1-orders-package-json.png" alt="Create Orders package.json" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step1-orders-package-json.png" alt="Create Orders package.json" width="700">
 </p>
 
 **Explanation:**
@@ -125,7 +125,7 @@ app.listen(PORT, '0.0.0.0', () => {
 ```
 
 <p align="center">
-  <img src="images/step1-orders-server-js.png" alt="Create Orders server.js" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step1-orders-server-js.png" alt="Create Orders server.js" width="700">
 </p>
 
 **Explanation:**
@@ -150,7 +150,7 @@ Create a file named `services/users-service/package.json` with the following con
 ```
 
 <p align="center">
-  <img src="images/step1-users-package-json.png" alt="Create Users package.json" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step1-users-package-json.png" alt="Create Users package.json" width="700">
 </p>
 
 **Explanation:**
@@ -190,7 +190,7 @@ app.listen(PORT, '0.0.0.0', () => {
 ```
 
 <p align="center">
-  <img src="images/step1-users-server-js.png" alt="Create Users server.js" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step1-users-server-js.png" alt="Create Users server.js" width="700">
 </p>
 
 **Explanation:**
@@ -276,7 +276,7 @@ http {
 ```
 
 <p align="center">
-  <img src="images/step2-nginx-conf.png" alt="Create nginx.conf" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step2-nginx-conf.png" alt="Create nginx.conf" width="700">
 </p>
 
 **Explanation:**
@@ -339,7 +339,7 @@ networks:
 ```
 
 <p align="center">
-  <img src="images/step3-docker-compose.png" alt="Create docker-compose.yml" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step3-docker-compose.png" alt="Create docker-compose.yml" width="700">
 </p>
 
 **Explanation:**
@@ -359,7 +359,7 @@ docker compose up -d --build
 ```
 
 <p align="center">
-  <img src="images/step4-docker-compose-up.png" alt="Launch Containers" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step4-docker-compose-up.png" alt="Launch Containers" width="700">
 </p>
 
 Verify running container status:
@@ -369,7 +369,7 @@ docker compose ps
 ```
 
 <p align="center">
-  <img src="images/step4-docker-compose-ps.png" alt="Verify Running Containers" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step4-docker-compose-ps.png" alt="Verify Running Containers" width="700">
 </p>
 
 Expected output:
@@ -396,7 +396,7 @@ curl -i http://localhost:8080/healthz
 ```
 
 <p align="center">
-  <img src="images/step5-test1-health.png" alt="Test Health Endpoint" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step5-test1-health.png" alt="Test Health Endpoint" width="700">
 </p>
 
 Expected output:
@@ -417,7 +417,7 @@ curl -i http://localhost:8080/api/v1/orders
 ```
 
 <p align="center">
-  <img src="images/step5-test2-auth-unauthorized.png" alt="Test Auth Failure" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step5-test2-auth-unauthorized.png" alt="Test Auth Failure" width="700">
 </p>
 
 Expected output:
@@ -437,7 +437,7 @@ curl -i -H "X-API-Key: valid-key-123" http://localhost:8080/api/v1/orders
 ```
 
 <p align="center">
-  <img src="images/step5-test3-orders-service.png" alt="Test Orders Routing" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step5-test3-orders-service.png" alt="Test Orders Routing" width="700">
 </p>
 
 Expected output:
@@ -467,7 +467,7 @@ curl -i -H "X-API-Key: valid-key-123" http://localhost:8080/api/v1/users
 ```
 
 <p align="center">
-  <img src="images/step5-test4-users-service.png" alt="Test Users Routing" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step5-test4-users-service.png" alt="Test Users Routing" width="700">
 </p>
 
 Expected output:
@@ -525,7 +525,7 @@ EOF
 ```
 
 <p align="center">
-  <img src="images/step5-test5-verify-script.png" alt="Create verify-gateway.sh" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step5-test5-verify-script.png" alt="Create verify-gateway.sh" width="700">
 </p>
 
 **Explanation:**
@@ -540,7 +540,7 @@ bash verify-gateway.sh
 ```
 
 <p align="center">
-  <img src="images/step5-verify-script-run.png" alt="Execute verify-gateway.sh" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2003:%20Gateway%20%26%20Rate-Aware%20Routing%20with%20Nginx/images/step5-verify-script-run.png" alt="Execute verify-gateway.sh" width="700">
 </p>
 
 Expected output:

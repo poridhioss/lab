@@ -3,7 +3,7 @@
 You will build a unified API platform integrating OpenAPI 3 contract validation, Redis-backed write idempotency, and an Nginx API gateway using Docker Compose. The architecture coordinates edge authentication and rate limiting at the gateway, header propagation of `Idempotency-Key`, schema validation in Express, and atomic distributed locking in Redis. You will deploy the multi-container stack and execute an automated end-to-end integration test suite.
 
 <p align="center">
-  <img src="images/lab04-architecture.svg" alt="Complete API Layer Integration Architecture Overview" width="750">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/lab04-architecture.svg" alt="Complete API Layer Integration Architecture Overview" width="750">
 </p>
 
 ---
@@ -61,7 +61,7 @@ cd ~/lab04-api-layer-integration
 ```
 
 <p align="center">
-  <img src="images/step1-create-dirs.png" alt="Create project directories" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step1-create-dirs.png" alt="Create project directories" width="700">
 </p>
 
 Create a file named `api-service/package.json` with the following contents:
@@ -84,7 +84,7 @@ Create a file named `api-service/package.json` with the following contents:
 ```
 
 <p align="center">
-  <img src="images/step1-package-json.png" alt="Create package.json" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step1-package-json.png" alt="Create package.json" width="700">
 </p>
 
 **Explanation:**
@@ -286,7 +286,7 @@ components:
 ```
 
 <p align="center">
-  <img src="images/step2-openapi-yaml.png" alt="Create openapi.yaml" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step2-openapi-yaml.png" alt="Create openapi.yaml" width="700">
 </p>
 
 **Explanation:**
@@ -390,7 +390,7 @@ module.exports = idempotencyMiddleware;
 ```
 
 <p align="center">
-  <img src="images/step3-idempotency-middleware.png" alt="Create idempotency middleware" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step3-idempotency-middleware.png" alt="Create idempotency middleware" width="700">
 </p>
 
 **Explanation:**
@@ -522,7 +522,7 @@ app.listen(PORT, '0.0.0.0', () => {
 ```
 
 <p align="center">
-  <img src="images/step4-server-js.png" alt="Create server.js" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step4-server-js.png" alt="Create server.js" width="700">
 </p>
 
 **Explanation:**
@@ -599,7 +599,7 @@ http {
 ```
 
 <p align="center">
-  <img src="images/step5-nginx-conf.png" alt="Create nginx.conf" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step5-nginx-conf.png" alt="Create nginx.conf" width="700">
 </p>
 
 **Explanation:**
@@ -660,7 +660,7 @@ networks:
 ```
 
 <p align="center">
-  <img src="images/step6-docker-compose-yml.png" alt="Create docker-compose.yml" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step6-docker-compose-yml.png" alt="Create docker-compose.yml" width="700">
 </p>
 
 **Explanation:**
@@ -679,7 +679,7 @@ docker compose up -d --build
 ```
 
 <p align="center">
-  <img src="images/step7-docker-compose-up.png" alt="Launch Containers" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step7-docker-compose-up.png" alt="Launch Containers" width="700">
 </p>
 
 Verify running container status:
@@ -689,7 +689,7 @@ docker compose ps
 ```
 
 <p align="center">
-  <img src="images/step7-docker-compose-ps.png" alt="Verify Running Containers" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step7-docker-compose-ps.png" alt="Verify Running Containers" width="700">
 </p>
 
 ---
@@ -796,7 +796,7 @@ runTests();
 ```
 
 <p align="center">
-  <img src="images/step7-test-integration-js.png" alt="Create test-integration.js" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step7-test-integration-js.png" alt="Create test-integration.js" width="700">
 </p>
 
 **Explanation:**
@@ -814,7 +814,7 @@ node test-integration.js
 ```
 
 <p align="center">
-  <img src="images/step7-node-test-integration.png" alt="Run Integration Tests" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2004:%20Complete%20API%20Layer%20Integration/images/step7-node-test-integration.png" alt="Run Integration Tests" width="700">
 </p>
 
 Expected output:

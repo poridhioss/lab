@@ -3,7 +3,7 @@
 You will build a contract-first REST service using OpenAPI 3.0.3 and Node.js with Express. The service implements an idempotent order creation endpoint (`POST /api/v1/orders`), a cursor-based pagination query endpoint (`GET /api/v1/orders`), and standardized RFC 7807 Problem Details error responses. All incoming requests are validated against the contract before execution, and the service is exposed externally through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab01-architecture.svg" alt="Contract-First API Architecture Overview" width="750">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/lab01-architecture.svg" alt="Contract-First API Architecture Overview" width="750">
 </p>
 
 ---
@@ -57,7 +57,7 @@ cd ~/lab01-contract-first-api
 ```
 
 <p align="center">
-  <img src="images/step1-create-dir.png" alt="Create Project Directory" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step1-create-dir.png" alt="Create Project Directory" width="700">
 </p>
 
 Create a file named `package.json` with the following contents:
@@ -80,7 +80,7 @@ Create a file named `package.json` with the following contents:
 ```
 
 <p align="center">
-  <img src="images/step1-package-json.png" alt="Create package.json" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step1-package-json.png" alt="Create package.json" width="700">
 </p>
 
 **Explanation:**
@@ -97,7 +97,7 @@ npm install
 ```
 
 <p align="center">
-  <img src="images/step1-npm-install.png" alt="Install Dependencies" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step1-npm-install.png" alt="Install Dependencies" width="700">
 </p>
 
 Expected output:
@@ -311,7 +311,7 @@ components:
 ```
 
 <p align="center">
-  <img src="images/step2-openapi-yaml.png" alt="Create openapi.yaml" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step2-openapi-yaml.png" alt="Create openapi.yaml" width="700">
 </p>
 
 **Explanation:**
@@ -481,7 +481,7 @@ module.exports = app;
 ```
 
 <p align="center">
-  <img src="images/step3-server-js.png" alt="Create server.js" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step3-server-js.png" alt="Create server.js" width="700">
 </p>
 
 **Explanation:**
@@ -503,7 +503,7 @@ node server.js &
 ```
 
 <p align="center">
-  <img src="images/step4-start-server.png" alt="Start Server" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-start-server.png" alt="Start Server" width="700">
 </p>
 
 Retrieve the private IP address of your virtual machine:
@@ -513,7 +513,7 @@ hostname -I | awk '{print $1}'
 ```
 
 <p align="center">
-  <img src="images/step4-hostname-ip.png" alt="Get Private IP" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-hostname-ip.png" alt="Get Private IP" width="700">
 </p>
 
 Configure the Poridhi Load Balancer:
@@ -522,19 +522,19 @@ Configure the Poridhi Load Balancer:
 3. Set the target port to `5000`.
 
 <p align="center">
-  <img src="images/step4-loadbalancer-modal.png" alt="Configure Load Balancer" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-loadbalancer-modal.png" alt="Configure Load Balancer" width="700">
 </p>
 
 Click **Expose** to generate an active public URL:
 
 <p align="center">
-  <img src="images/step4-loadbalancer-exposed.png" alt="Load Balancer Exposed" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-loadbalancer-exposed.png" alt="Load Balancer Exposed" width="700">
 </p>
 
 Open the generated Load Balancer URL in your web browser to confirm connectivity:
 
 <p align="center">
-  <img src="images/step4-browser-status.png" alt="Browser Status" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-browser-status.png" alt="Browser Status" width="700">
 </p>
 
 ---
@@ -554,7 +554,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ```
 
 <p align="center">
-  <img src="images/step4-test1-missing-key.png" alt="Test 1 Missing Idempotency Key" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-test1-missing-key.png" alt="Test 1 Missing Idempotency Key" width="700">
 </p>
 
 Expected output:
@@ -584,7 +584,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ```
 
 <p align="center">
-  <img src="images/step4-test2-valid-order.png" alt="Test 2 Valid Order" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-test2-valid-order.png" alt="Test 2 Valid Order" width="700">
 </p>
 
 Expected output:
@@ -613,7 +613,7 @@ curl -i "http://localhost:5000/api/v1/orders?limit=100"
 ```
 
 <p align="center">
-  <img src="images/step4-test3-query-limit.png" alt="Test 3 Query Limit Violation" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-test3-query-limit.png" alt="Test 3 Query Limit Violation" width="700">
 </p>
 
 Expected output:
@@ -640,7 +640,7 @@ curl -s "http://localhost:5000/api/v1/orders?limit=3" | jq .
 ```
 
 <p align="center">
-  <img src="images/step4-test4-pagination-p1.png" alt="Test 4 Pagination Page 1" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-test4-pagination-p1.png" alt="Test 4 Pagination Page 1" width="700">
 </p>
 
 Expected output:
@@ -667,7 +667,7 @@ curl -s "http://localhost:5000/api/v1/orders?limit=3&cursor=103" | jq .
 ```
 
 <p align="center">
-  <img src="images/step4-test4-pagination-p2.png" alt="Test 4 Pagination Page 2" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step4-test4-pagination-p2.png" alt="Test 4 Pagination Page 2" width="700">
 </p>
 
 Expected output:
@@ -787,7 +787,7 @@ const server = app.listen(0, async () => {
 ```
 
 <p align="center">
-  <img src="images/step5-test-js.png" alt="Create Test Script" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step5-test-js.png" alt="Create Test Script" width="700">
 </p>
 
 **Explanation:**
@@ -805,7 +805,7 @@ npm test
 ```
 
 <p align="center">
-  <img src="images/step5-npm-test.png" alt="Automated Test Suite Output" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/images/step5-npm-test.png" alt="Automated Test Suite Output" width="700">
 </p>
 
 Expected output:

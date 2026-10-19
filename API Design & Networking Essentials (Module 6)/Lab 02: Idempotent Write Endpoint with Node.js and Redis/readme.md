@@ -3,7 +3,7 @@
 You will build an idempotency-protected write endpoint using Node.js, Express, and Redis 7. The service intercepts mutation requests (`POST /api/v1/orders`), acquires atomic mutual exclusion locks using Redis `SET key value EX 60 NX`, caches completed responses, and replays cached results on subsequent retries. You will deploy Redis with Docker Compose and expose the Express application through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab02-architecture.svg" alt="Idempotent Write Endpoint Architecture Overview" width="750">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/lab02-architecture.svg" alt="Idempotent Write Endpoint Architecture Overview" width="750">
 </p>
 
 ---
@@ -57,7 +57,7 @@ cd ~/lab02-idempotent-write-endpoint
 ```
 
 <p align="center">
-  <img src="images/step1-create-dir.png" alt="Create Project Directory" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step1-create-dir.png" alt="Create Project Directory" width="700">
 </p>
 
 Create a file named `package.json` with the following contents:
@@ -80,7 +80,7 @@ Create a file named `package.json` with the following contents:
 ```
 
 <p align="center">
-  <img src="images/step1-package-json.png" alt="Create package.json" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step1-package-json.png" alt="Create package.json" width="700">
 </p>
 
 **Explanation:**
@@ -97,7 +97,7 @@ npm install
 ```
 
 <p align="center">
-  <img src="images/step1-npm-install.png" alt="Install Dependencies" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step1-npm-install.png" alt="Install Dependencies" width="700">
 </p>
 
 ---
@@ -120,7 +120,7 @@ services:
 ```
 
 <p align="center">
-  <img src="images/step2-docker-compose.png" alt="Create docker-compose.yml" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step2-docker-compose.png" alt="Create docker-compose.yml" width="700">
 </p>
 
 **Explanation:**
@@ -136,7 +136,7 @@ docker compose up -d redis
 ```
 
 <p align="center">
-  <img src="images/step2-docker-compose-up.png" alt="Launch Redis Container" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step2-docker-compose-up.png" alt="Launch Redis Container" width="700">
 </p>
 
 Verify Redis connectivity:
@@ -146,7 +146,7 @@ docker compose exec redis redis-cli ping
 ```
 
 <p align="center">
-  <img src="images/step2-redis-ping.png" alt="Verify Redis Connectivity" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step2-redis-ping.png" alt="Verify Redis Connectivity" width="700">
 </p>
 
 Expected output:
@@ -319,7 +319,7 @@ module.exports = { app, redis };
 ```
 
 <p align="center">
-  <img src="images/step3-server-js.png" alt="Create server.js" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step3-server-js.png" alt="Create server.js" width="700">
 </p>
 
 **Explanation:**
@@ -341,7 +341,7 @@ node server.js &
 ```
 
 <p align="center">
-  <img src="images/step4-start-server.png" alt="Start Server" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step4-start-server.png" alt="Start Server" width="700">
 </p>
 
 Retrieve the private IP address of your virtual machine:
@@ -351,7 +351,7 @@ hostname -I | awk '{print $1}'
 ```
 
 <p align="center">
-  <img src="images/step4-hostname-ip.png" alt="Get Private IP" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step4-hostname-ip.png" alt="Get Private IP" width="700">
 </p>
 
 Configure the Poridhi Load Balancer:
@@ -361,13 +361,13 @@ Configure the Poridhi Load Balancer:
 4. Click **Expose** to generate a public URL.
 
 <p align="center">
-  <img src="images/step4-loadbalancer-exposed.png" alt="Load Balancer Exposed" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step4-loadbalancer-exposed.png" alt="Load Balancer Exposed" width="700">
 </p>
 
 Open the generated Load Balancer URL in your web browser to confirm service health:
 
 <p align="center">
-  <img src="images/step4-browser-status.png" alt="Browser Status" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step4-browser-status.png" alt="Browser Status" width="700">
 </p>
 
 ---
@@ -388,7 +388,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ```
 
 <p align="center">
-  <img src="images/step4-test1-first-request.png" alt="Test 1 Cache Miss" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step4-test1-first-request.png" alt="Test 1 Cache Miss" width="700">
 </p>
 
 Expected output:
@@ -419,7 +419,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ```
 
 <p align="center">
-  <img src="images/step4-test2-retry-request.png" alt="Test 2 Cache Hit" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step4-test2-retry-request.png" alt="Test 2 Cache Hit" width="700">
 </p>
 
 Expected output:
@@ -448,7 +448,7 @@ curl -s http://localhost:5000/api/v1/orders | jq .
 ```
 
 <p align="center">
-  <img src="images/step4-test3-verify-db.png" alt="Test 3 Verify Database State" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step4-test3-verify-db.png" alt="Test 3 Verify Database State" width="700">
 </p>
 
 Expected output:
@@ -584,7 +584,7 @@ const server = app.listen(0, async () => {
 ```
 
 <p align="center">
-  <img src="images/step5-test-idempotency.png" alt="Create test-idempotency.js" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step5-test-idempotency.png" alt="Create test-idempotency.js" width="700">
 </p>
 
 **Explanation:**
@@ -601,7 +601,7 @@ npm test
 ```
 
 <p align="center">
-  <img src="images/step5-npm-test.png" alt="Automated Idempotency Test Output" width="700">
+  <img src="https://raw.githubusercontent.com/iftakhar-323/lab-assets/main/API%20Design%20%26%20Networking%20Essentials%20%28Module%206%29/Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/images/step5-npm-test.png" alt="Automated Idempotency Test Output" width="700">
 </p>
 
 Expected output:
