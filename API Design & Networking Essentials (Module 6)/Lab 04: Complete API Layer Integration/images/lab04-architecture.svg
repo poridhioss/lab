@@ -1,207 +1,362 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 520" width="1680" height="520">
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 760" width="1120" height="760">
   <defs>
+    <!-- Draw.io Authentic Drop Shadow Filter -->
+    <filter id="dropShadow" x="-12%" y="-12%" width="135%" height="145%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+
+    <!-- Draw.io Classic Marker Arrowhead -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+
     <style>
-      text {
-        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+      .card-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
         fill: #000000;
+        text-anchor: middle;
       }
-      .title-text {
-        font-size: 20px;
-        font-weight: bold;
-        fill: #000000;
+      .card-sub {
+        font-family: "Georgia", "DejaVu Serif", serif;
+        font-size: 13px;
+        fill: #111111;
+        text-anchor: middle;
       }
-      .subtitle-text {
-        font-size: 15px;
-        font-style: italic;
-        fill: #000000;
+      .sec-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .section-heading {
-        font-size: 17px;
-        font-weight: bold;
-        fill: #000000;
+      .flow-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .code-font {
-        font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 15.5px;
-        fill: #000000;
+      .flow-text {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 11px;
+        fill: #334155;
       }
-      .body-text {
-        font-size: 15.5px;
-        fill: #000000;
+      .code-badge {
+        font-family: "Courier New", Courier, "DejaVu Sans Mono", monospace;
+        font-size: 10.5px;
+        font-weight: 600;
       }
-      .arrow-label {
+      .note-text {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 10px;
+        fill: #475569;
+      }
+      .banner-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
         font-size: 16px;
-        font-weight: bold;
-        fill: #000000;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .arrow-sub {
-        font-size: 14.5px;
+      .banner-sub {
+        font-family: "Georgia", "DejaVu Serif", serif;
+        font-size: 13px;
+        fill: #475569;
         font-style: italic;
-        fill: #000000;
-      }
-      .flow-step-title {
-        font-size: 16.5px;
-        font-weight: bold;
-        fill: #000000;
-      }
-      .flow-step-sub {
-        font-size: 14.5px;
-        font-style: italic;
-        fill: #000000;
       }
     </style>
-    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
-    </marker>
   </defs>
+
+  <!-- Background Canvas -->
   <rect width="100%" height="100%" fill="#ffffff" />
 
+  <!-- Outer Frame -->
+  <rect x="20" y="16" width="1080" height="725" rx="10" fill="#fafafa" stroke="#cbd5e1" stroke-width="1.5" />
 
-  <!-- Component: External Client -->
-  <g transform="translate(40, 20)">
-    <rect width="280" height="480" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#dbeafe" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M.803 14.8169c0-.5342.433-.9665.9665-.9665.5335 0 .9665.4323.9665.9665 0 .5335-.433.9657-.9665.9657-.5335 0-.9666-.4322-.9666-.9657m2.736 0c0-.1963-.0532-.376-.1119-.5525-.2344-.7024-.876-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0708C.6149 13.2865 0 13.9646 0 14.817c0 .9764.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.793 1.7694-1.7694m-1.7694-7.149c.5335 0 .9665.433.9665.9665 0 .5335-.433.9665-.9665.9665-.5343 0-.9666-.433-.9666-.9665 0-.5335.4323-.9665.9666-.9665m0 2.7359c.9772 0 1.7694-.7923 1.7694-1.7694 0-.1956-.0532-.376-.1119-.5525-.2344-.7024-.8767-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0716C.6149 7.104 0 7.782 0 8.6344c0 .9771.7923 1.7694 1.7695 1.7694m13.221-5.694c-.5342 0-.9665-.433-.9665-.9664a.966.966 0 01.9666-.9665c.5335 0 .9658.4322.9658.9665 0 .5334-.4323.9664-.9658.9664m-9.6 16.5133c-.5335 0-.9666-.433-.9666-.9665 0-.5342.433-.9665.9666-.9665a.966.966 0 01.9665.9665c0 .5335-.4323.9665-.9665.9665m9.6-19.2491c-.978 0-1.7695.7922-1.7695 1.7694 0 .2085.0525.4025.1187.5882L5.039 18.5581c-.803.1681-1.4179.8462-1.4179 1.6985 0 .9772.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.7922 1.7694-1.7694 0-.1963-.0525-.3759-.111-.5525l8.3427-14.2728c.7778-.1865 1.3683-.8531 1.3683-1.688 0-.977-.793-1.7693-1.7694-1.7693m7.24 2.7359c-.5343 0-.9666-.433-.9666-.9665a.966.966 0 01.9665-.9665c.5335 0 .9666.4322.9666.9665 0 .5334-.433.9665-.9666.9665M12.6313 21.223c-.5343 0-.9665-.433-.9665-.9665a.966.966 0 01.9665-.9665c.5335 0 .9658.4323.9658.9665 0 .5335-.4323.9665-.9658.9665M22.2305 1.974c-.9772 0-1.7694.7922-1.7694 1.7694 0 .2085.0525.4025.1187.5882l-8.3009 14.2265c-.8021.1681-1.417.8462-1.417 1.6985 0 .9772.7922 1.7694 1.7694 1.7694.9764 0 1.7687-.7922 1.7687-1.7694 0-.1963-.0525-.3759-.1111-.5525l8.3427-14.2728C23.4094 5.2448 24 4.5782 24 3.7433c0-.977-.7923-1.7693-1.7695-1.7693" fill="#111827" />
-    </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">External Client</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">End-to-End Automated Test</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Idempotent POST Call</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">POST /api/v1/orders</text>
-      <text x="12" y="84" class="body-text">X-API-Key: m6_secret_token</text>
-      <text x="12" y="112" class="body-text">Idempotency-Key: tx_live_891</text>
-      <text x="12" y="140" class="body-text">Payload: {&quot;item_id&quot;: 99, &quot;qty&quot;: 1}</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Automated Retry Test</text>
-      <text x="12" y="56" class="body-text">• Simulates network disconnect</text>
-      <text x="12" y="84" class="body-text">• Retries exact same key and body</text>
-      <text x="12" y="112" class="body-text">• Asserts single DB execution</text>
-      <text x="12" y="140" class="subtitle-text">Validates end-to-end guarantee</text>
-    </g>
+  <!-- Header Banner -->
+  <g transform="translate(45, 42)">
+    <text x="0" y="0" class="banner-title">Lab 04: Complete Unified API Layer Architecture</text>
+    <text x="0" y="20" class="banner-sub">Capstone Integrated Topology: Nginx Edge Gateway • OpenAPI 3 Validation • Redis Idempotency Mutex • Zero DB Replays</text>
   </g>
 
-  <!-- Arrow: 1. Request (:8080) -->
-  <rect x="344" y="198" width="110" height="30" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
-  <text x="399" y="218" text-anchor="middle" class="arrow-label">1. Request (:8080)</text>
-  <line x1="320" y1="240" x2="478" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- Divider Line -->
+  <line x1="45" y1="74" x2="1075" y2="74" stroke="#e2e8f0" stroke-width="1.5" />
 
-  <!-- Component: Nginx API Gateway -->
-  <g transform="translate(480, 20)">
-    <rect width="280" height="480" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#ccfbf1" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0zm6 16.59c0 .705-.646 1.29-1.529 1.29-.631 0-1.351-.255-1.801-.81l-6-7.141v6.66c0 .721-.57 1.29-1.274 1.29H7.32c-.721 0-1.29-.6-1.29-1.29V7.41c0-.705.63-1.29 1.5-1.29.646 0 1.38.255 1.83.81l5.97 7.141V7.41c0-.721.6-1.29 1.29-1.29h.075c.72 0 1.29.6 1.29 1.29v9.18H18z" fill="#009639" />
-    </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Nginx API Gateway</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 8080 Ingress Gatekeeper</text>
+  <!-- ========================================================== -->
+  <!-- TOP SECTION: SYSTEM ARCHITECTURE (DRAW.IO AUTHENTIC CARDS) -->
+  <!-- ========================================================== -->
 
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Security &amp; Header Forwarding</text>
-      <text x="12" y="56" class="body-text">• Validates X-API-Key header</text>
-      <text x="12" y="84" class="body-text">• Enforces limit_req rate quota</text>
-      <text x="12" y="112" class="body-text">• Preserves Idempotency-Key</text>
-      <text x="12" y="140" class="body-text">• Passes X-Forwarded-For</text>
+  <!-- NODE 1: HTTP Client (Light Blue) -->
+  <g transform="translate(45, 140)">
+    <rect x="0" y="0" width="145" height="95" rx="8" fill="#dae8fc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Client Monitor / Laptop Icon -->
+    <g transform="translate(54, 12)">
+      <rect x="0" y="2" width="36" height="24" rx="2" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5" />
+      <line x1="0" y1="20" x2="36" y2="20" stroke="#1d4ed8" stroke-width="1" />
+      <polygon points="15,26 21,26 24,32 12,32" fill="#1d4ed8" />
+      <line x1="8" y1="32" x2="28" y2="32" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" />
+      <polyline points="6,9 10,12 6,15" fill="none" stroke="#2563eb" stroke-width="1.2" />
+      <line x1="13" y1="15" x2="18" y2="15" stroke="#2563eb" stroke-width="1.2" />
     </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Service Upstream Proxy</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">proxy_pass http://api_backend;</text>
-      <text x="12" y="84" class="body-text">• Strips unauthorized calls</text>
-      <text x="12" y="112" class="body-text">• Isolates internal architecture</text>
-      <text x="12" y="140" class="subtitle-text">Zero bypass of gateway layer</text>
-    </g>
+    <text x="72" y="66" class="card-title">HTTP Client</text>
+    <text x="72" y="82" font-family="Inter, sans-serif" font-size="10px" fill="#475569" text-anchor="middle">cURL / Test Suite</text>
+    <!-- Subtitle outside below card -->
+    <text x="72" y="116" class="card-sub">Consumer</text>
   </g>
 
-  <!-- Arrow: 2. Proxy (:3000) -->
-  <rect x="784" y="198" width="110" height="30" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2" />
-  <text x="839" y="218" text-anchor="middle" class="arrow-label">2. Proxy (:3000)</text>
-  <line x1="760" y1="240" x2="918" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- DASHER 1: Client to Load Balancer -->
+  <path d="M 190 187 L 255 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="196" y="168" width="53" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="222" y="181" font-family="Inter, sans-serif" font-size="9px" font-weight="600" fill="#0f172a" text-anchor="middle">Port 8080</text>
 
-  <!-- Component: Unified API Service -->
-  <g transform="translate(920, 20)">
-    <rect width="280" height="480" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#ede9fe" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
+  <!-- NODE 2: Poridhi Load Balancer (Light Purple) -->
+  <g transform="translate(260, 140)">
+    <rect x="0" y="0" width="150" height="95" rx="8" fill="#e1d5e7" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Load Balancer Router Icon -->
+    <g transform="translate(55, 12)">
+      <circle cx="20" cy="17" r="15" fill="#ffffff" stroke="#7e22ce" stroke-width="1.5" />
+      <line x1="12" y1="17" x2="28" y2="17" stroke="#7e22ce" stroke-width="1.5" />
+      <polygon points="28,17 24,14 24,20" fill="#7e22ce" />
+      <line x1="20" y1="9" x2="20" y2="25" stroke="#7e22ce" stroke-width="1.5" />
+      <polygon points="20,9 17,13 23,13" fill="#7e22ce" />
     </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Unified API Service</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Node.js Service (:3000)</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">OpenAPI 3 Validation</text>
-      <text x="12" y="56" class="body-text">• Validates against openapi.yaml</text>
-      <text x="12" y="84" class="body-text">• Checks JSON schema types</text>
-      <text x="12" y="112" class="body-text">• Rejects invalid payload (400)</text>
-      <text x="12" y="140" class="subtitle-text">Contract-first enforcement</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Idempotency Controller</text>
-      <text x="12" y="56" class="body-text">• Redis SETNX mutual exclusion</text>
-      <text x="12" y="84" class="body-text">• Prevents parallel race condition</text>
-      <text x="12" y="112" class="body-text">• Replays cached 201 on duplicate</text>
-      <text x="12" y="140" class="subtitle-text">Emits X-Cache: HIT / MISS</text>
-    </g>
+    <text x="75" y="66" class="card-title">Poridhi LB</text>
+    <text x="75" y="82" font-family="Inter, sans-serif" font-size="10px" fill="#475569" text-anchor="middle">Host Port 8080</text>
+    <!-- Subtitle outside below card -->
+    <text x="75" y="116" class="card-sub">Network Gateway</text>
   </g>
 
-  <!-- Arrow: 3. Key Store -->
-  <rect x="1224" y="198" width="110" height="30" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2" />
-  <text x="1279" y="218" text-anchor="middle" class="arrow-label">3. Key Store</text>
-  <line x1="1200" y1="240" x2="1358" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- DASHER 2: Load Balancer to Nginx Gateway -->
+  <path d="M 410 187 L 470 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="415" y="168" width="50" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="440" y="181" font-family="Inter, sans-serif" font-size="9px" font-weight="600" fill="#0f172a" text-anchor="middle">Ingress</text>
 
-  <!-- Component: Redis 7 Store -->
-  <g transform="translate(1360, 20)">
-    <rect width="280" height="480" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#fee2e2" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#dc2626" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M22.71 13.145c-1.66 2.092-3.452 4.483-7.038 4.483-3.203 0-4.397-2.825-4.48-5.12.701 1.484 2.073 2.685 4.214 2.63 4.117-.133 6.94-3.852 6.94-7.239 0-4.05-3.022-6.972-8.268-6.972-3.752 0-8.4 1.428-11.455 3.685C2.59 6.937 3.885 9.958 4.35 9.626c2.648-1.904 4.748-3.13 6.784-3.744C8.12 9.244.886 17.05 0 18.425c.1 1.261 1.66 4.648 2.424 4.648.232 0 .431-.133.664-.365a100.49 100.49 0 0 0 5.54-6.765c.222 3.104 1.748 6.898 6.014 6.898 3.819 0 7.604-2.756 9.33-8.965.2-.764-.73-1.361-1.261-.73zm-4.349-5.013c0 1.959-1.926 2.922-3.685 2.922-.941 0-1.664-.247-2.235-.568 1.051-1.592 2.092-3.225 3.21-4.973 1.972.334 2.71 1.43 2.71 2.619z" fill="#dc2626" />
+  <!-- NODE 3: Nginx Gateway (Mint Green) -->
+  <g transform="translate(475, 140)">
+    <rect x="0" y="0" width="155" height="95" rx="8" fill="#d5e8d4" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Gateway Shield Icon -->
+    <g transform="translate(58, 10)">
+      <polygon points="20,2 37,9 37,25 20,36 3,25 3,9" fill="#ffffff" stroke="#15803d" stroke-width="1.5" />
+      <path d="M 12 18 L 18 24 L 28 13" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Redis 7 Store</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 6379 (Internal Cache)</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Distributed State Lock</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">Key: idemp:tx_live_891</text>
-      <text x="12" y="84" class="body-text">• Status: IN_PROGRESS / DONE</text>
-      <text x="12" y="112" class="body-text">• Atomic key reservation</text>
-      <text x="12" y="140" class="subtitle-text">Prevents double-charging</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Cached Response Cache</text>
-      <text x="12" y="56" class="body-text">• status: 201 Created</text>
-      <text x="12" y="84" class="body-text">• body: {&quot;id&quot;: 891, ...}</text>
-      <text x="12" y="112" class="body-text">• TTL: 86400s (24h retention)</text>
-      <text x="12" y="140" class="subtitle-text">Instant zero-latency replay</text>
-    </g>
+    <text x="77" y="66" class="card-title">Nginx Gateway</text>
+    <text x="77" y="82" font-family="Inter, sans-serif" font-size="10px" fill="#475569" text-anchor="middle">Auth &amp; Header Prop.</text>
+    <!-- Subtitle outside below card -->
+    <text x="77" y="116" class="card-sub">Edge Defense Ingress</text>
   </g>
+
+  <!-- DASHER 3: Nginx to API Service -->
+  <path d="M 630 187 L 690 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="633" y="168" width="54" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="660" y="181" font-family="Inter, sans-serif" font-size="8.5px" font-weight="600" fill="#0f172a" text-anchor="middle">Pass Headers</text>
+
+  <!-- NODE 4: Express API Service (Warm Cream / Orange) -->
+  <g transform="translate(695, 140)">
+    <rect x="0" y="0" width="160" height="95" rx="8" fill="#fff2cc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Express Server Box Icon -->
+    <g transform="translate(60, 10)">
+      <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#ffffff" stroke="#b45309" stroke-width="1.5" />
+      <line x1="20" y1="20" x2="20" y2="38" stroke="#b45309" stroke-width="1.2" />
+      <line x1="20" y1="20" x2="36" y2="11" stroke="#b45309" stroke-width="1.2" />
+      <line x1="20" y1="20" x2="4" y2="11" stroke="#b45309" stroke-width="1.2" />
+    </g>
+    <text x="80" y="66" class="card-title">API Service</text>
+    <text x="80" y="82" font-family="Inter, sans-serif" font-size="10px" fill="#475569" text-anchor="middle">OpenAPI + Idemp.</text>
+    <!-- Subtitle outside below card -->
+    <text x="80" y="116" class="card-sub">Application Runtime</text>
+  </g>
+
+  <!-- BRANCHING FROM API SERVICE TO REDIS & ORDERS DB (Tree branching style) -->
+  <path d="M 855 187 L 890 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" />
+
+  <!-- Upper Branch to Redis 7 -->
+  <path d="M 890 187 L 890 125 L 920 125" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="860" y="103" width="60" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="890" y="116" font-family="Inter, sans-serif" font-size="8.5px" font-weight="600" fill="#0f172a" text-anchor="middle">Lock/Cache</text>
+
+  <!-- Lower Branch to In-Memory DB -->
+  <path d="M 890 187 L 890 245 L 920 245" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="860" y="248" width="60" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="890" y="261" font-family="Inter, sans-serif" font-size="8.5px" font-weight="600" fill="#0f172a" text-anchor="middle">Order Store</text>
+
+  <!-- NODE 5: Redis 7 Key Store (Light Coral) -->
+  <g transform="translate(925, 80)">
+    <rect x="0" y="0" width="145" height="90" rx="8" fill="#fee2e2" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Redis Memory Cache Icon -->
+    <g transform="translate(53, 8)">
+      <polygon points="19,2 35,10 19,18 3,10" fill="#ffffff" stroke="#b91c1c" stroke-width="1.5" />
+      <polygon points="19,10 35,18 19,26 3,18" fill="#fecaca" stroke="#b91c1c" stroke-width="1.5" />
+      <polygon points="19,18 35,26 19,34 3,26" fill="#ffffff" stroke="#b91c1c" stroke-width="1.5" />
+    </g>
+    <text x="72" y="62" class="card-title">Redis 7</text>
+    <text x="72" y="78" font-family="Inter, sans-serif" font-size="10px" fill="#475569" text-anchor="middle">Container (:6379)</text>
+    <!-- Subtitle outside below card -->
+    <text x="72" y="108" class="card-sub">Mutex &amp; Caching</text>
+  </g>
+
+  <!-- NODE 6: In-Memory DB (Soft Gray) -->
+  <g transform="translate(925, 200)">
+    <rect x="0" y="0" width="145" height="90" rx="8" fill="#f5f5f5" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Database Cylinder Icon -->
+    <g transform="translate(54, 8)">
+      <ellipse cx="18" cy="8" rx="16" ry="6" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+      <path d="M 2 8 L 2 18 A 16 6 0 0 0 34 18 L 34 8" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+      <path d="M 2 18 L 2 28 A 16 6 0 0 0 34 28 L 34 18" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+    </g>
+    <text x="72" y="62" class="card-title">ordersDb[]</text>
+    <text x="72" y="78" font-family="Inter, sans-serif" font-size="10px" fill="#475569" text-anchor="middle">Single Persistent DB</text>
+    <!-- Subtitle outside below card -->
+    <text x="72" y="108" class="card-sub">Persistent Entity Store</text>
+  </g>
+
+  <!-- ========================================================== -->
+  <!-- MIDDLE DIVIDER & SECTION TITLE                             -->
+  <!-- ========================================================== -->
+  <line x1="45" y1="320" x2="1075" y2="320" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3" />
+
+  <g transform="translate(45, 345)">
+    <text x="0" y="0" class="sec-title">Unified End-to-End Execution &amp; Retry Lifecycle</text>
+    <text x="0" y="18" class="banner-sub">Step-by-step trace of how mutations, retry replays, and multi-layered rejections flow through the integrated platform</text>
+  </g>
+
+  <!-- ========================================================== -->
+  <!-- BOTTOM SECTION: 3 DRAW.IO WORKFLOW CARDS                   -->
+  <!-- ========================================================== -->
+
+  <!-- PANEL 1: INTEGRATED WRITE MUTATION -->
+  <g transform="translate(45, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#dae8fc" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#1e3a8a">1. Layered Write Mutation (POST)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="145" height="18" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#1d4ed8">X-Cache: MISS (201)</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#2563eb" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Gateway Edge Ingress &amp; Auth</text>
+      <text x="24" y="24" class="flow-text">• Client provides <tspan class="code-badge">X-API-Key</tspan> &amp; <tspan class="code-badge">Idempotency-Key</tspan></text>
+      <text x="24" y="38" class="flow-text">• Nginx verifies key &amp; forwards both headers</text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#2563eb" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Contract Validation &amp; Redis Mutex</text>
+      <text x="24" y="24" class="flow-text">• Checks payload against <tspan class="code-badge">openapi.yaml</tspan></text>
+      <text x="24" y="38" class="flow-text">• Acquires lock: <tspan class="code-badge">SET idemp:&lt;key&gt; "IN_PROGRESS" EX 60 NX</tspan></text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 192)">
+      <circle cx="8" cy="8" r="8" fill="#16a34a" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title" fill="#15803d">Commit Order &amp; Cache Response</text>
+      <text x="24" y="24" class="flow-text">• Inserts order (ID 1) into <tspan class="code-badge">ordersDb</tspan></text>
+      <text x="24" y="38" class="flow-text">• Saves payload in Redis (24-hr TTL <tspan class="code-badge">EX 86400</tspan>)</text>
+      <text x="24" y="52" class="flow-text">• Returns: <tspan font-weight="700" fill="#16a34a">201 Created</tspan> + <tspan class="code-badge">X-Cache: MISS</tspan></text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Complete Pipeline Ingestion:</text>
+    <text x="20" y="301" class="note-text">Edge defense, contract verification, atomic locking, and</text>
+    <text x="20" y="313" class="note-text">persistence succeed in a single coordinated transaction.</text>
+  </g>
+
+  <!-- PANEL 2: NETWORK RETRY REPLAY -->
+  <g transform="translate(398, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#d5e8d4" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#14532d">2. Network Retry Replay (Cache Hit)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="165" height="18" rx="3" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#15803d">X-Cache: HIT-IDEMPOTENT</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#15803d" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Client Retries Identical Request</text>
+      <text x="24" y="24" class="flow-text">Transmits same <tspan class="code-badge">Idempotency-Key</tspan> to Gateway</text>
+      <text x="24" y="38" class="flow-text">Gateway passes key directly to <tspan class="code-badge">api_service</tspan></text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#15803d" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Redis Cache Hit Interception</text>
+      <text x="24" y="24" class="flow-text">• Middleware checks: <tspan class="code-badge">redis.get(redisKey)</tspan></text>
+      <text x="24" y="38" class="flow-text">• Finds cached response <tspan class="code-badge">{ status: 201, ... }</tspan></text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 192)">
+      <circle cx="8" cy="8" r="8" fill="#16a34a" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title" fill="#15803d">Zero Database Mutation Replay</text>
+      <text x="24" y="24" class="flow-text">• Returns cached <tspan font-weight="700" fill="#16a34a">201 Created</tspan> immediately</text>
+      <text x="24" y="38" class="flow-text">• Headers: <tspan class="code-badge">X-Cache: HIT-IDEMPOTENT</tspan></text>
+      <text x="24" y="52" class="flow-text">• Database row count remains strictly <tspan font-weight="700">1</tspan></text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">End-to-End Idempotency Proved:</text>
+    <text x="20" y="301" class="note-text">Retrying through public gateway produces identical semantics</text>
+    <text x="20" y="313" class="note-text">while completely bypassing backend database operations.</text>
+  </g>
+
+  <!-- PANEL 3: MULTI-LAYERED REJECTIONS -->
+  <g transform="translate(750, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#fee2e2" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#991b1b">3. Layered Rejections (401/400/409/429)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="165" height="18" rx="3" fill="#fef2f2" stroke="#fecaca" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#b91c1c">Earliest Boundary Defense</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Gateway Edge Boundary</text>
+      <text x="24" y="24" class="flow-text">• Bad/Missing API Key -&gt; <tspan font-weight="700" fill="#dc2626">401 Unauthorized</tspan></text>
+      <text x="24" y="38" class="flow-text">• Traffic &gt; 5r/s -&gt; <tspan font-weight="700" fill="#b45309">429 Too Many Requests</tspan></text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">OpenAPI Contract Boundary</text>
+      <text x="24" y="24" class="flow-text">• Missing <tspan class="code-badge">Idempotency-Key</tspan> -&gt; <tspan font-weight="700" fill="#dc2626">400 Bad Request</tspan></text>
+      <text x="24" y="38" class="flow-text">• Invalid amount/quantity -&gt; <tspan font-weight="700" fill="#dc2626">400 Bad Request</tspan></text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 192)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title">Redis Concurrency Boundary</text>
+      <text x="24" y="24" class="flow-text">• Parallel duplicate in-flight -&gt; <tspan font-weight="700" fill="#dc2626">409 Conflict</tspan></text>
+      <text x="24" y="38" class="flow-text">• Mutual exclusion protected across workers</text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Separation of Concerns:</text>
+    <text x="20" y="301" class="note-text">Each tier rejects its specific failure mode at the earliest</text>
+    <text x="20" y="313" class="note-text">possible boundary, protecting deep application layers.</text>
+  </g>
+
 </svg>
