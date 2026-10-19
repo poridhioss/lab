@@ -21,10 +21,6 @@ You will build an idempotency-protected write endpoint using Node.js, Express, a
 
 When a write request arrives, the idempotency middleware extracts the client-supplied `Idempotency-Key` header and checks Redis for an existing record. If the key does not exist, the middleware atomically acquires a lock by executing `SET idemp:<key> "IN_PROGRESS" EX 60 NX`. The application executes the business logic, commits the mutation to the database, and caches the serialized HTTP status code and response body in Redis. If a duplicate request arrives while the operation is in flight, the server returns `409 Conflict`. If a duplicate request arrives after completion, the server immediately replays the cached response with `X-Cache: HIT`, bypassing the database entirely.
 
-<p align="center">
-  <img src="images/lab02-flow.svg" alt="Lab 02 Idempotency and Concurrency Flow" width="750">
-</p>
-
 ---
 
 ## Objectives
@@ -635,19 +631,6 @@ Total orders in DB after concurrent requests: 2
 
  ALL IDEMPOTENT WRITE TESTS PASSED SUCCESSFULLY!
 ```
-
----
-
-### Verification Summary
-
-| # | Call | Status | Body snippet |
-| :--- | :--- | :--- | :--- |
-| 1 | `POST /api/v1/orders` (No Key) | `400 Bad Request` | `{"type":".../missing-idempotency-key","title":"Missing Idempotency-Key Header"}` |
-| 2 | `POST /api/v1/orders` (First Write) | `201 Created` | `{"id":1,"amount":250,"description":"Mechanical Keyboard","status":"COMPLETED"}` |
-| 3 | `POST /api/v1/orders` (Retry Replay) | `201 Created` | `{"id":1,"amount":250,"description":"Mechanical Keyboard","status":"COMPLETED"}` |
-| 4 | `GET /api/v1/orders` (Count Check) | `200 OK` | `{"total_orders":1,"orders":[{"id":1,...}]}` |
-| 5 | `POST /api/v1/orders` (Concurrent Lock) | `409 Conflict` | `{"type":".../concurrent-mutation","title":"Conflict: Mutation In Progress"}` |
-| 6 | `npm test` | `200 / 201 / 400 / 409` | `ALL IDEMPOTENT WRITE TESTS PASSED SUCCESSFULLY!` |
 
 ---
 

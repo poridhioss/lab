@@ -20,10 +20,6 @@ You will build a unified API platform integrating OpenAPI 3 contract validation,
 
 Client traffic enters Nginx on port 8080. Nginx authenticates the client using an in-memory API key map and checks rate quotas before reverse-proxying the request to the Express API service with the `Idempotency-Key` header preserved. The API service validates request bodies and query parameters against the OpenAPI 3 specification. Write mutations acquire an atomic mutex in Redis (`SETNX`) to ensure that concurrent requests sharing an idempotency key are rejected with `409 Conflict`. Valid orders are committed to the data store, and completed responses are cached in Redis for 24 hours. Subsequent retries replay the cached response with `X-Cache: HIT-IDEMPOTENT` without touching the database.
 
-<p align="center">
-  <img src="images/lab04-flow.svg" alt="Lab 04 Integration and Lifecycle Flow" width="750">
-</p>
-
 ---
 
 ## Objectives
@@ -846,19 +842,6 @@ Test 6: Querying paginated collection through Gateway (?limit=3)...
 
  ALL 6 END-TO-END INTEGRATION TESTS PASSED PERFECTLY!
 ```
-
----
-
-### Verification Summary
-
-| # | Call | Status | Body snippet |
-| :--- | :--- | :--- | :--- |
-| 1 | `GET /healthz` | `200 OK` | `{"status":"UP","gateway":"Nginx","layer":"Edge"}` |
-| 2 | `POST /api/v1/orders` (No API Key) | `401 Unauthorized` | `{"title":"Unauthorized","status":401}` |
-| 3 | `POST /api/v1/orders` (No Idemp Key) | `400 Bad Request` | `{"title":"Missing Required Header","status":400}` |
-| 4 | `POST /api/v1/orders` (Primary Write) | `201 Created` | `{"id":16,"item_id":402,"quantity":2,"amount":199.5}` |
-| 5 | `POST /api/v1/orders` (Retry Replay) | `201 Created` | `{"id":16,"item_id":402,"quantity":2,"amount":199.5}` |
-| 6 | `GET /api/v1/orders?limit=3` | `200 OK` | `{"data":[...],"pagination":{"next_cursor":3,...}}` |
 
 ---
 

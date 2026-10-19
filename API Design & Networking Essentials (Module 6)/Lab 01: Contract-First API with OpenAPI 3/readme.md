@@ -21,10 +21,6 @@ You will build a contract-first REST service using OpenAPI 3.0.3 and Node.js wit
 
 In a contract-first workflow, the API specification is authored before any server code is implemented. The OpenAPI document defines required headers, request payloads, response schemas, and status codes. When requests arrive, the server validates client parameters against these contract definitions. If a request violates the schema or omits required headers, the server rejects the call with an RFC 7807 Problem Details error payload. Valid mutations persist to the data store, and subsequent queries stream records chronologically using cursor pointers.
 
-<p align="center">
-  <img src="images/lab01-flow.svg" alt="Lab 01 Request Flow and Lifecycle" width="750">
-</p>
-
 ---
 
 ## Objectives
@@ -836,19 +832,6 @@ Querying Page 2 using cursor=105...
 
  ALL 4 CONTRACT-FIRST API TESTS PASSED SUCCESSFULLY!
 ```
-
----
-
-### Verification Summary
-
-| # | Call | Status | Body snippet |
-| :--- | :--- | :--- | :--- |
-| 1 | `POST /api/v1/orders` (No Key) | `400 Bad Request` | `{"type":".../missing-header","title":"Missing Required Header"}` |
-| 2 | `POST /api/v1/orders` (Valid Key) | `201 Created` | `{"id":126,"item_id":402,"quantity":2,"amount":199,"status":"CONFIRMED"}` |
-| 3 | `GET /api/v1/orders?limit=100` | `400 Bad Request` | `{"type":".../invalid-parameter","title":"Invalid Query Parameter"}` |
-| 4 | `GET /api/v1/orders?limit=3` | `200 OK` | `{"data":[...],"pagination":{"next_cursor":103,"has_more":true,"count":3}}` |
-| 5 | `GET /api/v1/orders?limit=3&cursor=103` | `200 OK` | `{"data":[...],"pagination":{"next_cursor":106,"has_more":true,"count":3}}` |
-| 6 | `npm test` | `200 / 201 / 400` | `ALL 4 CONTRACT-FIRST API TESTS PASSED SUCCESSFULLY!` |
 
 ---
 

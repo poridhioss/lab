@@ -21,10 +21,6 @@ You will build an API gateway using Nginx and Docker Compose fronting two isolat
 
 Incoming HTTP traffic enters Nginx on port 80. Nginx first evaluates the `X-API-Key` header against a memory-mapped lookup table. If the key is missing or invalid, Nginx immediately drops the request with `401 Unauthorized` without waking downstream containers. For authenticated traffic, Nginx checks compliance against a 10MB token-bucket rate limit zone (`5 req/s`). Requests within the rate boundary are reverse-proxied across the private Docker network to `orders_service:3001` or `users_service:3002`. If request rates exceed the token buffer, Nginx throttles the excess traffic with `429 Too Many Requests`.
 
-<p align="center">
-  <img src="images/lab03-flow.svg" alt="Lab 03 Request Routing and Rate Limiting Flow" width="750">
-</p>
-
 ---
 
 ## Objectives
@@ -576,19 +572,6 @@ Request #7 -> Status 429
 Request #8 -> Status 429
 Request #9 -> Status 429
 ```
-
----
-
-### Verification Summary
-
-| # | Call | Status | Body snippet |
-| :--- | :--- | :--- | :--- |
-| 1 | `GET /healthz` | `200 OK` | `{"status":"UP","gateway":"Nginx",...}` |
-| 2 | `GET /api/v1/orders` (No Key) | `401 Unauthorized` | `{"error":"Unauthorized: Invalid or Missing API Key"}` |
-| 3 | `GET /api/v1/orders` (Invalid Key) | `401 Unauthorized` | `{"error":"Unauthorized: Invalid or Missing API Key"}` |
-| 4 | `GET /api/v1/orders` (Valid Key) | `200 OK` | `{"service":"Orders Service","port":3001,...}` |
-| 5 | `GET /api/v1/users` (Valid Key) | `200 OK` | `{"service":"Users Service","port":3002,...}` |
-| 6 | Rapid burst requests (#7-#15) | `429 Too Many Requests` | Nginx edge rate limit throttle |
 
 ---
 
