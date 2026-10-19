@@ -3,7 +3,7 @@
 You will build an idempotency-protected write endpoint using Node.js, Express, and Redis 7. The service intercepts mutation requests (`POST /api/v1/orders`), acquires atomic mutual exclusion locks using Redis `SET key value EX 60 NX`, caches completed responses, and replays cached results on subsequent retries. You will deploy Redis with Docker Compose and expose the Express application through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab02-architecture.svg" alt="Lab 02 Architecture Overview" width="950">
+  <img src="images/lab02-architecture.svg" alt="Lab 02 Architecture Overview" width="750">
 </p>
 
 ---
@@ -22,7 +22,7 @@ You will build an idempotency-protected write endpoint using Node.js, Express, a
 When a write request arrives, the idempotency middleware extracts the client-supplied `Idempotency-Key` header and checks Redis for an existing record. If the key does not exist, the middleware atomically acquires a lock by executing `SET idemp:<key> "IN_PROGRESS" EX 60 NX`. The application executes the business logic, commits the mutation to the database, and caches the serialized HTTP status code and response body in Redis. If a duplicate request arrives while the operation is in flight, the server returns `409 Conflict`. If a duplicate request arrives after completion, the server immediately replays the cached response with `X-Cache: HIT`, bypassing the database entirely.
 
 <p align="center">
-  <img src="images/lab02-flow.svg" alt="Lab 02 Idempotency and Concurrency Flow" width="950">
+  <img src="images/lab02-flow.svg" alt="Lab 02 Idempotency and Concurrency Flow" width="750">
 </p>
 
 ---
@@ -60,7 +60,9 @@ mkdir -p ~/lab02-idempotent-write-endpoint
 cd ~/lab02-idempotent-write-endpoint
 ```
 
-![Create Lab Directory](images/step1-create-dir.png)
+<p align="center">
+  <img src="images/step1-create-dir.png" alt="Create Lab Directory" width="700">
+</p>
 
 Create a file named `package.json` with the following contents:
 
@@ -81,7 +83,9 @@ Create a file named `package.json` with the following contents:
 }
 ```
 
-![Create package.json](images/step1-package-json.png)
+<p align="center">
+  <img src="images/step1-package-json.png" alt="Create package.json" width="700">
+</p>
 
 **Explanation:**
 - `main`: Designates `server.js` as the application entrypoint.
@@ -96,7 +100,9 @@ Install the project dependencies:
 npm install
 ```
 
-![Install Dependencies](images/step1-npm-install.png)
+<p align="center">
+  <img src="images/step1-npm-install.png" alt="Install Dependencies" width="700">
+</p>
 
 ---
 
@@ -117,7 +123,9 @@ services:
     command: redis-server --appendonly yes
 ```
 
-![Create docker-compose.yml](images/step2-docker-compose.png)
+<p align="center">
+  <img src="images/step2-docker-compose.png" alt="Create docker-compose.yml" width="700">
+</p>
 
 **Explanation:**
 - `image: redis:7-alpine`: Uses the official lightweight Alpine Linux Redis 7 image.
@@ -131,7 +139,9 @@ Launch the Redis container in the background:
 docker compose up -d redis
 ```
 
-![Launch Redis Container](images/step2-docker-compose-up.png)
+<p align="center">
+  <img src="images/step2-docker-compose-up.png" alt="Launch Redis Container" width="700">
+</p>
 
 Verify Redis connectivity:
 
@@ -139,7 +149,9 @@ Verify Redis connectivity:
 docker compose exec redis redis-cli ping
 ```
 
-![Verify Redis Connectivity](images/step2-redis-ping.png)
+<p align="center">
+  <img src="images/step2-redis-ping.png" alt="Verify Redis Connectivity" width="700">
+</p>
 
 Expected output:
 
@@ -310,7 +322,9 @@ if (require.main === module) {
 module.exports = { app, redis };
 ```
 
-![Create server.js](images/step3-server-js.png)
+<p align="center">
+  <img src="images/step3-server-js.png" alt="Create server.js" width="700">
+</p>
 
 **Explanation:**
 - `redis.get(redisKey)`: Inspects Redis to determine whether the request is new, in flight, or previously completed.
@@ -330,7 +344,9 @@ Start the server process in the background on port 5000:
 node server.js &
 ```
 
-![Start Server](images/step4-start-server.png)
+<p align="center">
+  <img src="images/step4-start-server.png" alt="Start Server" width="700">
+</p>
 
 Retrieve the private IP address of your virtual machine:
 
@@ -338,7 +354,9 @@ Retrieve the private IP address of your virtual machine:
 hostname -I | awk '{print $1}'
 ```
 
-![Get Private IP](images/step4-hostname-ip.png)
+<p align="center">
+  <img src="images/step4-hostname-ip.png" alt="Get Private IP" width="700">
+</p>
 
 Configure the Poridhi Load Balancer:
 1. Open the **Load Balancer** modal in the Poridhi interface.
@@ -346,11 +364,15 @@ Configure the Poridhi Load Balancer:
 3. Set the target port to `5000`.
 4. Click **Expose** to generate a public URL.
 
-![Load Balancer Exposed](images/step4-loadbalancer-exposed.png)
+<p align="center">
+  <img src="images/step4-loadbalancer-exposed.png" alt="Load Balancer Exposed" width="700">
+</p>
 
 Open the generated Load Balancer URL in your web browser to confirm service health:
 
-![Browser Status](images/step4-browser-status.png)
+<p align="center">
+  <img src="images/step4-browser-status.png" alt="Browser Status" width="700">
+</p>
 
 ---
 
@@ -369,7 +391,9 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -d '{"amount": 250.00, "description": "Mechanical Keyboard"}'
 ```
 
-![Test 1 Cache Miss](images/step4-test1-first-request.png)
+<p align="center">
+  <img src="images/step4-test1-first-request.png" alt="Test 1 Cache Miss" width="700">
+</p>
 
 Expected output:
 
@@ -398,7 +422,9 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -d '{"amount": 250.00, "description": "Mechanical Keyboard"}'
 ```
 
-![Test 2 Cache Hit](images/step4-test2-retry-request.png)
+<p align="center">
+  <img src="images/step4-test2-retry-request.png" alt="Test 2 Cache Hit" width="700">
+</p>
 
 Expected output:
 
@@ -425,7 +451,9 @@ Query the orders collection to verify that only a single order exists:
 curl -s http://localhost:5000/api/v1/orders | jq .
 ```
 
-![Test 3 Verify Database State](images/step4-test3-verify-db.png)
+<p align="center">
+  <img src="images/step4-test3-verify-db.png" alt="Test 3 Verify Database State" width="700">
+</p>
 
 Expected output:
 
@@ -559,7 +587,9 @@ const server = app.listen(0, async () => {
 });
 ```
 
-![Create test-idempotency.js](images/step5-test-idempotency.png)
+<p align="center">
+  <img src="images/step5-test-idempotency.png" alt="Create test-idempotency.js" width="700">
+</p>
 
 **Explanation:**
 - `app.listen(0)`: Executes the server on a dynamic port to avoid collisions with background processes.
@@ -574,7 +604,9 @@ Execute the automated test suite:
 npm test
 ```
 
-![Automated Idempotency Test Output](images/step5-npm-test.png)
+<p align="center">
+  <img src="images/step5-npm-test.png" alt="Automated Idempotency Test Output" width="700">
+</p>
 
 Expected output:
 

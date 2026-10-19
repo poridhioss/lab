@@ -3,7 +3,7 @@
 You will build a unified API platform integrating OpenAPI 3 contract validation, Redis-backed write idempotency, and an Nginx API gateway using Docker Compose. The architecture coordinates edge authentication and rate limiting at the gateway, header propagation of `Idempotency-Key`, schema validation in Express, and atomic distributed locking in Redis. You will deploy the multi-container stack and execute an automated end-to-end integration test suite.
 
 <p align="center">
-  <img src="images/lab04-architecture.svg" alt="Lab 04 Architecture Overview" width="950">
+  <img src="images/lab04-architecture.svg" alt="Lab 04 Architecture Overview" width="750">
 </p>
 
 ---
@@ -21,7 +21,7 @@ You will build a unified API platform integrating OpenAPI 3 contract validation,
 Client traffic enters Nginx on port 8080. Nginx authenticates the client using an in-memory API key map and checks rate quotas before reverse-proxying the request to the Express API service with the `Idempotency-Key` header preserved. The API service validates request bodies and query parameters against the OpenAPI 3 specification. Write mutations acquire an atomic mutex in Redis (`SETNX`) to ensure that concurrent requests sharing an idempotency key are rejected with `409 Conflict`. Valid orders are committed to the data store, and completed responses are cached in Redis for 24 hours. Subsequent retries replay the cached response with `X-Cache: HIT-IDEMPOTENT` without touching the database.
 
 <p align="center">
-  <img src="images/lab04-flow.svg" alt="Lab 04 Integration and Lifecycle Flow" width="950">
+  <img src="images/lab04-flow.svg" alt="Lab 04 Integration and Lifecycle Flow" width="750">
 </p>
 
 ---
@@ -64,7 +64,9 @@ mkdir -p ~/lab04-api-layer-integration/api-service/middleware
 cd ~/lab04-api-layer-integration
 ```
 
-![Create project directories](images/step1-create-dirs.png)
+<p align="center">
+  <img src="images/step1-create-dirs.png" alt="Create project directories" width="700">
+</p>
 
 Create a file named `api-service/package.json` with the following contents:
 
@@ -85,7 +87,9 @@ Create a file named `api-service/package.json` with the following contents:
 }
 ```
 
-![Create package.json](images/step1-package-json.png)
+<p align="center">
+  <img src="images/step1-package-json.png" alt="Create package.json" width="700">
+</p>
 
 **Explanation:**
 - `main`: Designates `server.js` as the application entrypoint.
@@ -285,7 +289,9 @@ components:
             $ref: '#/components/schemas/ProblemDetails'
 ```
 
-![Create openapi.yaml](images/step2-openapi-yaml.png)
+<p align="center">
+  <img src="images/step2-openapi-yaml.png" alt="Create openapi.yaml" width="700">
+</p>
 
 **Explanation:**
 - `servers.url`: Specifies `http://localhost:8080/api/v1` to point to the public Nginx gateway ingress rather than internal service ports.
@@ -387,7 +393,9 @@ function idempotencyMiddleware(redisClient, ttlSeconds = 86400) {
 module.exports = idempotencyMiddleware;
 ```
 
-![Create idempotency middleware](images/step3-idempotency-middleware.png)
+<p align="center">
+  <img src="images/step3-idempotency-middleware.png" alt="Create idempotency middleware" width="700">
+</p>
 
 **Explanation:**
 - `req.header('Idempotency-Key')`: Validates the forwarded idempotency key from the gateway.
@@ -517,7 +525,9 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 ```
 
-![Create server.js](images/step4-server-js.png)
+<p align="center">
+  <img src="images/step4-server-js.png" alt="Create server.js" width="700">
+</p>
 
 **Explanation:**
 - `PORT = process.env.PORT || 3000`: Binds the API service to internal port 3000 within the private container network.
@@ -592,7 +602,9 @@ http {
 }
 ```
 
-![Create nginx.conf](images/step5-nginx-conf.png)
+<p align="center">
+  <img src="images/step5-nginx-conf.png" alt="Create nginx.conf" width="700">
+</p>
 
 **Explanation:**
 - `proxy_set_header Idempotency-Key $http_idempotency_key`: Propagates the custom idempotency key header across the reverse-proxy boundary to the internal service.
@@ -651,7 +663,9 @@ networks:
     driver: bridge
 ```
 
-![Create docker-compose.yml](images/step6-docker-compose-yml.png)
+<p align="center">
+  <img src="images/step6-docker-compose-yml.png" alt="Create docker-compose.yml" width="700">
+</p>
 
 **Explanation:**
 - `gateway.ports: "8080:80"`: Exposes only the gateway port 8080 on the host.
@@ -668,7 +682,9 @@ Start the complete multi-container stack in the background:
 docker compose up -d --build
 ```
 
-![Launch Containers](images/step7-docker-compose-up.png)
+<p align="center">
+  <img src="images/step7-docker-compose-up.png" alt="Launch Containers" width="700">
+</p>
 
 Verify running container status:
 
@@ -676,7 +692,9 @@ Verify running container status:
 docker compose ps
 ```
 
-![Verify Running Containers](images/step7-docker-compose-ps.png)
+<p align="center">
+  <img src="images/step7-docker-compose-ps.png" alt="Verify Running Containers" width="700">
+</p>
 
 ---
 
@@ -781,7 +799,9 @@ async function runTests() {
 runTests();
 ```
 
-![Create test-integration.js](images/step7-test-integration-js.png)
+<p align="center">
+  <img src="images/step7-test-integration-js.png" alt="Create test-integration.js" width="700">
+</p>
 
 **Explanation:**
 - `Test 1`: Verifies that the public `/healthz` endpoint responds with `200 OK`.
@@ -797,7 +817,9 @@ Execute the integration test suite:
 node test-integration.js
 ```
 
-![Run Integration Tests](images/step7-node-test-integration.png)
+<p align="center">
+  <img src="images/step7-node-test-integration.png" alt="Run Integration Tests" width="700">
+</p>
 
 Expected output:
 

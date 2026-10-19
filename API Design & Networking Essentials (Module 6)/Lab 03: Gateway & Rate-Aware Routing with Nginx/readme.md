@@ -3,7 +3,7 @@
 You will build an API gateway using Nginx and Docker Compose fronting two isolated Node.js microservices (`orders-service` and `users-service`). The gateway handles edge authentication using declarative `map` blocks, enforces token-bucket rate limiting (`5 req/s` with burst buffers), and dynamically routes client traffic to private upstream containers. You will deploy the multi-container stack and expose the gateway via the Poridhi Load Balancer on port 8080.
 
 <p align="center">
-  <img src="images/lab03-architecture.svg" alt="Lab 03 Architecture Overview" width="950">
+  <img src="images/lab03-architecture.svg" alt="Lab 03 Architecture Overview" width="750">
 </p>
 
 ---
@@ -22,7 +22,7 @@ You will build an API gateway using Nginx and Docker Compose fronting two isolat
 Incoming HTTP traffic enters Nginx on port 80. Nginx first evaluates the `X-API-Key` header against a memory-mapped lookup table. If the key is missing or invalid, Nginx immediately drops the request with `401 Unauthorized` without waking downstream containers. For authenticated traffic, Nginx checks compliance against a 10MB token-bucket rate limit zone (`5 req/s`). Requests within the rate boundary are reverse-proxied across the private Docker network to `orders_service:3001` or `users_service:3002`. If request rates exceed the token buffer, Nginx throttles the excess traffic with `429 Too Many Requests`.
 
 <p align="center">
-  <img src="images/lab03-flow.svg" alt="Lab 03 Request Routing and Rate Limiting Flow" width="950">
+  <img src="images/lab03-flow.svg" alt="Lab 03 Request Routing and Rate Limiting Flow" width="750">
 </p>
 
 ---
@@ -67,7 +67,9 @@ mkdir -p ~/lab03-gateway-routing/services/users-service
 cd ~/lab03-gateway-routing
 ```
 
-![Create Directories](images/step1-create-dirs.png)
+<p align="center">
+  <img src="images/step1-create-dirs.png" alt="Create Directories" width="700">
+</p>
 
 Create a file named `services/orders-service/package.json` with the following contents:
 
@@ -85,7 +87,9 @@ Create a file named `services/orders-service/package.json` with the following co
 }
 ```
 
-![Create Orders package.json](images/step1-orders-package-json.png)
+<p align="center">
+  <img src="images/step1-orders-package-json.png" alt="Create Orders package.json" width="700">
+</p>
 
 **Explanation:**
 - `main`: Sets `server.js` as the entrypoint for the orders microservice.
@@ -124,7 +128,9 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 ```
 
-![Create Orders server.js](images/step1-orders-server-js.png)
+<p align="center">
+  <img src="images/step1-orders-server-js.png" alt="Create Orders server.js" width="700">
+</p>
 
 **Explanation:**
 - `PORT = process.env.PORT || 3001`: Sets internal port 3001 for container network isolation.
@@ -147,7 +153,9 @@ Create a file named `services/users-service/package.json` with the following con
 }
 ```
 
-![Create Users package.json](images/step1-users-package-json.png)
+<p align="center">
+  <img src="images/step1-users-package-json.png" alt="Create Users package.json" width="700">
+</p>
 
 **Explanation:**
 - `main`: Sets `server.js` as the entrypoint for the users microservice.
@@ -185,7 +193,9 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 ```
 
-![Create Users server.js](images/step1-users-server-js.png)
+<p align="center">
+  <img src="images/step1-users-server-js.png" alt="Create Users server.js" width="700">
+</p>
 
 **Explanation:**
 - `PORT = process.env.PORT || 3002`: Binds the users service to internal port 3002.
@@ -269,7 +279,9 @@ http {
 }
 ```
 
-![Create nginx.conf](images/step2-nginx-conf.png)
+<p align="center">
+  <img src="images/step2-nginx-conf.png" alt="Create nginx.conf" width="700">
+</p>
 
 **Explanation:**
 - `limit_req_zone $binary_remote_addr zone=api_limit:10m rate=5r/s`: Tracks client IPs using binary representations in a 10MB memory table, enforcing a sustained rate limit of 5 requests per second.
@@ -330,7 +342,9 @@ networks:
     driver: bridge
 ```
 
-![Create docker-compose.yml](images/step3-docker-compose.png)
+<p align="center">
+  <img src="images/step3-docker-compose.png" alt="Create docker-compose.yml" width="700">
+</p>
 
 **Explanation:**
 - `gateway.ports: "8080:80"`: Exposes only the Nginx gateway container on host port 8080.
@@ -348,7 +362,9 @@ Start all three containers in the background:
 docker compose up -d --build
 ```
 
-![Launch Containers](images/step4-docker-compose-up.png)
+<p align="center">
+  <img src="images/step4-docker-compose-up.png" alt="Launch Containers" width="700">
+</p>
 
 Verify running container status:
 
@@ -356,7 +372,9 @@ Verify running container status:
 docker compose ps
 ```
 
-![Verify Running Containers](images/step4-docker-compose-ps.png)
+<p align="center">
+  <img src="images/step4-docker-compose-ps.png" alt="Verify Running Containers" width="700">
+</p>
 
 Expected output:
 
@@ -381,7 +399,9 @@ Query `/healthz` without an API key:
 curl -i http://localhost:8080/healthz
 ```
 
-![Test Health Endpoint](images/step5-test1-health.png)
+<p align="center">
+  <img src="images/step5-test1-health.png" alt="Test Health Endpoint" width="700">
+</p>
 
 Expected output:
 
@@ -400,7 +420,9 @@ Call `/api/v1/orders` without supplying an API key:
 curl -i http://localhost:8080/api/v1/orders
 ```
 
-![Test Auth Failure](images/step5-test2-auth-unauthorized.png)
+<p align="center">
+  <img src="images/step5-test2-auth-unauthorized.png" alt="Test Auth Failure" width="700">
+</p>
 
 Expected output:
 
@@ -418,7 +440,9 @@ Supply a valid `X-API-Key: valid-key-123` to query the orders service:
 curl -i -H "X-API-Key: valid-key-123" http://localhost:8080/api/v1/orders
 ```
 
-![Test Orders Routing](images/step5-test3-orders-service.png)
+<p align="center">
+  <img src="images/step5-test3-orders-service.png" alt="Test Orders Routing" width="700">
+</p>
 
 Expected output:
 
@@ -446,7 +470,9 @@ Query the users service through the gateway using the same valid key:
 curl -i -H "X-API-Key: valid-key-123" http://localhost:8080/api/v1/users
 ```
 
-![Test Users Routing](images/step5-test4-users-service.png)
+<p align="center">
+  <img src="images/step5-test4-users-service.png" alt="Test Users Routing" width="700">
+</p>
 
 Expected output:
 
@@ -502,7 +528,9 @@ done
 EOF
 ```
 
-![Create verify-gateway.sh](images/step5-test5-verify-script.png)
+<p align="center">
+  <img src="images/step5-test5-verify-script.png" alt="Create verify-gateway.sh" width="700">
+</p>
 
 **Explanation:**
 - `curl -s -o /dev/null -w "%{http_code}"`: Discards response body and prints only the HTTP status code.
@@ -515,7 +543,9 @@ Execute the verification script:
 bash verify-gateway.sh
 ```
 
-![Execute verify-gateway.sh](images/step5-verify-script-run.png)
+<p align="center">
+  <img src="images/step5-verify-script-run.png" alt="Execute verify-gateway.sh" width="700">
+</p>
 
 Expected output:
 

@@ -3,7 +3,7 @@
 You will build a contract-first REST service using OpenAPI 3.0.3 and Node.js with Express. The service implements an idempotent order creation endpoint (`POST /api/v1/orders`), a cursor-based pagination query endpoint (`GET /api/v1/orders`), and standardized RFC 7807 Problem Details error responses. All incoming requests are validated against the contract before execution, and the service is exposed externally through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab01-architecture.svg" alt="Lab 01 Architecture Overview" width="950">
+  <img src="images/lab01-architecture.svg" alt="Lab 01 Architecture Overview" width="750">
 </p>
 
 ---
@@ -22,7 +22,7 @@ You will build a contract-first REST service using OpenAPI 3.0.3 and Node.js wit
 In a contract-first workflow, the API specification is authored before any server code is implemented. The OpenAPI document defines required headers, request payloads, response schemas, and status codes. When requests arrive, the server validates client parameters against these contract definitions. If a request violates the schema or omits required headers, the server rejects the call with an RFC 7807 Problem Details error payload. Valid mutations persist to the data store, and subsequent queries stream records chronologically using cursor pointers.
 
 <p align="center">
-  <img src="images/lab01-flow.svg" alt="Lab 01 Request Flow and Lifecycle" width="950">
+  <img src="images/lab01-flow.svg" alt="Lab 01 Request Flow and Lifecycle" width="750">
 </p>
 
 ---
@@ -60,7 +60,9 @@ mkdir -p ~/lab01-contract-first-api
 cd ~/lab01-contract-first-api
 ```
 
-![Create Project Directory](images/step1-create-dir.png)
+<p align="center">
+  <img src="images/step1-create-dir.png" alt="Create Project Directory" width="700">
+</p>
 
 Create a file named `package.json` with the following contents:
 
@@ -81,7 +83,9 @@ Create a file named `package.json` with the following contents:
 }
 ```
 
-![Create package.json](images/step1-package-json.png)
+<p align="center">
+  <img src="images/step1-package-json.png" alt="Create package.json" width="700">
+</p>
 
 **Explanation:**
 - `main`: Points to `server.js` as the entrypoint file of the application.
@@ -96,7 +100,9 @@ Install the project dependencies:
 npm install
 ```
 
-![Install Dependencies](images/step1-npm-install.png)
+<p align="center">
+  <img src="images/step1-npm-install.png" alt="Install Dependencies" width="700">
+</p>
 
 Expected output:
 
@@ -308,7 +314,9 @@ components:
             $ref: '#/components/schemas/ProblemDetails'
 ```
 
-![Create openapi.yaml](images/step2-openapi-yaml.png)
+<p align="center">
+  <img src="images/step2-openapi-yaml.png" alt="Create openapi.yaml" width="700">
+</p>
 
 **Explanation:**
 - `servers.url`: Specifies `http://localhost:5000/api/v1` as the base URI path to enforce explicit API versioning.
@@ -476,7 +484,9 @@ if (require.main === module) {
 module.exports = app;
 ```
 
-![Create server.js](images/step3-server-js.png)
+<p align="center">
+  <img src="images/step3-server-js.png" alt="Create server.js" width="700">
+</p>
 
 **Explanation:**
 - `yaml.parse(fs.readFileSync(...))`: Reads and parses `openapi.yaml` into memory upon server startup.
@@ -496,7 +506,9 @@ Start the server process in the background on port 5000:
 node server.js &
 ```
 
-![Start Server](images/step4-start-server.png)
+<p align="center">
+  <img src="images/step4-start-server.png" alt="Start Server" width="700">
+</p>
 
 Retrieve the private IP address of your virtual machine:
 
@@ -504,22 +516,30 @@ Retrieve the private IP address of your virtual machine:
 hostname -I | awk '{print $1}'
 ```
 
-![Get Private IP](images/step4-hostname-ip.png)
+<p align="center">
+  <img src="images/step4-hostname-ip.png" alt="Get Private IP" width="700">
+</p>
 
 Configure the Poridhi Load Balancer:
 1. Open the **Load Balancer** modal in the Poridhi interface.
 2. Enter the IP address obtained from `hostname -I`.
 3. Set the target port to `5000`.
 
-![Configure Load Balancer](images/step4-loadbalancer-modal.png)
+<p align="center">
+  <img src="images/step4-loadbalancer-modal.png" alt="Configure Load Balancer" width="700">
+</p>
 
 Click **Expose** to generate an active public URL:
 
-![Load Balancer Exposed](images/step4-loadbalancer-exposed.png)
+<p align="center">
+  <img src="images/step4-loadbalancer-exposed.png" alt="Load Balancer Exposed" width="700">
+</p>
 
 Open the generated Load Balancer URL in your web browser to confirm connectivity:
 
-![Browser Status](images/step4-browser-status.png)
+<p align="center">
+  <img src="images/step4-browser-status.png" alt="Browser Status" width="700">
+</p>
 
 ---
 
@@ -537,7 +557,9 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -d '{"item_id": 402, "quantity": 1, "amount": 99.50}'
 ```
 
-![Test 1 Missing Idempotency Key](images/step4-test1-missing-key.png)
+<p align="center">
+  <img src="images/step4-test1-missing-key.png" alt="Test 1 Missing Idempotency Key" width="700">
+</p>
 
 Expected output:
 
@@ -565,7 +587,9 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
   -d '{"item_id": 402, "quantity": 2, "amount": 199.00}'
 ```
 
-![Test 2 Valid Order](images/step4-test2-valid-order.png)
+<p align="center">
+  <img src="images/step4-test2-valid-order.png" alt="Test 2 Valid Order" width="700">
+</p>
 
 Expected output:
 
@@ -592,7 +616,9 @@ Query `/api/v1/orders` with `limit=100`, exceeding the contract maximum of 50:
 curl -i "http://localhost:5000/api/v1/orders?limit=100"
 ```
 
-![Test 3 Query Limit Violation](images/step4-test3-query-limit.png)
+<p align="center">
+  <img src="images/step4-test3-query-limit.png" alt="Test 3 Query Limit Violation" width="700">
+</p>
 
 Expected output:
 
@@ -617,7 +643,9 @@ Retrieve the first page with `limit=3`:
 curl -s "http://localhost:5000/api/v1/orders?limit=3" | jq .
 ```
 
-![Test 4 Pagination Page 1](images/step4-test4-pagination-p1.png)
+<p align="center">
+  <img src="images/step4-test4-pagination-p1.png" alt="Test 4 Pagination Page 1" width="700">
+</p>
 
 Expected output:
 
@@ -642,7 +670,9 @@ Retrieve the second page using `cursor=103`:
 curl -s "http://localhost:5000/api/v1/orders?limit=3&cursor=103" | jq .
 ```
 
-![Test 4 Pagination Page 2](images/step4-test4-pagination-p2.png)
+<p align="center">
+  <img src="images/step4-test4-pagination-p2.png" alt="Test 4 Pagination Page 2" width="700">
+</p>
 
 Expected output:
 
@@ -760,7 +790,9 @@ const server = app.listen(0, async () => {
 });
 ```
 
-![Create Test Script](images/step5-test-js.png)
+<p align="center">
+  <img src="images/step5-test-js.png" alt="Create Test Script" width="700">
+</p>
 
 **Explanation:**
 - `app.listen(0)`: Spawns the Express server on an ephemeral random port to isolate automated tests from active server instances.
@@ -776,7 +808,9 @@ Execute `npm test` to run the test suite:
 npm test
 ```
 
-![Automated Test Suite Output](images/step5-npm-test.png)
+<p align="center">
+  <img src="images/step5-npm-test.png" alt="Automated Test Suite Output" width="700">
+</p>
 
 Expected output:
 
