@@ -1,218 +1,354 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 520" width="1680" height="520">
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 760" width="1120" height="760">
   <defs>
+    <!-- Draw.io Authentic Drop Shadow Filter -->
+    <filter id="dropShadow" x="-12%" y="-12%" width="135%" height="145%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+
+    <!-- Draw.io Classic Marker Arrowhead -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+
     <style>
-      text {
-        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+      .card-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
         fill: #000000;
+        text-anchor: middle;
       }
-      .title-text {
-        font-size: 20px;
-        font-weight: bold;
-        fill: #000000;
+      .card-sub {
+        font-family: "Georgia", "DejaVu Serif", serif;
+        font-size: 13px;
+        fill: #111111;
+        text-anchor: middle;
       }
-      .subtitle-text {
-        font-size: 15px;
-        font-style: italic;
-        fill: #000000;
+      .sec-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .section-heading {
-        font-size: 17px;
-        font-weight: bold;
-        fill: #000000;
+      .flow-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .code-font {
-        font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 15.5px;
-        fill: #000000;
+      .flow-text {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 11px;
+        fill: #334155;
       }
-      .body-text {
-        font-size: 15.5px;
-        fill: #000000;
+      .code-badge {
+        font-family: "Courier New", Courier, "DejaVu Sans Mono", monospace;
+        font-size: 10.5px;
+        font-weight: 600;
       }
-      .arrow-label {
+      .note-text {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 10px;
+        fill: #475569;
+      }
+      .banner-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
         font-size: 16px;
-        font-weight: bold;
-        fill: #000000;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .arrow-sub {
-        font-size: 14.5px;
+      .banner-sub {
+        font-family: "Georgia", "DejaVu Serif", serif;
+        font-size: 13px;
+        fill: #475569;
         font-style: italic;
-        fill: #000000;
-      }
-      .flow-step-title {
-        font-size: 16.5px;
-        font-weight: bold;
-        fill: #000000;
-      }
-      .flow-step-sub {
-        font-size: 14.5px;
-        font-style: italic;
-        fill: #000000;
       }
     </style>
-    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
-    </marker>
   </defs>
+
+  <!-- Background Canvas -->
   <rect width="100%" height="100%" fill="#ffffff" />
 
+  <!-- Outer Frame -->
+  <rect x="20" y="16" width="1080" height="725" rx="10" fill="#fafafa" stroke="#cbd5e1" stroke-width="1.5" />
 
-  <!-- Component: External Client -->
-  <g transform="translate(40, 20)">
-    <rect width="280" height="480" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#dbeafe" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M.803 14.8169c0-.5342.433-.9665.9665-.9665.5335 0 .9665.4323.9665.9665 0 .5335-.433.9657-.9665.9657-.5335 0-.9666-.4322-.9666-.9657m2.736 0c0-.1963-.0532-.376-.1119-.5525-.2344-.7024-.876-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0708C.6149 13.2865 0 13.9646 0 14.817c0 .9764.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.793 1.7694-1.7694m-1.7694-7.149c.5335 0 .9665.433.9665.9665 0 .5335-.433.9665-.9665.9665-.5343 0-.9666-.433-.9666-.9665 0-.5335.4323-.9665.9666-.9665m0 2.7359c.9772 0 1.7694-.7923 1.7694-1.7694 0-.1956-.0532-.376-.1119-.5525-.2344-.7024-.8767-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0716C.6149 7.104 0 7.782 0 8.6344c0 .9771.7923 1.7694 1.7695 1.7694m13.221-5.694c-.5342 0-.9665-.433-.9665-.9664a.966.966 0 01.9666-.9665c.5335 0 .9658.4322.9658.9665 0 .5334-.4323.9664-.9658.9664m-9.6 16.5133c-.5335 0-.9666-.433-.9666-.9665 0-.5342.433-.9665.9666-.9665a.966.966 0 01.9665.9665c0 .5335-.4323.9665-.9665.9665m9.6-19.2491c-.978 0-1.7695.7922-1.7695 1.7694 0 .2085.0525.4025.1187.5882L5.039 18.5581c-.803.1681-1.4179.8462-1.4179 1.6985 0 .9772.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.7922 1.7694-1.7694 0-.1963-.0525-.3759-.111-.5525l8.3427-14.2728c.7778-.1865 1.3683-.8531 1.3683-1.688 0-.977-.793-1.7693-1.7694-1.7693m7.24 2.7359c-.5343 0-.9666-.433-.9666-.9665a.966.966 0 01.9665-.9665c.5335 0 .9666.4322.9666.9665 0 .5334-.433.9665-.9666.9665M12.6313 21.223c-.5343 0-.9665-.433-.9665-.9665a.966.966 0 01.9665-.9665c.5335 0 .9658.4323.9658.9665 0 .5335-.4323.9665-.9658.9665M22.2305 1.974c-.9772 0-1.7694.7922-1.7694 1.7694 0 .2085.0525.4025.1187.5882l-8.3009 14.2265c-.8021.1681-1.417.8462-1.417 1.6985 0 .9772.7922 1.7694 1.7694 1.7694.9764 0 1.7687-.7922 1.7687-1.7694 0-.1963-.0525-.3759-.1111-.5525l8.3427-14.2728C23.4094 5.2448 24 4.5782 24 3.7433c0-.977-.7923-1.7693-1.7695-1.7693" fill="#111827" />
-    </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">External Client</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">cURL / Frontend Web App</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Authenticated Queries</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">X-API-Key: valid-secret-key</text>
-      <text x="12" y="84" class="body-text">• GET /api/v1/orders</text>
-      <text x="12" y="112" class="body-text">• GET /api/v1/users</text>
-      <text x="12" y="140" class="body-text">← 200 OK (Proxied Service)</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Edge Guard Rejections</text>
-      <text x="12" y="56" class="body-text">• Missing key: 401 Unauthorized</text>
-      <text x="12" y="84" class="body-text">• Burst &gt; 5 req/s: 429 Too Many</text>
-      <text x="12" y="112" class="body-text">• Zero backend service load</text>
-      <text x="12" y="140" class="subtitle-text">Edge gatekeeper protection</text>
-    </g>
+  <!-- Header Banner -->
+  <g transform="translate(45, 42)">
+    <text x="0" y="0" class="banner-title">Lab 03: API Gateway &amp; Rate-Aware Routing Architecture</text>
+    <text x="0" y="20" class="banner-sub">Complete Edge Defense Topology: Nginx Reverse Proxy • Map-Based Auth • Token Bucket Rate Quotas • Private Microservice Bridge</text>
   </g>
 
-  <!-- Arrow: 1. Request (:8080) -->
-  <rect x="344" y="198" width="110" height="30" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
-  <text x="399" y="218" text-anchor="middle" class="arrow-label">1. Request (:8080)</text>
-  <line x1="320" y1="240" x2="478" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- Divider Line -->
+  <line x1="45" y1="74" x2="1075" y2="74" stroke="#e2e8f0" stroke-width="1.5" />
 
-  <!-- Component: Nginx API Gateway -->
-  <g transform="translate(480, 20)">
-    <rect width="280" height="480" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#ccfbf1" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M12 0L1.605 6v12L12 24l10.395-6V6L12 0zm6 16.59c0 .705-.646 1.29-1.529 1.29-.631 0-1.351-.255-1.801-.81l-6-7.141v6.66c0 .721-.57 1.29-1.274 1.29H7.32c-.721 0-1.29-.6-1.29-1.29V7.41c0-.705.63-1.29 1.5-1.29.646 0 1.38.255 1.83.81l5.97 7.141V7.41c0-.721.6-1.29 1.29-1.29h.075c.72 0 1.29.6 1.29 1.29v9.18H18z" fill="#009639" />
-    </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Nginx API Gateway</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 8080 Ingress Gatekeeper</text>
+  <!-- ========================================================== -->
+  <!-- TOP SECTION: SYSTEM ARCHITECTURE (DRAW.IO AUTHENTIC CARDS) -->
+  <!-- ========================================================== -->
 
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Rate Limit and Security</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">Zone: limit_req_zone</text>
-      <text x="12" y="84" class="body-text">• Rate: 5r/s burst=5 nodelay</text>
-      <text x="12" y="112" class="body-text">• API Key Auth validation map</text>
-      <text x="12" y="140" class="body-text">• Immediate 401 and 429 rejection</text>
+  <!-- NODE 1: HTTP Client (Light Blue) -->
+  <g transform="translate(45, 140)">
+    <rect x="0" y="0" width="150" height="95" rx="8" fill="#dae8fc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Client Monitor / Laptop Icon -->
+    <g transform="translate(57, 12)">
+      <rect x="0" y="2" width="36" height="24" rx="2" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5" />
+      <line x1="0" y1="20" x2="36" y2="20" stroke="#1d4ed8" stroke-width="1" />
+      <polygon points="15,26 21,26 24,32 12,32" fill="#1d4ed8" />
+      <line x1="8" y1="32" x2="28" y2="32" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" />
+      <polyline points="6,9 10,12 6,15" fill="none" stroke="#2563eb" stroke-width="1.2" />
+      <line x1="13" y1="15" x2="18" y2="15" stroke="#2563eb" stroke-width="1.2" />
     </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Dynamic Route Splitting</text>
-      <text x="12" y="56" class="body-text">• /api/v1/orders -&gt; Port 3001</text>
-      <text x="12" y="84" class="body-text">• /api/v1/users -&gt; Port 3002</text>
-      <text x="12" y="112" class="body-text">• Preserves X-Forwarded-For</text>
-      <text x="12" y="140" class="subtitle-text">High-throughput reverse proxy</text>
-    </g>
+    <text x="75" y="66" class="card-title">HTTP Client</text>
+    <text x="75" y="82" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">cURL / Browser</text>
+    <!-- Subtitle outside below card -->
+    <text x="75" y="116" class="card-sub">Public Consumers</text>
   </g>
 
-  <!-- Arrow: 2. Proxy (:3001) -->
-  <rect x="784" y="98" width="110" height="30" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2" />
-  <text x="839" y="118" text-anchor="middle" class="arrow-label">2. Proxy (:3001)</text>
-  <line x1="760" y1="140" x2="918" y2="140" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- DASHER 1: Client to Load Balancer -->
+  <path d="M 195 187 L 265 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="202" y="168" width="55" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="229" y="181" font-family="Inter, sans-serif" font-size="9.5px" font-weight="600" fill="#0f172a" text-anchor="middle">Port 8080</text>
 
-  <!-- Arrow: 3. Proxy (:3002) -->
-  <rect x="784" y="308" width="110" height="30" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2" />
-  <text x="839" y="328" text-anchor="middle" class="arrow-label">3. Proxy (:3002)</text>
-  <line x1="760" y1="350" x2="918" y2="350" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
-
-  <!-- Component: Orders Service -->
-  <g transform="translate(920, 20)">
-    <rect width="340" height="230" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" />
-    <rect width="340" height="58" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
-    <rect y="48" width="340" height="10" fill="#ede9fe" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
+  <!-- NODE 2: Poridhi Load Balancer (Light Purple) -->
+  <g transform="translate(270, 140)">
+    <rect x="0" y="0" width="155" height="95" rx="8" fill="#e1d5e7" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Load Balancer Router Icon -->
+    <g transform="translate(57, 12)">
+      <circle cx="20" cy="17" r="15" fill="#ffffff" stroke="#7e22ce" stroke-width="1.5" />
+      <line x1="12" y1="17" x2="28" y2="17" stroke="#7e22ce" stroke-width="1.5" />
+      <polygon points="28,17 24,14 24,20" fill="#7e22ce" />
+      <line x1="20" y1="9" x2="20" y2="25" stroke="#7e22ce" stroke-width="1.5" />
+      <polygon points="20,9 17,13 23,13" fill="#7e22ce" />
     </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Orders Service</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 3001 (Internal Network)</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="310" height="138" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
-      <rect width="310" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Orders Microservice Domain</text>
-      <text x="12" y="56" class="body-text">• GET /orders and POST /orders</text>
-      <text x="12" y="84" class="body-text">• Dedicated order fulfillment logic</text>
-      <text x="12" y="112" class="subtitle-text">Protected from direct external exposure</text>
-    </g>
+    <text x="77" y="66" class="card-title">Poridhi LB</text>
+    <text x="77" y="82" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">Host Port 8080</text>
+    <!-- Subtitle outside below card -->
+    <text x="77" y="116" class="card-sub">Ingress Entrypoint</text>
   </g>
 
-  <!-- Component: Users Service -->
-  <g transform="translate(920, 270)">
-    <rect width="340" height="230" rx="8" fill="#f0fdf4" stroke="#059669" stroke-width="2" />
-    <rect width="340" height="58" rx="8" fill="#dcfce7" stroke="#059669" stroke-width="1.5" />
-    <rect y="48" width="340" height="10" fill="#dcfce7" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#059669" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
-    </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Users Service</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Port 3002 (Internal Network)</text>
+  <!-- DASHER 2: Load Balancer to Nginx Gateway -->
+  <path d="M 425 187 L 495 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="432" y="168" width="56" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="460" y="181" font-family="Inter, sans-serif" font-size="9.5px" font-weight="600" fill="#0f172a" text-anchor="middle">Proxy Pass</text>
 
-    <g transform="translate(15, 75)">
-      <rect width="310" height="138" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.2" />
-      <rect width="310" height="32" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Users Microservice Domain</text>
-      <text x="12" y="56" class="body-text">• GET /users and GET /users/:id</text>
-      <text x="12" y="84" class="body-text">• User identity and profile management</text>
-      <text x="12" y="112" class="subtitle-text">Isolated service domain compute</text>
+  <!-- NODE 3: Nginx API Gateway (Mint Green) -->
+  <g transform="translate(500, 140)">
+    <rect x="0" y="0" width="165" height="95" rx="8" fill="#d5e8d4" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Nginx Gateway / Shield Icon -->
+    <g transform="translate(63, 10)">
+      <polygon points="20,2 37,9 37,25 20,36 3,25 3,9" fill="#ffffff" stroke="#15803d" stroke-width="1.5" />
+      <path d="M 12 18 L 18 24 L 28 13" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </g>
+    <text x="82" y="66" class="card-title">Nginx Gateway</text>
+    <text x="82" y="82" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">Auth &amp; Rate Limiter</text>
+    <!-- Subtitle outside below card -->
+    <text x="82" y="116" class="card-sub">Central Edge Ingress</text>
   </g>
 
-  <!-- Component: Docker Network -->
-  <g transform="translate(1340, 20)">
-    <rect width="300" height="480" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
-    <rect width="300" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
-    <rect y="48" width="300" height="10" fill="#fef3c7" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z" fill="#0284c7" />
-    </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Docker Network</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Private Bridge Network (lab-net)</text>
+  <!-- BRANCHING FROM NGINX TO MICROSERVICES (Tree branching style) -->
+  <path d="M 665 187 L 710 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" />
 
-    <g transform="translate(15, 75)">
-      <rect width="270" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
-      <rect width="270" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Service Isolation</text>
-      <text x="12" y="56" class="body-text">• Internal DNS: orders_service:3001</text>
-      <text x="12" y="84" class="body-text">• Internal DNS: users_service:3002</text>
-      <text x="12" y="112" class="body-text">• Ports 3001 and 3002 internal only</text>
-      <text x="12" y="140" class="body-text">• Accessible strictly via Gateway</text>
-    </g>
+  <!-- Upper Branch to Orders Microservice -->
+  <path d="M 710 187 L 710 125 L 755 125" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="668" y="103" width="82" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="709" y="116" font-family="Inter, sans-serif" font-size="9px" font-weight="600" fill="#0f172a" text-anchor="middle">/api/v1/orders</text>
 
-    <g transform="translate(15, 257)">
-      <rect width="270" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
-      <rect width="270" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Edge Defense Benefits</text>
-      <text x="12" y="56" class="body-text">• Centralized authentication policy</text>
-      <text x="12" y="84" class="body-text">• Uniform rate quota enforcement</text>
-      <text x="12" y="112" class="body-text">• Single ingress IP and SSL endpoint</text>
-      <text x="12" y="140" class="subtitle-text">Production standard topology</text>
+  <!-- Lower Branch to Users Microservice -->
+  <path d="M 710 187 L 710 245 L 755 245" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="670" y="248" width="78" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="709" y="261" font-family="Inter, sans-serif" font-size="9px" font-weight="600" fill="#0f172a" text-anchor="middle">/api/v1/users</text>
+
+  <!-- NODE 4: Orders Service (Warm Cream) -->
+  <g transform="translate(760, 80)">
+    <rect x="0" y="0" width="165" height="90" rx="8" fill="#fff2cc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Microservice Box Icon -->
+    <g transform="translate(63, 8)">
+      <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#ffffff" stroke="#b45309" stroke-width="1.5" />
+      <line x1="20" y1="20" x2="20" y2="38" stroke="#b45309" stroke-width="1.2" />
+      <line x1="20" y1="20" x2="36" y2="11" stroke="#b45309" stroke-width="1.2" />
+      <line x1="20" y1="20" x2="4" y2="11" stroke="#b45309" stroke-width="1.2" />
     </g>
+    <text x="82" y="62" class="card-title">Orders Service</text>
+    <text x="82" y="78" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">Internal Port 3001</text>
+    <!-- Subtitle outside below card -->
+    <text x="82" y="108" class="card-sub">Private Microservice</text>
   </g>
+
+  <!-- NODE 5: Users Service (Soft Gray) -->
+  <g transform="translate(760, 200)">
+    <rect x="0" y="0" width="165" height="90" rx="8" fill="#f5f5f5" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Users Group Icon -->
+    <g transform="translate(63, 8)">
+      <circle cx="15" cy="12" r="6" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+      <path d="M 5 28 A 10 10 0 0 1 25 28" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+      <circle cx="27" cy="14" r="4.5" fill="#ffffff" stroke="#475569" stroke-width="1.2" />
+      <path d="M 23 28 A 7 7 0 0 1 33 28" fill="#ffffff" stroke="#475569" stroke-width="1.2" />
+    </g>
+    <text x="82" y="62" class="card-title">Users Service</text>
+    <text x="82" y="78" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">Internal Port 3002</text>
+    <!-- Subtitle outside below card -->
+    <text x="82" y="108" class="card-sub">Private Microservice</text>
+  </g>
+
+  <!-- Network Isolation Callout (Right Column) -->
+  <g transform="translate(955, 140)">
+    <rect x="0" y="0" width="115" height="95" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" />
+    <text x="57" y="24" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#334155" text-anchor="middle">Docker Bridge</text>
+    <text x="57" y="44" class="code-badge" fill="#15803d" text-anchor="middle">lab-net</text>
+    <text x="57" y="64" font-family="Inter, sans-serif" font-size="9px" fill="#64748b" text-anchor="middle">Zero Host Ports</text>
+    <text x="57" y="78" font-family="Inter, sans-serif" font-size="9px" fill="#64748b" text-anchor="middle">Pure Internal DNS</text>
+  </g>
+  <path d="M 925 125 L 945 125 L 945 187 L 955 187" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3" />
+
+  <!-- ========================================================== -->
+  <!-- MIDDLE DIVIDER & SECTION TITLE                             -->
+  <!-- ========================================================== -->
+  <line x1="45" y1="320" x2="1075" y2="320" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3" />
+
+  <g transform="translate(45, 345)">
+    <text x="0" y="0" class="sec-title">Unified Routing, Authentication &amp; Rate-Limiting Lifecycle</text>
+    <text x="0" y="18" class="banner-sub">How traffic moves through Nginx edge verification, credential validation, upstream reverse-proxying, and quota enforcement</text>
+  </g>
+
+  <!-- ========================================================== -->
+  <!-- BOTTOM SECTION: 3 DRAW.IO WORKFLOW CARDS                   -->
+  <!-- ========================================================== -->
+
+  <!-- PANEL 1: AUTHORIZED ROUTING -->
+  <g transform="translate(45, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#dae8fc" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#1e3a8a">1. Authorized Proxy Routing (200)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="145" height="18" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#1d4ed8">X-API-Key Validated</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#2563eb" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Client Calls API via Gateway</text>
+      <text x="24" y="24" class="flow-text">Header: <tspan class="code-badge" fill="#0f172a">X-API-Key: valid-key-123</tspan></text>
+      <text x="24" y="38" class="flow-text">Target: <tspan class="code-badge" fill="#0f172a">/api/v1/orders</tspan> or <tspan class="code-badge" fill="#0f172a">/api/v1/users</tspan></text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#2563eb" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Nginx Edge Validation &amp; Rate Check</text>
+      <text x="24" y="24" class="flow-text">• Checks credential in Nginx <tspan class="code-badge">map</tspan> table</text>
+      <text x="24" y="38" class="flow-text">• Confirms request is within 5 req/s quota</text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 192)">
+      <circle cx="8" cy="8" r="8" fill="#16a34a" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title" fill="#15803d">Internal Upstream Dispatch</text>
+      <text x="24" y="24" class="flow-text">• Proxies to <tspan class="code-badge">http://orders_service:3001</tspan></text>
+      <text x="24" y="38" class="flow-text">• Appends headers: <tspan class="code-badge">X-Real-IP</tspan>, <tspan class="code-badge">X-Forwarded-For</tspan></text>
+      <text x="24" y="52" class="flow-text">• Returns upstream payload: <tspan font-weight="700" fill="#16a34a">200 OK</tspan></text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Single Entrypoint Pattern:</text>
+    <text x="20" y="301" class="note-text">Clients interact with a single port (8080); internal service</text>
+    <text x="20" y="313" class="note-text">ports are entirely hidden from the outside world.</text>
+  </g>
+
+  <!-- PANEL 2: EDGE AUTHENTICATION GUARD -->
+  <g transform="translate(398, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#fee2e2" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#991b1b">2. Edge Auth Guard (401 Unauthorized)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="145" height="18" rx="3" fill="#fef2f2" stroke="#fecaca" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#b91c1c">Zero Backend Compute</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Unauthenticated Request Arrives</text>
+      <text x="24" y="24" class="flow-text">Condition: Missing or invalid <tspan class="code-badge">X-API-Key</tspan></text>
+      <text x="24" y="38" class="flow-text">Caller tries accessing protected service</text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Nginx Map Match Fails</text>
+      <text x="24" y="24" class="flow-text">• Map evaluates: <tspan class="code-badge">$api_client_name = ""</tspan></text>
+      <text x="24" y="38" class="flow-text">• Trigger: <tspan class="code-badge">if ($api_client_name = "") { return 401; }</tspan></text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 192)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title" fill="#991b1b">Immediate Gateway Drop</text>
+      <text x="24" y="24" class="flow-text">• Returns: <tspan font-weight="700" fill="#dc2626">401 Unauthorized</tspan></text>
+      <text x="24" y="38" class="flow-text">• Message: "Unauthorized: Invalid API Key"</text>
+      <text x="24" y="52" class="flow-text">• Upstream containers never invoked</text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Security &amp; Resource Efficiency:</text>
+    <text x="20" y="301" class="note-text">Unauthorized traffic is blocked at the gateway perimeter,</text>
+    <text x="20" y="313" class="note-text">protecting downstream database and microservice CPU.</text>
+  </g>
+
+  <!-- PANEL 3: TOKEN BUCKET RATE LIMITING -->
+  <g transform="translate(750, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#fff2cc" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#b45309">3. Rate Limiting (429 Too Many Requests)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="165" height="18" rx="3" fill="#fefce8" stroke="#fef08a" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#b45309">limit_req_zone (5r/s)</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#b45309" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Traffic Spike Exceeds Quota</text>
+      <text x="24" y="24" class="flow-text">• Client bursts multiple requests rapidly</text>
+      <text x="24" y="38" class="flow-text">• Exceeds configured rate policy: <tspan class="code-badge">rate=5r/s</tspan></text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#b45309" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Token Bucket Buffer Depletion</text>
+      <text x="24" y="24" class="flow-text">• Configuration: <tspan class="code-badge">burst=5 nodelay</tspan></text>
+      <text x="24" y="38" class="flow-text">• Leaky bucket leaks at 5 req/s</text>
+      <text x="24" y="52" class="flow-text">• Excess tokens overflow immediately</text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 206)">
+      <circle cx="8" cy="8" r="8" fill="#b45309" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title" fill="#b45309">Direct 429 Throttle Rejection</text>
+      <text x="24" y="24" class="flow-text">Returns: <tspan font-weight="700" fill="#b45309">429 Too Many Requests</tspan></text>
+      <text x="24" y="38" class="flow-text">Status code set via: <tspan class="code-badge">limit_req_status 429</tspan></text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Noisy Neighbor Protection:</text>
+    <text x="20" y="301" class="note-text">Rate limits isolate aggressive consumers, ensuring reliable</text>
+    <text x="20" y="313" class="note-text">quality of service (QoS) for all legitimate API clients.</text>
+  </g>
+
 </svg>

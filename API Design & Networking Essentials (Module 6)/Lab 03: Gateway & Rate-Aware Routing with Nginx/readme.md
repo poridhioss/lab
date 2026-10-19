@@ -1,48 +1,56 @@
 # Lab 03: API Gateway & Rate-Aware Routing with Nginx
 
-In a microservices architecture, exposing internal services directly to public traffic introduces severe security risks, redundant authentication logic, and vulnerability to noisy-neighbor traffic spikes. An **API Gateway** acts as the single ingress gatekeeper that handles SSL termination, client authentication, rate-limiting quotas, and request routing across private backend services. In this lab, you will configure **Nginx** as an API gateway fronting two isolated Node.js microservices (`Orders Service` and `Users Service`) in your Poridhi cloud environment using **Docker Compose**.
+Welcome to **Lab 03**! In this lab, you will design and implement a production-grade **API Gateway** pattern using **Nginx** and **Docker Compose** in your Poridhi cloud environment.
+
+In modern cloud-native architectures, you almost never expose individual backend microservices directly to the public internet. If you had 20 internal services, exposing them directly would mean managing 20 public firewall ports, writing redundant authentication logic in 20 different codebases, and risking an outage whenever a single aggressive client spams one of the services.
+
+Instead, companies like Netflix, Uber, and Shopify place an **API Gateway** at the edge of their network. The gateway acts as a high-performance reverse proxy that centralizes:
+1. **Edge Authentication:** Verifying client API keys before requests ever touch downstream application servers.
+2. **Rate Limiting & Traffic Shaping:** Protecting private services from traffic surges with token-bucket rate limits.
+3. **Dynamic Path-Based Routing:** Dispatching `/api/v1/orders` and `/api/v1/users` to isolated internal microservices running on a private Docker bridge network.
+
+---
+
+## Architecture & Unified Ingress Topology
+
+Below is the complete architectural layout and end-to-end routing lifecycle for your multi-service cluster. Everything—from public client traffic through the Poridhi Load Balancer to Nginx edge validation and isolated backend dispatch—is captured in this single diagram:
 
 <p align="center">
-  <img src="images/lab03-architecture.svg" alt="Lab 03 Architecture Overview" width="900">
+  <img src="images/lab03-architecture.svg" alt="Lab 03 Architecture & Ingress Topology" width="950">
 </p>
 
----
+### Understanding the Three Execution Lifecycles
 
-## Concepts
+As illustrated in the diagram above, your Nginx Gateway handles three distinct operational lifecycles:
 
-| Term | Definition |
-| :--- | :--- |
-| **API Gateway** | A reverse proxy server that sits between clients and backend microservices, providing centralized routing, authentication, SSL offloading, and rate limiting. |
-| **Reverse Proxy** | An intermediate server that receives public client requests and distributes them to internal backend servers, concealing the internal network topology. |
-| **Token Bucket Rate Limiting** | An algorithm implemented via Nginx `limit_req_zone` that permits steady traffic rates (e.g., 5 req/s) with burst buffers (`burst=5 nodelay`), rejecting excess traffic with `429 Too Many Requests`. |
-| **Edge Authentication** | Validating credentials (such as API keys or JWTs) at the gateway boundary before requests ever reach downstream compute services. |
-| **Private Bridge Network** | A container network (`lab-net`) where backend services communicate on private internal DNS names (`orders_service:3001`, `users_service:3002`) without publishing ports to the host. |
+1. **Authorized Dynamic Routing (`HTTP 200 OK`):**
+   - The client calls `GET /api/v1/orders` or `GET /api/v1/users` supplying a valid `X-API-Key: valid-key-123`.
+   - Nginx validates the key using its memory-mapped lookup table and verifies that the request complies with the rate limit zone.
+   - It reverse-proxies the request over the private Docker bridge (`lab-net`) to `http://orders_service:3001` or `http://users_service:3002`.
+   - The internal service responds with `200 OK`, and Nginx relays the payload back to the client while forwarding real client IP headers.
 
----
+2. **Edge Authentication Guard (`HTTP 401 Unauthorized`):**
+   - If a request arrives with an invalid or missing `X-API-Key`, Nginx's declarative map evaluates `$api_client_name` to empty.
+   - Nginx immediately terminates the connection with `401 Unauthorized` directly at the edge.
+   - **Crucial engineering benefit:** Downstream Node.js containers and databases are never invoked, conserving 100% of internal compute resources!
 
-## Request Routing & Edge Defense Flow
-
-The sequence diagram below illustrates how incoming HTTP requests are processed, authenticated, rate-checked, and routed by Nginx to the upstream services:
-
-<p align="center">
-  <img src="images/lab03-flow.svg" alt="Lab 03 Request Routing Flow" width="900">
-</p>
-
-1. **Authorized Routing:** A client calls `GET /api/v1/orders` supplying a valid `X-API-Key`. The gateway validates the key against its authorization map, confirms compliance with the rate quota zone, and reverse proxies the call to `http://orders_service:3001`.
-2. **Multi-Service Dispatch:** A client calls `GET /api/v1/users`. Nginx dynamically routes the request to `http://users_service:3002`, preserving client IP headers.
-3. **Edge Guarding (401 Unauthorized):** Requests lacking a valid `X-API-Key` are immediately dropped with `HTTP 401 Unauthorized` at the Nginx edge without consuming backend CPU or RAM.
-4. **Quota Enforcement (429 Too Many Requests):** High-frequency bursts exceeding the configured token bucket policy receive `HTTP 429 Too Many Requests` directly from Nginx.
+3. **Token Bucket Rate Limiting (`HTTP 429 Too Many Requests`):**
+   - Nginx enforces a `limit_req_zone` configured for `rate=5r/s` with a small burst buffer (`burst=5 nodelay`).
+   - If an aggressive client spams requests beyond this quota, Nginx drops the excess calls with `429 Too Many Requests`.
+   - This "noisy-neighbor" protection prevents any single consumer from degrading cluster performance.
 
 ---
 
-## Objectives
+## Core Concepts at a Glance
 
-- Configure Nginx as an API Gateway with host port 8080 (internal container port 80).
-- Implement API Key verification using Nginx declarative `map` blocks.
-- Configure token-bucket rate limiting (`limit_req_zone`) to defend against traffic spikes.
-- Route `/api/v1/orders` and `/api/v1/users` to isolated upstream microservices.
-- Enclose backend services inside an isolated Docker Compose network with zero host port exposure.
-- Test routing, unauthorized rejection (401), and rate limit enforcement (429) using automated scripts.
+| Concept | Why It Matters | Real-World Intuition |
+| :--- | :--- | :--- |
+| **API Gateway** | Single public entry point fronting multiple internal microservices. | Like a secure building lobby with a security desk that checks badges and directs visitors to the right department. |
+| **Reverse Proxy** | An intermediary server that receives public client requests and forwards them to private backend servers. | Hides internal container topology and private ports from external visibility. |
+| **Edge Authentication** | Checking credentials (API keys / JWTs) at the gateway boundary. | Blocks malicious traffic at the perimeter before it consumes downstream application memory or CPU. |
+| **Token Bucket Rate Limiting** | Regulates traffic rates (`rate=5r/s`) while permitting controlled bursts (`burst=5 nodelay`). | Smooths traffic spikes and rejects spam with `HTTP 429 Too Many Requests`. |
+| **Declarative `map` Block** | High-performance hash table lookup in Nginx memory. | Evaluates incoming headers (`X-API-Key`) with $O(1)$ efficiency without invoking external auth services. |
+| **Private Docker Bridge (`lab-net`)** | Container network where services talk via internal DNS names (`orders_service:3001`). | Zero host port exposure; internal microservices are physically unreachable from the public internet except through Nginx. |
 
 ---
 
@@ -51,7 +59,7 @@ The sequence diagram below illustrates how incoming HTTP requests are processed,
 ```text
 lab03-gateway-routing/
 ├── docker-compose.yml       # Docker Compose multi-container stack
-├── nginx.conf               # Nginx API Gateway configuration (Auth + Rate Quotas + Routing)
+├── nginx.conf               # Nginx API Gateway config (Auth + Rate Quotas + Routing)
 ├── services/
 │   ├── orders-service/
 │   │   ├── package.json
@@ -61,15 +69,16 @@ lab03-gateway-routing/
 │       └── server.js        # Internal Users Microservice (Port 3002)
 ├── verify-gateway.sh        # Automated cURL test script
 └── images/
-    ├── lab03-architecture.svg
-    └── lab03-flow.svg
+    └── lab03-architecture.svg  # Master architecture & routing topology diagram
 ```
 
 ---
 
 ## Step 1: Initialize Project and Microservices
 
-Create the project directories:
+In this step, you will create the project directories and set up two lightweight Node.js microservices: the **Orders Service** (running on internal port `3001`) and the **Users Service** (running on internal port `3002`).
+
+### 1. Create directory structure:
 
 ```bash
 mkdir -p ~/lab03-gateway-routing/services/orders-service
@@ -79,7 +88,9 @@ cd ~/lab03-gateway-routing
 
 ![Create Directories](images/step1-create-dirs.png)
 
-### Configure Orders Microservice
+---
+
+### 2. Configure Orders Microservice
 
 Create `services/orders-service/package.json`:
 
@@ -99,54 +110,47 @@ cat << 'EOF' > services/orders-service/package.json
 EOF
 ```
 
-![Orders Service package.json](images/step1-orders-package-json.png)
+![Create Orders package.json](images/step1-orders-package-json.png)
 
 Create `services/orders-service/server.js`:
 
 ```bash
 cat << 'EOF' > services/orders-service/server.js
 const express = require('express');
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
-let orders = [
-  { id: 1, item: "Mechanical Keyboard", price: 120.00, status: "SHIPPED" },
-  { id: 2, item: "4K Monitor 27-inch", price: 350.00, status: "PROCESSING" }
+const orders = [
+  { id: 101, item: "Mechanical Keyboard", amount: 150.00, status: "CONFIRMED" },
+  { id: 102, item: "Ultra-Wide Monitor", amount: 450.00, status: "SHIPPED" },
+  { id: 103, item: "USB-C Docking Station", amount: 89.99, status: "PENDING" }
 ];
 
 app.get('/api/v1/orders', (req, res) => {
-  console.log(`[ORDERS SERVICE] Received request from Client IP: ${req.header('x-real-ip') || req.ip}`);
+  const clientName = req.header('X-Client-Name') || 'Unknown';
+  console.log(`[ORDERS SERVICE] Query processed for client: ${clientName}`);
   res.json({
-    service: "Orders Microservice",
+    service: "Orders Service",
     port: PORT,
+    authenticated_client: clientName,
+    count: orders.length,
     data: orders
   });
 });
 
-app.post('/api/v1/orders', (req, res) => {
-  const { item, price } = req.body || {};
-  const newOrder = {
-    id: orders.length + 1,
-    item: item || "Standard Item",
-    price: price || 99.99,
-    status: "CREATED"
-  };
-  orders.push(newOrder);
-  res.status(201).json(newOrder);
-});
-
-app.listen(PORT, () => {
-  console.log(`Orders Microservice listening on internal port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[Orders Service] Running on internal port ${PORT}`);
 });
 EOF
 ```
 
-![Orders Service server.js](images/step1-orders-server-js.png)
+![Create Orders server.js](images/step1-orders-server-js.png)
 
-### Configure Users Microservice
+---
+
+### 3. Configure Users Microservice
 
 Create `services/users-service/package.json`:
 
@@ -166,54 +170,57 @@ cat << 'EOF' > services/users-service/package.json
 EOF
 ```
 
-![Users Service package.json](images/step1-users-package-json.png)
+![Create Users package.json](images/step1-users-package-json.png)
 
 Create `services/users-service/server.js`:
 
 ```bash
 cat << 'EOF' > services/users-service/server.js
 const express = require('express');
-
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.use(express.json());
 
 const users = [
-  { id: 10, name: "Alice Johnson", role: "Engineering Lead", email: "alice@example.com" },
-  { id: 11, name: "Bob Smith", role: "Site Reliability Engineer", email: "bob@example.com" }
+  { id: 1, name: "Alice Rahman", role: "DevOps Engineer", active: true },
+  { id: 2, name: "Bob Smith", role: "Backend Architect", active: true },
+  { id: 3, name: "Charlie Davis", role: "Frontend Developer", active: false }
 ];
 
 app.get('/api/v1/users', (req, res) => {
-  console.log(`[USERS SERVICE] Received request from Client IP: ${req.header('x-real-ip') || req.ip}`);
+  const clientName = req.header('X-Client-Name') || 'Unknown';
+  console.log(`[USERS SERVICE] Query processed for client: ${clientName}`);
   res.json({
-    service: "Users Microservice",
+    service: "Users Service",
     port: PORT,
+    authenticated_client: clientName,
+    count: users.length,
     data: users
   });
 });
 
-app.get('/api/v1/users/:id', (req, res) => {
-  const user = users.find(u => u.id === parseInt(req.params.id, 10));
-  if (!user) {
-    return res.status(404).json({ error: "User not found" });
-  }
-  res.json({ service: "Users Microservice", data: user });
-});
-
-app.listen(PORT, () => {
-  console.log(`Users Microservice listening on internal port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[Users Service] Running on internal port ${PORT}`);
 });
 EOF
 ```
 
-![Users Service server.js](images/step1-users-server-js.png)
+![Create Users server.js](images/step1-users-server-js.png)
 
 ---
 
-## Step 2: Configure the Nginx API Gateway (`nginx.conf`)
+## Step 2: Configure Nginx API Gateway (`nginx.conf`)
 
-Create `nginx.conf`. This configuration establishes the rate-limiting zone, maps authorized API keys, and routes traffic:
+Now write the Nginx configuration. This file governs the entire ingress layer:
+
+- **Upstream Definitions:** Uses Docker internal service names (`orders_service:3001` and `users_service:3002`).
+- **Token Bucket Rate Limiting:** Allocates a 10MB memory zone (`limit_req_zone`) tracking client IPs at `rate=5r/s`.
+- **API Key Map:** Maps valid keys (`valid-key-123`, `admin-key-999`) to client identities with $O(1)$ memory lookups.
+- **Header Injection:** Forwards client metadata (`X-Real-IP`, `X-Forwarded-For`, `X-Client-Name`) to upstreams.
+- **Edge Security:** Checks `$api_client_name` on protected endpoints; rejects unauthorized requests with `401`.
+
+Create `nginx.conf`:
 
 ```bash
 cat << 'EOF' > nginx.conf
@@ -222,92 +229,84 @@ events {
 }
 
 http {
-    include       mime.types;
-    default_type  application/json;
-
-    # Rate Limiting: 5 requests per second per IP with burst allowance of 5
-    limit_req_zone $binary_remote_addr zone=api_quota:10m rate=5r/s;
+    # 1. Rate Limiting Zone: 5 requests/sec per client IP with a 10MB memory zone
+    limit_req_zone $binary_remote_addr zone=api_limit:10m rate=5r/s;
     limit_req_status 429;
 
-    # API Key Authentication Mapping
-    map $http_x_api_key $api_client_authorized {
-        default 0;
-        "valid-secret-key-123" 1;
-        "prod-partner-key-999" 1;
+    # 2. Declarative API Key Authentication Map
+    map $http_x_api_key $api_client_name {
+        default             "";
+        "valid-key-123"     "Frontend-App";
+        "admin-key-999"     "Admin-Portal";
     }
 
-    upstream orders_backend {
+    # 3. Upstream Internal Services
+    upstream orders_upstream {
         server orders_service:3001;
     }
 
-    upstream users_backend {
+    upstream users_upstream {
         server users_service:3002;
     }
 
     server {
         listen 80;
-        server_name localhost;
 
         # Standard Proxy Headers
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Client-Name $api_client_name;
 
-        # Custom JSON Error Responses
-        error_page 401 = @error401;
-        error_page 429 = @error429;
-
-        location @error401 {
-            return 401 '{"type":"https://api.example.com/errors/unauthorized","title":"Unauthorized","status":401,"detail":"Missing or invalid X-API-Key header."}\n';
+        # Public Health Endpoint (Bypasses Auth & Rate Limits)
+        location /healthz {
+            access_log off;
+            add_header Content-Type application/json;
+            return 200 '{"status":"UP","gateway":"Nginx","timestamp":"$time_iso8601"}';
         }
 
-        location @error429 {
-            return 429 '{"type":"https://api.example.com/errors/rate-limit-exceeded","title":"Too Many Requests","status":429,"detail":"Rate quota of 5 requests/sec exceeded. Please slow down."}\n';
-        }
-
-        # Health Probe (Unauthenticated)
-        location /health {
-            return 200 '{"status":"UP","gateway":"Nginx","version":"1.25"}\n';
-        }
-
-        # Route 1: Orders Microservice
+        # Protected Orders Route
         location /api/v1/orders {
-            # Enforce API Key Authentication
-            if ($api_client_authorized = 0) {
-                return 401;
+            # Edge Authentication Check
+            if ($api_client_name = "") {
+                return 401 '{"error":"Unauthorized: Invalid or Missing API Key","status":401}';
             }
 
-            # Enforce Rate Limiting Quota
-            limit_req zone=api_quota burst=5 nodelay;
+            # Rate Limit Enforcement: Allow burst of 5 with nodelay
+            limit_req zone=api_limit burst=5 nodelay;
 
-            proxy_pass http://orders_backend;
+            proxy_pass http://orders_upstream;
         }
 
-        # Route 2: Users Microservice
+        # Protected Users Route
         location /api/v1/users {
-            # Enforce API Key Authentication
-            if ($api_client_authorized = 0) {
-                return 401;
+            # Edge Authentication Check
+            if ($api_client_name = "") {
+                return 401 '{"error":"Unauthorized: Invalid or Missing API Key","status":401}';
             }
 
-            # Enforce Rate Limiting Quota
-            limit_req zone=api_quota burst=5 nodelay;
+            # Rate Limit Enforcement
+            limit_req zone=api_limit burst=5 nodelay;
 
-            proxy_pass http://users_backend;
+            proxy_pass http://users_upstream;
         }
     }
 }
 EOF
 ```
 
-![Configure Nginx API Gateway](images/step2-nginx-conf.png)
+![Create nginx.conf](images/step2-nginx-conf.png)
 
 ---
 
-## Step 3: Configure Docker Compose (`docker-compose.yml`)
+## Step 3: Define Multi-Service Stack with Docker Compose
 
-Create `docker-compose.yml` to orchestrate the gateway and services inside a private bridge network:
+Now assemble the entire system in `docker-compose.yml`. 
+
+> [!IMPORTANT]
+> Notice that `orders_service` and `users_service` do **NOT** expose any host ports! Only Nginx exposes port `8080:80`. The microservices communicate exclusively across the private `lab-net` bridge network.
+
+Create `docker-compose.yml`:
 
 ```bash
 cat << 'EOF' > docker-compose.yml
@@ -326,6 +325,7 @@ services:
       - users_service
     networks:
       - lab-net
+    restart: unless-stopped
 
   orders_service:
     image: node:18-alpine
@@ -336,6 +336,7 @@ services:
     command: sh -c "npm install && node server.js"
     networks:
       - lab-net
+    restart: unless-stopped
 
   users_service:
     image: node:18-alpine
@@ -346,6 +347,7 @@ services:
     command: sh -c "npm install && node server.js"
     networks:
       - lab-net
+    restart: unless-stopped
 
 networks:
   lab-net:
@@ -357,244 +359,213 @@ EOF
 
 ---
 
-## Step 4: Launch the Multi-Service Gateway Stack
+## Step 4: Launch the Microservices Cluster
 
-Start all containers in detached mode:
+Start all three containers in the background:
 
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
 
-![Launch Multi-Service Gateway Stack](images/step4-docker-compose-up.png)
+![Launch Containers](images/step4-docker-compose-up.png)
 
-Verify that all three containers are healthy and running:
+Verify that all three services are running healthily:
 
 ```bash
 docker compose ps
 ```
 
-![Verify Containers Status](images/step4-docker-compose-ps.png)
+![Verify Running Containers](images/step4-docker-compose-ps.png)
 
 Expected output:
-
 ```text
 NAME           IMAGE          COMMAND                  SERVICE          CREATED         STATUS         PORTS
 lab03-gateway  nginx:alpine   "/docker-entrypoint.…"   gateway          5 seconds ago   Up 4 seconds   0.0.0.0:8080->80/tcp
-lab03-orders   node:18-alpine "docker-entrypoint.s…"   orders_service   5 seconds ago   Up 4 seconds   
-lab03-users    node:18-alpine "docker-entrypoint.s…"   users_service    5 seconds ago   Up 4 seconds   
+lab03-orders   node:18-alpine "sh -c 'npm install …"   orders_service   5 seconds ago   Up 4 seconds   
+lab03-users    node:18-alpine "sh -c 'npm install …"   users_service    5 seconds ago   Up 4 seconds   
 ```
-
-Notice that only port `8080` (the gateway) is exposed to the host machine. Ports `3001` and `3002` are fully isolated within `lab-net`.
 
 ---
 
-## Step 5: Test Gateway Routing and Edge Security
+## Step 5: Verify Gateway Routing, Auth, and Rate Limiting
 
-### 1. Test Gateway Health Endpoint
+Now, test each gateway capability using `curl`.
+
+### 1. Test Public Health Endpoint (Expect 200 OK)
+
+The `/healthz` endpoint is open to monitoring tools without requiring an API key:
 
 ```bash
-curl -i http://localhost:8080/health
+curl -i http://localhost:8080/healthz
 ```
 
-![Test Gateway Health](images/step5-test1-health.png)
+![Test Health Endpoint](images/step5-test1-health.png)
 
 Expected output:
-
 ```text
 HTTP/1.1 200 OK
 Content-Type: application/json
 
-{"status":"UP","gateway":"Nginx","version":"1.25"}
+{"status":"UP","gateway":"Nginx","timestamp":"2026-10-02T02:10:00+00:00"}
 ```
 
-### 2. Verify Authentication Enforcement (Expect 401 Unauthorized)
+---
 
-Make a request without providing the `X-API-Key` header:
+### 2. Test Edge Authentication Failure (Expect 401 Unauthorized)
+
+Call the protected `/api/v1/orders` endpoint **without** the `X-API-Key` header:
 
 ```bash
 curl -i http://localhost:8080/api/v1/orders
 ```
 
-![Verify Authentication Enforcement](images/step5-test2-auth-unauthorized.png)
+![Test Auth Failure](images/step5-test2-auth-unauthorized.png)
 
 Expected output:
-
 ```text
 HTTP/1.1 401 Unauthorized
-Content-Type: application/json
 
-{"type":"https://api.example.com/errors/unauthorized","title":"Unauthorized","status":401,"detail":"Missing or invalid X-API-Key header."}
+{"error":"Unauthorized: Invalid or Missing API Key","status":401}
 ```
 
-The request was rejected directly at the Nginx edge; `orders_service` was never contacted.
+> [!NOTE]
+> Nginx rejected the request instantly. The `orders-service` container was never invoked!
 
-### 3. Verify Orders Service Routing (Expect 200 OK)
+---
 
-Supply the valid API key:
+### 3. Test Authorized Route to Orders Service (Expect 200 OK)
+
+Provide a valid `X-API-Key: valid-key-123`:
 
 ```bash
-curl -s -H "X-API-Key: valid-secret-key-123" http://localhost:8080/api/v1/orders | jq .
+curl -i -H "X-API-Key: valid-key-123" http://localhost:8080/api/v1/orders
 ```
 
-![Verify Orders Service Routing](images/step5-test3-orders-service.png)
+![Test Orders Routing](images/step5-test3-orders-service.png)
 
 Expected output:
+```text
+HTTP/1.1 200 OK
 
-```json
 {
-  "service": "Orders Microservice",
+  "service": "Orders Service",
   "port": 3001,
-  "data": [
-    { "id": 1, "item": "Mechanical Keyboard", "price": 120, "status": "SHIPPED" },
-    { "id": 2, "item": "4K Monitor 27-inch", "price": 350, "status": "PROCESSING" }
-  ]
+  "authenticated_client": "Frontend-App",
+  "count": 3,
+  "data": [ ... ]
 }
 ```
 
-### 4. Verify Users Service Routing (Expect 200 OK)
+Notice that Nginx successfully injected `authenticated_client: "Frontend-App"` into the downstream microservice!
 
-Query the Users endpoint through the same gateway:
+---
+
+### 4. Test Authorized Route to Users Service (Expect 200 OK)
+
+Now query the separate `users-service` through the exact same gateway:
 
 ```bash
-curl -s -H "X-API-Key: valid-secret-key-123" http://localhost:8080/api/v1/users | jq .
+curl -i -H "X-API-Key: valid-key-123" http://localhost:8080/api/v1/users
 ```
 
-![Verify Users Service Routing](images/step5-test4-users-service.png)
+![Test Users Routing](images/step5-test4-users-service.png)
 
 Expected output:
+```text
+HTTP/1.1 200 OK
 
-```json
 {
-  "service": "Users Microservice",
+  "service": "Users Service",
   "port": 3002,
-  "data": [
-    { "id": 10, "name": "Alice Johnson", "role": "Engineering Lead", "email": "alice@example.com" },
-    { "id": 11, "name": "Bob Smith", "role": "Site Reliability Engineer", "email": "bob@example.com" }
-  ]
+  "authenticated_client": "Frontend-App",
+  "count": 3,
+  "data": [ ... ]
 }
 ```
 
-### 5. Verify Rate Limit Quota Enforcement (Expect 429 Too Many Requests)
+---
 
-Create the verification script `verify-gateway.sh`:
+### 5. Automated Verification & Rate-Limit Spikes
+
+Create `verify-gateway.sh` to test route verification and flood the gateway with a burst of requests to trigger rate limiting:
 
 ```bash
 cat << 'EOF' > verify-gateway.sh
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
+BASE_URL="http://localhost:8080"
+VALID_KEY="valid-key-123"
+INVALID_KEY="wrong-key-000"
 
-GATEWAY_URL="http://localhost:8080"
-VALID_KEY="valid-secret-key-123"
+echo "=== 1. Testing Healthz ==="
+curl -s -o /dev/null -w "Health Status: %{http_code}\n" "$BASE_URL/healthz"
 
-echo "=========================================================="
-echo "  Lab 03: API Gateway & Rate-Aware Routing Verification   "
-echo "=========================================================="
-echo ""
+echo -e "\n=== 2. Testing Missing Key (Expect 401) ==="
+curl -s -o /dev/null -w "Missing Key Status: %{http_code}\n" "$BASE_URL/api/v1/orders"
 
-echo "1. Checking Gateway Health (Unauthenticated)..."
-curl -s -i "$GATEWAY_URL/health" | head -n 8
-echo ""
+echo -e "\n=== 3. Testing Invalid Key (Expect 401) ==="
+curl -s -o /dev/null -w "Invalid Key Status: %{http_code}\n" -H "X-API-Key: $INVALID_KEY" "$BASE_URL/api/v1/orders"
 
-echo "2. Calling /api/v1/orders WITHOUT API Key (Expect 401 Unauthorized)..."
-HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$GATEWAY_URL/api/v1/orders")
-echo "HTTP Status Code: $HTTP_CODE"
-if [ "$HTTP_CODE" -eq 401 ]; then
-  echo " PASS: 401 Unauthorized enforced at Gateway edge."
-else
-  echo " FAIL: Expected 401, got $HTTP_CODE"
-fi
-echo ""
+echo -e "\n=== 4. Testing Authorized Orders Route (Expect 200) ==="
+curl -s -o /dev/null -w "Orders Route Status: %{http_code}\n" -H "X-API-Key: $VALID_KEY" "$BASE_URL/api/v1/orders"
 
-echo "3. Calling /api/v1/orders WITH Valid API Key (Expect 200 OK -> Orders Service)..."
-curl -s -H "X-API-Key: $VALID_KEY" "$GATEWAY_URL/api/v1/orders" | jq .
-echo ""
+echo -e "\n=== 5. Testing Authorized Users Route (Expect 200) ==="
+curl -s -o /dev/null -w "Users Route Status: %{http_code}\n" -H "X-API-Key: $VALID_KEY" "$BASE_URL/api/v1/users"
 
-echo "4. Calling /api/v1/users WITH Valid API Key (Expect 200 OK -> Users Service)..."
-curl -s -H "X-API-Key: $VALID_KEY" "$GATEWAY_URL/api/v1/users" | jq .
-echo ""
-
-echo "5. Testing Rate Limiting Quota (Sending 12 rapid concurrent requests)..."
-echo "Rate limit is 5r/s with burst=5. Excess requests must receive 429 Too Many Requests."
-COUNT_200=0
-COUNT_429=0
-
-for i in {1..12}; do
-  CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "X-API-Key: $VALID_KEY" "$GATEWAY_URL/api/v1/orders")
-  if [ "$CODE" -eq 200 ]; then
-    COUNT_200=$((COUNT_200 + 1))
-  elif [ "$CODE" -eq 429 ]; then
-    COUNT_429=$((COUNT_429 + 1))
-  fi
+echo -e "\n=== 6. Flooding Gateway to Test Rate Limiting (Expect 429) ==="
+for i in {1..15}; do
+  CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "X-API-Key: $VALID_KEY" "$BASE_URL/api/v1/orders")
+  echo "Request #$i -> Status $CODE"
 done
-
-echo "Results from 12 rapid requests: 200 OK = $COUNT_200, 429 Rate-Limited = $COUNT_429"
-if [ "$COUNT_429" -gt 0 ]; then
-  echo " PASS: Rate limit quota enforced by Nginx Gateway!"
-else
-  echo " WARNING: No 429 received, requests may have been spaced out."
-fi
-
-echo ""
-echo "=========================================================="
-echo "  ALL GATEWAY TESTS COMPLETED                             "
-echo "=========================================================="
 EOF
 ```
 
-![Create Verification Script](images/step5-test5-verify-script.png)
+![Create verify-gateway.sh](images/step5-test5-verify-script.png)
 
-Execute the verification script to simulate a burst of requests:
+Execute the verification script:
 
 ```bash
-chmod +x verify-gateway.sh
-./verify-gateway.sh
+bash verify-gateway.sh
 ```
 
-![Verify Gateway Output](images/step5-verify-script-run.png)
+![Execute verify-gateway.sh](images/step5-verify-script-run.png)
 
 Expected output:
-
 ```text
-==========================================================
-  Lab 03: API Gateway & Rate-Aware Routing Verification   
-==========================================================
+=== 1. Testing Healthz ===
+Health Status: 200
 
-1. Checking Gateway Health (Unauthenticated)...
-HTTP/1.1 200 OK
+=== 2. Testing Missing Key (Expect 401) ===
+Missing Key Status: 401
 
-2. Calling /api/v1/orders WITHOUT API Key (Expect 401 Unauthorized)...
-HTTP Status Code: 401
- PASS: 401 Unauthorized enforced at Gateway edge.
+=== 3. Testing Invalid Key (Expect 401) ===
+Invalid Key Status: 401
 
-3. Calling /api/v1/orders WITH Valid API Key (Expect 200 OK -> Orders Service)...
-{ "service": "Orders Microservice", "port": 3001, ... }
+=== 4. Testing Authorized Orders Route (Expect 200) ===
+Orders Route Status: 200
 
-4. Calling /api/v1/users WITH Valid API Key (Expect 200 OK -> Users Service)...
-{ "service": "Users Microservice", "port": 3002, ... }
+=== 5. Testing Authorized Users Route (Expect 200) ===
+Users Route Status: 200
 
-5. Testing Rate Limiting Quota (Sending 12 rapid concurrent requests)...
-Results from 12 rapid requests: 200 OK = 6, 429 Rate-Limited = 6
- PASS: Rate limit quota enforced by Nginx Gateway!
-
-==========================================================
-  ALL GATEWAY TESTS COMPLETED                             
-==========================================================
+=== 6. Flooding Gateway to Test Rate Limiting (Expect 429) ===
+Request #1 -> Status 200
+Request #2 -> Status 200
+Request #3 -> Status 200
+Request #4 -> Status 200
+Request #5 -> Status 200
+Request #6 -> Status 200
+Request #7 -> Status 429
+Request #8 -> Status 429
+Request #9 -> Status 429
+...
 ```
+
+Notice how requests #1 to #6 succeeded within the burst allowance, and subsequent rapid requests were throttled with `429 Too Many Requests`!
 
 ---
 
-## Clean Up
+## Key Engineering Takeaways
 
-Stop and remove the Docker Compose containers:
-
-```bash
-docker compose down
-```
-
----
-
-## Key Takeaways
-
-1. **Security Perimeter:** An API Gateway isolates backend microservices from direct public Internet exposure, preventing port scanners and unauthorized callers from reaching backend nodes.
-2. **Centralized Policy Enforcement:** Authentication and rate-limiting policies are configured declaratively in Nginx rather than duplicated across multiple programming languages and services.
-3. **Noisy Neighbor Protection:** The `limit_req_zone` token bucket algorithm throttles abusive consumers at the gateway edge, preventing cascading resource exhaustion on backend databases and workers.
+1. **Edge Offloading Saves Compute:** Performing authentication and rate limiting at the Nginx edge blocks malicious and abusive traffic before it ever touches application servers or databases.
+2. **True Network Isolation:** Using a private Docker bridge network (`lab-net`) ensures downstream microservices expose zero host ports, neutralizing unauthorized direct access attempts.
+3. **Decoupled Architecture:** Frontends interact with a single ingress URL (`/api/v1/...`). Upstream service names, ports, and internal locations can change at any time without impacting client apps.
+4. **Resilient Rate Shaping:** Token-bucket rate limiting gracefully absorbs normal traffic bursts while preventing denial-of-service and noisy-neighbor degradations.
