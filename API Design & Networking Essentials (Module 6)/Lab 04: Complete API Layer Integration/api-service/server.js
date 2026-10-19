@@ -82,7 +82,7 @@ app.post('/api/v1/reset', async (req, res) => {
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`[Lab 04 API SERVICE] Running on port ${PORT}`);
+    console.log(`[API Service] Running on port ${PORT}`);
     console.log(`Connected to Redis at ${REDIS_URL}`);
   });
 }

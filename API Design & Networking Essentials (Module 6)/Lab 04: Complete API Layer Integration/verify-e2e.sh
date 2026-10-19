@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Starting Docker Compose stack for Lab 04..."
+echo "Starting Docker Compose stack..."
 docker compose up -d
 
 echo "Waiting 6 seconds for services to initialize..."

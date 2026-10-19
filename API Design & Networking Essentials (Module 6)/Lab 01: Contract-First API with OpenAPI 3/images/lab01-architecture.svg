@@ -37,7 +37,7 @@
   <rect x="15" y="15" width="1120" height="450" rx="10" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
 
   <!-- Header Banner -->
-  <text x="38" y="45" class="banner-title">Lab 01: Contract-First API Architecture</text>
+  <text x="38" y="45" class="banner-title">Contract-First API Architecture</text>
   <text x="38" y="66" class="banner-sub">OpenAPI 3.0.3 Contract • Poridhi Load Balancer • Express Server • In-Memory Store</text>
   <line x1="38" y1="78" x2="1105" y2="78" stroke="#dddddd" stroke-width="1.5" />
 

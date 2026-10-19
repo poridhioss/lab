@@ -1,9 +1,9 @@
-# Lab 04: Complete API Layer Integration
+# Complete API Layer Integration
 
 You will build a unified API platform integrating OpenAPI 3 contract validation, Redis-backed write idempotency, and an Nginx API gateway using Docker Compose. The architecture coordinates edge authentication and rate limiting at the gateway, header propagation of `Idempotency-Key`, schema validation in Express, and atomic distributed locking in Redis. You will deploy the multi-container stack and execute an automated end-to-end integration test suite.
 
 <p align="center">
-  <img src="images/lab04-architecture.svg" alt="Lab 04 Architecture Overview" width="750">
+  <img src="images/lab04-architecture.svg" alt="Complete API Layer Integration Architecture Overview" width="750">
 </p>
 
 ---
@@ -70,7 +70,7 @@ Create a file named `api-service/package.json` with the following contents:
 {
   "name": "lab04-api-service",
   "version": "1.0.0",
-  "description": "Lab 04: Unified API Service with OpenAPI Validation & Idempotency",
+  "description": "Unified API Service with OpenAPI Validation & Idempotency",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

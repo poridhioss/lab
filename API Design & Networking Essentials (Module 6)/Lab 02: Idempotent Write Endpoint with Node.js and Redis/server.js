@@ -159,7 +159,7 @@ app.post('/api/v1/reset', async (req, res) => {
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`[Lab 02] Idempotent Write Server running on port ${PORT}`);
+    console.log(`[Idempotent Write Server] Running on port ${PORT}`);
     console.log(`Connected to Redis at ${REDIS_URL}`);
   });
 }

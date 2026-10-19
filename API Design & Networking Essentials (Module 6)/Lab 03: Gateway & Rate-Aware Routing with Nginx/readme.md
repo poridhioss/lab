@@ -1,9 +1,9 @@
-# Lab 03: API Gateway & Rate-Aware Routing with Nginx
+# API Gateway & Rate-Aware Routing with Nginx
 
 You will build an API gateway using Nginx and Docker Compose fronting two isolated Node.js microservices (`orders-service` and `users-service`). The gateway handles edge authentication using declarative `map` blocks, enforces token-bucket rate limiting (`5 req/s` with burst buffers), and dynamically routes client traffic to private upstream containers. You will deploy the multi-container stack and expose the gateway via the Poridhi Load Balancer on port 8080.
 
 <p align="center">
-  <img src="images/lab03-architecture.svg" alt="Lab 03 Architecture Overview" width="750">
+  <img src="images/lab03-architecture.svg" alt="API Gateway Architecture Overview" width="750">
 </p>
 
 ---

@@ -5,7 +5,7 @@ GATEWAY_URL="http://localhost:8080"
 VALID_KEY="valid-secret-key-123"
 
 echo "=========================================================="
-echo "  Lab 03: API Gateway & Rate-Aware Routing Verification   "
+echo "  API Gateway & Rate-Aware Routing Verification   "
 echo "=========================================================="
 echo ""
 

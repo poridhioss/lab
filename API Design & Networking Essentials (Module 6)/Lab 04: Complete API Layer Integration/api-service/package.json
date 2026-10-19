@@ -1,7 +1,7 @@
 {
   "name": "lab04-api-service",
   "version": "1.0.0",
-  "description": "Lab 04: Unified API Service with OpenAPI Validation & Idempotency",
+  "description": "Unified API Service with OpenAPI Validation & Idempotency",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

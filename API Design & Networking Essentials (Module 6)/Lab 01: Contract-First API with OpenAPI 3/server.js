@@ -141,7 +141,7 @@ app.get('/api/v1/orders', (req, res) => {
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`[Lab 01] Contract-First Server running on port ${PORT}`);
+    console.log(`[Contract-First Server] Running on port ${PORT}`);
     console.log(`OpenAPI Spec accessible at http://localhost:${PORT}/openapi.yaml`);
   });
 }

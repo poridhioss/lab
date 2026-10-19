@@ -48,9 +48,9 @@ flowchart TD
     end
 
     Clients -->|"HTTP Requests (:8080)"| GW
-    GW -->|"Lab 04 Route: /api/v1/orders"| Val
-    GW -->|"Lab 03 Route: /api/v1/orders"| OS
-    GW -->|"Lab 03 Route: /api/v1/users"| US
+    GW -->|"Integrated Orders Route: /api/v1/orders"| Val
+    GW -->|"Upstream Orders Route: /api/v1/orders"| OS
+    GW -->|"Upstream Users Route: /api/v1/users"| US
     Val --> IdempMid
     IdempMid <-->|"Atomic Mutex & Cache"| Redis
     IdempMid --> Controller
@@ -59,18 +59,18 @@ flowchart TD
 
 ---
 
-## Hands-On Labs
+## Practical Modules
 
-| Lab | Name | Objectives & Core Stack | Deliverables & Test Proof |
-| :--- | :--- | :--- | :--- |
-| **M6-L1** | [**Contract-First API**](Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/readme.md) | - Design an OpenAPI 3.0.3 contract.<br/>- Configure cursor pagination and `Idempotency-Key` headers.<br/>- Implement RFC 7807 error responses.<br/>- Generate Node.js Express server stubs. | - Validated `openapi.yaml`<br/>- Running Express server stub<br/>- Passing test suite for schema, pagination & 400 errors. |
-| **M6-L2** | [**Idempotent Write Endpoint**](Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/readme.md) | - Protect POST endpoints from duplicate retries.<br/>- Atomic distributed locks with Redis `SET NX EX`.<br/>- Replay cached 201 responses with `X-Cache: HIT`.<br/>- Concurrency conflict resolution (`409 Conflict`). | - Redis-backed Express middleware<br/>- Docker Compose Redis stack<br/>- Passing automated test proving duplicate requests produce one effect. |
-| **M6-L3** | [**Gateway & Rate-Aware Routing**](Lab%2003:%20Gateway%20&%20Rate-Aware%20Routing%20with%20Nginx/readme.md) | - Front microservices with Nginx API Gateway.<br/>- Enforce edge API Key authentication.<br/>- Apply token bucket rate-limiting quotas (`5r/s`).<br/>- Dynamic route splitting to Orders (:3001) & Users (:3002). | - Declarative `nginx.conf`<br/>- Multi-service Docker Compose cluster<br/>- Verification script proving 401, 200 routing, and 429 quota. |
-| **M6-L4** | [**Integration: API Layer**](Lab%2004:%20Complete%20API%20Layer%20Integration/readme.md) | - Combine OpenAPI spec, Redis idempotency, and Nginx gateway.<br/>- Forward custom `Idempotency-Key` across gateway.<br/>- End-to-end integration testing through gateway edge.<br/>- Architectural reflection on auth and idempotency boundaries. | - Complete Docker Compose stack<br/>- Automated end-to-end integration test<br/>- 4-line reflection on gateway vs service responsibilities. |
+| Topic | Objectives & Core Stack | Deliverables & Test Proof |
+| :--- | :--- | :--- |
+| [**Contract-First API Design**](Lab%2001:%20Contract-First%20API%20with%20OpenAPI%203/readme.md) | - Design an OpenAPI 3.0.3 contract.<br/>- Configure cursor pagination and `Idempotency-Key` headers.<br/>- Implement RFC 7807 error responses.<br/>- Generate Node.js Express server stubs. | - Validated `openapi.yaml`<br/>- Running Express server stub<br/>- Passing test suite for schema, pagination & 400 errors. |
+| [**Idempotent Write Endpoint**](Lab%2002:%20Idempotent%20Write%20Endpoint%20with%20Node.js%20and%20Redis/readme.md) | - Protect POST endpoints from duplicate retries.<br/>- Atomic distributed locks with Redis `SET NX EX`.<br/>- Replay cached 201 responses with `X-Cache: HIT`.<br/>- Concurrency conflict resolution (`409 Conflict`). | - Redis-backed Express middleware<br/>- Docker Compose Redis stack<br/>- Passing automated test proving duplicate requests produce one effect. |
+| [**Gateway & Rate-Aware Routing**](Lab%2003:%20Gateway%20&%20Rate-Aware%20Routing%20with%20Nginx/readme.md) | - Front microservices with Nginx API Gateway.<br/>- Enforce edge API Key authentication.<br/>- Apply token bucket rate-limiting quotas (`5r/s`).<br/>- Dynamic route splitting to Orders (:3001) & Users (:3002). | - Declarative `nginx.conf`<br/>- Multi-service Docker Compose cluster<br/>- Verification script proving 401, 200 routing, and 429 quota. |
+| [**Complete API Layer Integration**](Lab%2004:%20Complete%20API%20Layer%20Integration/readme.md) | - Combine OpenAPI spec, Redis idempotency, and Nginx gateway.<br/>- Forward custom `Idempotency-Key` across gateway.<br/>- End-to-end integration testing through gateway edge.<br/>- Architectural reflection on auth and idempotency boundaries. | - Complete Docker Compose stack<br/>- Automated end-to-end integration test<br/>- 4-line reflection on gateway vs service responsibilities. |
 
 ---
 
-## Lab Prerequisites & Tools
+## Prerequisites & Tools
 
 The labs in this module utilize standard tools pre-installed in the Poridhi environment:
 - **Node.js 18+** (`express`, `ioredis`, `yaml`, `uuid`)

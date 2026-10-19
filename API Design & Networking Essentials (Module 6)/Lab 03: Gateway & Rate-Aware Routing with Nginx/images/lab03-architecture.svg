@@ -37,7 +37,7 @@
   <rect x="15" y="15" width="1120" height="450" rx="10" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
 
   <!-- Header Banner -->
-  <text x="38" y="45" class="banner-title">Lab 03: API Gateway &amp; Rate-Aware Routing Architecture</text>
+  <text x="38" y="45" class="banner-title">API Gateway &amp; Rate-Aware Routing Architecture</text>
   <text x="38" y="66" class="banner-sub">Nginx Ingress Gateway • Declarative API Key Auth • Token Bucket Rate Limiting • Private Microservices</text>
   <line x1="38" y1="78" x2="1105" y2="78" stroke="#dddddd" stroke-width="1.5" />
 

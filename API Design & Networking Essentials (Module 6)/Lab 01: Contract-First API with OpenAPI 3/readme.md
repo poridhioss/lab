@@ -1,9 +1,9 @@
-# Lab 01: Contract-First API Design with OpenAPI 3
+# Contract-First API Design with OpenAPI 3
 
 You will build a contract-first REST service using OpenAPI 3.0.3 and Node.js with Express. The service implements an idempotent order creation endpoint (`POST /api/v1/orders`), a cursor-based pagination query endpoint (`GET /api/v1/orders`), and standardized RFC 7807 Problem Details error responses. All incoming requests are validated against the contract before execution, and the service is exposed externally through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab01-architecture.svg" alt="Lab 01 Architecture Overview" width="750">
+  <img src="images/lab01-architecture.svg" alt="Contract-First API Architecture Overview" width="750">
 </p>
 
 ---
@@ -66,7 +66,7 @@ Create a file named `package.json` with the following contents:
 {
   "name": "lab01-contract-first-api",
   "version": "1.0.0",
-  "description": "Lab 01: Contract-First API with OpenAPI 3",
+  "description": "Contract-First API with OpenAPI 3",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -472,7 +472,7 @@ app.get('/api/v1/orders', (req, res) => {
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`[Lab 01] Contract-First Server running on port ${PORT}`);
+    console.log(`[Contract-First Server] Running on port ${PORT}`);
     console.log(`OpenAPI Spec accessible at http://localhost:${PORT}/openapi.yaml`);
   });
 }

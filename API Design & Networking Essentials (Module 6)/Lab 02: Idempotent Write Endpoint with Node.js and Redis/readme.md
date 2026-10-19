@@ -1,9 +1,9 @@
-# Lab 02: Idempotent Write Endpoint with Node.js and Redis
+# Idempotent Write Endpoint with Node.js and Redis
 
 You will build an idempotency-protected write endpoint using Node.js, Express, and Redis 7. The service intercepts mutation requests (`POST /api/v1/orders`), acquires atomic mutual exclusion locks using Redis `SET key value EX 60 NX`, caches completed responses, and replays cached results on subsequent retries. You will deploy Redis with Docker Compose and expose the Express application through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab02-architecture.svg" alt="Lab 02 Architecture Overview" width="750">
+  <img src="images/lab02-architecture.svg" alt="Idempotent Write Endpoint Architecture Overview" width="750">
 </p>
 
 ---
@@ -57,7 +57,7 @@ cd ~/lab02-idempotent-write-endpoint
 ```
 
 <p align="center">
-  <img src="images/step1-create-dir.png" alt="Create Lab Directory" width="700">
+  <img src="images/step1-create-dir.png" alt="Create Project Directory" width="700">
 </p>
 
 Create a file named `package.json` with the following contents:
@@ -66,7 +66,7 @@ Create a file named `package.json` with the following contents:
 {
   "name": "lab02-idempotent-write-endpoint",
   "version": "1.0.0",
-  "description": "Lab 02: Idempotent Write Endpoint with Node.js and Redis",
+  "description": "Idempotent Write Endpoint with Node.js and Redis",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -310,7 +310,7 @@ app.post('/api/v1/reset', async (req, res) => {
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`[Lab 02] Idempotent Write Server running on port ${PORT}`);
+    console.log(`[Idempotent Write Server] Running on port ${PORT}`);
     console.log(`Connected to Redis at ${REDIS_URL}`);
   });
 }

@@ -29,7 +29,7 @@ function request(method, path, headers = {}, body = null) {
 
 async function runIntegrationSuite() {
   console.log('===============================================================');
-  console.log('  Lab 04: End-to-End Integrated API Layer Verification Suite   ');
+  console.log('     End-to-End Integrated API Layer Verification Suite        ');
   console.log('===============================================================\n');
 
   try {
