@@ -21,6 +21,10 @@ You will build an idempotency-protected write endpoint using Node.js, Express, a
 
 When a write request arrives, the idempotency middleware extracts the client-supplied `Idempotency-Key` header and checks Redis for an existing record. If the key does not exist, the middleware atomically acquires a lock by executing `SET idemp:<key> "IN_PROGRESS" EX 60 NX`. The application executes the business logic, commits the mutation to the database, and caches the serialized HTTP status code and response body in Redis. If a duplicate request arrives while the operation is in flight, the server returns `409 Conflict`. If a duplicate request arrives after completion, the server immediately replays the cached response with `X-Cache: HIT`, bypassing the database entirely.
 
+<p align="center">
+  <img src="images/lab02-flow.svg" alt="Lab 02 Idempotency and Concurrency Flow" width="950">
+</p>
+
 ---
 
 ## Objectives
@@ -40,9 +44,7 @@ lab02-idempotent-write-endpoint/
 ├── docker-compose.yml    # Redis 7 service definition
 ├── package.json          # Node.js dependencies and script definitions
 ├── server.js             # Express server with Redis Idempotency Middleware
-├── test-idempotency.js   # Automated retry and concurrency race condition test
-└── images/
-    └── lab02-architecture.svg
+└── test-idempotency.js   # Automated retry and concurrency race condition test
 ```
 
 Docker Compose provisions the Redis caching and locking layer, the Express server executes the mutation logic through the idempotency middleware, and the test script verifies mutual exclusion under automated assertions.

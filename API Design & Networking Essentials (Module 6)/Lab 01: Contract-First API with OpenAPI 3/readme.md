@@ -21,6 +21,10 @@ You will build a contract-first REST service using OpenAPI 3.0.3 and Node.js wit
 
 In a contract-first workflow, the API specification is authored before any server code is implemented. The OpenAPI document defines required headers, request payloads, response schemas, and status codes. When requests arrive, the server validates client parameters against these contract definitions. If a request violates the schema or omits required headers, the server rejects the call with an RFC 7807 Problem Details error payload. Valid mutations persist to the data store, and subsequent queries stream records chronologically using cursor pointers.
 
+<p align="center">
+  <img src="images/lab01-flow.svg" alt="Lab 01 Request Flow and Lifecycle" width="950">
+</p>
+
 ---
 
 ## Objectives
@@ -40,9 +44,7 @@ lab01-contract-first-api/
 ├── openapi.yaml       # OpenAPI 3.0.3 contract specification
 ├── package.json       # Node.js dependencies and script definitions
 ├── server.js          # Express server enforcing contract rules
-├── test.js            # Automated contract validation test suite
-└── images/
-    └── lab01-architecture.svg
+└── test.js            # Automated contract validation test suite
 ```
 
 The OpenAPI contract defines the request and response interface, the Express server executes the business logic while enforcing contract boundaries, and the automated test script verifies compliance across all endpoints.

@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 420" width="1060" height="420">
+  <defs>
+    <filter id="dropShadow" x="-12%" y="-12%" width="135%" height="145%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <style>
+      text {
+        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+        font-weight: bold;
+        fill: #000000;
+      }
+      .banner-title { font-size: 19px; font-weight: bold; fill: #000000; }
+      .banner-sub { font-size: 14px; font-weight: bold; fill: #333333; font-style: italic; }
+      .flow-title { font-size: 14px; font-weight: bold; fill: #000000; }
+      .flow-step-num { font-size: 11px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .flow-text { font-size: 12.5px; font-weight: bold; fill: #111111; }
+      .code-badge { font-family: "Courier New", Courier, monospace; font-size: 12px; font-weight: bold; }
+      .flow-sub { font-size: 11px; font-weight: bold; fill: #444444; font-style: italic; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff" />
+  <rect x="15" y="15" width="1030" height="390" rx="10" fill="#fafafa" stroke="#000000" stroke-width="1.5" />
+
+  <g transform="translate(35, 42)">
+    <text x="0" y="0" class="banner-title">Lab 03: Request Routing, Authentication &amp; Rate-Limiting Lifecycle Flow</text>
+    <text x="0" y="22" class="banner-sub">End-to-End Tracing: Authorized Dispatch • Edge Auth Drop • Token Bucket Throttling</text>
+  </g>
+
+  <line x1="35" y1="76" x2="1025" y2="76" stroke="#cccccc" stroke-width="1.5" />
+
+  <!-- CARD 1: AUTHORIZED ROUTING -->
+  <g transform="translate(35, 95)">
+    <rect x="0" y="0" width="315" height="290" rx="8" fill="#dae8fc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <rect x="0" y="0" width="315" height="36" rx="8" fill="#cce0ff" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="24" class="flow-title">1. Authorized Proxy Routing (200)</text>
+
+    <rect x="14" y="46" width="165" height="20" rx="3" fill="#ffffff" stroke="#000000" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#1d4ed8">X-API-Key: valid-key-123</text>
+
+    <g transform="translate(14, 76)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">A</text>
+      <text x="26" y="14" class="flow-text">Client Passes Valid Key</text>
+      <text x="26" y="28" class="flow-sub">Target: /api/v1/orders or users</text>
+      <text x="26" y="41" class="flow-sub">Enters via host port 8080</text>
+    </g>
+
+    <g transform="translate(14, 130)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">B</text>
+      <text x="26" y="14" class="flow-text">Nginx Map Validation</text>
+      <text x="26" y="28" class="flow-sub">Resolves client to "Frontend-App"</text>
+      <text x="26" y="41" class="flow-sub">Checks rate limit zone compliance</text>
+    </g>
+
+    <g transform="translate(14, 184)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">C</text>
+      <text x="26" y="14" class="flow-text">Internal Dispatch &amp; 200 OK</text>
+      <text x="26" y="28" class="flow-sub">Proxies to orders_service:3001</text>
+      <text x="26" y="41" class="flow-sub">Appends X-Client-Name header</text>
+    </g>
+
+    <rect x="14" y="238" width="287" height="38" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1" />
+    <text x="20" y="254" class="flow-sub" fill="#000000">Clients interact with port 8080;</text>
+    <text x="20" y="268" class="flow-sub" fill="#000000">backend ports are hidden from internet.</text>
+  </g>
+
+  <!-- CARD 2: EDGE AUTH GUARD -->
+  <g transform="translate(372, 95)">
+    <rect x="0" y="0" width="315" height="290" rx="8" fill="#fee2e2" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <rect x="0" y="0" width="315" height="36" rx="8" fill="#fecaca" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="24" class="flow-title">2. Edge Auth Guard (401)</text>
+
+    <rect x="14" y="46" width="165" height="20" rx="3" fill="#ffffff" stroke="#000000" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#b91c1c">Zero Backend Compute</text>
+
+    <g transform="translate(14, 76)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">A</text>
+      <text x="26" y="14" class="flow-text">Unauthenticated Call Arrives</text>
+      <text x="26" y="28" class="flow-sub">Missing or bad X-API-Key</text>
+      <text x="26" y="41" class="flow-sub">Attempts accessing protected route</text>
+    </g>
+
+    <g transform="translate(14, 130)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">B</text>
+      <text x="26" y="14" class="flow-text">Nginx Map Lookup Fails</text>
+      <text x="26" y="28" class="flow-sub">$api_client_name evaluates to ""</text>
+      <text x="26" y="41" class="flow-sub">Rule: if ($api_client_name = "")</text>
+    </g>
+
+    <g transform="translate(14, 184)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">C</text>
+      <text x="26" y="14" class="flow-text">Immediate Gateway Drop</text>
+      <text x="26" y="28" class="flow-sub">Returns 401 Unauthorized</text>
+      <text x="26" y="41" class="flow-sub">Upstream containers never invoked</text>
+    </g>
+
+    <rect x="14" y="238" width="287" height="38" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1" />
+    <text x="20" y="254" class="flow-sub" fill="#000000">Unauthorized traffic is blocked at edge,</text>
+    <text x="20" y="268" class="flow-sub" fill="#000000">conserving downstream CPU and database.</text>
+  </g>
+
+  <!-- CARD 3: TOKEN BUCKET RATE LIMITING -->
+  <g transform="translate(710, 95)">
+    <rect x="0" y="0" width="315" height="290" rx="8" fill="#fff2cc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <rect x="0" y="0" width="315" height="36" rx="8" fill="#ffe599" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="24" class="flow-title">3. Rate Limiting (429)</text>
+
+    <rect x="14" y="46" width="165" height="20" rx="3" fill="#ffffff" stroke="#000000" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#b45309">limit_req_zone (5r/s)</text>
+
+    <g transform="translate(14, 76)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">A</text>
+      <text x="26" y="14" class="flow-text">Traffic Burst Exceeds Quota</text>
+      <text x="26" y="28" class="flow-sub">Client spams rapid requests</text>
+      <text x="26" y="41" class="flow-sub">Exceeds sustained rate: 5r/s</text>
+    </g>
+
+    <g transform="translate(14, 130)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">B</text>
+      <text x="26" y="14" class="flow-text">Buffer Depletion</text>
+      <text x="26" y="28" class="flow-sub">Policy: burst=5 nodelay</text>
+      <text x="26" y="41" class="flow-sub">Excess tokens rejected immediately</text>
+    </g>
+
+    <g transform="translate(14, 184)">
+      <circle cx="9" cy="9" r="9" fill="#000000" />
+      <text x="9" y="13" class="flow-step-num">C</text>
+      <text x="26" y="14" class="flow-text">Direct 429 Throttle</text>
+      <text x="26" y="28" class="flow-sub">Returns 429 Too Many Requests</text>
+      <text x="26" y="41" class="flow-sub">limit_req_status 429</text>
+    </g>
+
+    <rect x="14" y="238" width="287" height="38" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1" />
+    <text x="20" y="254" class="flow-sub" fill="#000000">Protects internal cluster from noisy</text>
+    <text x="20" y="268" class="flow-sub" fill="#000000">neighbors, guaranteeing QoS for all clients.</text>
+  </g>
+
+</svg>

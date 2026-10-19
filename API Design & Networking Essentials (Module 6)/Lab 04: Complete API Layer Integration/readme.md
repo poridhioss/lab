@@ -20,6 +20,10 @@ You will build a unified API platform integrating OpenAPI 3 contract validation,
 
 Client traffic enters Nginx on port 8080. Nginx authenticates the client using an in-memory API key map and checks rate quotas before reverse-proxying the request to the Express API service with the `Idempotency-Key` header preserved. The API service validates request bodies and query parameters against the OpenAPI 3 specification. Write mutations acquire an atomic mutex in Redis (`SETNX`) to ensure that concurrent requests sharing an idempotency key are rejected with `409 Conflict`. Valid orders are committed to the data store, and completed responses are cached in Redis for 24 hours. Subsequent retries replay the cached response with `X-Cache: HIT-IDEMPOTENT` without touching the database.
 
+<p align="center">
+  <img src="images/lab04-flow.svg" alt="Lab 04 Integration and Lifecycle Flow" width="950">
+</p>
+
 ---
 
 ## Objectives
@@ -39,14 +43,12 @@ lab04-api-layer-integration/
 ├── docker-compose.yml       # Multi-container stack (Gateway + API + Redis)
 ├── nginx.conf               # Nginx Gateway config with header propagation & edge auth
 ├── test-integration.js      # Automated end-to-end integration test suite
-├── api-service/
-│   ├── package.json         # Node dependencies (express, ioredis, yaml)
-│   ├── openapi.yaml         # Single source of truth OpenAPI 3 specification
-│   ├── server.js            # Express API service implementing the contract
-│   └── middleware/
-│       └── idempotency.js   # Redis-backed idempotency middleware
-└── images/
-    └── lab04-architecture.svg
+└── api-service/
+    ├── package.json         # Node dependencies (express, ioredis, yaml)
+    ├── openapi.yaml         # Single source of truth OpenAPI 3 specification
+    ├── server.js            # Express API service implementing the contract
+    └── middleware/
+        └── idempotency.js   # Redis-backed idempotency middleware
 ```
 
 The Nginx gateway terminates edge security and passes verified traffic and headers to the Express API service, which enforces the OpenAPI contract and coordinates distributed idempotency locks with Redis.
