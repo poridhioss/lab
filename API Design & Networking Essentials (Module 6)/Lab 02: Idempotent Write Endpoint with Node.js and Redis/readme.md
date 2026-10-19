@@ -1,60 +1,35 @@
 # Lab 02: Idempotent Write Endpoint with Node.js and Redis
 
-Welcome to **Lab 02**! In this lab, you will tackle one of the most critical challenges in distributed systems and backend engineering: **ensuring safe, idempotent write mutations under network retries and concurrent race conditions**.
-
-Imagine a user shopping on a mobile app on a spotty cellular connection. They tap "Pay $250". The server receives the request, charges their credit card, and creates the order in the database. But just before the `200 OK` response packet reaches the phone, the cellular tower drops the connection. The mobile client times out and automatically retries the payment request.
-
-Without **Idempotency Protection**, the customer gets charged twice and two duplicate orders appear in the database!
-
-In this lab, you will design and implement a production-grade **Idempotency Middleware** using **Node.js (Express)** and **Redis 7** in your Poridhi cloud environment. You will harness Redis atomic locks (`SET key value EX 60 NX`), intermediate state tracking (`IN_PROGRESS`), and automated response caching with TTL expiration.
-
----
-
-## Architecture & Unified Caching Topology
-
-Below is the complete architectural layout and end-to-end idempotency lifecycle for the service you will build. Everything—from the client request, network routing through the Poridhi Load Balancer, distributed Redis locking, database mutation, and instant cache replaying—is captured in this unified design:
+You will build an idempotency-protected write endpoint using Node.js, Express, and Redis 7. The service intercepts mutation requests (`POST /api/v1/orders`), acquires atomic mutual exclusion locks using Redis `SET key value EX 60 NX`, caches completed responses, and replays cached results on subsequent retries. You will deploy Redis with Docker Compose and expose the Express application through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab02-architecture.svg" alt="Lab 02 Architecture & Caching Topology" width="950">
+  <img src="images/lab02-architecture.svg" alt="Lab 02 Architecture Overview" width="950">
 </p>
-
-### Understanding the Three Execution Lifecycles
-
-As illustrated in the diagram above, your middleware handles three distinct operational scenarios:
-
-1. **First Mutation Lifecycle (`X-Cache: MISS`):**
-   - The client sends `POST /api/v1/orders` with an `Idempotency-Key` header (e.g., `ord_tx_1001`).
-   - The middleware attempts an atomic lock in Redis: `SET idemp:ord_tx_1001 "IN_PROGRESS" EX 60 NX`.
-   - The key did not exist, so Redis grants the lock.
-   - The server proceeds to execute the business logic, creating Order #1 in the database.
-   - Before sending the response, the middleware intercepts the payload and caches `{ status: 201, body: order }` in Redis with a 24-hour TTL (`EX 86400`).
-   - The response is sent back with headers `HTTP 201 Created` and `X-Cache: MISS`.
-
-2. **Network Retry Replay Lifecycle (`X-Cache: HIT`):**
-   - When the client retries the request with the identical `Idempotency-Key`, the middleware queries Redis.
-   - Redis finds the cached completed response.
-   - The server **completely bypasses** the business logic and database.
-   - It instantly replays the cached `HTTP 201 Created` response with `X-Cache: HIT` and `Idempotency-Replay: true`.
-   - Exactly **one** order remains in the database.
-
-3. **Concurrency Race Condition Guard (`HTTP 409 Conflict`):**
-   - If two identical requests hit the server concurrently at the exact same millisecond, both attempt the atomic `SETNX` lock.
-   - Redis processes commands in a deterministic single thread. Request 1 wins the lock.
-   - Request 2 sees that the key is already `IN_PROGRESS` and is immediately rejected with `409 Conflict`.
-   - This mutual exclusion prevents duplicate concurrent mutations across multi-instance backends.
 
 ---
 
-## Core Concepts at a Glance
+## Concepts
 
-| Concept | Why It Matters | Real-World Intuition |
-| :--- | :--- | :--- |
-| **Idempotency** | Prevents unintended side effects when identical mutations are sent repeatedly (`f(f(x)) = f(x)`). | Tapping "Submit Order" five times during a network freeze results in exactly one order and one charge. |
-| **Atomic Lock (`SETNX`)** | Redis primitive `SET key value EX ttl NX` sets a key only if it does not already exist. | Provides instant, lock-safe mutual exclusion without needing slow database table locks. |
-| **`IN_PROGRESS` State** | Marks a transaction as currently processing. | Informs concurrent parallel requests that work is already underway, preventing race condition duplicates. |
-| **Response Caching** | Storing the HTTP status and JSON response body in Redis under the idempotency key. | Allows the server to replay identical responses instantly without touching disk or databases. |
-| **TTL Expiration (`EX 86400`)** | Automatically expires idempotency records after 24 hours. | Prevents Redis memory bloat while comfortably exceeding client retry windows. |
-| **At-Least-Once Delivery** | Network reality where distributed systems retry until they receive an acknowledgment. | Requires receiving backend endpoints to be strictly idempotent to avoid duplicate records. |
+| Term | Definition |
+| :--- | :--- |
+| **Idempotency** | A property of an API operation where making the same request multiple times produces the identical side effect as making it once (`f(f(x)) = f(x)`). |
+| **Atomic Lock (`SETNX`)** | A Redis primitive (`SET key value EX ttl NX`) that sets a key only if it does not already exist, guaranteeing atomic mutual exclusion across distributed workers. |
+| **`IN_PROGRESS` State** | A transient lock status indicating that a mutation is actively processing, allowing the server to reject concurrent duplicates with `409 Conflict`. |
+| **Response Caching** | Storing the serialized HTTP status code, headers, and body payload in Redis under the idempotency key for instant replay upon retries. |
+| **TTL Expiration (`EX 86400`)** | An automated expiration timer that clears idempotency records after 24 hours to prevent memory exhaustion while covering client retry windows. |
+| **At-Least-Once Delivery** | A network delivery guarantee where clients retry requests until an acknowledgment is received, requiring the receiving endpoint to be idempotent. |
+
+When a write request arrives, the idempotency middleware extracts the client-supplied `Idempotency-Key` header and checks Redis for an existing record. If the key does not exist, the middleware atomically acquires a lock by executing `SET idemp:<key> "IN_PROGRESS" EX 60 NX`. The application executes the business logic, commits the mutation to the database, and caches the serialized HTTP status code and response body in Redis. If a duplicate request arrives while the operation is in flight, the server returns `409 Conflict`. If a duplicate request arrives after completion, the server immediately replays the cached response with `X-Cache: HIT`, bypassing the database entirely.
+
+---
+
+## Objectives
+
+- Deploy a Redis 7 key store using Docker Compose.
+- Implement an Express idempotency middleware handling key validation, atomic locking, and response caching.
+- Configure Redis TTL expiration to manage cache memory lifecycles.
+- Expose the application via the Poridhi Load Balancer on port 5000.
+- Verify cache misses, retry replays, database integrity, and concurrent race conditions.
 
 ---
 
@@ -63,20 +38,20 @@ As illustrated in the diagram above, your middleware handles three distinct oper
 ```text
 lab02-idempotent-write-endpoint/
 ├── docker-compose.yml    # Redis 7 service definition
-├── package.json          # Node dependencies (express, ioredis)
+├── package.json          # Node.js dependencies and script definitions
 ├── server.js             # Express server with Redis Idempotency Middleware
 ├── test-idempotency.js   # Automated retry and concurrency race condition test
 └── images/
-    └── lab02-architecture.svg  # Master architecture & caching lifecycle diagram
+    └── lab02-architecture.svg
 ```
+
+Docker Compose provisions the Redis caching and locking layer, the Express server executes the mutation logic through the idempotency middleware, and the test script verifies mutual exclusion under automated assertions.
 
 ---
 
 ## Step 1: Initialize the Project Workspace
 
-In this step, you will create the project folder and install the dependencies: **Express** for web routing and **ioredis** for high-performance communication with Redis.
-
-### 1. Create and enter the project directory:
+Create the project directory:
 
 ```bash
 mkdir -p ~/lab02-idempotent-write-endpoint
@@ -85,12 +60,9 @@ cd ~/lab02-idempotent-write-endpoint
 
 ![Create Lab Directory](images/step1-create-dir.png)
 
-### 2. Create `package.json`:
+Create a file named `package.json` with the following contents:
 
-Define start and test scripts for your application:
-
-```bash
-cat << 'EOF' > package.json
+```json
 {
   "name": "lab02-idempotent-write-endpoint",
   "version": "1.0.0",
@@ -105,14 +77,18 @@ cat << 'EOF' > package.json
     "ioredis": "^5.4.1"
   }
 }
-EOF
 ```
 
 ![Create package.json](images/step1-package-json.png)
 
-### 3. Install dependencies:
+**Explanation:**
+- `main`: Designates `server.js` as the application entrypoint.
+- `scripts.start`: Defines the start command to launch the Express server.
+- `scripts.test`: Defines the automated test command executing `test-idempotency.js`.
+- `dependencies.express`: Installs Express to handle HTTP routing and middleware chaining.
+- `dependencies.ioredis`: Installs the Redis client supporting promises and atomic operations.
 
-Run `npm install` to download Express and the Redis client:
+Install the project dependencies:
 
 ```bash
 npm install
@@ -124,12 +100,9 @@ npm install
 
 ## Step 2: Start Redis Key Store with Docker Compose
 
-Now, start a lightweight **Redis 7** container using Docker Compose. Redis will act as our fast in-memory key-value store for distributed locking and response caching.
+Create a file named `docker-compose.yml` with the following contents:
 
-### 1. Create `docker-compose.yml`:
-
-```bash
-cat << 'EOF' > docker-compose.yml
+```yaml
 version: '3.8'
 
 services:
@@ -140,12 +113,17 @@ services:
       - "6379:6379"
     restart: unless-stopped
     command: redis-server --appendonly yes
-EOF
 ```
 
 ![Create docker-compose.yml](images/step2-docker-compose.png)
 
-### 2. Launch the Redis container in the background:
+**Explanation:**
+- `image: redis:7-alpine`: Uses the official lightweight Alpine Linux Redis 7 image.
+- `container_name: lab02-redis`: Assigns a fixed container identifier.
+- `ports: "6379:6379"`: Maps host port 6379 to the Redis container port.
+- `command: redis-server --appendonly yes`: Enables AOF (Append Only File) persistence to record mutation operations to disk.
+
+Launch the Redis container in the background:
 
 ```bash
 docker compose up -d redis
@@ -153,9 +131,7 @@ docker compose up -d redis
 
 ![Launch Redis Container](images/step2-docker-compose-up.png)
 
-### 3. Verify Redis connectivity:
-
-Send a `PING` command to verify that Redis is healthy and ready to accept connections:
+Verify Redis connectivity:
 
 ```bash
 docker compose exec redis redis-cli ping
@@ -164,26 +140,18 @@ docker compose exec redis redis-cli ping
 ![Verify Redis Connectivity](images/step2-redis-ping.png)
 
 Expected output:
+
 ```text
 PONG
 ```
 
 ---
 
-## Step 3: Implement the Idempotency Middleware & Endpoint (`server.js`)
+## Step 3: Implement the Idempotency Middleware and Server Stub
 
-Now, implement `server.js`. This file contains our custom **Idempotency Middleware** factory that wraps write endpoints.
+Create a file named `server.js` with the following contents:
 
-Let's look at how the middleware works:
-- **Key Extraction:** Inspects incoming `POST`, `PUT`, or `PATCH` requests for the `Idempotency-Key` header.
-- **Cache Check:** If the key already has a cached payload, it intercepts the request, adds `X-Cache: HIT`, and replays the response immediately.
-- **Lock Acquisition:** If not cached, it runs `SET idemp:<key> "IN_PROGRESS" EX 60 NX`. If the key is already locked by another worker, it returns `409 Conflict`.
-- **Response Monkey-Patching:** Wraps `res.json` so that when the controller finishes execution, the result is automatically saved in Redis with a 24-hour TTL (`EX 86400`).
-
-Create `server.js`:
-
-```bash
-cat << 'EOF' > server.js
+```javascript
 const express = require('express');
 const Redis = require('ioredis');
 
@@ -338,20 +306,23 @@ if (require.main === module) {
 }
 
 module.exports = { app, redis };
-EOF
 ```
 
 ![Create server.js](images/step3-server-js.png)
 
+**Explanation:**
+- `redis.get(redisKey)`: Inspects Redis to determine whether the request is new, in flight, or previously completed.
+- `redis.set(redisKey, 'IN_PROGRESS', 'EX', 60, 'NX')`: Uses `NX` to establish an atomic lock with a 60-second safeguard timeout, preventing concurrent race conditions.
+- `res.setHeader('X-Cache', 'HIT')`: Adds custom cache inspection headers so consumers can confirm when responses are replayed from cache versus processed anew.
+- `res.json = (body) => { ... }`: Intercepts the response completion event to persist status and body data into Redis with a 24-hour expiration (`EX 86400`).
+- `setTimeout(..., 80)`: Introduces latency into the mutation handler to simulate real-world database or payment gateway operations.
+- `app.post('/api/v1/reset')`: Provides a cleanup endpoint to clear in-memory state and Redis idempotency keys during automated test cycles.
+
 ---
 
-## Step 4: Expose Service via Poridhi Load Balancer & Verify via cURL
+## Step 4: Expose the Server via Poridhi Load Balancer
 
-Now launch your Express service on port `5000` and expose it through the Poridhi Load Balancer.
-
-### 1. Start the Server on Port 5000
-
-Launch the server in the background:
+Start the server process in the background on port 5000:
 
 ```bash
 node server.js &
@@ -359,12 +330,7 @@ node server.js &
 
 ![Start Server](images/step4-start-server.png)
 
-> [!TIP]
-> If your terminal prompt does not reappear immediately, press `Enter` on your keyboard.
-
-### 2. Expose Service via Poridhi Load Balancer
-
-1. Retrieve the private IP of your Poridhi virtual machine:
+Retrieve the private IP address of your virtual machine:
 
 ```bash
 hostname -I | awk '{print $1}'
@@ -372,27 +338,27 @@ hostname -I | awk '{print $1}'
 
 ![Get Private IP](images/step4-hostname-ip.png)
 
-2. Open the **Load Balancer** modal in the top Poridhi menu bar.
-3. Configure the mapping:
-   - **Enter IP**: Paste the IP retrieved above (e.g., `10.x.x.x`).
-   - **Enter Port**: `5000`
-4. Click **Expose** to obtain your public Load Balancer URL:
+Configure the Poridhi Load Balancer:
+1. Open the **Load Balancer** modal in the Poridhi interface.
+2. Enter the IP address obtained from `hostname -I`.
+3. Set the target port to `5000`.
+4. Click **Expose** to generate a public URL.
 
 ![Load Balancer Exposed](images/step4-loadbalancer-exposed.png)
 
-5. Open the URL in your web browser to verify that the service is live:
+Open the generated Load Balancer URL in your web browser to confirm service health:
 
 ![Browser Status](images/step4-browser-status.png)
 
 ---
 
-### 3. Verify Idempotency via cURL
+## Verification
 
-You can test either against `http://localhost:5000` in your terminal or use your public Poridhi Load Balancer URL.
+You will verify cache miss behavior, duplicate request replay, database record counts, and concurrency protection using `curl` and the automated test runner.
 
-#### Test 1: Send Primary POST Request (Cache Miss)
+### Scenario 1: Primary Mutation (Cache Miss - Expected 201 Created)
 
-Submit a new order with `Idempotency-Key: ord_tx_1001`:
+Submit an initial order request with `Idempotency-Key: ord_tx_1001`:
 
 ```bash
 curl -i -X POST http://localhost:5000/api/v1/orders \
@@ -404,6 +370,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ![Test 1 Cache Miss](images/step4-test1-first-request.png)
 
 Expected output:
+
 ```text
 HTTP/1.1 201 Created
 X-Cache: MISS
@@ -418,11 +385,9 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-Notice `X-Cache: MISS`. The order was processed and assigned Order ID `1`.
+### Scenario 2: Identical Network Retry (Cache Hit - Expected 201 Created Replay)
 
-#### Test 2: Send Identical Retry (Cache Hit)
-
-Now simulate a network timeout or accidental double-click by sending the **exact same request** with the identical `Idempotency-Key`:
+Execute the exact same request again with the identical `Idempotency-Key`:
 
 ```bash
 curl -i -X POST http://localhost:5000/api/v1/orders \
@@ -434,6 +399,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ![Test 2 Cache Hit](images/step4-test2-retry-request.png)
 
 Expected output:
+
 ```text
 HTTP/1.1 201 Created
 X-Cache: HIT
@@ -449,12 +415,9 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-> [!NOTE]
-> Look at the headers: `X-Cache: HIT` and `Idempotency-Replay: true`! The order ID returned is still `1`, and the timestamp is identical. The server replayed the cached response directly from Redis without creating another database entry.
+### Scenario 3: Verify Persistent Database State
 
-#### Test 3: Verify Persistent Database State
-
-Query all orders to verify that only a single order was created:
+Query the orders collection to verify that only a single order exists:
 
 ```bash
 curl -s http://localhost:5000/api/v1/orders | jq .
@@ -463,6 +426,7 @@ curl -s http://localhost:5000/api/v1/orders | jq .
 ![Test 3 Verify Database State](images/step4-test3-verify-db.png)
 
 Expected output:
+
 ```json
 {
   "total_orders": 1,
@@ -478,18 +442,13 @@ Expected output:
 }
 ```
 
-Despite sending two write requests, `total_orders` is strictly **1**. Idempotency successfully prevented a duplicate order!
-
 ---
 
-## Step 5: Run Automated Idempotency Test Suite
+### Scenario 4: Automated Concurrency and Idempotency Test Suite
 
-Now create `test-idempotency.js` to run automated assertions covering missing headers, primary mutations, retry replays, database integrity, and **concurrent parallel race conditions**.
+Create a file named `test-idempotency.js` with the following contents:
 
-Create `test-idempotency.js`:
-
-```bash
-cat << 'EOF' > test-idempotency.js
+```javascript
 const http = require('http');
 const { app, redis } = require('./server');
 
@@ -596,12 +555,18 @@ const server = app.listen(0, async () => {
     await redis.quit();
   }
 });
-EOF
 ```
 
 ![Create test-idempotency.js](images/step5-test-idempotency.png)
 
-### Run the automated test suite:
+**Explanation:**
+- `app.listen(0)`: Executes the server on a dynamic port to avoid collisions with background processes.
+- `Test 1`: Asserts that omitting `Idempotency-Key` triggers an immediate `HTTP 400 Bad Request`.
+- `Test 2`: Asserts that an initial write produces `HTTP 201 Created` with header `X-Cache: MISS`.
+- `Test 3`: Asserts that a duplicate write request with the same key returns `HTTP 201 Created` with `X-Cache: HIT` and identical order data.
+- `Test 4`: Uses `Promise.all` to launch concurrent parallel requests sharing the same key, asserting mutual exclusion via `409 Conflict`.
+
+Execute the automated test suite:
 
 ```bash
 npm test
@@ -610,6 +575,7 @@ npm test
 ![Automated Idempotency Test Output](images/step5-npm-test.png)
 
 Expected output:
+
 ```text
 > lab02-idempotent-write-endpoint@1.0.0 test
 > node test-idempotency.js
@@ -638,9 +604,19 @@ Total orders in DB after concurrent requests: 2
 
 ---
 
-## Key Engineering Takeaways
+### Verification Summary
 
-1. **Atomic Locks Protect Against Race Conditions:** Relying on Redis `SET key value EX 60 NX` gives you atomic mutual exclusion across distributed worker nodes without relying on complex database table locking.
-2. **Replay Exact Semantics:** Storing both the HTTP status code and response payload ensures client SDKs experience identical behavior on retries, regardless of whether the response came from the database or cache.
-3. **Controlled In-Flight States:** Using an explicit intermediate state (`IN_PROGRESS`) and responding with `409 Conflict` prevents split-brain mutations when clients spam retry buttons.
-4. **Memory Hygiene with TTL:** Setting a sensible TTL (such as 24 hours) ensures your Redis instance doesn't run out of memory, while giving client mobile devices ample time to complete automatic exponential backoff retries.
+| # | Call | Status | Body snippet |
+| :--- | :--- | :--- | :--- |
+| 1 | `POST /api/v1/orders` (No Key) | `400 Bad Request` | `{"type":".../missing-idempotency-key","title":"Missing Idempotency-Key Header"}` |
+| 2 | `POST /api/v1/orders` (First Write) | `201 Created` | `{"id":1,"amount":250,"description":"Mechanical Keyboard","status":"COMPLETED"}` |
+| 3 | `POST /api/v1/orders` (Retry Replay) | `201 Created` | `{"id":1,"amount":250,"description":"Mechanical Keyboard","status":"COMPLETED"}` |
+| 4 | `GET /api/v1/orders` (Count Check) | `200 OK` | `{"total_orders":1,"orders":[{"id":1,...}]}` |
+| 5 | `POST /api/v1/orders` (Concurrent Lock) | `409 Conflict` | `{"type":".../concurrent-mutation","title":"Conflict: Mutation In Progress"}` |
+| 6 | `npm test` | `200 / 201 / 400 / 409` | `ALL IDEMPOTENT WRITE TESTS PASSED SUCCESSFULLY!` |
+
+---
+
+## Conclusion
+
+You built an idempotency-protected write endpoint using Express and Redis 7. You implemented atomic mutual exclusion locks (`SETNX`), intermediate conflict rejection (`409 Conflict`), and automated response caching with 24-hour TTL expiration. You verified that duplicate requests and concurrent parallel calls produce strictly one mutation in the database.

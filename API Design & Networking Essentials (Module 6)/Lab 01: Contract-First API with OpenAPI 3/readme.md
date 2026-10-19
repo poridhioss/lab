@@ -1,53 +1,35 @@
 # Lab 01: Contract-First API Design with OpenAPI 3
 
-Welcome to **Lab 01**! In this hands-on lab, you will step into the shoes of a backend platform engineer building a production-ready REST service. Instead of jumping straight into writing JavaScript code, you will use the **Contract-First API Design** methodology. 
-
-In modern software engineering (practiced by companies like Stripe, GitHub, and Twilio), teams never write backend endpoints in isolation. They first write an unambiguous contract using **OpenAPI 3.0** (formerly Swagger). This contract becomes the **single source of truth** that frontend engineers, mobile developers, backend services, and automated test runners align on from day one.
-
-By the end of this lab, you will have designed an OpenAPI 3.0.3 specification and implemented a compliant **Node.js (Express)** microservice that enforces write idempotency, cursor-based pagination, and RFC 7807 error formats.
-
----
-
-## Architecture & Unified Execution Topology
-
-Below is the complete architectural layout and request execution topology for the service you will build. Everything—from the client request and network routing to contract verification, data persistence, and error handling—flows through this unified pipeline:
+You will build a contract-first REST service using OpenAPI 3.0.3 and Node.js with Express. The service implements an idempotent order creation endpoint (`POST /api/v1/orders`), a cursor-based pagination query endpoint (`GET /api/v1/orders`), and standardized RFC 7807 Problem Details error responses. All incoming requests are validated against the contract before execution, and the service is exposed externally through the Poridhi Load Balancer on port 5000.
 
 <p align="center">
-  <img src="images/lab01-architecture.svg" alt="Lab 01 Architecture & Execution Topology" width="950">
+  <img src="images/lab01-architecture.svg" alt="Lab 01 Architecture Overview" width="950">
 </p>
-
-### Understanding the Three Core Lifecycles
-
-As illustrated in the diagram above, your API enforces three distinct production patterns:
-
-1. **Write Mutation Lifecycle (`POST /api/v1/orders`):**
-   - The client submits a new order and **must** provide a client-generated UUID via the `Idempotency-Key` header.
-   - The server validates the request headers and body payload types against the OpenAPI schema.
-   - If valid, the order is stored in the database, and the server returns `HTTP 201 Created` with a `Location: /api/v1/orders/{id}` resource pointer.
-   - If the network drops and the client retries with the identical idempotency key, duplicate orders or billing charges are prevented.
-
-2. **High-Performance Cursor Pagination (`GET /api/v1/orders`):**
-   - The client requests a slice of records using `?limit=3&cursor=103`.
-   - The server validates that the requested limit does not exceed the contract boundary (`1 <= limit <= 50`).
-   - The server queries records strictly greater than the cursor (`WHERE id > cursor LIMIT limit`), eliminating the duplicate or skipped records common to offset pagination.
-   - The response includes `next_cursor` and `has_more` metadata for smooth infinite scrolling.
-
-3. **Standardized RFC 7807 Problem Details (`HTTP 400 Bad Request`):**
-   - If a client omits the `Idempotency-Key` or requests `limit=100`, the server does not return an arbitrary error string.
-   - Instead, it responds with `application/problem+json` containing standard diagnostic fields: `type`, `title`, `status`, `detail`, and `instance`.
 
 ---
 
-## Core Concepts at a Glance
+## Concepts
 
-| Concept | Why It Matters | Real-World Intuition |
-| :--- | :--- | :--- |
-| **Contract-First Design** | Eliminates integration mismatches between frontend and backend teams. | Frontend developers can generate mock servers immediately while backend engineers build the actual implementation to spec. |
-| **OpenAPI 3.0.3** | Machine-readable JSON/YAML standard for documenting and validating REST APIs. | Allows auto-generating client SDKs, Swagger interactive documentation, and automated regression test suites. |
-| **Idempotency Key** | Guarantees that performing the same operation multiple times yields the exact same outcome. | Protects users from double billing if they click "Pay Now" on a spotty cellular connection that auto-retries. |
-| **Cursor Pagination** | Paginates through chronological datasets using a unique record pointer (`id > cursor`). | Fast $O(1)$ indexed database queries; immune to duplicate or missed items when new records are inserted concurrently. |
-| **RFC 7807 Problem Details** | IETF standard (`application/problem+json`) for HTTP error payloads. | Frontend clients parse a single, consistent JSON structure (`title`, `status`, `detail`) across all microservices. |
-| **URI Versioning** | Explicit version numbers in the URL path (`/api/v1/orders`). | Guarantees backwards compatibility when introducing new features without breaking existing mobile or third-party consumers. |
+| Term | Definition |
+| :--- | :--- |
+| **Contract-First Design** | An API architecture approach where the interface specification is defined and reviewed before implementation code is written. |
+| **OpenAPI 3.0.3** | A standardized specification format used to describe endpoints, headers, payload schemas, and response codes. |
+| **Cursor Pagination** | A pagination method that retrieves records sequentially after a unique pointer (`WHERE id > cursor LIMIT limit`), preventing duplicate items during concurrent writes. |
+| **Idempotency Key** | A unique client-provided token supplied via the `Idempotency-Key` HTTP header that prevents duplicate resource creation during retries. |
+| **RFC 7807 Problem Details** | An IETF standard (`application/problem+json`) defining machine-readable HTTP error payloads containing `type`, `title`, `status`, `detail`, and `instance`. |
+| **URI Versioning** | Explicit versioning within the URL path (`/api/v1/...`) that preserves backward compatibility for existing consumers. |
+
+In a contract-first workflow, the API specification is authored before any server code is implemented. The OpenAPI document defines required headers, request payloads, response schemas, and status codes. When requests arrive, the server validates client parameters against these contract definitions. If a request violates the schema or omits required headers, the server rejects the call with an RFC 7807 Problem Details error payload. Valid mutations persist to the data store, and subsequent queries stream records chronologically using cursor pointers.
+
+---
+
+## Objectives
+
+- Configure the project workspace with Express and YAML parser dependencies.
+- Author an OpenAPI 3.0.3 specification defining `/orders` endpoints, write idempotency headers, query limits, and RFC 7807 error models.
+- Implement an Express server stub that enforces the OpenAPI contract rules and manages in-memory order data.
+- Expose the application using the Poridhi Load Balancer on port 5000.
+- Verify contract enforcement, boundary restrictions, cursor pagination, and automated unit tests.
 
 ---
 
@@ -55,21 +37,21 @@ As illustrated in the diagram above, your API enforces three distinct production
 
 ```text
 lab01-contract-first-api/
-├── openapi.yaml       # OpenAPI 3.0.3 contract (Single source of truth)
-├── package.json       # Node.js project manifest & dependencies (Express, YAML)
-├── server.js          # Express backend server implementing the contract
-├── test.js            # Automated contract verification test suite
+├── openapi.yaml       # OpenAPI 3.0.3 contract specification
+├── package.json       # Node.js dependencies and script definitions
+├── server.js          # Express server enforcing contract rules
+├── test.js            # Automated contract validation test suite
 └── images/
-    └── lab01-architecture.svg  # Unified topology & lifecycle diagram
+    └── lab01-architecture.svg
 ```
+
+The OpenAPI contract defines the request and response interface, the Express server executes the business logic while enforcing contract boundaries, and the automated test script verifies compliance across all endpoints.
 
 ---
 
 ## Step 1: Initialize the Project Workspace
 
-In this step, you will set up your project folder and install the necessary Node.js libraries: **Express** for routing and **YAML** for parsing the OpenAPI contract directly into memory.
-
-### 1. Create and enter the project directory:
+Create the project directory:
 
 ```bash
 mkdir -p ~/lab01-contract-first-api
@@ -78,12 +60,9 @@ cd ~/lab01-contract-first-api
 
 ![Create Project Directory](images/step1-create-dir.png)
 
-### 2. Create `package.json`:
+Create a file named `package.json` with the following contents:
 
-Write the project configuration file defining start and test scripts:
-
-```bash
-cat << 'EOF' > package.json
+```json
 {
   "name": "lab01-contract-first-api",
   "version": "1.0.0",
@@ -98,14 +77,18 @@ cat << 'EOF' > package.json
     "yaml": "^2.4.2"
   }
 }
-EOF
 ```
 
 ![Create package.json](images/step1-package-json.png)
 
-### 3. Install dependencies:
+**Explanation:**
+- `main`: Points to `server.js` as the entrypoint file of the application.
+- `scripts.start`: Defines the command `node server.js` to run the Express server.
+- `scripts.test`: Defines the command `node test.js` to execute the automated verification test suite.
+- `dependencies.express`: Installs the Express web framework for routing and HTTP handling.
+- `dependencies.yaml`: Installs the YAML parser library to load and inspect `openapi.yaml` at runtime.
 
-Run `npm install` to download Express and the YAML parser:
+Install the project dependencies:
 
 ```bash
 npm install
@@ -114,6 +97,7 @@ npm install
 ![Install Dependencies](images/step1-npm-install.png)
 
 Expected output:
+
 ```text
 added 69 packages in 2s
 found 0 vulnerabilities
@@ -121,20 +105,11 @@ found 0 vulnerabilities
 
 ---
 
-## Step 2: Define the OpenAPI 3 Contract (`openapi.yaml`)
+## Step 2: Define the OpenAPI 3.0.3 Contract
 
-Now you will author the heart of this lab: the OpenAPI 3.0.3 specification. 
+Create a file named `openapi.yaml` with the following contents:
 
-Notice how this file defines:
-- The base server URI with versioning: `http://localhost:5000/api/v1`.
-- The mandatory `Idempotency-Key` header on `POST /orders`.
-- Boundary rules on query parameters (`minimum: 1, maximum: 50, default: 10` on `limit`).
-- The standardized `ProblemDetails` schema conforming to **RFC 7807**.
-
-Create `openapi.yaml`:
-
-```bash
-cat << 'EOF' > openapi.yaml
+```yaml
 openapi: 3.0.3
 info:
   title: Orders Service API
@@ -329,26 +304,25 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-EOF
 ```
 
 ![Create openapi.yaml](images/step2-openapi-yaml.png)
 
+**Explanation:**
+- `servers.url`: Specifies `http://localhost:5000/api/v1` as the base URI path to enforce explicit API versioning.
+- `paths./orders.post.parameters`: Declares the `Idempotency-Key` header with `required: true` and UUID formatting.
+- `paths./orders.get.parameters`: Defines `cursor` and `limit` query parameters with explicit validation boundaries (`minimum: 1, maximum: 50, default: 10`).
+- `components.schemas.CreateOrderRequest`: Enforces mandatory fields (`item_id`, `quantity`, `amount`) and minimum values (`quantity >= 1`, `amount >= 0.01`).
+- `components.schemas.ProblemDetails`: Declares the RFC 7807 error format with `type`, `title`, `status`, `detail`, and `instance` properties.
+- `components.responses.ProblemDetails400`: Maps bad requests to `application/problem+json` to standardize error communication across consumers.
+
 ---
 
-## Step 3: Implement the Compliant Server (`server.js`)
+## Step 3: Implement the Contract-Compliant Server Stub
 
-With the contract established, we now write the Node.js server. The server faithfully mirrors every requirement specified in `openapi.yaml`:
+Create a file named `server.js` with the following contents:
 
-- **RFC 7807 Helper:** A reusable `sendProblem()` function setting `Content-Type: application/problem+json`.
-- **Pre-Seeded Entity Store:** Seeds 25 order records with auto-increment IDs (`101` through `125`) to test cursor pagination immediately.
-- **Contract Schema Validation:** Explicit checks for `Idempotency-Key`, payload data types, and boundary limits (`1 <= limit <= 50`).
-- **Raw Spec Endpoint:** Serves `/openapi.yaml` directly so external API clients and Swagger documentation viewers can consume the contract.
-
-Create `server.js`:
-
-```bash
-cat << 'EOF' > server.js
+```javascript
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -498,20 +472,23 @@ if (require.main === module) {
 }
 
 module.exports = app;
-EOF
 ```
 
 ![Create server.js](images/step3-server-js.png)
 
+**Explanation:**
+- `yaml.parse(fs.readFileSync(...))`: Reads and parses `openapi.yaml` into memory upon server startup.
+- `sendProblem()`: Helper function setting `Content-Type: application/problem+json` and returning RFC 7807 compliant error payloads.
+- `ordersDb`: In-memory array pre-seeded with 25 records to enable immediate cursor pagination verification.
+- `req.header('Idempotency-Key')`: Checks for the presence of the required idempotency key header, returning an RFC 7807 400 error if missing.
+- `res.setHeader('Location', ...)`: Returns the resource URI for newly created orders alongside `HTTP 201 Created`.
+- `ordersDb.filter(o => o.id > cursor)`: Executes cursor-based pagination by selecting items strictly greater than the cursor ID and slicing up to the validated `limit`.
+
 ---
 
-## Step 4: Expose and Verify via Poridhi Load Balancer
+## Step 4: Expose the Server via Poridhi Load Balancer
 
-Now, launch your server and expose it through Poridhi's cloud infrastructure. We run the service on port `5000` to avoid conflict with default web interface ports.
-
-### 1. Start the Server on Port 5000
-
-Start the Express application in the background:
+Start the server process in the background on port 5000:
 
 ```bash
 node server.js &
@@ -519,12 +496,7 @@ node server.js &
 
 ![Start Server](images/step4-start-server.png)
 
-> [!TIP]
-> If your terminal prompt does not reappear after starting the background process, simply press the `Enter` key on your keyboard.
-
-### 2. Configure Poridhi Load Balancer
-
-1. Retrieve the private IP address of your Poridhi virtual machine:
+Retrieve the private IP address of your virtual machine:
 
 ```bash
 hostname -I | awk '{print $1}'
@@ -532,30 +504,30 @@ hostname -I | awk '{print $1}'
 
 ![Get Private IP](images/step4-hostname-ip.png)
 
-2. Open the **Load Balancer** dialog in the Poridhi interface (the cloud/router icon in the top navigation bar).
-3. Fill in the connection settings:
-   - **Enter IP**: Paste the IP address obtained above (e.g., `10.x.x.x`).
-   - **Enter Port**: `5000`
+Configure the Poridhi Load Balancer:
+1. Open the **Load Balancer** modal in the Poridhi interface.
+2. Enter the IP address obtained from `hostname -I`.
+3. Set the target port to `5000`.
 
 ![Configure Load Balancer](images/step4-loadbalancer-modal.png)
 
-4. Click **Expose**. Poridhi will generate an active public Load Balancer URL:
+Click **Expose** to generate an active public URL:
 
 ![Load Balancer Exposed](images/step4-loadbalancer-exposed.png)
 
-5. Open the generated Load Balancer URL in your browser to verify that the server is active:
+Open the generated Load Balancer URL in your web browser to confirm connectivity:
 
 ![Browser Status](images/step4-browser-status.png)
 
 ---
 
-### 3. Verify Contract Enforcement via cURL
+## Verification
 
-Now, test each contract requirement using `curl`. You can run these commands directly against `http://localhost:5000` in your terminal, or substitute your **Poridhi Load Balancer URL** to test over the web!
+You will verify contract validation, mutation handling, query parameter limits, and cursor pagination using `curl` and the automated test runner.
 
-#### Test 1: Missing Idempotency Key (Expect RFC 7807 400 Bad Request)
+### Scenario 1: Missing Idempotency-Key Header (Expected 400 Bad Request)
 
-Send an order creation request **without** the required `Idempotency-Key` header:
+Execute a `POST` request without the `Idempotency-Key` header:
 
 ```bash
 curl -i -X POST http://localhost:5000/api/v1/orders \
@@ -566,6 +538,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ![Test 1 Missing Idempotency Key](images/step4-test1-missing-key.png)
 
 Expected output:
+
 ```text
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json; charset=utf-8
@@ -579,12 +552,9 @@ Content-Type: application/problem+json; charset=utf-8
 }
 ```
 
-> [!NOTE]
-> Notice the response `Content-Type: application/problem+json`. This confirms RFC 7807 compliance!
+### Scenario 2: Valid Order Placement (Expected 201 Created)
 
-#### Test 2: Valid Order Placement (Expect 201 Created)
-
-Now include a valid UUID in the `Idempotency-Key` header:
+Execute a `POST` request supplying a valid `Idempotency-Key` header:
 
 ```bash
 curl -i -X POST http://localhost:5000/api/v1/orders \
@@ -596,6 +566,7 @@ curl -i -X POST http://localhost:5000/api/v1/orders \
 ![Test 2 Valid Order](images/step4-test2-valid-order.png)
 
 Expected output:
+
 ```text
 HTTP/1.1 201 Created
 Location: /api/v1/orders/126
@@ -611,9 +582,9 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 
-#### Test 3: Query Limit Violation (Expect RFC 7807 400 Bad Request)
+### Scenario 3: Query Parameter Limit Out of Bounds (Expected 400 Bad Request)
 
-The OpenAPI contract sets `maximum: 50` on the `limit` query parameter. Request `limit=100` to verify boundary enforcement:
+Query `/api/v1/orders` with `limit=100`, exceeding the contract maximum of 50:
 
 ```bash
 curl -i "http://localhost:5000/api/v1/orders?limit=100"
@@ -622,6 +593,7 @@ curl -i "http://localhost:5000/api/v1/orders?limit=100"
 ![Test 3 Query Limit Violation](images/step4-test3-query-limit.png)
 
 Expected output:
+
 ```text
 HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json; charset=utf-8
@@ -635,9 +607,9 @@ Content-Type: application/problem+json; charset=utf-8
 }
 ```
 
-#### Test 4: Cursor Pagination (Page 1 & Page 2)
+### Scenario 4: Cursor-Based Pagination
 
-Request the first page with `limit=3`:
+Retrieve the first page with `limit=3`:
 
 ```bash
 curl -s "http://localhost:5000/api/v1/orders?limit=3" | jq .
@@ -646,6 +618,7 @@ curl -s "http://localhost:5000/api/v1/orders?limit=3" | jq .
 ![Test 4 Pagination Page 1](images/step4-test4-pagination-p1.png)
 
 Expected output:
+
 ```json
 {
   "data": [
@@ -661,7 +634,7 @@ Expected output:
 }
 ```
 
-Notice `next_cursor: 103`. Fetch Page 2 by passing `cursor=103`:
+Retrieve the second page using `cursor=103`:
 
 ```bash
 curl -s "http://localhost:5000/api/v1/orders?limit=3&cursor=103" | jq .
@@ -670,6 +643,7 @@ curl -s "http://localhost:5000/api/v1/orders?limit=3&cursor=103" | jq .
 ![Test 4 Pagination Page 2](images/step4-test4-pagination-p2.png)
 
 Expected output:
+
 ```json
 {
   "data": [
@@ -685,19 +659,13 @@ Expected output:
 }
 ```
 
-> [!TIP]
-> Notice how Page 2 seamlessly begins at record `104` with zero duplicates and zero skipped items!
-
 ---
 
-## Step 5: Run Automated Contract Test Suite
+### Scenario 5: Automated Contract Validation Test Suite
 
-In real-world continuous integration (CI/CD) pipelines, contract compliance is never checked manually with `curl`. Instead, automated test suites execute against the server stub to guarantee that no pull request breaks the API contract.
+Create a file named `test.js` with the following contents:
 
-Create `test.js` to run automated assertions against all 4 contract scenarios:
-
-```bash
-cat << 'EOF' > test.js
+```javascript
 const http = require('http');
 const app = require('./server');
 
@@ -788,12 +756,19 @@ const server = app.listen(0, async () => {
     server.close();
   }
 });
-EOF
 ```
 
 ![Create Test Script](images/step5-test-js.png)
 
-### Run the automated test suite:
+**Explanation:**
+- `app.listen(0)`: Spawns the Express server on an ephemeral random port to isolate automated tests from active server instances.
+- `request()`: Wraps Node.js `http.request` into a promise-based client to test status codes, headers, and parsed JSON responses.
+- `Test 1`: Asserts that omitting `Idempotency-Key` triggers an `HTTP 400` status with RFC 7807 payload title `Missing Required Header`.
+- `Test 2`: Asserts that supplying a valid body and key produces `HTTP 201 Created` with a populated `Location` header.
+- `Test 3`: Asserts that requesting `limit=100` triggers `HTTP 400 Bad Request` with `Invalid Query Parameter`.
+- `Test 4`: Asserts that sequential queries across pages yield distinct records without ID overlap using `next_cursor`.
+
+Execute `npm test` to run the test suite:
 
 ```bash
 npm test
@@ -802,6 +777,7 @@ npm test
 ![Automated Test Suite Output](images/step5-npm-test.png)
 
 Expected output:
+
 ```text
 > lab01-contract-first-api@1.0.0 test
 > node test.js
@@ -827,9 +803,19 @@ Querying Page 2 using cursor=105...
 
 ---
 
-## Key Engineering Takeaways
+### Verification Summary
 
-1. **The Contract is the Source of Truth:** Designing the OpenAPI specification upfront eliminates costly misunderstandings and ensures backend implementation adheres strictly to agreed schemas.
-2. **Idempotency Guarantees Safe Network Retries:** Mobile devices, payment gateways, and microservices encounter transient network drops. Enforcing `Idempotency-Key` ensures that automatic retries never result in duplicate orders or double-billing.
-3. **Cursor Pagination Scales Effortlessly:** Unlike offset-based pagination (`OFFSET 10000`), cursor pagination leverages indexed sequential keys (`WHERE id > cursor LIMIT limit`). It delivers deterministic performance and prevents phantom records under real-time writes.
-4. **RFC 7807 Standardizes Distributed Errors:** Using `application/problem+json` replaces proprietary error formats with a universally recognized IETF standard, simplifying client error-handling logic across web and mobile platforms.
+| # | Call | Status | Body snippet |
+| :--- | :--- | :--- | :--- |
+| 1 | `POST /api/v1/orders` (No Key) | `400 Bad Request` | `{"type":".../missing-header","title":"Missing Required Header"}` |
+| 2 | `POST /api/v1/orders` (Valid Key) | `201 Created` | `{"id":126,"item_id":402,"quantity":2,"amount":199,"status":"CONFIRMED"}` |
+| 3 | `GET /api/v1/orders?limit=100` | `400 Bad Request` | `{"type":".../invalid-parameter","title":"Invalid Query Parameter"}` |
+| 4 | `GET /api/v1/orders?limit=3` | `200 OK` | `{"data":[...],"pagination":{"next_cursor":103,"has_more":true,"count":3}}` |
+| 5 | `GET /api/v1/orders?limit=3&cursor=103` | `200 OK` | `{"data":[...],"pagination":{"next_cursor":106,"has_more":true,"count":3}}` |
+| 6 | `npm test` | `200 / 201 / 400` | `ALL 4 CONTRACT-FIRST API TESTS PASSED SUCCESSFULLY!` |
+
+---
+
+## Conclusion
+
+You designed an OpenAPI 3.0.3 specification enforcing URI versioning, write idempotency headers, query boundaries, and RFC 7807 Problem Details. You implemented an Express server stub directly compliant with this contract and verified boundary enforcement, cursor pagination, and error responses through cURL and automated test suites.
