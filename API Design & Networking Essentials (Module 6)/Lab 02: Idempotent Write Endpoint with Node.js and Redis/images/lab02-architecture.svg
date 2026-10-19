@@ -1,217 +1,353 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 520" width="1680" height="520">
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 760" width="1120" height="760">
   <defs>
+    <!-- Draw.io Authentic Drop Shadow Filter -->
+    <filter id="dropShadow" x="-12%" y="-12%" width="135%" height="145%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+
+    <!-- Draw.io Classic Marker Arrowhead -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#000000" />
+    </marker>
+
     <style>
-      text {
-        font-family: "Times New Roman", Times, "Liberation Serif", serif;
+      .card-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
         fill: #000000;
+        text-anchor: middle;
       }
-      .title-text {
-        font-size: 20px;
-        font-weight: bold;
-        fill: #000000;
+      .card-sub {
+        font-family: "Georgia", "DejaVu Serif", serif;
+        font-size: 13px;
+        fill: #111111;
+        text-anchor: middle;
       }
-      .subtitle-text {
-        font-size: 15px;
-        font-style: italic;
-        fill: #000000;
+      .sec-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .section-heading {
-        font-size: 17px;
-        font-weight: bold;
-        fill: #000000;
+      .flow-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .code-font {
-        font-family: "Times New Roman", Times, "Liberation Serif", serif;
-        font-size: 15.5px;
-        fill: #000000;
+      .flow-text {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 11px;
+        fill: #334155;
       }
-      .body-text {
-        font-size: 15.5px;
-        fill: #000000;
+      .code-badge {
+        font-family: "Courier New", Courier, "DejaVu Sans Mono", monospace;
+        font-size: 10.5px;
+        font-weight: 600;
       }
-      .arrow-label {
+      .note-text {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
+        font-size: 10px;
+        fill: #475569;
+      }
+      .banner-title {
+        font-family: "Inter", "DejaVu Sans", Arial, sans-serif;
         font-size: 16px;
-        font-weight: bold;
-        fill: #000000;
+        font-weight: 700;
+        fill: #0f172a;
       }
-      .arrow-sub {
-        font-size: 14.5px;
+      .banner-sub {
+        font-family: "Georgia", "DejaVu Serif", serif;
+        font-size: 13px;
+        fill: #475569;
         font-style: italic;
-        fill: #000000;
-      }
-      .flow-step-title {
-        font-size: 16.5px;
-        font-weight: bold;
-        fill: #000000;
-      }
-      .flow-step-sub {
-        font-size: 14.5px;
-        font-style: italic;
-        fill: #000000;
       }
     </style>
-    <marker id="arr-black" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
-    </marker>
   </defs>
+
+  <!-- Background Canvas -->
   <rect width="100%" height="100%" fill="#ffffff" />
 
+  <!-- Outer Frame -->
+  <rect x="20" y="16" width="1080" height="725" rx="10" fill="#fafafa" stroke="#cbd5e1" stroke-width="1.5" />
 
-  <!-- Component: HTTP Client -->
-  <g transform="translate(40, 20)">
-    <rect width="280" height="480" rx="8" fill="#f0f7ff" stroke="#2563eb" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#dbeafe" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M.803 14.8169c0-.5342.433-.9665.9665-.9665.5335 0 .9665.4323.9665.9665 0 .5335-.433.9657-.9665.9657-.5335 0-.9666-.4322-.9666-.9657m2.736 0c0-.1963-.0532-.376-.1119-.5525-.2344-.7024-.876-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0708C.6149 13.2865 0 13.9646 0 14.817c0 .9764.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.793 1.7694-1.7694m-1.7694-7.149c.5335 0 .9665.433.9665.9665 0 .5335-.433.9665-.9665.9665-.5343 0-.9666-.433-.9666-.9665 0-.5335.4323-.9665.9666-.9665m0 2.7359c.9772 0 1.7694-.7923 1.7694-1.7694 0-.1956-.0532-.376-.1119-.5525-.2344-.7024-.8767-1.2169-1.6575-1.2169-.1249 0-.2344.0465-.3524.0716C.6149 7.104 0 7.782 0 8.6344c0 .9771.7923 1.7694 1.7695 1.7694m13.221-5.694c-.5342 0-.9665-.433-.9665-.9664a.966.966 0 01.9666-.9665c.5335 0 .9658.4322.9658.9665 0 .5334-.4323.9664-.9658.9664m-9.6 16.5133c-.5335 0-.9666-.433-.9666-.9665 0-.5342.433-.9665.9666-.9665a.966.966 0 01.9665.9665c0 .5335-.4323.9665-.9665.9665m9.6-19.2491c-.978 0-1.7695.7922-1.7695 1.7694 0 .2085.0525.4025.1187.5882L5.039 18.5581c-.803.1681-1.4179.8462-1.4179 1.6985 0 .9772.7923 1.7694 1.7695 1.7694.9772 0 1.7694-.7922 1.7694-1.7694 0-.1963-.0525-.3759-.111-.5525l8.3427-14.2728c.7778-.1865 1.3683-.8531 1.3683-1.688 0-.977-.793-1.7693-1.7694-1.7693m7.24 2.7359c-.5343 0-.9666-.433-.9666-.9665a.966.966 0 01.9665-.9665c.5335 0 .9666.4322.9666.9665 0 .5334-.433.9665-.9666.9665M12.6313 21.223c-.5343 0-.9665-.433-.9665-.9665a.966.966 0 01.9665-.9665c.5335 0 .9658.4323.9658.9665 0 .5335-.4323.9665-.9658.9665M22.2305 1.974c-.9772 0-1.7694.7922-1.7694 1.7694 0 .2085.0525.4025.1187.5882l-8.3009 14.2265c-.8021.1681-1.417.8462-1.417 1.6985 0 .9772.7922 1.7694 1.7694 1.7694.9764 0 1.7687-.7922 1.7687-1.7694 0-.1963-.0525-.3759-.1111-.5525l8.3427-14.2728C23.4094 5.2448 24 4.5782 24 3.7433c0-.977-.7923-1.7693-1.7695-1.7693" fill="#111827" />
-    </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">HTTP Client</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Retrying Caller / Web Client</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Primary Write Request</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">POST /api/v1/orders</text>
-      <text x="12" y="84" class="body-text">Idempotency-Key: pay_live_9a2f</text>
-      <text x="12" y="112" class="body-text">Payload: {&quot;amount&quot;: 250}</text>
-      <text x="12" y="140" class="subtitle-text">First write execution</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Network Retry Call</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">POST /api/v1/orders</text>
-      <text x="12" y="84" class="body-text">Idempotency-Key: pay_live_9a2f</text>
-      <text x="12" y="112" class="body-text">← 201 Created (Cached Replay)</text>
-      <text x="12" y="140" class="subtitle-text">Zero duplicate order created</text>
-    </g>
+  <!-- Header Banner -->
+  <g transform="translate(45, 42)">
+    <text x="0" y="0" class="banner-title">Lab 02: Idempotent Write Architecture &amp; Caching Lifecycle</text>
+    <text x="0" y="20" class="banner-sub">Complete Distributed Topology: Node.js Express • Redis 7 Atomic Locks (SETNX) • Response Replay • Race Condition Guard</text>
   </g>
 
-  <!-- Arrow: 1. POST (Key) -->
-  <rect x="344" y="108" width="110" height="30" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
-  <text x="399" y="128" text-anchor="middle" class="arrow-label">1. POST (Key)</text>
-  <line x1="320" y1="150" x2="478" y2="150" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- Divider Line -->
+  <line x1="45" y1="74" x2="1075" y2="74" stroke="#e2e8f0" stroke-width="1.5" />
 
-  <!-- Arrow: 4. Replay 201 -->
-  <rect x="346" y="288" width="110" height="30" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2" />
-  <text x="401" y="308" text-anchor="middle" class="arrow-label">4. Replay 201</text>
-  <line x1="480" y1="330" x2="322" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
+  <!-- ========================================================== -->
+  <!-- TOP SECTION: SYSTEM ARCHITECTURE (DRAW.IO AUTHENTIC CARDS) -->
+  <!-- ========================================================== -->
 
-  <!-- Component: Express API Server -->
-  <g transform="translate(480, 20)">
-    <rect width="280" height="480" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#ede9fe" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" fill="#339933" />
+  <!-- NODE 1: HTTP Client (Light Blue) -->
+  <g transform="translate(45, 140)">
+    <rect x="0" y="0" width="150" height="95" rx="8" fill="#dae8fc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Client Monitor / Laptop Icon -->
+    <g transform="translate(57, 12)">
+      <rect x="0" y="2" width="36" height="24" rx="2" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5" />
+      <line x1="0" y1="20" x2="36" y2="20" stroke="#1d4ed8" stroke-width="1" />
+      <polygon points="15,26 21,26 24,32 12,32" fill="#1d4ed8" />
+      <line x1="8" y1="32" x2="28" y2="32" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" />
+      <polyline points="6,9 10,12 6,15" fill="none" stroke="#2563eb" stroke-width="1.2" />
+      <line x1="13" y1="15" x2="18" y2="15" stroke="#2563eb" stroke-width="1.2" />
     </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Express API Server</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Express (Port 5000) &amp; Middleware</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Idempotency Interceptor</text>
-      <text x="12" y="56" class="body-text">• Checks Idempotency-Key header</text>
-      <text x="12" y="84" class="body-text">• Queries Redis for key state</text>
-      <text x="12" y="112" class="body-text">• SETNX acquires exclusive lock</text>
-      <text x="12" y="140" class="body-text">• Concurrency: IN_PROGRESS</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Response Cacher</text>
-      <text x="12" y="56" class="body-text">• Intercepts res.send() output</text>
-      <text x="12" y="84" class="body-text">• Caches status and body in Redis</text>
-      <text x="12" y="112" class="body-text">• Replays cached body on retry</text>
-      <text x="12" y="140" class="subtitle-text">Emits X-Cache: HIT / MISS</text>
-    </g>
+    <text x="75" y="66" class="card-title">HTTP Client</text>
+    <text x="75" y="82" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">cURL / Browser</text>
+    <!-- Subtitle outside below card -->
+    <text x="75" y="116" class="card-sub">Client / Consumer</text>
   </g>
 
-  <!-- Arrow: 2. Lock (NX) -->
-  <rect x="784" y="108" width="110" height="30" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2" />
-  <text x="839" y="128" text-anchor="middle" class="arrow-label">2. Lock (NX)</text>
-  <line x1="760" y1="150" x2="918" y2="150" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- DASHER 1: Client to Load Balancer -->
+  <path d="M 195 187 L 265 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="202" y="168" width="55" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="229" y="181" font-family="Inter, sans-serif" font-size="9.5px" font-weight="600" fill="#0f172a" text-anchor="middle">Port 5000</text>
 
-  <!-- Arrow: 3. Cache Hit -->
-  <rect x="786" y="288" width="110" height="30" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2" />
-  <text x="841" y="308" text-anchor="middle" class="arrow-label">3. Cache Hit</text>
-  <line x1="920" y1="330" x2="762" y2="330" stroke="#000000" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#arr-black)" />
-
-  <!-- Component: Redis 7 Store -->
-  <g transform="translate(920, 20)">
-    <rect width="280" height="480" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#fee2e2" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#dc2626" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M22.71 13.145c-1.66 2.092-3.452 4.483-7.038 4.483-3.203 0-4.397-2.825-4.48-5.12.701 1.484 2.073 2.685 4.214 2.63 4.117-.133 6.94-3.852 6.94-7.239 0-4.05-3.022-6.972-8.268-6.972-3.752 0-8.4 1.428-11.455 3.685C2.59 6.937 3.885 9.958 4.35 9.626c2.648-1.904 4.748-3.13 6.784-3.744C8.12 9.244.886 17.05 0 18.425c.1 1.261 1.66 4.648 2.424 4.648.232 0 .431-.133.664-.365a100.49 100.49 0 0 0 5.54-6.765c.222 3.104 1.748 6.898 6.014 6.898 3.819 0 7.604-2.756 9.33-8.965.2-.764-.73-1.361-1.261-.73zm-4.349-5.013c0 1.959-1.926 2.922-3.685 2.922-.941 0-1.664-.247-2.235-.568 1.051-1.592 2.092-3.225 3.21-4.973 1.972.334 2.71 1.43 2.71 2.619z" fill="#dc2626" />
+  <!-- NODE 2: Poridhi Load Balancer (Light Purple) -->
+  <g transform="translate(270, 140)">
+    <rect x="0" y="0" width="155" height="95" rx="8" fill="#e1d5e7" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Load Balancer Router Icon -->
+    <g transform="translate(57, 12)">
+      <circle cx="20" cy="17" r="15" fill="#ffffff" stroke="#7e22ce" stroke-width="1.5" />
+      <line x1="12" y1="17" x2="28" y2="17" stroke="#7e22ce" stroke-width="1.5" />
+      <polygon points="28,17 24,14 24,20" fill="#7e22ce" />
+      <line x1="20" y1="9" x2="20" y2="25" stroke="#7e22ce" stroke-width="1.5" />
+      <polygon points="20,9 17,13 23,13" fill="#7e22ce" />
     </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Redis 7 Store</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Key-Value State Cache</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Atomic Lock Engine</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">SET key &apos;IN_PROGRESS&apos; EX 60 NX</text>
-      <text x="12" y="84" class="body-text">• Mutual exclusion on key</text>
-      <text x="12" y="112" class="body-text">• Prevents duplicate race condition</text>
-      <text x="12" y="140" class="body-text">• Status: IN_PROGRESS</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Cached Response Body</text>
-      <text x="12" y="56" class="code-font" font-weight="bold">Key: idemp:pay_live_9a2f</text>
-      <text x="12" y="84" class="body-text">• status: 201, headers: {...}</text>
-      <text x="12" y="112" class="body-text">• body: {&quot;id&quot;: 501, &quot;status&quot;: ...}</text>
-      <text x="12" y="140" class="subtitle-text">TTL: 86400s (24h retention)</text>
-    </g>
+    <text x="77" y="66" class="card-title">Poridhi LB</text>
+    <text x="77" y="82" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">Port 5000 Proxy</text>
+    <!-- Subtitle outside below card -->
+    <text x="77" y="116" class="card-sub">Network Gateway</text>
   </g>
 
-  <!-- Arrow: Execute Once -->
-  <rect x="1224" y="198" width="110" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2" />
-  <text x="1279" y="218" text-anchor="middle" class="arrow-label">Execute Once</text>
-  <line x1="1200" y1="240" x2="1358" y2="240" stroke="#000000" stroke-width="1.8" marker-end="url(#arr-black)" />
+  <!-- DASHER 2: Load Balancer to Express Server -->
+  <path d="M 425 187 L 495 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="432" y="168" width="56" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="460" y="181" font-family="Inter, sans-serif" font-size="9.5px" font-weight="600" fill="#0f172a" text-anchor="middle">Rev. Proxy</text>
 
-  <!-- Component: Order Database -->
-  <g transform="translate(1360, 20)">
-    <rect width="280" height="480" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2" />
-    <rect width="280" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
-    <rect y="48" width="280" height="10" fill="#fef3c7" />
-    <rect x="14" y="10" width="38" height="38" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="1.2" />
-    <g transform="translate(19, 15) scale(1.16)">
-      <path d="M12 2C6.48 2 2 4.01 2 6.5v11C2 19.99 6.48 22 12 22s10-2.01 10-4.5v-11C22 4.01 17.52 2 12 2zm0 2c4.42 0 8 1.34 8 2.5S16.42 9 12 9 4 7.66 4 6.5 7.58 4 12 4zm8 13.5c0 1.16-3.58 2.5-8 2.5s-8-1.34-8-2.5v-2.32c1.88 1.18 4.79 1.82 8 1.82s6.12-.64 8-1.82v2.32zm0-5c0 1.16-3.58 2.5-8 2.5s-8-1.34-8-2.5v-2.32c1.88 1.18 4.79 1.82 8 1.82s6.12-.64 8-1.82v2.32z" fill="#4b5563" />
+  <!-- NODE 3: Express Server with Middleware (Mint Green) -->
+  <g transform="translate(500, 140)">
+    <rect x="0" y="0" width="165" height="95" rx="8" fill="#d5e8d4" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Express Server Box Icon -->
+    <g transform="translate(62, 12)">
+      <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#ffffff" stroke="#15803d" stroke-width="1.5" />
+      <line x1="20" y1="20" x2="20" y2="38" stroke="#15803d" stroke-width="1.2" />
+      <line x1="20" y1="20" x2="36" y2="11" stroke="#15803d" stroke-width="1.2" />
+      <line x1="20" y1="20" x2="4" y2="11" stroke="#15803d" stroke-width="1.2" />
     </g>
-    <text x="60" y="28" text-anchor="start" class="title-text">Order Database</text>
-    <text x="60" y="48" text-anchor="start" class="subtitle-text">Transactional Data Store</text>
-
-    <g transform="translate(15, 75)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Payment Execution</text>
-      <text x="12" y="56" class="body-text">• Deducts customer balance</text>
-      <text x="12" y="84" class="body-text">• Inserts confirmed order row</text>
-      <text x="12" y="112" class="body-text">• Executed strictly ONCE per key</text>
-      <text x="12" y="140" class="subtitle-text">Zero double-billing anomaly</text>
-    </g>
-
-    <g transform="translate(15, 257)">
-      <rect width="250" height="166" rx="6" fill="#ffffff" stroke="#fde68a" stroke-width="1.2" />
-      <rect width="250" height="32" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2" />
-      <text x="12" y="22" class="section-heading">Audit Ledger</text>
-      <text x="12" y="56" class="body-text">• Maps Idempotency-Key to order</text>
-      <text x="12" y="84" class="body-text">• Preserves transactional integrity</text>
-      <text x="12" y="112" class="body-text">• Immutable order records</text>
-      <text x="12" y="140" class="subtitle-text">Production safe guarantee</text>
-    </g>
+    <text x="82" y="66" class="card-title">Express Server</text>
+    <text x="82" y="82" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">server.js (:5000)</text>
+    <!-- Subtitle outside below card -->
+    <text x="82" y="116" class="card-sub">Idempotency Layer</text>
   </g>
+
+  <!-- BRANCHING FROM EXPRESS SERVER (Tree branching style) -->
+  <path d="M 665 187 L 710 187" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" />
+
+  <!-- Upper Branch to Redis 7 -->
+  <path d="M 710 187 L 710 125 L 755 125" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="668" y="103" width="82" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="709" y="116" font-family="Inter, sans-serif" font-size="9px" font-weight="600" fill="#0f172a" text-anchor="middle">Lock &amp; Caching</text>
+
+  <!-- Lower Branch to orders[] State -->
+  <path d="M 710 187 L 710 245 L 755 245" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow)" />
+  <rect x="666" y="248" width="86" height="18" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />
+  <text x="709" y="261" font-family="Inter, sans-serif" font-size="9px" font-weight="600" fill="#0f172a" text-anchor="middle">Commit on Miss</text>
+
+  <!-- NODE 4: Redis 7 Key Store (Warm Cream / Coral) -->
+  <g transform="translate(760, 80)">
+    <rect x="0" y="0" width="165" height="90" rx="8" fill="#fff2cc" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Redis Memory Cache Icon -->
+    <g transform="translate(63, 8)">
+      <polygon points="19,2 35,10 19,18 3,10" fill="#ffffff" stroke="#b45309" stroke-width="1.5" />
+      <polygon points="19,10 35,18 19,26 3,18" fill="#fed7aa" stroke="#b45309" stroke-width="1.5" />
+      <polygon points="19,18 35,26 19,34 3,26" fill="#ffffff" stroke="#b45309" stroke-width="1.5" />
+    </g>
+    <text x="82" y="62" class="card-title">Redis 7</text>
+    <text x="82" y="78" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">Container (:6379)</text>
+    <!-- Subtitle outside below card -->
+    <text x="82" y="108" class="card-sub">Atomic Lock &amp; Cache</text>
+  </g>
+
+  <!-- NODE 5: In-Memory DB (Soft Gray) -->
+  <g transform="translate(760, 200)">
+    <rect x="0" y="0" width="165" height="90" rx="8" fill="#f5f5f5" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Database Cylinder Icon -->
+    <g transform="translate(64, 8)">
+      <ellipse cx="18" cy="8" rx="16" ry="6" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+      <path d="M 2 8 L 2 18 A 16 6 0 0 0 34 18 L 34 8" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+      <path d="M 2 18 L 2 28 A 16 6 0 0 0 34 28 L 34 18" fill="#ffffff" stroke="#475569" stroke-width="1.5" />
+    </g>
+    <text x="82" y="62" class="card-title">orders[] State</text>
+    <text x="82" y="78" font-family="Inter, sans-serif" font-size="10.5px" fill="#475569" text-anchor="middle">Single Persistent DB</text>
+    <!-- Subtitle outside below card -->
+    <text x="82" y="108" class="card-sub">Entity Data Store</text>
+  </g>
+
+  <!-- Redis TTL Callout (Right Column) -->
+  <g transform="translate(955, 140)">
+    <rect x="0" y="0" width="115" height="95" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" />
+    <text x="57" y="24" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#334155" text-anchor="middle">Redis Key Schema</text>
+    <text x="57" y="44" class="code-badge" fill="#b45309" text-anchor="middle">idemp:&lt;key&gt;</text>
+    <text x="57" y="64" font-family="Inter, sans-serif" font-size="9px" fill="#64748b" text-anchor="middle">Lock: EX 60 NX</text>
+    <text x="57" y="78" font-family="Inter, sans-serif" font-size="9px" fill="#64748b" text-anchor="middle">Cache: EX 86400</text>
+  </g>
+  <path d="M 925 125 L 945 125 L 945 187 L 955 187" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3" />
+
+  <!-- ========================================================== -->
+  <!-- MIDDLE DIVIDER & SECTION TITLE                             -->
+  <!-- ========================================================== -->
+  <line x1="45" y1="320" x2="1075" y2="320" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3,3" />
+
+  <g transform="translate(45, 345)">
+    <text x="0" y="0" class="sec-title">Unified Idempotency &amp; Concurrency Lifecycle</text>
+    <text x="0" y="18" class="banner-sub">How requests move through atomic lock acquisition, response caching, instant replays, and conflict rejection</text>
+  </g>
+
+  <!-- ========================================================== -->
+  <!-- BOTTOM SECTION: 3 DRAW.IO WORKFLOW CARDS                   -->
+  <!-- ========================================================== -->
+
+  <!-- PANEL 1: FIRST MUTATION (CACHE MISS) -->
+  <g transform="translate(45, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#dae8fc" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#1e3a8a">1. First Mutation (Cache Miss)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="145" height="18" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#1d4ed8">X-Cache: MISS</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#2563eb" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Acquires Atomic Lock in Redis</text>
+      <text x="24" y="24" class="flow-text">Executes: <tspan class="code-badge" fill="#0f172a">SET idemp:&lt;key&gt; "IN_PROGRESS"</tspan></text>
+      <text x="24" y="38" class="flow-text">Options: <tspan class="code-badge" fill="#0f172a">EX 60 NX</tspan> (Locks key atomically)</text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#2563eb" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Executes Core Business Logic</text>
+      <text x="24" y="24" class="flow-text">• Simulates latency &amp; credit card processing</text>
+      <text x="24" y="38" class="flow-text">• Inserts order row into <tspan class="code-badge">orders[]</tspan> with ID = 1</text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 192)">
+      <circle cx="8" cy="8" r="8" fill="#16a34a" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title" fill="#15803d">Caches Payload &amp; Responds 201</text>
+      <text x="24" y="24" class="flow-text">• Stores JSON <tspan class="code-badge">{ status: 201, body }</tspan> in Redis</text>
+      <text x="24" y="38" class="flow-text">• Sets 24-hr TTL (<tspan class="code-badge">EX 86400</tspan>)</text>
+      <text x="24" y="52" class="flow-text">• Returns: <tspan font-weight="700" fill="#16a34a">201 Created</tspan> + <tspan class="code-badge">X-Cache: MISS</tspan></text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Primary Execution Path:</text>
+    <text x="20" y="301" class="note-text">Database mutation executes strictly once; final response</text>
+    <text x="20" y="313" class="note-text">is saved in Redis to protect against future client retries.</text>
+  </g>
+
+  <!-- PANEL 2: NETWORK RETRY REPLAY (CACHE HIT) -->
+  <g transform="translate(398, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#d5e8d4" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#14532d">2. Network Retry Replay (Cache Hit)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="145" height="18" rx="3" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#15803d">X-Cache: HIT</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#15803d" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Client Retries Identical Key</text>
+      <text x="24" y="24" class="flow-text">Transmits: <tspan class="code-badge" fill="#0f172a">Idempotency-Key: ord_tx_1001</tspan></text>
+      <text x="24" y="38" class="flow-text">Cause: Mobile timeout or network retry policy</text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#15803d" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Redis Cache Hit Interception</text>
+      <text x="24" y="24" class="flow-text">• Middleware checks: <tspan class="code-badge">redis.get(redisKey)</tspan></text>
+      <text x="24" y="38" class="flow-text">• Finds serialized payload <tspan class="code-badge">{ status: 201, ... }</tspan></text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 192)">
+      <circle cx="8" cy="8" r="8" fill="#16a34a" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title" fill="#15803d">Instant Replay Without DB Call</text>
+      <text x="24" y="24" class="flow-text">• Returns status: <tspan font-weight="700" fill="#16a34a">201 Created</tspan></text>
+      <text x="24" y="38" class="flow-text">• Sets headers: <tspan class="code-badge">X-Cache: HIT</tspan>, <tspan class="code-badge">Idempotency-Replay</tspan></text>
+      <text x="24" y="52" class="flow-text">• Order ID remains <tspan font-weight="700">1</tspan> (zero duplicate rows)</text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Zero Database Mutation:</text>
+    <text x="20" y="301" class="note-text">Business logic &amp; billing are completely bypassed;</text>
+    <text x="20" y="313" class="note-text">the client receives the exact expected state immediately.</text>
+  </g>
+
+  <!-- PANEL 3: CONCURRENCY RACE CONDITION (409 CONFLICT) -->
+  <g transform="translate(750, 380)">
+    <rect x="0" y="0" width="325" height="330" rx="8" fill="#ffffff" stroke="#000000" stroke-width="1.5" filter="url(#dropShadow)" />
+    <!-- Header ribbon -->
+    <path d="M 0 8 Q 0 0 8 0 L 317 0 Q 325 0 325 8 L 325 36 L 0 36 Z" fill="#fee2e2" stroke="#000000" stroke-width="1.5" />
+    <text x="14" y="23" font-family="Inter, sans-serif" font-size="12px" font-weight="700" fill="#991b1b">3. Concurrency Conflict (409)</text>
+
+    <!-- Subtitle badge -->
+    <rect x="14" y="47" width="165" height="18" rx="3" fill="#fef2f2" stroke="#fecaca" stroke-width="1" />
+    <text x="20" y="60" class="code-badge" fill="#b91c1c">Mutual Exclusion (SETNX)</text>
+
+    <!-- Step A -->
+    <g transform="translate(14, 78)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+      <text x="24" y="8" class="flow-title">Parallel Concurrent Requests</text>
+      <text x="24" y="24" class="flow-text">• Two clients transmit identical key</text>
+      <text x="24" y="38" class="flow-text">• Both hit the server at the exact same millisecond</text>
+    </g>
+
+    <!-- Step B -->
+    <g transform="translate(14, 135)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+      <text x="24" y="8" class="flow-title">Atomic Winner &amp; Lock Contention</text>
+      <text x="24" y="24" class="flow-text">• Request 1 wins Redis <tspan class="code-badge">SETNX</tspan> lock</text>
+      <text x="24" y="38" class="flow-text">• Request 2 fails lock check (<tspan class="code-badge">IN_PROGRESS</tspan>)</text>
+    </g>
+
+    <!-- Step C -->
+    <g transform="translate(14, 206)">
+      <circle cx="8" cy="8" r="8" fill="#dc2626" />
+      <text x="8" y="11.5" font-family="Inter, sans-serif" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+      <text x="24" y="8" class="flow-title">Immediate 409 Conflict Rejection</text>
+      <text x="24" y="24" class="flow-text">Returns: <tspan font-weight="700" fill="#dc2626">409 Conflict</tspan></text>
+      <text x="24" y="38" class="flow-text">detail: "Mutation In Progress. Please retry shortly."</text>
+    </g>
+
+    <!-- Bottom note -->
+    <rect x="14" y="272" width="297" height="44" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+    <text x="20" y="288" class="note-text" font-weight="600" fill="#334155">Distributed Concurrency Safety:</text>
+    <text x="20" y="301" class="note-text">Redis atomic operations guarantee mutual exclusion,</text>
+    <text x="20" y="313" class="note-text">preventing double mutations across multi-core workers.</text>
+  </g>
+
 </svg>
