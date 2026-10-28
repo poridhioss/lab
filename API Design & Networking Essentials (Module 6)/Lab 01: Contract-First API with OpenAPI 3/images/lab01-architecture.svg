@@ -139,13 +139,7 @@
     <text x="70" y="41" class="box-sub">25 Seeded Orders</text>
   </g>
 
-  <!-- Arrows from Middle Nodes to Right Group -->
-  <path d="M 820 200 L 885 200" class="flow-arrow" marker-end="url(#arrow)">
-    <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1s" repeatCount="indefinite" />
-  </path>
-  <path d="M 820 300 L 885 300" class="flow-arrow" marker-end="url(#arrow)">
-    <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1s" repeatCount="indefinite" />
-  </path>
+
 
   <!-- 5. RIGHT GROUP (Task Workers style) -->
   <g id="contract-guarantees" transform="translate(890, 135)">
@@ -168,4 +162,14 @@
     <text x="107" y="225" class="box-sub">Problem Details</text>
   </g>
 
+  <!-- Arrows from Middle Nodes to Right Group Pills -->
+  <path d="M 820 200 C 862 200, 872 220, 914 220" class="flow-arrow" marker-end="url(#arrow)">
+    <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1s" repeatCount="indefinite" />
+  </path>
+  <path d="M 820 288 C 862 288, 872 283, 914 283" class="flow-arrow" marker-end="url(#arrow)">
+    <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1s" repeatCount="indefinite" />
+  </path>
+  <path d="M 820 312 C 862 312, 872 346, 914 346" class="flow-arrow" marker-end="url(#arrow)">
+    <animate attributeName="stroke-dashoffset" from="22" to="0" dur="1s" repeatCount="indefinite" />
+  </path>
 </svg>
